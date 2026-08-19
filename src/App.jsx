@@ -29,7 +29,7 @@ export default function App() {
 
   return (
     <div className="stage">
-      <div className="phone">
+      <div className="phone" data-tab={tab}>
         {tab === 'events' ? <EventsScreen onSelect={setSelected} /> : null}
         {tab === 'shop' ? <ShopScreen onSelect={setSelected} /> : null}
         {tab === 'marketplace' ? (

@@ -10,7 +10,7 @@
 .phone {
   width: min(100%, 390px);
   height: min(100dvh - 32px, 844px);
-  background: var(--chrome);
+  background-color: var(--chrome);
   border-radius: 40px;
   overflow: hidden;
   position: relative;
@@ -19,6 +19,23 @@
   box-shadow:
     0 0 0 10px #4a4548,
     0 28px 70px rgb(31 28 26 / 28%);
+  transition: background-color 0.65s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.phone[data-tab='events'] {
+  background-color: #6b94ab;
+}
+
+.phone[data-tab='shop'] {
+  background-color: #c48693;
+}
+
+.phone[data-tab='marketplace'] {
+  background-color: #8c82b0;
+}
+
+.phone[data-tab='wallet'] {
+  background-color: var(--chrome);
 }
 
 .screen {
@@ -26,21 +43,15 @@
   min-height: 0;
   display: flex;
   flex-direction: column;
-  background: var(--chrome);
+  background: transparent;
   color: #f6f3ef;
   position: relative;
 }
 
-.screen-events {
-  background: #6b94ab;
-}
-
-.screen-spend {
-  background: #c48693;
-}
-
+.screen-events,
+.screen-spend,
 .screen-market {
-  background: #8c82b0;
+  background: transparent;
 }
 
 .screen-events .screen-header p,
@@ -740,7 +751,7 @@
 }
 
 .wallet-screen {
-  background: var(--chrome);
+  background: transparent;
 }
 
 .wallet-hero {
