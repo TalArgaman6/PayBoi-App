@@ -15,6 +15,11 @@ export function formatPbs(amount) {
   return `p${amount}`
 }
 
+export function assetUrl(path) {
+  if (!path) return ''
+  return `${import.meta.env.BASE_URL}${path.replace(/^\//, '')}`
+}
+
 export function formatEarn(amount) {
   return `+${amount}`
 }
@@ -38,6 +43,7 @@ export function matchesQuery(item, query) {
     item.subtitle,
     item.venue,
     item.shop,
+    item.seller?.name,
     item.city,
   ]
     .filter(Boolean)

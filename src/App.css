@@ -31,6 +31,24 @@
   position: relative;
 }
 
+.screen-events {
+  background: #6b94ab;
+}
+
+.screen-spend {
+  background: #c48693;
+}
+
+.screen-market {
+  background: #8c82b0;
+}
+
+.screen-events .screen-header p,
+.screen-spend .screen-header p,
+.screen-market .screen-header p {
+  color: rgb(246 243 239 / 78%);
+}
+
 .screen-header {
   display: flex;
   justify-content: space-between;
@@ -318,6 +336,34 @@
   font-size: 0.9rem;
   font-weight: 600;
   line-height: 1.2;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.item-title-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.ride-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  flex-shrink: 0;
+  color: #9f9891;
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+.ride-mark svg {
+  width: 13px;
+  height: 13px;
+  display: block;
 }
 
 .item-sub,
@@ -327,7 +373,7 @@
   font-size: 0.72rem;
 }
 
-.item-copy span {
+.item-copy span:not(.ride-mark) {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -369,6 +415,70 @@
   opacity: 0.7;
 }
 
+.seller-face {
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+  min-width: 44px;
+}
+
+.seller-face img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+  box-shadow: 0 0 0 2px #fff, 0 0 0 3px #d8dce3;
+}
+
+.seller-face em {
+  font-style: normal;
+  font-size: 0.58rem;
+  font-weight: 500;
+  line-height: 1;
+  color: var(--muted);
+  max-width: 52px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: center;
+}
+
+.seller-face-detail img {
+  width: 48px;
+  height: 48px;
+}
+
+.sell-body p {
+  margin: 0 0 14px;
+  color: var(--muted);
+  font-size: 0.86rem;
+}
+
+.sell-field {
+  display: grid;
+  gap: 6px;
+  margin: 0 0 12px;
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #9a9288;
+}
+
+.sell-field select {
+  height: 42px;
+  border: 0;
+  border-radius: 12px;
+  padding: 0 12px;
+  background: var(--wash);
+  color: var(--ink);
+  font-family: var(--font-ui);
+  font-size: 0.86rem;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
 .list-toolbar {
   display: flex;
   justify-content: space-between;
@@ -396,6 +506,7 @@
   padding: 8px 14px;
   border-radius: 999px;
   cursor: pointer;
+  flex-shrink: 0;
 }
 
 .filter-launch i {
@@ -837,10 +948,10 @@
   bottom: 132px;
   margin: 0;
   min-height: 1.2em;
-  font-size: 0.78rem;
+  font-size: 0.68rem;
   font-weight: 400;
-  letter-spacing: 0.14em;
-  color: #5c5854;
+  letter-spacing: 0.24em;
+  color: #3c3a3b;
 }
 
 .splash-line i {
@@ -848,7 +959,7 @@
   width: 1px;
   height: 0.85em;
   margin-left: 3px;
-  background: #5c5854;
+  background: #3c3a3b;
   vertical-align: -1px;
   animation: caret 1s step-end infinite;
 }

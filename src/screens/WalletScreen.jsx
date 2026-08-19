@@ -17,7 +17,7 @@ const totalWorth = wallet.gifts.reduce(
 const SUGGESTION_FILTERS = [
   { id: 'all', label: 'All' },
   { id: 'event', label: 'Events' },
-  { id: 'shop', label: 'Shop' },
+  { id: 'shop', label: 'Spend' },
 ]
 
 export function WalletScreen({ onSelect }) {

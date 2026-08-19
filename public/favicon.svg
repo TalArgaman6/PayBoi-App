@@ -1,4 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" rx="8" fill="#322e31"/>
-  <text x="16" y="22" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="700" fill="#c9a46c">p</text>
+  <text
+    x="16"
+    y="24"
+    text-anchor="middle"
+    font-family="system-ui, sans-serif"
+    font-size="28"
+    font-weight="600"
+    fill="#d1b45f"
+  >p</text>
 </svg>

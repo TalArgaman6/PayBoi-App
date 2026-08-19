@@ -53,7 +53,7 @@ export function suggestionsForBalance(balance, { limit = 8, diverse = true } = {
 }
 
 export function kindLabel(kind) {
-  if (kind === 'shop') return 'Shop'
+  if (kind === 'shop') return 'Spend'
   if (kind === 'marketplace') return 'Resale'
   return 'Event'
 }

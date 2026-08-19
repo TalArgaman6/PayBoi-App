@@ -41,7 +41,8 @@
       "featured": true,
       "kicker": "pboi 2026",
       "banner": "photos/pboi-festival.jpg",
-      "image": "photos/pboi-festival.jpg"
+      "image": "photos/pboi-festival.jpg",
+      "rides": 12
     },
     {
       "id": "dreck-wed",
@@ -97,7 +98,8 @@
       "time": "23:00",
       "pricePbs": 55,
       "badge": "gold",
-      "image": "photos/club-lasers.jpg"
+      "image": "photos/club-lasers.jpg",
+      "rides": 4
     },
     {
       "id": "hilton-beach",
@@ -167,7 +169,8 @@
       "time": "23:00",
       "pricePbs": 68,
       "badge": "gold",
-      "image": "photos/dj-booth.jpg"
+      "image": "photos/dj-booth.jpg",
+      "rides": 5
     },
     {
       "id": "forever-tlv",
@@ -181,7 +184,8 @@
       "time": "23:00",
       "pricePbs": 95,
       "badge": "gold",
-      "image": "photos/afterhours.jpg"
+      "image": "photos/afterhours.jpg",
+      "rides": 8
     },
     {
       "id": "arisa",
@@ -330,7 +334,8 @@
       "time": "16:00",
       "pricePbs": 110,
       "badge": "gold",
-      "image": "photos/park-concert.jpg"
+      "image": "photos/park-concert.jpg",
+      "rides": 6
     }
   ]
 }

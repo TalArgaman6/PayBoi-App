@@ -43,7 +43,7 @@ export function CategoryCoin({ gifts, activeId, onPick }) {
       className={`category-coin${picking ? ' is-picking' : ''}`}
       viewBox={`0 0 ${size} ${size}`}
       role="img"
-      aria-label="Gay rights mix by perk"
+      aria-label="i win mix by perk"
     >
       <defs>
         <linearGradient id="ring-shine" x1="0.15" y1="0" x2="0.85" y2="1">

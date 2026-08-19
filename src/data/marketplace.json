@@ -20,6 +20,10 @@
       "title": "Forever TLV \u2014 1 ticket",
       "subtitle": "Resale at original price",
       "shop": "From Alex",
+      "seller": {
+        "name": "Alex",
+        "photo": "photos/sellers/alex.jpg"
+      },
       "city": "Tel Aviv",
       "pricePbs": 95,
       "originalPbs": 95,
@@ -34,6 +38,10 @@
       "title": "FFF by Shirazi pack",
       "subtitle": "Resale at original price",
       "shop": "From Sam",
+      "seller": {
+        "name": "Sam",
+        "photo": "photos/sellers/sam.jpg"
+      },
       "city": "Tel Aviv",
       "pricePbs": 68,
       "originalPbs": 68,
@@ -48,6 +56,10 @@
       "title": "Forever Pride Weekend",
       "subtitle": "Transferable Hangar 11 pass",
       "shop": "From Noa",
+      "seller": {
+        "name": "Noa",
+        "photo": "photos/sellers/noa.jpg"
+      },
       "city": "Tel Aviv",
       "pricePbs": 140,
       "originalPbs": 140,
@@ -63,6 +75,10 @@
       "title": "Gaze @ Haoman + drinks",
       "subtitle": "Package, same-price resale",
       "shop": "From Ido",
+      "seller": {
+        "name": "Ido",
+        "photo": "photos/sellers/ido.jpg"
+      },
       "city": "Tel Aviv",
       "pricePbs": 72,
       "originalPbs": 72,
@@ -77,6 +93,10 @@
       "title": "Offer Nissim Pride",
       "subtitle": "Loyalty points on transfer",
       "shop": "From Maya",
+      "seller": {
+        "name": "Maya",
+        "photo": "photos/sellers/maya.jpg"
+      },
       "city": "Tel Aviv",
       "pricePbs": 110,
       "originalPbs": 110,
@@ -92,6 +112,10 @@
       "title": "Arisa \u2014 1 ticket",
       "subtitle": "Transfer, no extra markup",
       "shop": "From Jordan",
+      "seller": {
+        "name": "Jordan",
+        "photo": "photos/sellers/jordan.jpg"
+      },
       "city": "Tel Aviv",
       "pricePbs": 62,
       "originalPbs": 62,

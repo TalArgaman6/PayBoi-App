@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
-import { assetUrl } from './ItemRow.jsx'
-import { earnAmount, formatEarn, isEventItem } from '../lib/format.js'
+import { assetUrl, earnAmount, formatEarn, isEventItem } from '../lib/format.js'
 
 export function FeaturedBanner({ items, onSelect }) {
   const [index, setIndex] = useState(0)

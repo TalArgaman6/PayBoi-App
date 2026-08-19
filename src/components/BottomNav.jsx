@@ -1,6 +1,6 @@
 const TABS = [
   { id: 'events', label: 'Events' },
-  { id: 'shop', label: 'Shop' },
+  { id: 'shop', label: 'Spend' },
   { id: 'marketplace', label: 'Marketplace' },
   { id: 'wallet', label: 'Wallet' },
 ]

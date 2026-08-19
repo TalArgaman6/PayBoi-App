@@ -27,56 +27,55 @@ function formatFilterPrice(pbs, country) {
 export function EventsScreen({ onSelect }) {
   const [query, setQuery] = useState('')
   const [menu, setMenu] = useState(false)
-  const [country, setCountry] = useState(DEFAULT_COUNTRY)
   const [type, setType] = useState('all')
+  const [ride, setRide] = useState('all')
   const [priceMin, setPriceMin] = useState(PRICE_SLIDER.min)
   const [priceMax, setPriceMax] = useState(PRICE_SLIDER.max)
 
+  const country = DEFAULT_COUNTRY
   const currency = currencyForCountry(country)
   const priceOpen = !isFullPriceSpan(priceMin, priceMax)
+  const nearby = (item) =>
+    item.country === country || item.type === 'travel'
 
   const featured = useMemo(
-    () => catalog.items.filter((item) => item.featured),
-    [],
+    () => catalog.items.filter((item) => item.featured && nearby(item)),
+    [country],
   )
 
   const items = useMemo(
     () =>
       catalog.items.filter((item) => {
-        const countryOk = country === 'all' || item.country === country
         const typeOk = type === 'all' || item.type === type
+        const rideOk = ride === 'all' || Boolean(item.rides)
         return (
-          countryOk &&
+          nearby(item) &&
           typeOk &&
+          rideOk &&
           inPbsSpan(item, priceMin, priceMax) &&
           matchesQuery(item, query)
         )
       }),
-    [country, priceMax, priceMin, query, type],
+    [country, priceMax, priceMin, query, ride, type],
   )
 
   const place =
-    country === 'all'
-      ? 'Worldwide'
-      : catalog.countries.find((item) => item.id === country)?.label || catalog.city
+    catalog.countries.find((item) => item.id === country)?.label || catalog.city
 
   const typeLabel =
     catalog.types.find((item) => item.id === type)?.label || 'All'
-  const activeCount = [
-    country !== DEFAULT_COUNTRY,
-    type !== 'all',
-    priceOpen,
-  ].filter(Boolean).length
+  const rideOn = ride !== 'all'
+  const activeCount = [type !== 'all', rideOn, priceOpen].filter(Boolean).length
 
   function resetFilters() {
-    setCountry(DEFAULT_COUNTRY)
     setType('all')
+    setRide('all')
     setPriceMin(PRICE_SLIDER.min)
     setPriceMax(PRICE_SLIDER.max)
   }
 
   return (
-    <section className="screen">
+    <section className="screen screen-events">
       <ScreenHeader title="Events" kicker={place} />
       <div className="sheet">
         <FeaturedBanner items={featured} onSelect={onSelect} />
@@ -100,8 +99,8 @@ export function EventsScreen({ onSelect }) {
         />
         {activeCount ? (
           <div className="active-filters">
-            {country !== DEFAULT_COUNTRY ? <span>{place}</span> : null}
             {type !== 'all' ? <span>{typeLabel}</span> : null}
+            {rideOn ? <span>Shared ride</span> : null}
             {priceOpen ? (
               <span>
                 {formatFilterPrice(priceMin, country)} –{' '}
@@ -120,7 +119,7 @@ export function EventsScreen({ onSelect }) {
             />
           ))}
           {items.length === 0 ? (
-            <p className="empty">Nothing in this country, type, or price range yet.</p>
+            <p className="empty">Nothing in this type, ride, or price range yet.</p>
           ) : null}
         </div>
       </div>
@@ -129,12 +128,6 @@ export function EventsScreen({ onSelect }) {
         onClose={() => setMenu(false)}
         onClear={resetFilters}
       >
-        <FilterTabs
-          label="Country"
-          filters={catalog.countries}
-          active={country}
-          onChange={setCountry}
-        />
         <div className="filter-row">
           <p className="filter-label">Currency</p>
           <p className="currency-lock">{currencyLabel(currency)}</p>
@@ -144,6 +137,15 @@ export function EventsScreen({ onSelect }) {
           filters={catalog.types}
           active={type}
           onChange={setType}
+        />
+        <FilterTabs
+          label="Shared ride"
+          filters={[
+            { id: 'all', label: 'All' },
+            { id: 'area', label: 'From your area' },
+          ]}
+          active={ride}
+          onChange={setRide}
         />
         <PriceRangeBar
           min={priceMin}

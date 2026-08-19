@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { BottomNav } from './components/BottomNav.jsx'
 import { ItemThumb } from './components/ItemRow.jsx'
 import { EarnBadge } from './components/EarnBadge.jsx'
+import { SellerFace } from './components/SellerFace.jsx'
 import { Splash } from './components/Splash.jsx'
 import wallet from './data/wallet.json'
 import { formatPbs, formatTokenBalance } from './lib/format.js'
@@ -49,12 +50,18 @@ export default function App() {
                 <strong>{selected.title}</strong>
                 <span>{selected.subtitle}</span>
               </div>
-              <EarnBadge item={selected} />
+              {selected.seller ? (
+                <SellerFace seller={selected.seller} size="detail" />
+              ) : (
+                <EarnBadge item={selected} />
+              )}
             </div>
             <p>
-              {selected.pricePbs <= wallet.balance
-                ? `Pay ${formatPbs(selected.pricePbs)}. You gain ${selected.earnPbs ?? selected.pricePbs} pts, with ${formatPbs(wallet.balance - selected.pricePbs)} left.`
-                : `This is ${formatPbs(selected.pricePbs - wallet.balance)} over your ${formatTokenBalance(wallet.balance)} pbs.`}
+              {selected.seller
+                ? `Pay ${formatPbs(selected.pricePbs)} to ${selected.seller.name}. Same price as the door — their profile is on the listing.`
+                : selected.pricePbs <= wallet.balance
+                  ? `Pay ${formatPbs(selected.pricePbs)}. You gain ${selected.earnPbs ?? selected.pricePbs} pts, with ${formatPbs(wallet.balance - selected.pricePbs)} left.`
+                  : `This is ${formatPbs(selected.pricePbs - wallet.balance)} over your ${formatTokenBalance(wallet.balance)} pbs.`}
             </p>
             <button type="button" className="pay-btn">
               Pay {formatPbs(selected.pricePbs)}
