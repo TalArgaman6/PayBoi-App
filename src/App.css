@@ -474,16 +474,25 @@
 }
 
 .seller-face em {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
   font-style: normal;
   font-size: 0.58rem;
   font-weight: 500;
   line-height: 1;
   color: var(--muted);
-  max-width: 52px;
+  max-width: 64px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   text-align: center;
+}
+
+.seller-ig {
+  width: 11px;
+  height: 11px;
+  flex-shrink: 0;
 }
 
 .seller-face-detail img {
