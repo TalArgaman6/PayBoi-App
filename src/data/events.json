@@ -2,28 +2,88 @@
   "city": "Tel Aviv",
   "cityCode": "TLV",
   "countries": [
-    { "id": "all", "label": "All" },
-    { "id": "IL", "label": "TLV" },
-    { "id": "US", "label": "United States" },
-    { "id": "GB", "label": "United Kingdom" },
-    { "id": "DE", "label": "Germany" },
-    { "id": "FR", "label": "France" },
-    { "id": "ES", "label": "Spain" },
-    { "id": "IT", "label": "Italy" },
-    { "id": "NL", "label": "Netherlands" },
-    { "id": "BR", "label": "Brazil" },
-    { "id": "AU", "label": "Australia" },
-    { "id": "MX", "label": "Mexico" },
-    { "id": "TH", "label": "Thailand" },
-    { "id": "CH", "label": "Alps" },
-    { "id": "SEA", "label": "At sea" }
+    {
+      "id": "all",
+      "label": "All"
+    },
+    {
+      "id": "IL",
+      "label": "TLV"
+    },
+    {
+      "id": "US",
+      "label": "United States"
+    },
+    {
+      "id": "GB",
+      "label": "United Kingdom"
+    },
+    {
+      "id": "DE",
+      "label": "Germany"
+    },
+    {
+      "id": "FR",
+      "label": "France"
+    },
+    {
+      "id": "ES",
+      "label": "Spain"
+    },
+    {
+      "id": "IT",
+      "label": "Italy"
+    },
+    {
+      "id": "NL",
+      "label": "Netherlands"
+    },
+    {
+      "id": "BR",
+      "label": "Brazil"
+    },
+    {
+      "id": "AU",
+      "label": "Australia"
+    },
+    {
+      "id": "MX",
+      "label": "Mexico"
+    },
+    {
+      "id": "TH",
+      "label": "Thailand"
+    },
+    {
+      "id": "CH",
+      "label": "Alps"
+    },
+    {
+      "id": "SEA",
+      "label": "At sea"
+    }
   ],
   "types": [
-    { "id": "all", "label": "All" },
-    { "id": "party", "label": "Party" },
-    { "id": "bar", "label": "Bar" },
-    { "id": "sports", "label": "Sports" },
-    { "id": "travel", "label": "Travel" }
+    {
+      "id": "all",
+      "label": "All"
+    },
+    {
+      "id": "party",
+      "label": "Party"
+    },
+    {
+      "id": "bar",
+      "label": "Bar"
+    },
+    {
+      "id": "sports",
+      "label": "Sports"
+    },
+    {
+      "id": "travel",
+      "label": "Travel"
+    }
   ],
   "items": [
     {
@@ -42,7 +102,9 @@
       "kicker": "pboi 2026",
       "banner": "photos/pboi-festival.jpg",
       "image": "photos/pboi-festival.jpg",
-      "rides": 12
+      "rides": 12,
+      "together": 5,
+      "bracelet": true
     },
     {
       "id": "dreck-wed",
@@ -56,7 +118,8 @@
       "time": "23:00",
       "pricePbs": 38,
       "badge": "pearl",
-      "image": "photos/dj-booth.jpg"
+      "image": "photos/dj-booth.jpg",
+      "together": 5
     },
     {
       "id": "callas-karaoke",
@@ -99,7 +162,8 @@
       "pricePbs": 55,
       "badge": "gold",
       "image": "photos/club-lasers.jpg",
-      "rides": 4
+      "rides": 4,
+      "together": 5
     },
     {
       "id": "hilton-beach",
@@ -170,7 +234,8 @@
       "pricePbs": 68,
       "badge": "gold",
       "image": "photos/dj-booth.jpg",
-      "rides": 5
+      "rides": 5,
+      "together": 5
     },
     {
       "id": "forever-tlv",
@@ -185,7 +250,8 @@
       "pricePbs": 95,
       "badge": "gold",
       "image": "photos/afterhours.jpg",
-      "rides": 8
+      "rides": 8,
+      "together": 5
     },
     {
       "id": "arisa",
@@ -199,7 +265,8 @@
       "time": "23:00",
       "pricePbs": 62,
       "badge": "gold",
-      "image": "photos/club-lasers.jpg"
+      "image": "photos/club-lasers.jpg",
+      "together": 5
     },
     {
       "id": "crush-line",
@@ -213,7 +280,8 @@
       "time": "23:00",
       "pricePbs": 48,
       "badge": "gold",
-      "image": "photos/drag-stage.jpg"
+      "image": "photos/drag-stage.jpg",
+      "together": 5
     },
     {
       "id": "beef-night",
@@ -227,7 +295,8 @@
       "time": "23:00",
       "pricePbs": 75,
       "badge": "gold",
-      "image": "photos/afterhours.jpg"
+      "image": "photos/afterhours.jpg",
+      "together": 5
     },
     {
       "id": "tlv-volleyball",
@@ -255,7 +324,8 @@
       "time": "23:00",
       "pricePbs": 150,
       "badge": "pink",
-      "image": "photos/club-lasers.jpg"
+      "image": "photos/club-lasers.jpg",
+      "bracelet": true
     },
     {
       "id": "madrid-pride",
@@ -269,7 +339,8 @@
       "time": "00:00",
       "pricePbs": 120,
       "badge": "gold",
-      "image": "photos/rainbow-street.jpg"
+      "image": "photos/rainbow-street.jpg",
+      "bracelet": true
     },
     {
       "id": "forever-pride",
@@ -286,7 +357,9 @@
       "featured": true,
       "kicker": "Big night",
       "banner": "photos/rainbow-street.jpg",
-      "image": "photos/rainbow-street.jpg"
+      "image": "photos/rainbow-street.jpg",
+      "together": 5,
+      "bracelet": true
     },
     {
       "id": "gay-cruise",
@@ -320,7 +393,8 @@
       "featured": true,
       "kicker": "Winter",
       "banner": "photos/ski-week.jpg",
-      "image": "photos/ski-week.jpg"
+      "image": "photos/ski-week.jpg",
+      "bracelet": true
     },
     {
       "id": "offer-nissim-pride",
@@ -335,7 +409,9 @@
       "pricePbs": 110,
       "badge": "gold",
       "image": "photos/park-concert.jpg",
-      "rides": 6
+      "rides": 6,
+      "together": 5,
+      "bracelet": true
     }
   ]
 }

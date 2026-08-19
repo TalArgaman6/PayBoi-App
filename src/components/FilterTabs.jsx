@@ -1,7 +1,8 @@
-export function FilterTabs({ label, filters, active, onChange }) {
+export function FilterTabs({ label, note, filters, active, onChange }) {
   return (
     <div className="filter-row">
       {label ? <p className="filter-label">{label}</p> : null}
+      {note ? <p className="filter-note">{note}</p> : null}
       <div className="filter-tabs">
         {filters.map((filter) => (
           <button

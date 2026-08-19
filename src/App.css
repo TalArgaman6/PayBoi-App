@@ -35,7 +35,7 @@
 }
 
 .phone[data-tab='wallet'] {
-  background-color: var(--chrome);
+  background-color: #a7adb5;
 }
 
 .screen {
@@ -81,7 +81,7 @@
   margin: 8px 0 0;
   font-family: Figtree, system-ui, sans-serif;
   font-size: 0.75rem;
-  font-weight: 400;
+  font-weight: 600;
   letter-spacing: normal;
   font-style: normal;
   color: var(--kicker);
@@ -98,10 +98,11 @@
   font-size: 1.28rem;
   letter-spacing: 0;
   font-weight: 600;
+  color: #fff;
 }
 
 .pboi-logo span {
-  color: var(--gold);
+  color: #fff;
 }
 
 .brand-ring {
@@ -112,6 +113,23 @@
   background: linear-gradient(145deg, #f7f5f1 0%, #d1b45f 100%);
   -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #000 0);
   mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #000 0);
+}
+
+.header-ring {
+  animation: header-ring-fade 5s ease-in-out infinite;
+}
+
+@keyframes header-ring-fade {
+  0%,
+  60% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 .sheet {
@@ -161,7 +179,7 @@
   display: flex;
   flex-direction: column;
   gap: 6px;
-  margin: 12px 0 2px;
+  margin: 18px 0 6px;
 }
 
 .filter-label {
@@ -170,6 +188,16 @@
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: #9a9288;
+}
+
+.filter-note {
+  margin: 0;
+  font-size: 0.68rem;
+  line-height: 1.35;
+  color: var(--muted);
+  font-weight: 400;
+  letter-spacing: normal;
+  text-transform: none;
 }
 
 .filter-tabs {
@@ -193,10 +221,11 @@
 
 .price-range-readout {
   margin: 0;
-  font-family: Figtree, sans-serif;
+  font-family: Inter, system-ui, sans-serif;
   font-size: 0.78rem;
-  font-weight: 500;
-  letter-spacing: normal;
+  font-weight: 400;
+  letter-spacing: 0;
+  font-variant-numeric: tabular-nums;
   color: #1f1c1a;
 }
 
@@ -750,8 +779,13 @@
   color: var(--ink);
 }
 
-.wallet-screen {
-  background: transparent;
+.wallet-screen .screen-header h1,
+.wallet-screen .screen-header p,
+.wallet-screen .user-handle,
+.wallet-screen .token-balance,
+.wallet-screen .token-balance small,
+.wallet-screen .fiat-balance {
+  color: #fff;
 }
 
 .wallet-hero {
@@ -764,8 +798,8 @@
   margin: 0 0 8px;
   font-family: Figtree, system-ui, sans-serif;
   font-size: 0.68rem;
-  font-weight: 400;
-  letter-spacing: 0.02em;
+  font-weight: 600;
+  letter-spacing: 0.08em;
   color: #9a9288;
 }
 
@@ -793,6 +827,7 @@
   margin: 4px 0 0;
   color: var(--kicker);
   font-size: 0.72rem;
+  font-weight: 600;
 }
 
 .wallet-sheet {
@@ -809,6 +844,10 @@
 .spend-now {
   width: 100%;
   margin-top: 22px;
+}
+
+.spend-now .gift-kicker {
+  color: var(--ink);
 }
 
 .category-coin {
@@ -833,8 +872,8 @@
 .coin-caption {
   margin: 8px 0 0;
   font-size: 0.72rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  text-transform: none;
   color: var(--muted);
 }
 

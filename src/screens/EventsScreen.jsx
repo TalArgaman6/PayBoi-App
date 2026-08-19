@@ -29,6 +29,8 @@ export function EventsScreen({ onSelect }) {
   const [menu, setMenu] = useState(false)
   const [type, setType] = useState('all')
   const [ride, setRide] = useState('all')
+  const [together, setTogether] = useState('all')
+  const [bracelet, setBracelet] = useState('all')
   const [priceMin, setPriceMin] = useState(PRICE_SLIDER.min)
   const [priceMax, setPriceMax] = useState(PRICE_SLIDER.max)
 
@@ -48,15 +50,19 @@ export function EventsScreen({ onSelect }) {
       catalog.items.filter((item) => {
         const typeOk = type === 'all' || item.type === type
         const rideOk = ride === 'all' || Boolean(item.rides)
+        const togetherOk = together === 'all' || Boolean(item.together)
+        const braceletOk = bracelet === 'all' || Boolean(item.bracelet)
         return (
           nearby(item) &&
           typeOk &&
           rideOk &&
+          togetherOk &&
+          braceletOk &&
           inPbsSpan(item, priceMin, priceMax) &&
           matchesQuery(item, query)
         )
       }),
-    [country, priceMax, priceMin, query, ride, type],
+    [bracelet, country, priceMax, priceMin, query, ride, together, type],
   )
 
   const place =
@@ -65,11 +71,21 @@ export function EventsScreen({ onSelect }) {
   const typeLabel =
     catalog.types.find((item) => item.id === type)?.label || 'All'
   const rideOn = ride !== 'all'
-  const activeCount = [type !== 'all', rideOn, priceOpen].filter(Boolean).length
+  const togetherOn = together !== 'all'
+  const braceletOn = bracelet !== 'all'
+  const activeCount = [
+    type !== 'all',
+    rideOn,
+    togetherOn,
+    braceletOn,
+    priceOpen,
+  ].filter(Boolean).length
 
   function resetFilters() {
     setType('all')
     setRide('all')
+    setTogether('all')
+    setBracelet('all')
     setPriceMin(PRICE_SLIDER.min)
     setPriceMax(PRICE_SLIDER.max)
   }
@@ -128,6 +144,8 @@ export function EventsScreen({ onSelect }) {
           <div className="active-filters">
             {type !== 'all' ? <span>{typeLabel}</span> : null}
             {rideOn ? <span>Shared ride</span> : null}
+            {togetherOn ? <span>Party together</span> : null}
+            {braceletOn ? <span>Bracelet</span> : null}
             {priceOpen ? (
               <span>
                 {formatFilterPrice(priceMin, country)} –{' '}
@@ -146,7 +164,7 @@ export function EventsScreen({ onSelect }) {
             />
           ))}
           {items.length === 0 ? (
-            <p className="empty">Nothing in this type, ride, or price range yet.</p>
+            <p className="empty">Nothing in this mix yet.</p>
           ) : null}
         </div>
       </div>
@@ -173,6 +191,25 @@ export function EventsScreen({ onSelect }) {
           ]}
           active={ride}
           onChange={setRide}
+        />
+        <FilterTabs
+          label="Party together"
+          note="Up to 5 tickets"
+          filters={[
+            { id: 'all', label: 'All' },
+            { id: 'group', label: 'Together' },
+          ]}
+          active={together}
+          onChange={setTogether}
+        />
+        <FilterTabs
+          label="Bracelet"
+          filters={[
+            { id: 'all', label: 'All' },
+            { id: 'pass', label: 'Line pass' },
+          ]}
+          active={bracelet}
+          onChange={setBracelet}
         />
         <PriceRangeBar
           min={priceMin}
