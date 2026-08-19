@@ -1,6 +1,6 @@
-# PayBoi App
+# pboi
 
-A React app for splitting shared expenses. Edit it on your machine, and GitHub Pages hosts the live preview.
+A React app for the LGBTQ economy: events, shop, pre-owned marketplace, and a token wallet.
 
 ## Local development
 
@@ -15,4 +15,4 @@ Open [http://localhost:5173](http://localhost:5173).
 
 GitHub Pages: https://talargaman6.github.io/PayBoi-App/
 
-Every push to `main` rebuilds and publishes that site.
+Demo catalog lives in `src/data/` as JSON (`events.json`, `products.json`, `marketplace.json`, `wallet.json`).

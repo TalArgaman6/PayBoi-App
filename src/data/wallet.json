@@ -1,0 +1,63 @@
+{
+  "user": "TAL.ARGAMAN",
+  "nickname": "TAL",
+  "pronouns": "he/him",
+  "token": "pbs",
+  "balance": 1420,
+  "fiat": 680,
+  "currency": "ILS",
+  "section": "Gay rights",
+  "caption": "What your nights unlocked",
+  "gifts": [
+    {
+      "id": "greenroom",
+      "label": "Green room",
+      "hint": "Backstage / quiet booth access at pboi festival and circuit nights.",
+      "color": "#d1b45f",
+      "metal": "gold",
+      "count": 2,
+      "worth": 6
+    },
+    {
+      "id": "door",
+      "label": "Skip the door",
+      "hint": "Walk in at partner clubs. No queue, no guest-list texting.",
+      "color": "#a7adb5",
+      "metal": "silver",
+      "count": 3,
+      "worth": 5
+    },
+    {
+      "id": "plusone",
+      "label": "+1 on the list",
+      "hint": "Bring someone in on your name. They pay nothing at the door.",
+      "color": "#67956f",
+      "count": 1,
+      "worth": 2
+    },
+    {
+      "id": "afters",
+      "label": "Afters pass",
+      "hint": "Sunrise rooms after the main. Wristband is transferable.",
+      "color": "#8c82b0",
+      "count": 2,
+      "worth": 2
+    },
+    {
+      "id": "pour",
+      "label": "First pour",
+      "hint": "Opening drink on the house at bars in the Night Index.",
+      "color": "#c48693",
+      "count": 1,
+      "worth": 1
+    },
+    {
+      "id": "cab",
+      "label": "Cab home",
+      "hint": "A prepaid ride back. Safe, anonymous, no card at 6am.",
+      "color": "#6b94ab",
+      "count": 4,
+      "worth": 1
+    }
+  ]
+}

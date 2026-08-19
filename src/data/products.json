@@ -1,0 +1,187 @@
+{
+  "filters": [
+    {
+      "id": "top-sellers",
+      "label": "Top Sellers"
+    },
+    {
+      "id": "most-viewed",
+      "label": "Most Viewed"
+    },
+    {
+      "id": "new",
+      "label": "New"
+    }
+  ],
+  "items": [
+    {
+      "id": "pride-tee",
+      "title": "Pride Collection Tee",
+      "subtitle": "Limited 2026 drop",
+      "shop": "pboi Shop",
+      "city": "Tel Aviv",
+      "pricePbs": 11,
+      "image": "photos/pride-tee.jpg",
+      "filters": [
+        "top-sellers",
+        "new"
+      ],
+      "badge": "gold"
+    },
+    {
+      "id": "drink-vouchers",
+      "title": "Bar Voucher Pack",
+      "subtitle": "Shpagat, Layla, Callas drinks",
+      "shop": "Night Index",
+      "city": "Tel Aviv",
+      "pricePbs": 9,
+      "image": "photos/cocktails.jpg",
+      "filters": [
+        "top-sellers"
+      ],
+      "badge": "gold"
+    },
+    {
+      "id": "gym-month",
+      "title": "Gym Month Pass",
+      "subtitle": "Pride-friendly studios",
+      "shop": "Circuit Gyms",
+      "city": "Tel Aviv",
+      "pricePbs": 24,
+      "image": "photos/pool-party.jpg",
+      "filters": [
+        "top-sellers",
+        "most-viewed"
+      ],
+      "badge": "gold"
+    },
+    {
+      "id": "cruise-hold",
+      "title": "Gay Cruise Hold",
+      "subtitle": "Season deposit, transferable",
+      "shop": "Vacaya",
+      "city": "Worldwide",
+      "pricePbs": 120,
+      "image": "photos/beach-night.jpg",
+      "filters": [
+        "most-viewed"
+      ],
+      "badge": "pink"
+    },
+    {
+      "id": "airline-tlv",
+      "title": "Airline Credit TLV",
+      "subtitle": "Travelgay partner fares",
+      "shop": "Travelgay",
+      "city": "Tel Aviv",
+      "pricePbs": 85,
+      "image": "photos/beach-night.jpg",
+      "filters": [
+        "most-viewed"
+      ],
+      "badge": "pink"
+    },
+    {
+      "id": "mrbb-night",
+      "title": "Mr B&B Night",
+      "subtitle": "LGBTQ-friendly stay",
+      "shop": "Mr B&B",
+      "city": "Tel Aviv",
+      "pricePbs": 42,
+      "image": "photos/rooftop-stay.jpg",
+      "filters": [
+        "top-sellers",
+        "new"
+      ],
+      "badge": "pink"
+    },
+    {
+      "id": "std-kit",
+      "title": "Anonymous Test Kit",
+      "subtitle": "Discreet invoice only",
+      "shop": "Health Room",
+      "city": "Tel Aviv",
+      "pricePbs": 14,
+      "thumb": {
+        "label": "AK",
+        "from": "#555",
+        "to": "#cbd5e1"
+      },
+      "filters": [
+        "new"
+      ],
+      "badge": "gold"
+    },
+    {
+      "id": "org-donate",
+      "title": "Community Donation",
+      "subtitle": "Support local LGBTQ orgs",
+      "shop": "pboi Give",
+      "city": "Tel Aviv",
+      "pricePbs": 5,
+      "image": "photos/rainbow-street.jpg",
+      "filters": [
+        "top-sellers",
+        "new"
+      ],
+      "badge": "pearl"
+    },
+    {
+      "id": "pride-hoodie",
+      "title": "Rainbow Ring Hoodie",
+      "subtitle": "Brand merch, gift-ready",
+      "shop": "pboi Shop",
+      "city": "Tel Aviv",
+      "pricePbs": 19,
+      "image": "photos/pride-tee.jpg",
+      "filters": [
+        "new",
+        "most-viewed"
+      ],
+      "badge": "gold"
+    },
+    {
+      "id": "streaming-month",
+      "title": "Queer Sounds Month",
+      "subtitle": "Download + streaming pass",
+      "shop": "pboi Music",
+      "city": "Worldwide",
+      "pricePbs": 3,
+      "image": "photos/dj-booth.jpg",
+      "filters": [
+        "top-sellers"
+      ],
+      "badge": "pearl"
+    },
+    {
+      "id": "broadway-bundle",
+      "title": "Broadway Bundle",
+      "subtitle": "Two seats + interval drinks",
+      "shop": "Night Index",
+      "city": "Tel Aviv",
+      "pricePbs": 36,
+      "image": "photos/drag-stage.jpg",
+      "filters": [
+        "most-viewed"
+      ],
+      "badge": "gold"
+    },
+    {
+      "id": "app-premium",
+      "title": "Dating Apps Premium",
+      "subtitle": "One-tap gay apps bundle",
+      "shop": "pboi Shop",
+      "city": "Worldwide",
+      "pricePbs": 16,
+      "thumb": {
+        "label": "AP",
+        "from": "#4a4a4a",
+        "to": "#e9d5ff"
+      },
+      "filters": [
+        "new"
+      ],
+      "badge": "gold"
+    }
+  ]
+}

@@ -1,147 +1,70 @@
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
+import { BottomNav } from './components/BottomNav.jsx'
+import { ItemThumb } from './components/ItemRow.jsx'
+import { EarnBadge } from './components/EarnBadge.jsx'
+import { Splash } from './components/Splash.jsx'
+import wallet from './data/wallet.json'
+import { formatPbs, formatTokenBalance } from './lib/format.js'
+import { EventsScreen } from './screens/EventsScreen.jsx'
+import { MarketplaceScreen } from './screens/MarketplaceScreen.jsx'
+import { ShopScreen } from './screens/ShopScreen.jsx'
+import { WalletScreen } from './screens/WalletScreen.jsx'
 import './App.css'
 
-const STARTER_PEOPLE = [
-  { id: 'you', name: 'You' },
-  { id: 'alex', name: 'Alex' },
-  { id: 'sam', name: 'Sam' },
-]
-
 export default function App() {
-  const [people] = useState(STARTER_PEOPLE)
-  const [description, setDescription] = useState('Dinner')
-  const [amount, setAmount] = useState('84')
-  const [paidBy, setPaidBy] = useState('you')
-  const [expenses, setExpenses] = useState([
-    { id: 1, description: 'Groceries', amount: 46.5, paidBy: 'alex' },
-  ])
+  const [booted, setBooted] = useState(false)
+  const [tab, setTab] = useState('events')
+  const [selected, setSelected] = useState(null)
 
-  const balances = useMemo(() => {
-    const totals = Object.fromEntries(people.map((person) => [person.id, 0]))
-    const shareCount = people.length || 1
-
-    expenses.forEach((expense) => {
-      const share = expense.amount / shareCount
-      people.forEach((person) => {
-        totals[person.id] -= share
-      })
-      totals[expense.paidBy] += expense.amount
-    })
-
-    return people.map((person) => ({
-      ...person,
-      balance: totals[person.id],
-    }))
-  }, [expenses, people])
-
-  function addExpense(event) {
-    event.preventDefault()
-    const parsed = Number.parseFloat(amount)
-
-    if (!description.trim() || !Number.isFinite(parsed) || parsed <= 0) {
-      return
-    }
-
-    setExpenses((current) => [
-      {
-        id: Date.now(),
-        description: description.trim(),
-        amount: parsed,
-        paidBy,
-      },
-      ...current,
-    ])
-    setDescription('')
-    setAmount('')
-  }
-
-  function personName(id) {
-    return people.find((person) => person.id === id)?.name ?? id
+  if (!booted) {
+    return (
+      <div className="stage">
+        <div className="phone">
+          <Splash onDone={() => setBooted(true)} />
+        </div>
+      </div>
+    )
   }
 
   return (
-    <div className="page">
-      <header className="hero">
-        <p className="eyebrow">PayBoi</p>
-        <h1>Split it. Track it. Settle up.</h1>
-        <p className="lede">
-          A fresh React starter for shared expenses. Edit locally, then see the
-          same app live on GitHub Pages.
-        </p>
-      </header>
-
-      <main className="layout">
-        <section className="card">
-          <h2>Add an expense</h2>
-          <form className="form" onSubmit={addExpense}>
-            <label>
-              What was it?
-              <input
-                value={description}
-                onChange={(event) => setDescription(event.target.value)}
-                placeholder="Coffee, taxi, rent..."
+    <div className="stage">
+      <div className="phone">
+        {tab === 'events' ? <EventsScreen onSelect={setSelected} /> : null}
+        {tab === 'shop' ? <ShopScreen onSelect={setSelected} /> : null}
+        {tab === 'marketplace' ? (
+          <MarketplaceScreen onSelect={setSelected} />
+        ) : null}
+        {tab === 'wallet' ? <WalletScreen onSelect={setSelected} /> : null}
+        <BottomNav tab={tab} onChange={setTab} />
+        {selected ? (
+          <aside className="detail-sheet" role="dialog" aria-label={selected.title}>
+            <div className="detail-handle" />
+            <div className="detail-head">
+              <ItemThumb
+                thumb={selected.thumb}
+                title={selected.title}
+                image={selected.image}
               />
-            </label>
-            <label>
-              Amount
-              <input
-                value={amount}
-                onChange={(event) => setAmount(event.target.value)}
-                inputMode="decimal"
-                placeholder="0.00"
-              />
-            </label>
-            <label>
-              Paid by
-              <select
-                value={paidBy}
-                onChange={(event) => setPaidBy(event.target.value)}
-              >
-                {people.map((person) => (
-                  <option key={person.id} value={person.id}>
-                    {person.name}
-                  </option>
-                ))}
-              </select>
-            </label>
-            <button type="submit">Add expense</button>
-          </form>
-        </section>
-
-        <section className="card">
-          <h2>Balances</h2>
-          <ul className="balances">
-            {balances.map((person) => (
-              <li key={person.id}>
-                <span>{person.name}</span>
-                <strong className={person.balance >= 0 ? 'positive' : 'negative'}>
-                  {person.balance >= 0 ? 'is owed' : 'owes'}{' '}
-                  {Math.abs(person.balance).toFixed(2)}
-                </strong>
-              </li>
-            ))}
-          </ul>
-        </section>
-
-        <section className="card wide">
-          <h2>Activity</h2>
-          {expenses.length === 0 ? (
-            <p className="empty">No expenses yet. Add the first one above.</p>
-          ) : (
-            <ul className="activity">
-              {expenses.map((expense) => (
-                <li key={expense.id}>
-                  <div>
-                    <strong>{expense.description}</strong>
-                    <span>{personName(expense.paidBy)} paid</span>
-                  </div>
-                  <em>{expense.amount.toFixed(2)}</em>
-                </li>
-              ))}
-            </ul>
-          )}
-        </section>
-      </main>
+              <div>
+                <strong>{selected.title}</strong>
+                <span>{selected.subtitle}</span>
+              </div>
+              <EarnBadge item={selected} />
+            </div>
+            <p>
+              {selected.pricePbs <= wallet.balance
+                ? `Pay ${formatPbs(selected.pricePbs)}. You gain ${selected.earnPbs ?? selected.pricePbs} pts, with ${formatPbs(wallet.balance - selected.pricePbs)} left.`
+                : `This is ${formatPbs(selected.pricePbs - wallet.balance)} over your ${formatTokenBalance(wallet.balance)} pbs.`}
+            </p>
+            <button type="button" className="pay-btn">
+              Pay {formatPbs(selected.pricePbs)}
+            </button>
+            <button type="button" className="ghost-btn" onClick={() => setSelected(null)}>
+              Close
+            </button>
+          </aside>
+        ) : null}
+      </div>
     </div>
   )
 }
