@@ -60,8 +60,8 @@
   margin: 0;
   font-family: var(--font-display);
   font-size: 1.55rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
+  font-weight: 600;
+  letter-spacing: 0;
   text-transform: uppercase;
   line-height: 1;
 }
@@ -69,9 +69,10 @@
 .screen-header p {
   margin: 8px 0 0;
   font-family: Figtree, system-ui, sans-serif;
-  font-size: 0.68rem;
+  font-size: 0.75rem;
   font-weight: 400;
-  letter-spacing: 0.02em;
+  letter-spacing: normal;
+  font-style: normal;
   color: var(--kicker);
 }
 
@@ -489,6 +490,34 @@
 
 .list-toolbar .count-line {
   margin: 0;
+  white-space: nowrap;
+  font-size: 0.66rem;
+}
+
+.filter-tools {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.filter-reset {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--btn-ink);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+
+.filter-reset svg {
+  width: 16px;
+  height: 16px;
+  display: block;
 }
 
 .filter-launch {
@@ -910,37 +939,27 @@
 }
 
 .splash-letters {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.12em;
+  display: grid;
+  justify-items: center;
   font-family: var(--font-display);
   font-size: 3.1rem;
-  line-height: 1;
-  letter-spacing: 0;
+  line-height: 0.94;
+  letter-spacing: 0.02em;
   font-weight: 600;
-}
-
-.splash-letters b,
-.splash-letters span {
-  display: block;
-  line-height: 1;
-  text-box-trim: trim-both;
-  text-box-edge: text text;
-}
-
-.splash-letters span:nth-child(3) {
-  margin-top: -0.2em;
-}
-
-.splash-letters span:nth-child(4) {
-  margin-top: -0.12em;
 }
 
 .splash-letters b {
   color: var(--gold);
   font-weight: 600;
-  transform: translateY(0.12em);
+}
+
+.splash-letters span:nth-child(3) {
+  margin-top: -0.08em;
+}
+
+.splash-letters span:nth-child(4) {
+  margin-top: -0.02em;
+  transform: translateY(8px);
 }
 
 .splash-line {
@@ -948,10 +967,12 @@
   bottom: 132px;
   margin: 0;
   min-height: 1.2em;
-  font-size: 0.68rem;
-  font-weight: 400;
-  letter-spacing: 0.24em;
-  color: #3c3a3b;
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  font-style: normal;
+  letter-spacing: 0.02em;
+  color: #5c5854;
 }
 
 .splash-line i {
@@ -959,7 +980,7 @@
   width: 1px;
   height: 0.85em;
   margin-left: 3px;
-  background: #3c3a3b;
+  background: #5c5854;
   vertical-align: -1px;
   animation: caret 1s step-end infinite;
 }
