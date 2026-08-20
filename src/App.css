@@ -821,8 +821,7 @@
   padding: 18px 18px 16px;
   overflow: hidden;
   display: grid;
-  grid-template-rows: auto 1fr;
-  align-content: stretch;
+  align-content: end;
   color: #fff;
   background: transparent;
   box-shadow: none;
@@ -834,16 +833,6 @@
   height: 70%;
   background: radial-gradient(circle at 50% 0%, rgb(255 180 220 / 35%), transparent 68%);
   pointer-events: none;
-}
-
-.pay-card-top {
-  position: relative;
-}
-
-.pay-card .pboi-logo,
-.pay-card .pboi-logo span {
-  color: #fff;
-  font-size: 1.05rem;
 }
 
 .pay-card-foot {
@@ -1156,6 +1145,7 @@
 
 .feed-mode {
   display: flex;
+  flex-wrap: wrap;
   gap: 6px;
 }
 
@@ -1213,6 +1203,78 @@
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--gold);
+}
+
+.feed-track {
+  margin: 0;
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.feed-tags {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.68rem;
+}
+
+.feed-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.feed-actions button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--wash);
+  color: var(--muted);
+  font-size: 0.68rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.feed-actions button svg {
+  width: 14px;
+  height: 14px;
+  display: block;
+}
+
+.feed-actions button.is-on {
+  color: #c48693;
+}
+
+.feed-clip,
+.user-feed-slide video {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+  border-radius: 18px;
+  background: #2a2624;
+}
+
+.feed-photo.is-clip {
+  position: relative;
+}
+
+.feed-photo.is-clip i {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  font-style: normal;
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #fff;
+  background: rgb(0 0 0 / 45%);
+  padding: 4px 8px;
+  border-radius: 999px;
 }
 
 .party-rate {

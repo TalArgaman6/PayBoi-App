@@ -49,7 +49,7 @@ export function WalletScreen({ onSelect }) {
       <div className="wallet-shine" aria-hidden="true" />
       <ScreenHeader
         title="Wallet"
-        kicker={`${wallet.nickname} · ${wallet.pronouns}`}
+        kicker={wallet.nickname}
       />
       <WalletCard wallet={wallet} />
       <div className="sheet wallet-sheet">

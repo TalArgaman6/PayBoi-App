@@ -62,7 +62,7 @@ export default function App() {
               {selected.seller
                 ? `Pay ${formatPbs(selected.pricePbs)} to ${selected.seller.name}. Same price as the door — their profile is on the listing.`
                 : selected.pricePbs <= wallet.balance
-                  ? `Pay ${formatPbs(selected.pricePbs)}. You gain ${selected.earnPbs ?? selected.pricePbs} pts, with ${formatPbs(wallet.balance - selected.pricePbs)} left.`
+                  ? `Pay ${formatPbs(selected.pricePbs)}. You gain ${selected.earnPbs ?? selected.pricePbs} bois, with ${formatPbs(wallet.balance - selected.pricePbs)} left.`
                   : `This is ${formatPbs(selected.pricePbs - wallet.balance)} over your ${formatTokenBalance(wallet.balance)} pbs.`}
             </p>
             <button type="button" className="pay-btn">
