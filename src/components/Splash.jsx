@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-const LINE = 'a new gay economy'
+const LINE = 'a new lgbtq economy'
 
 export function Splash({ onDone }) {
   const [shown, setShown] = useState('')

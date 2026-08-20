@@ -3,7 +3,7 @@
 :root {
   font-family: Figtree, system-ui, sans-serif;
   color: #f4f6fb;
-  background: #0c0d12;
+  background: #12141c;
   color-scheme: dark;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -22,7 +22,8 @@
   --btn-ink: #d7dbe8;
   --wash: #1c1f28;
   --line: #2a2e3a;
-  --header-grad: linear-gradient(135deg, #4ec8f5 0%, #4a78ff 48%, #6a48d8 100%);
+  --nav: #12141a;
+  --header-grad: linear-gradient(135deg, #2db0e0 0%, #3b82f0 48%, #3d74dc 100%);
 }
 
 *,
@@ -43,6 +44,7 @@ body {
 }
 
 button,
-input {
+input,
+select {
   font: inherit;
 }

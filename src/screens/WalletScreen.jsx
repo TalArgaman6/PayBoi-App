@@ -6,7 +6,7 @@ import { RiderRow } from '../components/RiderRow.jsx'
 import { ScreenHeader } from '../components/ScreenHeader.jsx'
 import { WalletCard } from '../components/WalletCard.jsx'
 import { PRICE_RANGES, inPriceRange } from '../lib/filters.js'
-import { formatPbs } from '../lib/format.js'
+import { assetUrl, formatPbs } from '../lib/format.js'
 import { kindLabel, suggestionsForBalance } from '../lib/suggestions.js'
 
 const totalWorth = wallet.gifts.reduce(
@@ -17,7 +17,7 @@ const totalWorth = wallet.gifts.reduce(
 const SUGGESTION_FILTERS = [
   { id: 'all', label: 'All' },
   { id: 'event', label: 'Events' },
-  { id: 'shop', label: 'Spend' },
+  { id: 'shop', label: 'Drop' },
 ]
 
 export function WalletScreen({ onSelect }) {
@@ -48,7 +48,12 @@ export function WalletScreen({ onSelect }) {
         title="Wallet"
         kicker={wallet.nickname}
       />
-      <WalletCard wallet={wallet} />
+      <div className="wallet-hero">
+        <WalletCard wallet={wallet} />
+        <div className="wallet-profile" aria-hidden="true">
+          <img src={assetUrl(wallet.photo)} alt="" />
+        </div>
+      </div>
       <div className="sheet wallet-sheet">
         <p className="coin-caption">{wallet.caption}</p>
         <div className="gift-room">

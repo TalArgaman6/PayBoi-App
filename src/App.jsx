@@ -6,6 +6,7 @@ import { SellerFace } from './components/SellerFace.jsx'
 import { Splash } from './components/Splash.jsx'
 import wallet from './data/wallet.json'
 import { formatPbs, formatTokenBalance } from './lib/format.js'
+import { rankVars } from './lib/settings.js'
 import { useWalletTilt } from './lib/tilt.js'
 import { EventsScreen } from './screens/EventsScreen.jsx'
 import { FeedScreen } from './screens/FeedScreen.jsx'
@@ -33,7 +34,12 @@ export default function App() {
 
   return (
     <div className="stage">
-      <div className="phone" data-tab={tab} ref={phone}>
+      <div
+        className="phone"
+        data-tab={tab}
+        ref={phone}
+        style={rankVars(wallet.balance)}
+      >
         {tab === 'events' ? <EventsScreen onSelect={setSelected} /> : null}
         {tab === 'shop' ? <ShopScreen onSelect={setSelected} /> : null}
         {tab === 'marketplace' ? (

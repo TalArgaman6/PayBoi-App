@@ -6,19 +6,12 @@ function clamp(value) {
 
 function paint(node, x, y) {
   if (!node) return
-  node.style.setProperty('--header-angle', `${135 + x * 24}deg`)
-  node.style.setProperty('--header-cyan-x', `${8 + x * 18}%`)
-  node.style.setProperty('--header-cyan-y', `${-20 + y * 16}%`)
-  node.style.setProperty('--header-violet-x', `${96 + x * 14}%`)
-  node.style.setProperty('--header-violet-y', `${8 + y * 14}%`)
+  node.style.setProperty('--header-angle', `${145 + x * 22}deg`)
+  node.style.setProperty('--header-glow-x', `${8 + x * 16}%`)
+  node.style.setProperty('--header-glow-y', `${110 + y * 12}%`)
   node.style.setProperty('--wallet-angle', `${145 + x * 22}deg`)
-  node.style.setProperty('--wallet-pink-x', `${92 + x * 16}%`)
-  node.style.setProperty('--wallet-pink-y', `${-8 + y * 16}%`)
   node.style.setProperty('--wallet-blue-x', `${8 + x * 16}%`)
   node.style.setProperty('--wallet-blue-y', `${110 + y * 12}%`)
-  node.style.setProperty('--wallet-shine-angle', `${120 + x * 32}deg`)
-  node.style.setProperty('--wallet-shine-x', `${x * 36}px`)
-  node.style.setProperty('--wallet-shine-y', `${y * 22}px`)
 }
 
 export function useWalletTilt(ref, ready = true) {

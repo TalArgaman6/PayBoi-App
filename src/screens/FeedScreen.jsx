@@ -46,6 +46,28 @@ function VoteMark() {
   )
 }
 
+function ShareMark() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path
+        d="M12 4v11M8.2 7.5 12 3.8l3.8 3.7"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M6 13v6.2A1.8 1.8 0 0 0 7.8 21h8.4A1.8 1.8 0 0 0 18 19.2V13"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
+    </svg>
+  )
+}
+
 function Heart({ on }) {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -60,6 +82,52 @@ function Heart({ on }) {
   )
 }
 
+function peopleOn(post) {
+  return [post.user, ...(post.with || [])]
+}
+
+function collabLabel(people) {
+  if (people.length < 2) return people[0]?.name || ''
+  if (people.length === 2) return `${people[0].name} + ${people[1].name}`
+  return `${people[0].name} + ${people.length - 1}`
+}
+
+function onPost(post, userId) {
+  return (
+    post.user.id === userId ||
+    (post.with || []).some((person) => person.id === userId)
+  )
+}
+
+function FeedPeople({ post, onOpen }) {
+  const people = peopleOn(post)
+  const collab = people.length > 1
+
+  return (
+    <div className={`feed-user${collab ? ' is-collab' : ''}`}>
+      <span className="feed-faces">
+        {people.slice(0, 4).map((person) => (
+          <button
+            key={person.id}
+            type="button"
+            onClick={() => onOpen(person.id, post.id)}
+            aria-label={person.name}
+          >
+            <img src={assetUrl(person.photo)} alt="" />
+          </button>
+        ))}
+      </span>
+      <button
+        type="button"
+        className="feed-user-copy"
+        onClick={() => onOpen(post.user.id, post.id)}
+      >
+        <strong>{collabLabel(people)}</strong>
+      </button>
+    </div>
+  )
+}
+
 function kindLabel(kind) {
   if (kind === 'rating') return 'Live rating'
   if (kind === 'ride') return 'Ride request'
@@ -70,26 +138,34 @@ function kindLabel(kind) {
   return 'Post'
 }
 
-function RatingOptions({ options, picked, onVote }) {
+function upvoteLine(entry, picked, me) {
+  const votes = entry.votes || 0
+  if (votes <= 0) return null
+  const lead = picked === entry.id ? me : entry.upvoters?.[0] || 'Someone'
+  if (votes === 1) return `${lead} upvoted`
+  return `${lead} upvoted +${votes - 1} more`
+}
+
+function RatingOptions({ options, picked, onVote, me, live = 4 }) {
   const ranked = [...options].sort((left, right) => right.votes - left.votes)
-  const live = ranked.reduce((sum, item) => sum + item.votes, 0)
-  const avg = ranked.length ? Math.round(live / ranked.length) : 0
 
   return (
     <div>
-      <p className="rate-kicker">
-        Live rating · {live} live · avg {avg}
-      </p>
+      <p className="rate-kicker">Live rating · {live} live</p>
       <ul className="party-rate">
         {ranked.map((entry) => {
           const party = PARTY_BY_ID[entry.id]
           if (!party) return null
           const on = picked === entry.id
+          const fans = upvoteLine(entry, picked, me)
           return (
             <li key={entry.id}>
               <img src={assetUrl(party.image)} alt="" />
               <div>
-                <strong>{party.title}</strong>
+                <strong>
+                  {party.title}
+                  {fans ? <b>{fans}</b> : null}
+                </strong>
                 <span>{party.venue}</span>
               </div>
               <button
@@ -110,10 +186,11 @@ function RatingOptions({ options, picked, onVote }) {
   )
 }
 
-function UserFeed({ posts, startId, onClose }) {
+function UserFeed({ posts, startId, userId, onClose }) {
   const scroller = useRef(null)
   const media = posts.filter((post) => post.image || post.video)
-  const person = media[0]?.user
+  const person =
+    media.flatMap(peopleOn).find((item) => item.id === userId) || media[0]?.user
 
   useEffect(() => {
     const root = scroller.current
@@ -144,7 +221,7 @@ function UserFeed({ posts, startId, onClose }) {
             data-post={post.id}
           >
             {post.video ? (
-              <video src={assetUrl(post.video)} controls playsInline />
+              <video src={assetUrl(post.video)} controls playsInline muted autoPlay loop />
             ) : (
               <img src={assetUrl(post.image)} alt="" />
             )}
@@ -200,7 +277,7 @@ export function FeedScreen() {
 
   const album = useMemo(() => {
     if (!viewer) return []
-    return posts.filter((post) => post.user.id === viewer.userId)
+    return posts.filter((post) => onPost(post, viewer.userId))
   }, [posts, viewer])
 
   const visible = useMemo(
@@ -298,6 +375,7 @@ export function FeedScreen() {
         ? {
             ...base,
             kind: 'rating',
+            live: 1,
             options: picks.map((id) => ({ id, votes: 0 })),
           }
         : {
@@ -416,6 +494,9 @@ export function FeedScreen() {
                   src={assetUrl(post.video)}
                   controls
                   playsInline
+                  muted
+                  autoPlay
+                  loop
                 />
               ) : post.image ? (
                 <button
@@ -430,14 +511,7 @@ export function FeedScreen() {
                 <p className="rate-kicker">{kindLabel(post.kind)}</p>
               ) : null}
               <div className="feed-meta">
-                <button
-                  type="button"
-                  className="feed-user"
-                  onClick={() => openUser(post.user.id, post.id)}
-                >
-                  <img src={assetUrl(post.user.photo)} alt="" />
-                  <strong>{post.user.name}</strong>
-                </button>
+                <FeedPeople post={post} onOpen={openUser} />
                 <span>{post.when}</span>
               </div>
               {post.track ? <p className="feed-track">{post.track}</p> : null}
@@ -451,6 +525,8 @@ export function FeedScreen() {
                 <RatingOptions
                   options={post.options}
                   picked={mine[post.id]}
+                  me={ME.name}
+                  live={post.live ?? 4}
                   onVote={(optionId) => vote(post.id, optionId)}
                 />
               ) : null}
@@ -466,9 +542,10 @@ export function FeedScreen() {
                 </button>
                 <button
                   type="button"
+                  aria-label="Share"
                   onClick={() => shareToInstagram(post)}
                 >
-                  Story
+                  <ShareMark />
                 </button>
               </div>
             </article>
@@ -479,6 +556,7 @@ export function FeedScreen() {
         <UserFeed
           posts={album}
           startId={viewer.startId}
+          userId={viewer.userId}
           onClose={() => setViewer(null)}
         />
       ) : null}

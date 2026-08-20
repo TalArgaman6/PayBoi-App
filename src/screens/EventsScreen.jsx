@@ -24,7 +24,7 @@ function formatFilterPrice(pbs, country) {
   return `${formatPbs(pbs)} · ${local}`
 }
 
-export function EventsScreen({ onSelect }) {
+export function EventsScreen({ onSelect, country = DEFAULT_COUNTRY }) {
   const [query, setQuery] = useState('')
   const [menu, setMenu] = useState(false)
   const [type, setType] = useState('all')
@@ -35,7 +35,6 @@ export function EventsScreen({ onSelect }) {
   const [priceMin, setPriceMin] = useState(PRICE_SLIDER.min)
   const [priceMax, setPriceMax] = useState(PRICE_SLIDER.max)
 
-  const country = DEFAULT_COUNTRY
   const currency = currencyForCountry(country)
   const priceOpen = !isFullPriceSpan(priceMin, priceMax)
   const nearby = (item) =>
