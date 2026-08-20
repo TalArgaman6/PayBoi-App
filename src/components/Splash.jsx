@@ -27,8 +27,6 @@ export function Splash({ onDone }) {
       <span className="splash-letters" aria-hidden="true">
         <b>p</b>
         <span>b</span>
-        <span>o</span>
-        <span>i</span>
       </span>
       <p className="splash-line">
         {shown}
