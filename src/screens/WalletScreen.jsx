@@ -1,12 +1,12 @@
 import { useMemo, useState } from 'react'
 import wallet from '../data/wallet.json'
-import { CategoryCoin } from '../components/CategoryCoin.jsx'
 import { FilterTabs } from '../components/FilterTabs.jsx'
 import { ItemRow } from '../components/ItemRow.jsx'
 import { RiderRow } from '../components/RiderRow.jsx'
 import { ScreenHeader } from '../components/ScreenHeader.jsx'
+import { WalletCard } from '../components/WalletCard.jsx'
 import { PRICE_RANGES, inPriceRange } from '../lib/filters.js'
-import { formatPbs, formatTokenBalance } from '../lib/format.js'
+import { formatPbs } from '../lib/format.js'
 import { kindLabel, suggestionsForBalance } from '../lib/suggestions.js'
 
 const totalWorth = wallet.gifts.reduce(
@@ -47,25 +47,8 @@ export function WalletScreen({ onSelect }) {
         title="Wallet"
         kicker={`${wallet.nickname} · ${wallet.pronouns}`}
       />
-      <div className="wallet-hero">
-        <p className="user-handle">{wallet.user}</p>
-        <p className="token-balance">
-          <small>{wallet.token}</small>
-          {formatTokenBalance(wallet.balance)}
-        </p>
-        <p className="fiat-balance">
-          ₪{wallet.fiat.toLocaleString('en-US')}
-        </p>
-      </div>
+      <WalletCard wallet={wallet} />
       <div className="sheet wallet-sheet">
-        <CategoryCoin
-          gifts={wallet.gifts}
-          activeId={litGift}
-          onPick={(id) => {
-            setSelectedGift(id)
-            setOpenGift(id)
-          }}
-        />
         <p className="coin-caption">{wallet.caption}</p>
         <div className="gift-room">
           <p className="gift-kicker">{wallet.section}</p>

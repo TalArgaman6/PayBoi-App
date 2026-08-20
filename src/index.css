@@ -2,8 +2,9 @@
 
 :root {
   font-family: Figtree, system-ui, sans-serif;
-  color: #2a2624;
-  background: #8a847e;
+  color: #f4f6fb;
+  background: #0c0d12;
+  color-scheme: dark;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -12,15 +13,16 @@
   --accent: #d1b45f;
   --accent-ink: #1c1a18;
   --gold: #d1b45f;
-  --ink: #1c1a18;
-  --chrome: #2f2e30;
-  --sheet: #f8f6f3;
-  --muted: #7a756f;
-  --kicker: #c9c2ba;
-  --btn: #ededed;
-  --btn-ink: #8a8a8a;
-  --wash: #f1eee8;
-  --line: #e6e1d8;
+  --ink: #f4f6fb;
+  --chrome: #101218;
+  --sheet: #16181f;
+  --muted: #8b90a0;
+  --kicker: #c9cce0;
+  --btn: #2a2d38;
+  --btn-ink: #d7dbe8;
+  --wash: #1c1f28;
+  --line: #2a2e3a;
+  --header-grad: linear-gradient(135deg, #4ec8f5 0%, #4a78ff 48%, #6a48d8 100%);
 }
 
 *,

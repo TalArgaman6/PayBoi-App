@@ -1,0 +1,193 @@
+{
+  "posts": [
+    {
+      "id": "maya-rate-1",
+      "kind": "rating",
+      "user": {
+        "id": "maya",
+        "name": "Maya",
+        "photo": "photos/sellers/maya.jpg"
+      },
+      "caption": "Help me pick tonight.",
+      "when": "48m",
+      "options": [
+        { "id": "forever-tlv", "votes": 31 },
+        { "id": "gaze-haoman", "votes": 24 },
+        { "id": "fff-shirazi", "votes": 12 }
+      ]
+    },
+    {
+      "id": "alex-1",
+      "user": {
+        "id": "alex",
+        "name": "Alex",
+        "photo": "photos/sellers/alex.jpg"
+      },
+      "image": "photos/club-lasers.jpg",
+      "caption": "Haoman already packed.",
+      "when": "2h"
+    },
+    {
+      "id": "sam-rate-1",
+      "kind": "rating",
+      "user": {
+        "id": "sam",
+        "name": "Sam",
+        "photo": "photos/sellers/sam.jpg"
+      },
+      "caption": "Drek or Crush this week?",
+      "when": "2h",
+      "options": [
+        { "id": "dreck-wed", "votes": 19 },
+        { "id": "crush-line", "votes": 11 }
+      ]
+    },
+    {
+      "id": "sam-1",
+      "user": {
+        "id": "sam",
+        "name": "Sam",
+        "photo": "photos/sellers/sam.jpg"
+      },
+      "image": "photos/dj-booth.jpg",
+      "caption": "FFF soundcheck. Come late.",
+      "when": "3h"
+    },
+    {
+      "id": "tal-1",
+      "user": {
+        "id": "tal",
+        "name": "TAL",
+        "photo": "photos/sellers/tal.jpg"
+      },
+      "image": "photos/beach-night.jpg",
+      "caption": "Hilton light before the room.",
+      "when": "4h"
+    },
+    {
+      "id": "alex-rate-1",
+      "kind": "rating",
+      "user": {
+        "id": "alex",
+        "name": "Alex",
+        "photo": "photos/sellers/alex.jpg"
+      },
+      "caption": "Beef or Arisa Saturday?",
+      "when": "5h",
+      "options": [
+        { "id": "beef-night", "votes": 22 },
+        { "id": "arisa", "votes": 27 }
+      ]
+    },
+    {
+      "id": "noa-1",
+      "user": {
+        "id": "noa",
+        "name": "Noa",
+        "photo": "photos/sellers/noa.jpg"
+      },
+      "image": "photos/rainbow-street.jpg",
+      "caption": "Shenkin in the afternoon.",
+      "when": "5h"
+    },
+    {
+      "id": "maya-1",
+      "user": {
+        "id": "maya",
+        "name": "Maya",
+        "photo": "photos/sellers/maya.jpg"
+      },
+      "image": "photos/pool-party.jpg",
+      "caption": "Gordon Pool, same crew.",
+      "when": "6h"
+    },
+    {
+      "id": "alex-2",
+      "user": {
+        "id": "alex",
+        "name": "Alex",
+        "photo": "photos/sellers/alex.jpg"
+      },
+      "image": "photos/afterhours.jpg",
+      "caption": "Afters floor is kinder.",
+      "when": "8h"
+    },
+    {
+      "id": "ido-1",
+      "user": {
+        "id": "ido",
+        "name": "Ido",
+        "photo": "photos/sellers/ido.jpg"
+      },
+      "image": "photos/volleyball.jpg",
+      "caption": "Sunday nets at Gordon.",
+      "when": "1d"
+    },
+    {
+      "id": "jordan-1",
+      "user": {
+        "id": "jordan",
+        "name": "Jordan",
+        "photo": "photos/sellers/jordan.jpg"
+      },
+      "image": "photos/drag-stage.jpg",
+      "caption": "Callas karaoke, no notes.",
+      "when": "1d"
+    },
+    {
+      "id": "sam-2",
+      "user": {
+        "id": "sam",
+        "name": "Sam",
+        "photo": "photos/sellers/sam.jpg"
+      },
+      "image": "photos/hiphop-club.jpg",
+      "caption": "Lima Monday if you still can.",
+      "when": "1d"
+    },
+    {
+      "id": "noa-2",
+      "user": {
+        "id": "noa",
+        "name": "Noa",
+        "photo": "photos/sellers/noa.jpg"
+      },
+      "image": "photos/gay-bar.jpg",
+      "caption": "Shpagat terrace, 21:00.",
+      "when": "1d"
+    },
+    {
+      "id": "tal-2",
+      "user": {
+        "id": "tal",
+        "name": "TAL",
+        "photo": "photos/sellers/tal.jpg"
+      },
+      "image": "photos/pboi-festival.jpg",
+      "caption": "Yearly week loading.",
+      "when": "2d"
+    },
+    {
+      "id": "maya-2",
+      "user": {
+        "id": "maya",
+        "name": "Maya",
+        "photo": "photos/sellers/maya.jpg"
+      },
+      "image": "photos/cocktails.jpg",
+      "caption": "First pour, then we decide.",
+      "when": "2d"
+    },
+    {
+      "id": "alex-3",
+      "user": {
+        "id": "alex",
+        "name": "Alex",
+        "photo": "photos/sellers/alex.jpg"
+      },
+      "image": "photos/park-concert.jpg",
+      "caption": "Offer in the park, still ringing.",
+      "when": "3d"
+    }
+  ]
+}

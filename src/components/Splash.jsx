@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { BrandRing } from './BrandRing.jsx'
 
 const LINE = 'a new gay economy'
 
@@ -35,7 +34,6 @@ export function Splash({ onDone }) {
         {shown}
         <i />
       </p>
-      <BrandRing className="splash-ring" />
     </button>
   )
 }

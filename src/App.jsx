@@ -7,6 +7,7 @@ import { Splash } from './components/Splash.jsx'
 import wallet from './data/wallet.json'
 import { formatPbs, formatTokenBalance } from './lib/format.js'
 import { EventsScreen } from './screens/EventsScreen.jsx'
+import { FeedScreen } from './screens/FeedScreen.jsx'
 import { MarketplaceScreen } from './screens/MarketplaceScreen.jsx'
 import { ShopScreen } from './screens/ShopScreen.jsx'
 import { WalletScreen } from './screens/WalletScreen.jsx'
@@ -35,6 +36,7 @@ export default function App() {
         {tab === 'marketplace' ? (
           <MarketplaceScreen onSelect={setSelected} />
         ) : null}
+        {tab === 'feed' ? <FeedScreen /> : null}
         {tab === 'wallet' ? <WalletScreen onSelect={setSelected} /> : null}
         <BottomNav tab={tab} onChange={setTab} />
         {selected ? (

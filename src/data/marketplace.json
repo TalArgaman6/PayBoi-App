@@ -1,36 +1,22 @@
 {
   "premiumOnly": true,
   "filters": [
-    {
-      "id": "tickets",
-      "label": "Tickets"
-    },
-    {
-      "id": "packages",
-      "label": "Packages"
-    },
-    {
-      "id": "transfers",
-      "label": "Transfers"
-    }
+    { "id": "tickets", "label": "Tickets" },
+    { "id": "packages", "label": "Packages" },
+    { "id": "transfers", "label": "Transfers" }
   ],
   "items": [
     {
       "id": "resale-forever",
-      "title": "Forever TLV \u2014 1 ticket",
+      "title": "Forever TLV — 1 ticket",
       "subtitle": "Resale at original price",
       "shop": "From Alex",
-      "seller": {
-        "name": "Alex",
-        "photo": "photos/sellers/alex.jpg"
-      },
+      "seller": { "name": "Alex", "photo": "photos/sellers/alex.jpg" },
       "city": "Tel Aviv",
       "pricePbs": 95,
       "originalPbs": 95,
       "image": "photos/afterhours.jpg",
-      "filters": [
-        "tickets"
-      ],
+      "filters": ["tickets"],
       "badge": "gold"
     },
     {
@@ -38,17 +24,12 @@
       "title": "FFF by Shirazi pack",
       "subtitle": "Resale at original price",
       "shop": "From Sam",
-      "seller": {
-        "name": "Sam",
-        "photo": "photos/sellers/sam.jpg"
-      },
+      "seller": { "name": "Sam", "photo": "photos/sellers/sam.jpg" },
       "city": "Tel Aviv",
       "pricePbs": 68,
       "originalPbs": 68,
-      "image": "photos/dj-booth.jpg",
-      "filters": [
-        "packages"
-      ],
+      "image": "photos/fff-shirazi.jpg",
+      "filters": ["packages"],
       "badge": "gold"
     },
     {
@@ -56,18 +37,12 @@
       "title": "Forever Pride Weekend",
       "subtitle": "Transferable Hangar 11 pass",
       "shop": "From Noa",
-      "seller": {
-        "name": "Noa",
-        "photo": "photos/sellers/noa.jpg"
-      },
+      "seller": { "name": "Noa", "photo": "photos/sellers/noa.jpg" },
       "city": "Tel Aviv",
       "pricePbs": 140,
       "originalPbs": 140,
-      "image": "photos/rainbow-street.jpg",
-      "filters": [
-        "tickets",
-        "transfers"
-      ],
+      "image": "photos/forever-pride.jpg",
+      "filters": ["tickets", "transfers"],
       "badge": "pink"
     },
     {
@@ -75,17 +50,12 @@
       "title": "Gaze @ Haoman + drinks",
       "subtitle": "Package, same-price resale",
       "shop": "From Ido",
-      "seller": {
-        "name": "Ido",
-        "photo": "photos/sellers/ido.jpg"
-      },
+      "seller": { "name": "Ido", "photo": "photos/sellers/ido.jpg" },
       "city": "Tel Aviv",
       "pricePbs": 72,
       "originalPbs": 72,
       "image": "photos/club-lasers.jpg",
-      "filters": [
-        "packages"
-      ],
+      "filters": ["packages"],
       "badge": "gold"
     },
     {
@@ -93,37 +63,25 @@
       "title": "Offer Nissim Pride",
       "subtitle": "Loyalty points on transfer",
       "shop": "From Maya",
-      "seller": {
-        "name": "Maya",
-        "photo": "photos/sellers/maya.jpg"
-      },
+      "seller": { "name": "Maya", "photo": "photos/sellers/maya.jpg" },
       "city": "Tel Aviv",
       "pricePbs": 110,
       "originalPbs": 110,
       "image": "photos/park-concert.jpg",
-      "filters": [
-        "tickets",
-        "transfers"
-      ],
+      "filters": ["tickets", "transfers"],
       "badge": "gold"
     },
     {
       "id": "resale-arisa",
-      "title": "Arisa \u2014 1 ticket",
+      "title": "Arisa — 1 ticket",
       "subtitle": "Transfer, no extra markup",
       "shop": "From Jordan",
-      "seller": {
-        "name": "Jordan",
-        "photo": "photos/sellers/jordan.jpg"
-      },
+      "seller": { "name": "Jordan", "photo": "photos/sellers/jordan.jpg" },
       "city": "Tel Aviv",
       "pricePbs": 62,
       "originalPbs": 62,
-      "image": "photos/club-lasers.jpg",
-      "filters": [
-        "tickets",
-        "transfers"
-      ],
+      "image": "photos/arisa-night.jpg",
+      "filters": ["tickets"],
       "badge": "gold"
     }
   ]

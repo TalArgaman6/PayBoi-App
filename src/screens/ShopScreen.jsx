@@ -13,20 +13,22 @@ export function ShopScreen({ onSelect }) {
   const items = useMemo(
     () =>
       catalog.items.filter(
-        (item) => item.filters.includes(filter) && matchesQuery(item, query),
+        (item) =>
+          (filter === 'all' || item.filters.includes(filter)) &&
+          matchesQuery(item, query),
       ),
     [filter, query],
   )
 
   return (
     <section className="screen screen-spend">
-      <ScreenHeader title="Spend" kicker="Top sellers, new drops" />
+      <ScreenHeader title="Spend" kicker="Lifestyle, shopping, nights" />
       <div className="sheet">
         <p className="count-line">{items.length} products</p>
         <SearchBar
           value={query}
           onChange={setQuery}
-          placeholder="Search merch, vouchers, stays"
+          placeholder="Search lifestyle, shopping, travel"
         />
         <FilterTabs
           filters={catalog.filters}

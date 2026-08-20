@@ -1,19 +1,181 @@
 {
   "filters": [
     {
-      "id": "top-sellers",
-      "label": "Top Sellers"
+      "id": "all",
+      "label": "All"
     },
     {
-      "id": "most-viewed",
-      "label": "Most Viewed"
+      "id": "lifestyle",
+      "label": "Lifestyle"
     },
     {
-      "id": "new",
-      "label": "New"
+      "id": "shopping",
+      "label": "Shopping"
+    },
+    {
+      "id": "night",
+      "label": "Night"
+    },
+    {
+      "id": "travel",
+      "label": "Travel"
     }
   ],
   "items": [
+    {
+      "id": "gordon-pool",
+      "title": "Gordon Pool Day Pass",
+      "subtitle": "The famous beachfront municipal pool",
+      "shop": "Gordon Pool",
+      "city": "Tel Aviv",
+      "pricePbs": 16,
+      "image": "photos/gordon-pool.jpg",
+      "filters": ["lifestyle"],
+      "badge": "gold"
+    },
+    {
+      "id": "gordon-locker",
+      "title": "Gordon Locker + Towel",
+      "subtitle": "Day locker on the Gordon deck",
+      "shop": "Gordon Pool",
+      "city": "Tel Aviv",
+      "pricePbs": 8,
+      "image": "photos/gordon-locker.jpg",
+      "filters": ["lifestyle"],
+      "badge": "pearl"
+    },
+    {
+      "id": "lehamim-card",
+      "title": "Lehamim Loaf Card",
+      "subtitle": "Sourdough + coffee, Rothschild",
+      "shop": "Lehamim Bakery",
+      "city": "Tel Aviv",
+      "pricePbs": 6,
+      "image": "photos/lehamim.jpg",
+      "filters": ["lifestyle"],
+      "badge": "pearl"
+    },
+    {
+      "id": "breads-box",
+      "title": "Breads Saturday Box",
+      "subtitle": "Pastries for the morning after",
+      "shop": "Breads Bakery",
+      "city": "Tel Aviv",
+      "pricePbs": 9,
+      "image": "photos/breads-box.jpg",
+      "filters": ["lifestyle"],
+      "badge": "gold"
+    },
+    {
+      "id": "nordau-pastry",
+      "title": "Nordau Pastry Card",
+      "subtitle": "Gay-neighborhood bakery tab",
+      "shop": "Café Nordau",
+      "city": "Tel Aviv",
+      "pricePbs": 5,
+      "image": "photos/nordau-pastry.jpg",
+      "filters": ["lifestyle"],
+      "badge": "pearl"
+    },
+    {
+      "id": "gym-month",
+      "title": "Gym Month Pass",
+      "subtitle": "Pride-friendly studios",
+      "shop": "Circuit Gyms",
+      "city": "Tel Aviv",
+      "pricePbs": 24,
+      "image": "photos/gym-month.jpg",
+      "filters": ["lifestyle"],
+      "badge": "gold"
+    },
+    {
+      "id": "sportiv-beach",
+      "title": "Sportiv Beach Kit",
+      "subtitle": "Volleyball shorts + court socks",
+      "shop": "Sportiv",
+      "city": "Tel Aviv",
+      "pricePbs": 18,
+      "image": "photos/sportiv-beach.jpg",
+      "filters": ["lifestyle"],
+      "badge": "gold"
+    },
+    {
+      "id": "pride-run",
+      "title": "Pride Run Kit",
+      "subtitle": "Singlet and race bib hold",
+      "shop": "TLV Sports",
+      "city": "Tel Aviv",
+      "pricePbs": 14,
+      "image": "photos/pride-run.jpg",
+      "filters": ["lifestyle"],
+      "badge": "pearl"
+    },
+    {
+      "id": "std-kit",
+      "title": "Anonymous Test Kit",
+      "subtitle": "Discreet invoice only",
+      "shop": "Health Room",
+      "city": "Tel Aviv",
+      "pricePbs": 14,
+      "image": "photos/std-kit.jpg",
+      "filters": ["lifestyle"],
+      "badge": "gold"
+    },
+    {
+      "id": "org-donate",
+      "title": "Community Donation",
+      "subtitle": "Support local LGBTQ orgs",
+      "shop": "pboi Give",
+      "city": "Tel Aviv",
+      "pricePbs": 5,
+      "image": "photos/org-donate.jpg",
+      "filters": ["lifestyle"],
+      "badge": "pearl"
+    },
+    {
+      "id": "playground-tlv",
+      "title": "Playground Adult",
+      "subtitle": "Allenby boutique, discreet pickup",
+      "shop": "Playground TLV",
+      "city": "Tel Aviv",
+      "pricePbs": 22,
+      "image": "photos/playground-tlv.jpg",
+      "filters": ["shopping"],
+      "badge": "gold"
+    },
+    {
+      "id": "leather-lab",
+      "title": "Leather Lab Night Kit",
+      "subtitle": "Harness and club gear",
+      "shop": "Leather Lab",
+      "city": "Tel Aviv",
+      "pricePbs": 28,
+      "image": "photos/leather-lab.jpg",
+      "filters": ["shopping"],
+      "badge": "gold"
+    },
+    {
+      "id": "shenkin-edit",
+      "title": "Shenkin Edit Drop",
+      "subtitle": "Small-run shirts and trousers",
+      "shop": "Shenkin Edit",
+      "city": "Tel Aviv",
+      "pricePbs": 34,
+      "image": "photos/shenkin-edit.jpg",
+      "filters": ["shopping"],
+      "badge": "gold"
+    },
+    {
+      "id": "dizengoff-mens",
+      "title": "Dizengoff Men's Cut",
+      "subtitle": "Tailored night-out pieces",
+      "shop": "Dizengoff Men's",
+      "city": "Tel Aviv",
+      "pricePbs": 48,
+      "image": "photos/dizengoff-mens.jpg",
+      "filters": ["shopping"],
+      "badge": "pink"
+    },
     {
       "id": "pride-tee",
       "title": "Pride Collection Tee",
@@ -22,11 +184,41 @@
       "city": "Tel Aviv",
       "pricePbs": 11,
       "image": "photos/pride-tee.jpg",
-      "filters": [
-        "top-sellers",
-        "new"
-      ],
+      "filters": ["shopping"],
       "badge": "gold"
+    },
+    {
+      "id": "pride-hoodie",
+      "title": "Rainbow Ring Hoodie",
+      "subtitle": "Brand merch, gift-ready",
+      "shop": "pboi Shop",
+      "city": "Tel Aviv",
+      "pricePbs": 19,
+      "image": "photos/pride-hoodie.jpg",
+      "filters": ["shopping"],
+      "badge": "gold"
+    },
+    {
+      "id": "purim-lab",
+      "title": "Purim Costume Lab",
+      "subtitle": "Full look, wig optional",
+      "shop": "Costume Lab TLV",
+      "city": "Tel Aviv",
+      "pricePbs": 26,
+      "image": "photos/purim-lab.jpg",
+      "filters": ["shopping"],
+      "badge": "gold"
+    },
+    {
+      "id": "drag-closet",
+      "title": "Drag Closet Stage Look",
+      "subtitle": "Rent a night, return at noon",
+      "shop": "Drag Closet",
+      "city": "Tel Aviv",
+      "pricePbs": 32,
+      "image": "photos/drag-closet.jpg",
+      "filters": ["shopping"],
+      "badge": "pink"
     },
     {
       "id": "drink-vouchers",
@@ -36,23 +228,40 @@
       "city": "Tel Aviv",
       "pricePbs": 9,
       "image": "photos/cocktails.jpg",
-      "filters": [
-        "top-sellers"
-      ],
+      "filters": ["night"],
       "badge": "gold"
     },
     {
-      "id": "gym-month",
-      "title": "Gym Month Pass",
-      "subtitle": "Pride-friendly studios",
-      "shop": "Circuit Gyms",
+      "id": "broadway-bundle",
+      "title": "Broadway Bundle",
+      "subtitle": "Two seats + interval drinks",
+      "shop": "Night Index",
       "city": "Tel Aviv",
-      "pricePbs": 24,
-      "image": "photos/pool-party.jpg",
-      "filters": [
-        "top-sellers",
-        "most-viewed"
-      ],
+      "pricePbs": 36,
+      "image": "photos/broadway-bundle.jpg",
+      "filters": ["night"],
+      "badge": "gold"
+    },
+    {
+      "id": "streaming-month",
+      "title": "Queer Sounds Month",
+      "subtitle": "Download + streaming pass",
+      "shop": "pboi Music",
+      "city": "Worldwide",
+      "pricePbs": 3,
+      "image": "photos/streaming-month.jpg",
+      "filters": ["night"],
+      "badge": "pearl"
+    },
+    {
+      "id": "app-premium",
+      "title": "Dating Apps Premium",
+      "subtitle": "One-tap gay apps bundle",
+      "shop": "pboi Shop",
+      "city": "Worldwide",
+      "pricePbs": 16,
+      "image": "photos/app-premium.jpg",
+      "filters": ["night"],
       "badge": "gold"
     },
     {
@@ -62,10 +271,8 @@
       "shop": "Vacaya",
       "city": "Worldwide",
       "pricePbs": 120,
-      "image": "photos/beach-night.jpg",
-      "filters": [
-        "most-viewed"
-      ],
+      "image": "photos/cruise-hold.jpg",
+      "filters": ["travel"],
       "badge": "pink"
     },
     {
@@ -75,10 +282,8 @@
       "shop": "Travelgay",
       "city": "Tel Aviv",
       "pricePbs": 85,
-      "image": "photos/beach-night.jpg",
-      "filters": [
-        "most-viewed"
-      ],
+      "image": "photos/airline-tlv.jpg",
+      "filters": ["travel"],
       "badge": "pink"
     },
     {
@@ -89,99 +294,8 @@
       "city": "Tel Aviv",
       "pricePbs": 42,
       "image": "photos/rooftop-stay.jpg",
-      "filters": [
-        "top-sellers",
-        "new"
-      ],
+      "filters": ["travel"],
       "badge": "pink"
-    },
-    {
-      "id": "std-kit",
-      "title": "Anonymous Test Kit",
-      "subtitle": "Discreet invoice only",
-      "shop": "Health Room",
-      "city": "Tel Aviv",
-      "pricePbs": 14,
-      "thumb": {
-        "label": "AK",
-        "from": "#555",
-        "to": "#cbd5e1"
-      },
-      "filters": [
-        "new"
-      ],
-      "badge": "gold"
-    },
-    {
-      "id": "org-donate",
-      "title": "Community Donation",
-      "subtitle": "Support local LGBTQ orgs",
-      "shop": "pboi Give",
-      "city": "Tel Aviv",
-      "pricePbs": 5,
-      "image": "photos/rainbow-street.jpg",
-      "filters": [
-        "top-sellers",
-        "new"
-      ],
-      "badge": "pearl"
-    },
-    {
-      "id": "pride-hoodie",
-      "title": "Rainbow Ring Hoodie",
-      "subtitle": "Brand merch, gift-ready",
-      "shop": "pboi Shop",
-      "city": "Tel Aviv",
-      "pricePbs": 19,
-      "image": "photos/pride-tee.jpg",
-      "filters": [
-        "new",
-        "most-viewed"
-      ],
-      "badge": "gold"
-    },
-    {
-      "id": "streaming-month",
-      "title": "Queer Sounds Month",
-      "subtitle": "Download + streaming pass",
-      "shop": "pboi Music",
-      "city": "Worldwide",
-      "pricePbs": 3,
-      "image": "photos/dj-booth.jpg",
-      "filters": [
-        "top-sellers"
-      ],
-      "badge": "pearl"
-    },
-    {
-      "id": "broadway-bundle",
-      "title": "Broadway Bundle",
-      "subtitle": "Two seats + interval drinks",
-      "shop": "Night Index",
-      "city": "Tel Aviv",
-      "pricePbs": 36,
-      "image": "photos/drag-stage.jpg",
-      "filters": [
-        "most-viewed"
-      ],
-      "badge": "gold"
-    },
-    {
-      "id": "app-premium",
-      "title": "Dating Apps Premium",
-      "subtitle": "One-tap gay apps bundle",
-      "shop": "pboi Shop",
-      "city": "Worldwide",
-      "pricePbs": 16,
-      "thumb": {
-        "label": "AP",
-        "from": "#4a4a4a",
-        "to": "#e9d5ff"
-      },
-      "filters": [
-        "new"
-      ],
-      "badge": "gold"
     }
   ]
 }

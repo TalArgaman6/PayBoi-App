@@ -28,6 +28,7 @@ export function EventsScreen({ onSelect }) {
   const [query, setQuery] = useState('')
   const [menu, setMenu] = useState(false)
   const [type, setType] = useState('all')
+  const [line, setLine] = useState('all')
   const [ride, setRide] = useState('all')
   const [together, setTogether] = useState('all')
   const [bracelet, setBracelet] = useState('all')
@@ -49,12 +50,14 @@ export function EventsScreen({ onSelect }) {
     () =>
       catalog.items.filter((item) => {
         const typeOk = type === 'all' || item.type === type
+        const lineOk = line === 'all' || item.line === line
         const rideOk = ride === 'all' || Boolean(item.rides)
         const togetherOk = together === 'all' || Boolean(item.together)
         const braceletOk = bracelet === 'all' || Boolean(item.bracelet)
         return (
           nearby(item) &&
           typeOk &&
+          lineOk &&
           rideOk &&
           togetherOk &&
           braceletOk &&
@@ -62,7 +65,17 @@ export function EventsScreen({ onSelect }) {
           matchesQuery(item, query)
         )
       }),
-    [bracelet, country, priceMax, priceMin, query, ride, together, type],
+    [
+      bracelet,
+      country,
+      line,
+      priceMax,
+      priceMin,
+      query,
+      ride,
+      together,
+      type,
+    ],
   )
 
   const place =
@@ -70,11 +83,14 @@ export function EventsScreen({ onSelect }) {
 
   const typeLabel =
     catalog.types.find((item) => item.id === type)?.label || 'All'
+  const lineLabel =
+    catalog.lines.find((item) => item.id === line)?.label || 'All'
   const rideOn = ride !== 'all'
   const togetherOn = together !== 'all'
   const braceletOn = bracelet !== 'all'
   const activeCount = [
     type !== 'all',
+    line !== 'all',
     rideOn,
     togetherOn,
     braceletOn,
@@ -83,6 +99,7 @@ export function EventsScreen({ onSelect }) {
 
   function resetFilters() {
     setType('all')
+    setLine('all')
     setRide('all')
     setTogether('all')
     setBracelet('all')
@@ -143,6 +160,7 @@ export function EventsScreen({ onSelect }) {
         {activeCount ? (
           <div className="active-filters">
             {type !== 'all' ? <span>{typeLabel}</span> : null}
+            {line !== 'all' ? <span>{lineLabel}</span> : null}
             {rideOn ? <span>Shared ride</span> : null}
             {togetherOn ? <span>Party together</span> : null}
             {braceletOn ? <span>Bracelet</span> : null}
@@ -182,6 +200,12 @@ export function EventsScreen({ onSelect }) {
           filters={catalog.types}
           active={type}
           onChange={setType}
+        />
+        <FilterTabs
+          label="Party line"
+          filters={catalog.lines}
+          active={line}
+          onChange={setLine}
         />
         <FilterTabs
           label="Shared ride"
