@@ -32,7 +32,7 @@
 
 .phone[data-tab='wallet'] {
   background-image: none;
-  background-color: #4a3d68;
+  background-color: #5b3f8a;
 }
 
 .screen {
@@ -765,26 +765,67 @@
   color: #fff;
 }
 
+.wallet-screen {
+  background:
+    radial-gradient(
+      120% 90% at var(--wallet-pink-x, 92%) var(--wallet-pink-y, -8%),
+      #f4b7d8 0%,
+      transparent 42%
+    ),
+    radial-gradient(
+      80% 70% at var(--wallet-blue-x, 8%) var(--wallet-blue-y, 110%),
+      #5a6db8 0%,
+      transparent 48%
+    ),
+    linear-gradient(
+      var(--wallet-angle, 145deg),
+      #5b3f8a 0%,
+      #7b5aa8 38%,
+      #c45b9a 100%
+    );
+}
+
+.wallet-shine {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    var(--wallet-shine-angle, 120deg),
+    rgb(255 255 255 / 22%) 0%,
+    rgb(255 255 255 / 0%) 36%,
+    rgb(255 255 255 / 8%) 62%,
+    transparent 100%
+  );
+  transform: translate3d(
+    var(--wallet-shine-x, 0px),
+    var(--wallet-shine-y, 0px),
+    0
+  );
+  will-change: transform;
+}
+
+.wallet-screen .screen-header,
+.wallet-screen .pay-card {
+  position: relative;
+  z-index: 1;
+}
+
 .pay-card {
   position: relative;
   z-index: 1;
-  width: calc(100% - 36px);
-  margin: 2px auto 18px;
+  width: 100%;
+  margin: 0;
   min-height: 188px;
-  border-radius: 22px;
+  border-radius: 0;
   padding: 18px 18px 16px;
   overflow: hidden;
   display: grid;
   grid-template-rows: auto 1fr;
   align-content: stretch;
   color: #fff;
-  background:
-    radial-gradient(120% 90% at 92% -8%, #f4b7d8 0%, transparent 42%),
-    radial-gradient(80% 70% at 8% 110%, #5a6db8 0%, transparent 48%),
-    linear-gradient(145deg, #5b3f8a 0%, #7b5aa8 38%, #c45b9a 100%);
-  box-shadow:
-    0 18px 40px rgb(42 24 68 / 32%),
-    inset 0 1px 0 rgb(255 255 255 / 28%);
+  background: transparent;
+  box-shadow: none;
 }
 
 .pay-card-glow {
@@ -792,19 +833,6 @@
   inset: -30% -10% auto;
   height: 70%;
   background: radial-gradient(circle at 50% 0%, rgb(255 180 220 / 35%), transparent 68%);
-  pointer-events: none;
-}
-
-.pay-card-shine {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    120deg,
-    rgb(255 255 255 / 22%) 0%,
-    rgb(255 255 255 / 0%) 36%,
-    rgb(255 255 255 / 8%) 62%,
-    transparent 100%
-  );
   pointer-events: none;
 }
 
@@ -854,6 +882,8 @@
 }
 
 .wallet-sheet {
+  position: relative;
+  z-index: 1;
   display: grid;
   justify-items: stretch;
   padding-top: 22px;
@@ -1025,7 +1055,7 @@
   font-weight: 700;
   font-style: normal;
   letter-spacing: 0.02em;
-  color: #9a9694;
+  color: #fff;
   text-align: center;
 }
 
@@ -1034,7 +1064,7 @@
   width: 1px;
   height: 0.85em;
   margin-left: 3px;
-  background: #9a9694;
+  background: #fff;
   vertical-align: -1px;
   animation: caret 1s step-end infinite;
 }
