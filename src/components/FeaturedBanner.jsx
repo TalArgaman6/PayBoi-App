@@ -30,7 +30,7 @@ export function FeaturedBanner({ items, onSelect }) {
           <strong>{current.title}</strong>
           <em>
             {current.city}
-            {earn ? ` · gain ${formatEarn(earnAmount(current))} bois` : null}
+            {earn ? ` · gain ${formatEarn(earnAmount(current))} p` : null}
           </em>
         </div>
       </button>

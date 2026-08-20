@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from 'react'
+import { useMemo, useState } from 'react'
 import wallet from '../data/wallet.json'
 import { FilterTabs } from '../components/FilterTabs.jsx'
 import { ItemRow } from '../components/ItemRow.jsx'
@@ -8,7 +8,6 @@ import { WalletCard } from '../components/WalletCard.jsx'
 import { PRICE_RANGES, inPriceRange } from '../lib/filters.js'
 import { formatPbs } from '../lib/format.js'
 import { kindLabel, suggestionsForBalance } from '../lib/suggestions.js'
-import { useWalletTilt } from '../lib/tilt.js'
 
 const totalWorth = wallet.gifts.reduce(
   (sum, gift) => sum + (gift.worth ?? gift.count),
@@ -28,8 +27,6 @@ export function WalletScreen({ onSelect }) {
   const [hoverGift, setHoverGift] = useState(null)
   const [selectedGift, setSelectedGift] = useState(null)
   const litGift = hoverGift || selectedGift || openGift
-  const root = useRef(null)
-  useWalletTilt(root)
   const curated = useMemo(
     () => suggestionsForBalance(wallet.balance),
     [],
@@ -45,7 +42,7 @@ export function WalletScreen({ onSelect }) {
   )
 
   return (
-    <section className="screen wallet-screen" ref={root}>
+    <section className="screen wallet-screen">
       <div className="wallet-shine" aria-hidden="true" />
       <ScreenHeader
         title="Wallet"

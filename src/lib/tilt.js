@@ -6,6 +6,11 @@ function clamp(value) {
 
 function paint(node, x, y) {
   if (!node) return
+  node.style.setProperty('--header-angle', `${135 + x * 24}deg`)
+  node.style.setProperty('--header-cyan-x', `${8 + x * 18}%`)
+  node.style.setProperty('--header-cyan-y', `${-20 + y * 16}%`)
+  node.style.setProperty('--header-violet-x', `${96 + x * 14}%`)
+  node.style.setProperty('--header-violet-y', `${8 + y * 14}%`)
   node.style.setProperty('--wallet-angle', `${145 + x * 22}deg`)
   node.style.setProperty('--wallet-pink-x', `${92 + x * 16}%`)
   node.style.setProperty('--wallet-pink-y', `${-8 + y * 16}%`)
@@ -16,8 +21,9 @@ function paint(node, x, y) {
   node.style.setProperty('--wallet-shine-y', `${y * 22}px`)
 }
 
-export function useWalletTilt(ref) {
+export function useWalletTilt(ref, ready = true) {
   useEffect(() => {
+    if (!ready) return undefined
     const node = ref.current
     if (!node) return undefined
 
@@ -101,5 +107,5 @@ export function useWalletTilt(ref) {
       node.removeEventListener('pointerleave', onLeave)
       node.removeEventListener('pointerdown', listen)
     }
-  }, [ref])
+  }, [ref, ready])
 }

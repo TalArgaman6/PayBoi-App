@@ -4,7 +4,7 @@ export function EarnBadge({ item }) {
   const points = earnAmount(item)
 
   return (
-    <span className="earn-badge" title={`Gain ${points} bois at this party`}>
+    <span className="earn-badge" title={`Gain ${points} p at this party`}>
       <svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true">
         <path
           d="M8 13V3M8 3l-3.2 3.2M8 3l3.2 3.2"
@@ -16,7 +16,7 @@ export function EarnBadge({ item }) {
         />
       </svg>
       {formatEarn(points)}
-      <small>bois</small>
+      <small>p</small>
     </span>
   )
 }

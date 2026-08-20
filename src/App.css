@@ -26,8 +26,24 @@
 .phone[data-tab='shop'],
 .phone[data-tab='marketplace'],
 .phone[data-tab='feed'] {
-  background-image: var(--header-grad);
   background-color: #4a78ff;
+  background-image:
+    radial-gradient(
+      120% 90% at var(--header-cyan-x, 8%) var(--header-cyan-y, -20%),
+      #4ec8f5 0%,
+      transparent 46%
+    ),
+    radial-gradient(
+      90% 80% at var(--header-violet-x, 96%) var(--header-violet-y, 8%),
+      #6a48d8 0%,
+      transparent 44%
+    ),
+    linear-gradient(
+      var(--header-angle, 135deg),
+      #4ec8f5 0%,
+      #4a78ff 48%,
+      #6a48d8 100%
+    );
 }
 
 .phone[data-tab='wallet'] {
@@ -96,7 +112,7 @@
 }
 
 .pboi-logo span {
-  color: #fff;
+  color: var(--gold);
 }
 
 .sheet {
@@ -769,19 +785,19 @@
   background:
     radial-gradient(
       120% 90% at var(--wallet-pink-x, 92%) var(--wallet-pink-y, -8%),
-      #f4b7d8 0%,
-      transparent 42%
+      #5a3d8c 0%,
+      transparent 46%
     ),
     radial-gradient(
       80% 70% at var(--wallet-blue-x, 8%) var(--wallet-blue-y, 110%),
-      #5a6db8 0%,
-      transparent 48%
+      #2f2a6e 0%,
+      transparent 50%
     ),
     linear-gradient(
       var(--wallet-angle, 145deg),
-      #5b3f8a 0%,
-      #7b5aa8 38%,
-      #c45b9a 100%
+      #1c1236 0%,
+      #35245e 42%,
+      #4a3280 100%
     );
 }
 
@@ -831,7 +847,7 @@
   position: absolute;
   inset: -30% -10% auto;
   height: 70%;
-  background: radial-gradient(circle at 50% 0%, rgb(255 180 220 / 35%), transparent 68%);
+  background: radial-gradient(circle at 50% 0%, rgb(120 90 190 / 28%), transparent 68%);
   pointer-events: none;
 }
 
