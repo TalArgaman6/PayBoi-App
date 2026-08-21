@@ -5,9 +5,9 @@ import { EarnBadge } from './components/EarnBadge.jsx'
 import { SellerFace } from './components/SellerFace.jsx'
 import { Splash } from './components/Splash.jsx'
 import wallet from './data/wallet.json'
-import { formatPbs, formatTokenBalance } from './lib/format.js'
+import { formatCost, formatPbs, formatTokenBalance } from './lib/format.js'
 import { rankVars } from './lib/settings.js'
-import { useWalletTilt } from './lib/tilt.js'
+import { unlockMotion, useWalletTilt } from './lib/tilt.js'
 import { EventsScreen } from './screens/EventsScreen.jsx'
 import { FeedScreen } from './screens/FeedScreen.jsx'
 import { MarketplaceScreen } from './screens/MarketplaceScreen.jsx'
@@ -28,14 +28,7 @@ export default function App() {
         <div className="phone">
           <Splash
             onDone={async () => {
-              const Sensor = window.DeviceOrientationEvent
-              if (Sensor && typeof Sensor.requestPermission === 'function') {
-                try {
-                  await Sensor.requestPermission()
-                } catch {
-                  /* tilt stays mouse-only */
-                }
-              }
+              await unlockMotion()
               setBooted(true)
             }}
           />
@@ -81,13 +74,13 @@ export default function App() {
             </div>
             <p>
               {selected.seller
-                ? `Pay ${formatPbs(selected.pricePbs)} to ${selected.seller.name}. Same price as the door — their profile is on the listing.`
+                ? `Pay ${formatCost(selected)} to ${selected.seller.name}. Same price as the door — their profile is on the listing.`
                 : selected.pricePbs <= wallet.balance
-                  ? `Pay ${formatPbs(selected.pricePbs)}. You gain ${selected.earnPbs ?? selected.pricePbs} p, with ${formatPbs(wallet.balance - selected.pricePbs)} left.`
+                  ? `Pay ${formatCost(selected)}. ${formatPbs(wallet.balance - selected.pricePbs)} left.`
                   : `This is ${formatPbs(selected.pricePbs - wallet.balance)} over your ${formatTokenBalance(wallet.balance)} pbs.`}
             </p>
             <button type="button" className="pay-btn">
-              Pay {formatPbs(selected.pricePbs)}
+              Pay {formatCost(selected)}
             </button>
             <button type="button" className="ghost-btn" onClick={() => setSelected(null)}>
               Close

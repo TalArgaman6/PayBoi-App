@@ -4,15 +4,46 @@ function clamp(value) {
   return Math.max(-1, Math.min(1, value))
 }
 
+let motionOk = false
+
+async function unlockMotion() {
+  const orient = window.DeviceOrientationEvent
+  const motion = window.DeviceMotionEvent
+  try {
+    if (orient && typeof orient.requestPermission === 'function') {
+      const state = await orient.requestPermission()
+      if (state === 'granted') motionOk = true
+    } else if (orient) {
+      motionOk = true
+    }
+  } catch {
+    /* keep trying on later taps */
+  }
+  try {
+    if (motion && typeof motion.requestPermission === 'function') {
+      const state = await motion.requestPermission()
+      if (state === 'granted') motionOk = true
+    }
+  } catch {
+    /* ignore */
+  }
+  return motionOk
+}
+
 function paint(node, x, y) {
   if (!node) return
   node.style.setProperty('--header-angle', `${145 + x * 22}deg`)
   node.style.setProperty('--header-glow-x', `${8 + x * 16}%`)
   node.style.setProperty('--header-glow-y', `${110 + y * 12}%`)
-  node.style.setProperty('--wallet-angle', `${172 + x * 22}deg`)
-  node.style.setProperty('--wallet-blue-x', `${8 + x * 16}%`)
-  node.style.setProperty('--wallet-blue-y', `${110 + y * 12}%`)
+  node.style.setProperty('--wallet-angle', `${172 + x * 38}deg`)
+  node.style.setProperty('--wallet-top-x', `${86 + x * 26}%`)
+  node.style.setProperty('--wallet-top-y', `${-6 + y * 18}%`)
+  node.style.setProperty('--wallet-blue-x', `${14 + x * 28}%`)
+  node.style.setProperty('--wallet-blue-y', `${104 + y * 20}%`)
+  node.style.setProperty('--wallet-shine-angle', `${120 + x * 32}deg`)
 }
+
+export { unlockMotion }
 
 export function useWalletTilt(ref, ready = true) {
   useEffect(() => {
@@ -29,7 +60,6 @@ export function useWalletTilt(ref, ready = true) {
     let y = 0
     let raf = 0
     let live = true
-    let listening = false
 
     function apply(nextX, nextY) {
       targetX = clamp(nextX)
@@ -37,22 +67,27 @@ export function useWalletTilt(ref, ready = true) {
     }
 
     function fromTilt(gamma, beta) {
+      if (gamma == null || beta == null) return
       if (restG === null) {
         samples.push({ gamma, beta })
-        if (samples.length < 6) return
+        if (samples.length < 4) return
         restG = samples.reduce((sum, item) => sum + item.gamma, 0) / samples.length
         restB = samples.reduce((sum, item) => sum + item.beta, 0) / samples.length
       }
-      apply((gamma - restG) / 26, (beta - restB) / 26)
+      apply((gamma - restG) / 18, (beta - restB) / 18)
     }
 
     function onOrient(event) {
-      if (event.gamma == null || event.beta == null) return
       fromTilt(event.gamma, event.beta)
     }
 
+    function onMotion(event) {
+      const g = event.accelerationIncludingGravity
+      if (!g || g.x == null) return
+      apply(g.x / 7, (g.y + 6) / 8)
+    }
+
     function onMouse(event) {
-      if (event.target.closest('.sheet')) return
       const box = node.getBoundingClientRect()
       apply(
         ((event.clientX - box.left) / box.width - 0.5) * 2,
@@ -65,37 +100,39 @@ export function useWalletTilt(ref, ready = true) {
     }
 
     function tick() {
-      x += (targetX - x) * 0.14
-      y += (targetY - y) * 0.14
+      x += (targetX - x) * 0.18
+      y += (targetY - y) * 0.18
       paint(node, x, y)
       if (live) raf = window.requestAnimationFrame(tick)
     }
 
-    async function listen() {
-      if (listening) return
-      const Sensor = window.DeviceOrientationEvent
-      if (Sensor && typeof Sensor.requestPermission === 'function') {
-        try {
-          const state = await Sensor.requestPermission()
-          if (state !== 'granted') return
-        } catch {
-          return
-        }
-      }
-      listening = true
+    let bound = false
+
+    function bindSensors() {
+      if (bound) return
+      bound = true
       window.addEventListener('deviceorientation', onOrient)
+      window.addEventListener('deviceorientationabsolute', onOrient)
+      window.addEventListener('devicemotion', onMotion)
+    }
+
+    async function listen() {
+      await unlockMotion()
+      bindSensors()
     }
 
     node.addEventListener('pointermove', onMouse)
     node.addEventListener('pointerleave', onLeave)
+    node.addEventListener('pointerdown', listen)
     listen()
     raf = window.requestAnimationFrame(tick)
-    node.addEventListener('pointerdown', listen)
 
     return () => {
       live = false
       window.cancelAnimationFrame(raf)
       window.removeEventListener('deviceorientation', onOrient)
+      window.removeEventListener('deviceorientationabsolute', onOrient)
+      window.removeEventListener('devicemotion', onMotion)
       node.removeEventListener('pointermove', onMouse)
       node.removeEventListener('pointerleave', onLeave)
       node.removeEventListener('pointerdown', listen)

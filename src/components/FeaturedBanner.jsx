@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { assetUrl, earnAmount, formatEarn, isEventItem } from '../lib/format.js'
+import { assetUrl, formatCost } from '../lib/format.js'
 
 export function FeaturedBanner({ items, onSelect }) {
   const [index, setIndex] = useState(0)
@@ -15,8 +15,6 @@ export function FeaturedBanner({ items, onSelect }) {
 
   if (!current) return null
 
-  const earn = isEventItem(current)
-
   return (
     <div className="feature-banner">
       <button
@@ -29,8 +27,7 @@ export function FeaturedBanner({ items, onSelect }) {
           <span>{current.kicker || 'Featured'}</span>
           <strong>{current.title}</strong>
           <em>
-            {current.city}
-            {earn ? ` · gain ${formatEarn(earnAmount(current))} p` : null}
+            {current.city} · {formatCost(current)}
           </em>
         </div>
       </button>

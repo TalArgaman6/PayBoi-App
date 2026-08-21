@@ -28,10 +28,13 @@
       "subtitle": "The famous beachfront municipal pool",
       "shop": "Gordon Pool",
       "city": "Tel Aviv",
-      "pricePbs": 16,
+      "pricePbs": 80,
       "image": "photos/gordon-pool.jpg",
-      "filters": ["lifestyle"],
-      "badge": "gold"
+      "filters": [
+        "lifestyle"
+      ],
+      "badge": "gold",
+      "priceIls": 45
     },
     {
       "id": "gordon-locker",
@@ -39,10 +42,13 @@
       "subtitle": "Day locker on the Gordon deck",
       "shop": "Gordon Pool",
       "city": "Tel Aviv",
-      "pricePbs": 8,
+      "pricePbs": 40,
       "image": "photos/gordon-locker.jpg",
-      "filters": ["lifestyle"],
-      "badge": "pearl"
+      "filters": [
+        "lifestyle"
+      ],
+      "badge": "pearl",
+      "priceIls": 20
     },
     {
       "id": "facial-tlv",
@@ -50,10 +56,13 @@
       "subtitle": "Glow before the night",
       "shop": "Skin Room TLV",
       "city": "Tel Aviv",
-      "pricePbs": 28,
+      "pricePbs": 160,
       "image": "photos/facial.jpg",
-      "filters": ["lifestyle"],
-      "badge": "gold"
+      "filters": [
+        "lifestyle"
+      ],
+      "badge": "gold",
+      "priceIls": 90
     },
     {
       "id": "tan-machine",
@@ -61,10 +70,13 @@
       "subtitle": "Stand-up booth, 12 minutes",
       "shop": "Bronze Lab",
       "city": "Tel Aviv",
-      "pricePbs": 18,
+      "pricePbs": 120,
       "image": "photos/tan-machine.jpg",
-      "filters": ["lifestyle"],
-      "badge": "gold"
+      "filters": [
+        "lifestyle"
+      ],
+      "badge": "gold",
+      "priceIls": 70
     },
     {
       "id": "hair-removal",
@@ -72,10 +84,13 @@
       "subtitle": "Discreet clinic, same-week",
       "shop": "Smooth Room",
       "city": "Tel Aviv",
-      "pricePbs": 32,
+      "pricePbs": 180,
       "image": "photos/hair-removal.jpg",
-      "filters": ["lifestyle"],
-      "badge": "pearl"
+      "filters": [
+        "lifestyle"
+      ],
+      "badge": "pearl",
+      "priceIls": 110
     },
     {
       "id": "gym-month",
@@ -83,10 +98,13 @@
       "subtitle": "Pride-friendly studios",
       "shop": "Circuit Gyms",
       "city": "Tel Aviv",
-      "pricePbs": 24,
+      "pricePbs": 150,
       "image": "photos/gym-month.jpg",
-      "filters": ["lifestyle"],
-      "badge": "gold"
+      "filters": [
+        "lifestyle"
+      ],
+      "badge": "gold",
+      "priceIls": 85
     },
     {
       "id": "sportiv-beach",
@@ -94,10 +112,13 @@
       "subtitle": "Volleyball shorts + court socks",
       "shop": "Sportiv",
       "city": "Tel Aviv",
-      "pricePbs": 18,
+      "pricePbs": 90,
       "image": "photos/sportiv-beach.jpg",
-      "filters": ["lifestyle"],
-      "badge": "gold"
+      "filters": [
+        "lifestyle"
+      ],
+      "badge": "gold",
+      "priceIls": 55
     },
     {
       "id": "pride-run",
@@ -105,10 +126,13 @@
       "subtitle": "Singlet and race bib hold",
       "shop": "TLV Sports",
       "city": "Tel Aviv",
-      "pricePbs": 14,
+      "pricePbs": 70,
       "image": "photos/pride-run.jpg",
-      "filters": ["lifestyle"],
-      "badge": "pearl"
+      "filters": [
+        "lifestyle"
+      ],
+      "badge": "pearl",
+      "priceIls": 40
     },
     {
       "id": "std-kit",
@@ -116,10 +140,13 @@
       "subtitle": "Discreet invoice only",
       "shop": "Health Room",
       "city": "Tel Aviv",
-      "pricePbs": 14,
+      "pricePbs": 85,
       "image": "photos/std-kit.jpg",
-      "filters": ["lifestyle"],
-      "badge": "gold"
+      "filters": [
+        "lifestyle"
+      ],
+      "badge": "gold",
+      "priceIls": 50
     },
     {
       "id": "org-donate",
@@ -127,10 +154,13 @@
       "subtitle": "Support local LGBTQ orgs",
       "shop": "pboi Give",
       "city": "Tel Aviv",
-      "pricePbs": 5,
+      "pricePbs": 25,
       "image": "photos/org-donate.jpg",
-      "filters": ["lifestyle"],
-      "badge": "pearl"
+      "filters": [
+        "lifestyle"
+      ],
+      "badge": "pearl",
+      "priceIls": 15
     },
     {
       "id": "playground-tlv",
@@ -138,10 +168,13 @@
       "subtitle": "Allenby boutique, discreet pickup",
       "shop": "Playground TLV",
       "city": "Tel Aviv",
-      "pricePbs": 22,
+      "pricePbs": 140,
       "image": "photos/playground-tlv.jpg",
-      "filters": ["shopping"],
-      "badge": "gold"
+      "filters": [
+        "shopping"
+      ],
+      "badge": "gold",
+      "priceIls": 80
     },
     {
       "id": "leather-lab",
@@ -149,10 +182,13 @@
       "subtitle": "Harness and club gear",
       "shop": "Leather Lab",
       "city": "Tel Aviv",
-      "pricePbs": 28,
+      "pricePbs": 165,
       "image": "photos/leather-lab.jpg",
-      "filters": ["shopping"],
-      "badge": "gold"
+      "filters": [
+        "shopping"
+      ],
+      "badge": "gold",
+      "priceIls": 95
     },
     {
       "id": "shenkin-edit",
@@ -160,10 +196,13 @@
       "subtitle": "Small-run shirts and trousers",
       "shop": "Shenkin Edit",
       "city": "Tel Aviv",
-      "pricePbs": 34,
+      "pricePbs": 190,
       "image": "photos/shenkin-edit.jpg",
-      "filters": ["shopping"],
-      "badge": "gold"
+      "filters": [
+        "shopping"
+      ],
+      "badge": "gold",
+      "priceIls": 120
     },
     {
       "id": "dizengoff-mens",
@@ -171,10 +210,13 @@
       "subtitle": "Tailored night-out pieces",
       "shop": "Dizengoff Men's",
       "city": "Tel Aviv",
-      "pricePbs": 48,
+      "pricePbs": 145,
       "image": "photos/dizengoff-mens.jpg",
-      "filters": ["shopping"],
-      "badge": "pink"
+      "filters": [
+        "shopping"
+      ],
+      "badge": "pink",
+      "priceIls": 80
     },
     {
       "id": "pride-tee",
@@ -182,10 +224,13 @@
       "subtitle": "Limited 2026 drop",
       "shop": "pboi Shop",
       "city": "Tel Aviv",
-      "pricePbs": 11,
+      "pricePbs": 60,
       "image": "photos/pride-tee.jpg",
-      "filters": ["shopping"],
-      "badge": "gold"
+      "filters": [
+        "shopping"
+      ],
+      "badge": "gold",
+      "priceIls": 35
     },
     {
       "id": "pride-hoodie",
@@ -193,10 +238,13 @@
       "subtitle": "Brand merch, gift-ready",
       "shop": "pboi Shop",
       "city": "Tel Aviv",
-      "pricePbs": 19,
+      "pricePbs": 95,
       "image": "photos/pride-hoodie.jpg",
-      "filters": ["shopping"],
-      "badge": "gold"
+      "filters": [
+        "shopping"
+      ],
+      "badge": "gold",
+      "priceIls": 55
     },
     {
       "id": "purim-lab",
@@ -204,10 +252,13 @@
       "subtitle": "Full look, wig optional",
       "shop": "Costume Lab TLV",
       "city": "Tel Aviv",
-      "pricePbs": 26,
+      "pricePbs": 125,
       "image": "photos/purim-lab.jpg",
-      "filters": ["shopping"],
-      "badge": "gold"
+      "filters": [
+        "shopping"
+      ],
+      "badge": "gold",
+      "priceIls": 70
     },
     {
       "id": "drag-closet",
@@ -215,10 +266,13 @@
       "subtitle": "Rent a night, return at noon",
       "shop": "Drag Closet",
       "city": "Tel Aviv",
-      "pricePbs": 32,
+      "pricePbs": 175,
       "image": "photos/drag-closet.jpg",
-      "filters": ["shopping"],
-      "badge": "pink"
+      "filters": [
+        "shopping"
+      ],
+      "badge": "pink",
+      "priceIls": 100
     },
     {
       "id": "drink-vouchers",
@@ -226,10 +280,13 @@
       "subtitle": "Shpagat, Layla, Callas drinks",
       "shop": "Night Index",
       "city": "Tel Aviv",
-      "pricePbs": 9,
+      "pricePbs": 70,
       "image": "photos/cocktails.jpg",
-      "filters": ["night"],
-      "badge": "gold"
+      "filters": [
+        "night"
+      ],
+      "badge": "gold",
+      "priceIls": 40
     },
     {
       "id": "broadway-bundle",
@@ -237,10 +294,13 @@
       "subtitle": "Two seats + interval drinks",
       "shop": "Night Index",
       "city": "Tel Aviv",
-      "pricePbs": 36,
+      "pricePbs": 155,
       "image": "photos/broadway-bundle.jpg",
-      "filters": ["night"],
-      "badge": "gold"
+      "filters": [
+        "night"
+      ],
+      "badge": "gold",
+      "priceIls": 90
     },
     {
       "id": "streaming-month",
@@ -248,10 +308,13 @@
       "subtitle": "Download + streaming pass",
       "shop": "pboi Music",
       "city": "Worldwide",
-      "pricePbs": 3,
+      "pricePbs": 20,
       "image": "photos/streaming-month.jpg",
-      "filters": ["night"],
-      "badge": "pearl"
+      "filters": [
+        "night"
+      ],
+      "badge": "pearl",
+      "priceIls": 12
     },
     {
       "id": "app-premium",
@@ -259,10 +322,13 @@
       "subtitle": "One-tap gay apps bundle",
       "shop": "pboi Shop",
       "city": "Worldwide",
-      "pricePbs": 16,
+      "pricePbs": 75,
       "image": "photos/app-premium.jpg",
-      "filters": ["night"],
-      "badge": "gold"
+      "filters": [
+        "night"
+      ],
+      "badge": "gold",
+      "priceIls": 40
     },
     {
       "id": "cruise-hold",
@@ -270,10 +336,13 @@
       "subtitle": "Season deposit, transferable",
       "shop": "Vacaya",
       "city": "Worldwide",
-      "pricePbs": 120,
+      "pricePbs": 280,
       "image": "photos/cruise-hold.jpg",
-      "filters": ["travel"],
-      "badge": "pink"
+      "filters": [
+        "travel"
+      ],
+      "badge": "pink",
+      "priceIls": 180
     },
     {
       "id": "airline-tlv",
@@ -281,10 +350,13 @@
       "subtitle": "Travelgay partner fares",
       "shop": "Travelgay",
       "city": "Tel Aviv",
-      "pricePbs": 85,
+      "pricePbs": 240,
       "image": "photos/airline-tlv.jpg",
-      "filters": ["travel"],
-      "badge": "pink"
+      "filters": [
+        "travel"
+      ],
+      "badge": "pink",
+      "priceIls": 150
     },
     {
       "id": "mrbb-night",
@@ -292,10 +364,13 @@
       "subtitle": "LGBTQ-friendly stay",
       "shop": "Mr B&B",
       "city": "Tel Aviv",
-      "pricePbs": 42,
+      "pricePbs": 140,
       "image": "photos/rooftop-stay.jpg",
-      "filters": ["travel"],
-      "badge": "pink"
+      "filters": [
+        "travel"
+      ],
+      "badge": "pink",
+      "priceIls": 80
     }
   ]
 }

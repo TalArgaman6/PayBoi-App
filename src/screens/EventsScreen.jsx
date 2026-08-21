@@ -12,16 +12,13 @@ import {
   PRICE_SLIDER,
   currencyForCountry,
   currencyLabel,
-  eventCurrency,
-  formatLocal,
   inPbsSpan,
   isFullPriceSpan,
 } from '../lib/filters.js'
-import { formatPbs, formatWhen, matchesQuery } from '../lib/format.js'
+import { formatWhen, matchesQuery } from '../lib/format.js'
 
-function formatFilterPrice(pbs, country) {
-  const local = formatLocal(pbs, currencyForCountry(country))
-  return `${formatPbs(pbs)} · ${local}`
+function formatFilterPrice(pbs) {
+  return `₪${Math.round(pbs * 0.375)} / ${pbs} p`
 }
 
 export function EventsScreen({ onSelect, country = DEFAULT_COUNTRY }) {
@@ -176,7 +173,7 @@ export function EventsScreen({ onSelect, country = DEFAULT_COUNTRY }) {
             <ItemRow
               key={item.id}
               item={item}
-              meta={`${formatWhen(item.date, item.time)} · ${item.venue} · ${formatLocal(item.pricePbs, eventCurrency(item))}`}
+              meta={`${formatWhen(item.date, item.time)} · ${item.venue}`}
               onSelect={onSelect}
             />
           ))}

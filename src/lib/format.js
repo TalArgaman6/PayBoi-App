@@ -12,7 +12,7 @@ export function formatWhen(date, time) {
 }
 
 export function formatPbs(amount) {
-  return `p${amount}`
+  return `${Number(amount).toLocaleString('en-US')} p`
 }
 
 export function assetUrl(path) {
@@ -23,6 +23,15 @@ export function assetUrl(path) {
 
 export function formatEarn(amount) {
   return `+${amount}`
+}
+
+export function ilsAmount(item) {
+  if (item?.priceIls != null) return item.priceIls
+  return Math.round((item?.pricePbs ?? 0) * 0.375)
+}
+
+export function formatCost(item) {
+  return `₪${ilsAmount(item)} / ${item?.pricePbs ?? 0} p`
 }
 
 export function earnAmount(item) {

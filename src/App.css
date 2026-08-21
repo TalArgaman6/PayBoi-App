@@ -412,32 +412,19 @@
   background: var(--accent);
 }
 
-.earn-badge {
-  display: inline-flex;
-  align-items: baseline;
-  justify-content: flex-end;
-  gap: 2px;
-  min-width: 44px;
-  padding: 3px 5px 4px;
-  border-radius: 6px;
-  background: #1d3328;
-  color: #8fd4a8;
+.cost-mark {
+  flex-shrink: 0;
+  margin: 0;
+  padding: 0;
+  background: none;
+  color: #fff;
   font-family: var(--font-ui);
-  font-size: 0.66rem;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-}
-
-.earn-badge small {
-  font-family: Figtree, Georgia, serif;
-  font-size: 0.95em;
+  font-size: 0.62rem;
   font-weight: 500;
   letter-spacing: 0;
-  line-height: 1;
-  text-transform: none;
-  font-variant: normal;
-  font-style: normal;
-  opacity: 0.9;
+  line-height: 1.2;
+  text-align: right;
+  white-space: nowrap;
 }
 
 .seller-face {
@@ -478,6 +465,7 @@
   height: 8px;
   flex-shrink: 0;
   display: block;
+  margin-top: 2px;
 }
 
 .seller-face-detail img {
@@ -781,12 +769,12 @@
 .wallet-screen {
   background:
     radial-gradient(
-      120% 90% at 92% -8%,
+      120% 90% at var(--wallet-top-x, 86%) var(--wallet-top-y, -6%),
       var(--wallet-top, #5a3d8c) 0%,
       transparent 46%
     ),
     radial-gradient(
-      80% 70% at var(--wallet-blue-x, 8%) var(--wallet-blue-y, 110%),
+      80% 70% at var(--wallet-blue-x, 14%) var(--wallet-blue-y, 104%),
       var(--wallet-glow, #2f2a6e) 0%,
       transparent 50%
     ),
@@ -804,7 +792,7 @@
   z-index: 0;
   pointer-events: none;
   background: linear-gradient(
-    120deg,
+    var(--wallet-shine-angle, 120deg),
     rgb(255 255 255 / 22%) 0%,
     rgb(255 255 255 / 0%) 36%,
     rgb(255 255 255 / 8%) 62%,

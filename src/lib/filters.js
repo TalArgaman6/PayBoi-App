@@ -1,15 +1,15 @@
 export const PRICE_RANGES = [
   { id: 'all', label: 'Any', min: 0, max: Infinity },
-  { id: 'cover', label: '≤ p40', min: 0, max: 40 },
-  { id: 'night', label: 'p41–90', min: 41, max: 90 },
-  { id: 'weekend', label: 'p91–150', min: 91, max: 150 },
-  { id: 'trip', label: 'p150+', min: 151, max: Infinity },
+  { id: 'cover', label: '≤ p200', min: 0, max: 200 },
+  { id: 'night', label: 'p201–400', min: 201, max: 400 },
+  { id: 'weekend', label: 'p401–800', min: 401, max: 800 },
+  { id: 'trip', label: 'p800+', min: 801, max: Infinity },
 ]
 
 export const PRICE_SLIDER = {
   min: 0,
-  max: 250,
-  step: 1,
+  max: 1200,
+  step: 20,
 }
 
 export const DEFAULT_COUNTRY = 'IL'
@@ -72,7 +72,10 @@ export function toLocal(pbs, currency) {
   return pbs * USD_PER_PBS * (FROM_USD[currency] || 1)
 }
 
-export function formatLocal(pbs, currency) {
+export function formatLocal(pbs, currency, item) {
+  if (item?.priceIls != null && currency === 'ILS') {
+    return `₪${item.priceIls}`
+  }
   const value = toLocal(pbs, currency)
   const rounded = value >= 10 ? Math.round(value) : Math.round(value * 10) / 10
   const prefix = CURRENCY_META[currency]?.prefix || '$'
