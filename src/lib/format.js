@@ -35,7 +35,9 @@ export function formatCost(item) {
 }
 
 export function earnAmount(item) {
-  return item?.earnPbs ?? item?.pricePbs ?? 0
+  if (item?.earnPbs != null) return item.earnPbs
+  const pbs = item?.pricePbs ?? 0
+  return Math.round(8 + Math.max(0, Math.min(1, (pbs - 200) / 1000)) * 42)
 }
 
 export function isEventItem(item) {

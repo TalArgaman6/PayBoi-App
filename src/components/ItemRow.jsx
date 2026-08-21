@@ -1,6 +1,6 @@
 import { EarnBadge } from './EarnBadge.jsx'
 import { SellerFace } from './SellerFace.jsx'
-import { assetUrl } from '../lib/format.js'
+import { formatCost, isEventItem, assetUrl } from '../lib/format.js'
 
 export function ItemThumb({ thumb, title, image }) {
   const label = thumb?.label || title.slice(0, 2).toUpperCase()
@@ -47,6 +47,8 @@ export function RideMark({ count }) {
 }
 
 export function ItemRow({ item, meta, onSelect }) {
+  const event = isEventItem(item)
+
   return (
     <button type="button" className="item-row" onClick={() => onSelect?.(item)}>
       <ItemThumb thumb={item.thumb} title={item.title} image={item.image} />
@@ -58,7 +60,14 @@ export function ItemRow({ item, meta, onSelect }) {
         {item.subtitle ? <span className="item-sub">{item.subtitle}</span> : null}
         {meta ? <span className="item-meta">{meta}</span> : null}
       </div>
-      {item.seller ? <SellerFace seller={item.seller} /> : <EarnBadge item={item} />}
+      {item.seller ? (
+        <SellerFace seller={item.seller} />
+      ) : (
+        <span className="item-price">
+          <span className="cost-mark">{formatCost(item)}</span>
+          {event ? <EarnBadge item={item} /> : null}
+        </span>
+      )}
     </button>
   )
 }

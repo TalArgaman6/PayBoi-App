@@ -131,7 +131,7 @@
       "date": "2026-09-18",
       "time": "16:00",
       "pricePbs": 1200,
-      "earnPbs": 144,
+      "earnPbs": 50,
       "featured": true,
       "kicker": "pboi 2026",
       "banner": "photos/pboi-festival.jpg",
@@ -156,7 +156,8 @@
       "badge": "pearl",
       "image": "photos/dj-booth.jpg",
       "together": 5,
-      "priceIls": 80
+      "priceIls": 80,
+      "earnPbs": 10
     },
     {
       "id": "callas-karaoke",
@@ -171,7 +172,8 @@
       "pricePbs": 210,
       "badge": "pearl",
       "image": "photos/drag-stage.jpg",
-      "priceIls": 65
+      "priceIls": 65,
+      "earnPbs": 8
     },
     {
       "id": "callas-outside",
@@ -186,7 +188,8 @@
       "pricePbs": 220,
       "badge": "pearl",
       "image": "photos/gay-bar.jpg",
-      "priceIls": 70
+      "priceIls": 70,
+      "earnPbs": 9
     },
     {
       "id": "gaze-haoman",
@@ -204,7 +207,8 @@
       "image": "photos/club-lasers.jpg",
       "rides": 4,
       "together": 5,
-      "priceIls": 140
+      "priceIls": 140,
+      "earnPbs": 16
     },
     {
       "id": "hilton-beach",
@@ -219,7 +223,8 @@
       "pricePbs": 230,
       "badge": "pearl",
       "image": "photos/beach-night.jpg",
-      "priceIls": 75
+      "priceIls": 75,
+      "earnPbs": 9
     },
     {
       "id": "lima-day",
@@ -234,7 +239,8 @@
       "pricePbs": 200,
       "badge": "pearl",
       "image": "photos/hiphop-club.jpg",
-      "priceIls": 60
+      "priceIls": 60,
+      "earnPbs": 8
     },
     {
       "id": "disco-inferno",
@@ -249,7 +255,8 @@
       "pricePbs": 220,
       "badge": "pearl",
       "image": "photos/disco-inferno.jpg",
-      "priceIls": 70
+      "priceIls": 70,
+      "earnPbs": 9
     },
     {
       "id": "shpagat-night",
@@ -264,7 +271,8 @@
       "pricePbs": 210,
       "badge": "pearl",
       "image": "photos/shpagat-night.jpg",
-      "priceIls": 65
+      "priceIls": 65,
+      "earnPbs": 8
     },
     {
       "id": "fff-shirazi",
@@ -282,7 +290,8 @@
       "image": "photos/fff-shirazi.jpg",
       "rides": 5,
       "together": 5,
-      "priceIls": 155
+      "priceIls": 155,
+      "earnPbs": 17
     },
     {
       "id": "forever-tlv",
@@ -300,7 +309,8 @@
       "image": "photos/afterhours.jpg",
       "rides": 8,
       "together": 5,
-      "priceIls": 180
+      "priceIls": 180,
+      "earnPbs": 21
     },
     {
       "id": "arisa",
@@ -317,7 +327,8 @@
       "badge": "gold",
       "image": "photos/arisa-night.jpg",
       "together": 5,
-      "priceIls": 150
+      "priceIls": 150,
+      "earnPbs": 16
     },
     {
       "id": "crush-line",
@@ -334,7 +345,8 @@
       "badge": "gold",
       "image": "photos/crush-line.jpg",
       "together": 5,
-      "priceIls": 120
+      "priceIls": 120,
+      "earnPbs": 13
     },
     {
       "id": "beef-night",
@@ -351,7 +363,8 @@
       "badge": "gold",
       "image": "photos/beef-night.jpg",
       "together": 5,
-      "priceIls": 165
+      "priceIls": 165,
+      "earnPbs": 19
     },
     {
       "id": "tlv-volleyball",
@@ -366,7 +379,8 @@
       "pricePbs": 200,
       "badge": "pearl",
       "image": "photos/volleyball.jpg",
-      "priceIls": 60
+      "priceIls": 60,
+      "earnPbs": 8
     },
     {
       "id": "circuit-bcn",
@@ -382,7 +396,8 @@
       "badge": "pink",
       "image": "photos/circuit-bcn.jpg",
       "bracelet": true,
-      "priceIls": 320
+      "priceIls": 320,
+      "earnPbs": 46
     },
     {
       "id": "madrid-pride",
@@ -398,7 +413,8 @@
       "badge": "gold",
       "image": "photos/rainbow-street.jpg",
       "bracelet": true,
-      "priceIls": 300
+      "priceIls": 300,
+      "earnPbs": 41
     },
     {
       "id": "forever-pride",
@@ -419,7 +435,8 @@
       "image": "photos/forever-pride.jpg",
       "together": 5,
       "bracelet": true,
-      "priceIls": 280
+      "priceIls": 280,
+      "earnPbs": 37
     },
     {
       "id": "gay-cruise",
@@ -437,7 +454,8 @@
       "kicker": "Travel",
       "banner": "photos/cruise-banner.jpg",
       "image": "photos/cruise-banner.jpg",
-      "priceIls": 320
+      "priceIls": 320,
+      "earnPbs": 50
     },
     {
       "id": "snow-pride",
@@ -456,7 +474,8 @@
       "banner": "photos/ski-week.jpg",
       "image": "photos/ski-week.jpg",
       "bracelet": true,
-      "priceIls": 300
+      "priceIls": 300,
+      "earnPbs": 44
     },
     {
       "id": "offer-nissim-pride",
@@ -474,7 +493,8 @@
       "rides": 6,
       "together": 5,
       "bracelet": true,
-      "priceIls": 220
+      "priceIls": 220,
+      "earnPbs": 30
     }
   ]
 }

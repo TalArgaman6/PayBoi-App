@@ -5,7 +5,7 @@ import { EarnBadge } from './components/EarnBadge.jsx'
 import { SellerFace } from './components/SellerFace.jsx'
 import { Splash } from './components/Splash.jsx'
 import wallet from './data/wallet.json'
-import { formatCost, formatPbs, formatTokenBalance } from './lib/format.js'
+import { formatCost, formatEarn, formatPbs, formatTokenBalance, earnAmount, isEventItem } from './lib/format.js'
 import { rankVars } from './lib/settings.js'
 import { unlockMotion, useWalletTilt } from './lib/tilt.js'
 import { EventsScreen } from './screens/EventsScreen.jsx'
@@ -69,14 +69,19 @@ export default function App() {
               {selected.seller ? (
                 <SellerFace seller={selected.seller} size="detail" />
               ) : (
-                <EarnBadge item={selected} />
+                <span className="item-price">
+                  <span className="cost-mark">{formatCost(selected)}</span>
+                  {isEventItem(selected) ? <EarnBadge item={selected} /> : null}
+                </span>
               )}
             </div>
             <p>
               {selected.seller
                 ? `Pay ${formatCost(selected)} to ${selected.seller.name}. Same price as the door — their profile is on the listing.`
                 : selected.pricePbs <= wallet.balance
-                  ? `Pay ${formatCost(selected)}. ${formatPbs(wallet.balance - selected.pricePbs)} left.`
+                  ? isEventItem(selected)
+                    ? `Pay ${formatCost(selected)}. You gain ${formatEarn(earnAmount(selected))} p, with ${formatPbs(wallet.balance - selected.pricePbs)} left.`
+                    : `Pay ${formatCost(selected)}. ${formatPbs(wallet.balance - selected.pricePbs)} left.`
                   : `This is ${formatPbs(selected.pricePbs - wallet.balance)} over your ${formatTokenBalance(wallet.balance)} pbs.`}
             </p>
             <button type="button" className="pay-btn">

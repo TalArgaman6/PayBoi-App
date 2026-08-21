@@ -427,6 +427,41 @@
   white-space: nowrap;
 }
 
+.item-price {
+  display: grid;
+  justify-items: end;
+  gap: 5px;
+  flex-shrink: 0;
+}
+
+.earn-badge {
+  display: inline-flex;
+  align-items: baseline;
+  justify-content: flex-end;
+  gap: 2px;
+  min-width: 44px;
+  padding: 3px 5px 4px;
+  border-radius: 6px;
+  background: #1d3328;
+  color: #8fd4a8;
+  font-family: var(--font-ui);
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.earn-badge small {
+  font-family: Figtree, Georgia, serif;
+  font-size: 0.95em;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 1;
+  text-transform: none;
+  font-variant: normal;
+  font-style: normal;
+  opacity: 0.9;
+}
+
 .seller-face {
   display: grid;
   justify-items: center;
