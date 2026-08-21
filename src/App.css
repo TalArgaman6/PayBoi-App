@@ -77,9 +77,9 @@
 
 .screen-header h1 {
   margin: 0;
-  font-family: "Artonex Trial", var(--font-display);
+  font-family: var(--font-ui);
   font-size: 1.22rem;
-  font-weight: 400;
+  font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   line-height: 1;
@@ -1131,11 +1131,11 @@
   z-index: 1;
   margin: 0 0 64px;
   min-height: 1.2em;
-  font-family: "Special Elite", "American Typewriter", serif;
-  font-size: 0.78rem;
-  font-weight: 400;
+  font-family: var(--font-ui);
+  font-size: 0.62rem;
+  font-weight: 600;
   font-style: normal;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.06em;
   color: #8b90a0;
   text-align: center;
 }
@@ -1355,7 +1355,24 @@
   object-position: center 32%;
   display: block;
   border-radius: 18px;
-  background: #2a2624;
+  background: #2a2e3a;
+  pointer-events: none;
+}
+
+.feed-clip::-webkit-media-controls,
+.feed-clip::-webkit-media-controls-enclosure,
+.feed-clip::-webkit-media-controls-panel,
+.feed-clip::-webkit-media-controls-overlay-play-button,
+.feed-clip::-webkit-media-controls-start-playback-button,
+.user-feed-slide video::-webkit-media-controls,
+.user-feed-slide video::-webkit-media-controls-enclosure,
+.user-feed-slide video::-webkit-media-controls-panel,
+.user-feed-slide video::-webkit-media-controls-overlay-play-button,
+.user-feed-slide video::-webkit-media-controls-start-playback-button {
+  display: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  -webkit-appearance: none;
 }
 
 .feed-photo.is-clip {

@@ -69,14 +69,6 @@ function ShareMark() {
 }
 
 function FeedClip({ src, className }) {
-  function showControls(event) {
-    event.currentTarget.controls = true
-  }
-
-  function hideControls(event) {
-    event.currentTarget.controls = false
-  }
-
   function keepMuted(event) {
     if (!event.currentTarget.muted) event.currentTarget.muted = true
     if (event.currentTarget.volume !== 0) event.currentTarget.volume = 0
@@ -92,9 +84,12 @@ function FeedClip({ src, className }) {
       autoPlay
       loop
       preload="metadata"
-      onMouseEnter={showControls}
-      onMouseLeave={hideControls}
+      controls={false}
+      controlsList="nodownload nofullscreen noremoteplayback noplaybackrate"
+      disablePictureInPicture
+      disableRemotePlayback
       onVolumeChange={keepMuted}
+      onContextMenu={(event) => event.preventDefault()}
     />
   )
 }
