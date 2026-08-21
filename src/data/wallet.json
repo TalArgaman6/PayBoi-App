@@ -5,6 +5,7 @@
   "token": "pbs",
   "balance": 4506,
   "fiat": 2163,
+  "premium": false,
   "currency": "ILS",
   "section": "i win",
   "caption": "What your nights unlocked",

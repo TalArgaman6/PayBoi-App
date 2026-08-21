@@ -43,7 +43,7 @@ export default function App() {
         className="phone"
         data-tab={tab}
         ref={phone}
-        style={rankVars(wallet.balance)}
+        style={rankVars(wallet.balance, { premium: wallet.premium })}
       >
         {tab === 'events' ? <EventsScreen onSelect={setSelected} /> : null}
         {tab === 'shop' ? <ShopScreen onSelect={setSelected} /> : null}
@@ -71,7 +71,9 @@ export default function App() {
               ) : (
                 <span className="item-price">
                   <span className="cost-mark">{formatCost(selected)}</span>
-                  {isEventItem(selected) ? <EarnBadge item={selected} /> : null}
+                  {tab === 'events' && isEventItem(selected) ? (
+                    <EarnBadge item={selected} />
+                  ) : null}
                 </span>
               )}
             </div>
@@ -80,7 +82,7 @@ export default function App() {
                 ? `Pay ${formatCost(selected)} to ${selected.seller.name}. Same price as the door — their profile is on the listing.`
                 : selected.pricePbs <= wallet.balance
                   ? isEventItem(selected)
-                    ? `Pay ${formatCost(selected)}. You gain ${formatEarn(earnAmount(selected))} p, with ${formatPbs(wallet.balance - selected.pricePbs)} left.`
+                    ? `Pay ${formatCost(selected)}. You gain ${formatEarn(earnAmount(selected))} pbs, with ${formatPbs(wallet.balance - selected.pricePbs)} left.`
                     : `Pay ${formatCost(selected)}. ${formatPbs(wallet.balance - selected.pricePbs)} left.`
                   : `This is ${formatPbs(selected.pricePbs - wallet.balance)} over your ${formatTokenBalance(wallet.balance)} pbs.`}
             </p>

@@ -1,9 +1,9 @@
 export const PRICE_RANGES = [
   { id: 'all', label: 'Any', min: 0, max: Infinity },
-  { id: 'cover', label: '≤ p200', min: 0, max: 200 },
-  { id: 'night', label: 'p201–400', min: 201, max: 400 },
-  { id: 'weekend', label: 'p401–800', min: 401, max: 800 },
-  { id: 'trip', label: 'p800+', min: 801, max: Infinity },
+  { id: 'cover', label: '≤ 200 pbs', min: 0, max: 200 },
+  { id: 'night', label: '201–400 pbs', min: 201, max: 400 },
+  { id: 'weekend', label: '401–800 pbs', min: 401, max: 800 },
+  { id: 'trip', label: '800+ pbs', min: 801, max: Infinity },
 ]
 
 export const PRICE_SLIDER = {

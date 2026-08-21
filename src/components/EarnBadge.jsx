@@ -4,9 +4,9 @@ export function EarnBadge({ item }) {
   const points = earnAmount(item)
 
   return (
-    <span className="earn-badge" title={`Gain ${points} p at this party`}>
+    <span className="earn-badge" title={`Gain ${points} pbs at this party`}>
       {formatEarn(points)}
-      <small>p</small>
+      <small>pbs</small>
     </span>
   )
 }

@@ -27,7 +27,7 @@ export function FeaturedBanner({ items, onSelect }) {
           <span>{current.kicker || 'Featured'}</span>
           <strong>{current.title}</strong>
           <em>
-            {current.city} · {formatCost(current)} · gain {formatEarn(earnAmount(current))} p
+            {current.city} · {formatCost(current)} · gain {formatEarn(earnAmount(current))} pbs
           </em>
         </div>
       </button>

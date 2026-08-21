@@ -18,7 +18,7 @@ import {
 import { formatWhen, matchesQuery } from '../lib/format.js'
 
 function formatFilterPrice(pbs) {
-  return `₪${Math.round(pbs * 0.375)} / ${pbs} p`
+  return `₪${Math.round(pbs * 0.375)} / ${pbs} pbs`
 }
 
 export function EventsScreen({ onSelect, country = DEFAULT_COUNTRY }) {
@@ -174,6 +174,7 @@ export function EventsScreen({ onSelect, country = DEFAULT_COUNTRY }) {
               key={item.id}
               item={item}
               meta={`${formatWhen(item.date, item.time)} · ${item.venue}`}
+              showEarn
               onSelect={onSelect}
             />
           ))}

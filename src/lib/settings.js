@@ -1,6 +1,7 @@
 import { HEADER_TINTS } from './tints.js'
 
 const STEPS = [0, 250, 600, 1200, 2000, 3000]
+const VIOLET = HEADER_TINTS[0]
 
 const GOLD = {
   id: 'gold',
@@ -25,15 +26,14 @@ export const WALLET_RANKS = [
   GOLD,
 ]
 
-export function rankForBalance(balance) {
-  return (
-    [...WALLET_RANKS].reverse().find((item) => balance >= item.minP) ??
-    WALLET_RANKS[0]
-  )
+export function rankForBalance(balance, { premium = false } = {}) {
+  if (premium) return GOLD
+  return VIOLET
 }
 
-export function rankVars(balance) {
-  const rank = rankForBalance(balance)
+export function rankVars(balance, options = {}) {
+  const rank = rankForBalance(balance, options)
+  const premium = Boolean(options.premium)
   return {
     '--wallet-top': rank.top,
     '--wallet-glow': rank.glow,
@@ -41,5 +41,6 @@ export function rankVars(balance) {
     '--wallet-mid': rank.mid,
     '--wallet-lift': rank.lift,
     '--wallet-fallback': rank.fallback,
+    '--filter-accent': premium ? GOLD.lift : VIOLET.color,
   }
 }
