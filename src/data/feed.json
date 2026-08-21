@@ -43,15 +43,15 @@
   ],
   "posts": [
     {
-      "id": "noa-mirror-1",
+      "id": "alex-ido-mirror-1",
       "kind": "looks",
       "user": {
-        "id": "noa",
-        "name": "Noa",
-        "photo": "photos/sellers/noa.jpg"
+        "id": "alex",
+        "name": "Alex",
+        "photo": "photos/sellers/alex.jpg"
       },
       "image": "photos/mirror-looks.jpg",
-      "caption": "Mirror check with Ido. Out in 20. #Forever",
+      "caption": "Mirror check. Out in 20. #Forever",
       "when": "12m",
       "tags": [
         "looks",
@@ -107,19 +107,20 @@
       ]
     },
     {
-      "id": "alex-live-1",
+      "id": "tal-pride-sunrise-1",
       "kind": "looks",
       "user": {
-        "id": "alex",
-        "name": "Alex",
-        "photo": "photos/sellers/alex.jpg"
+        "id": "tal",
+        "name": "Tal",
+        "photo": "photos/sellers/toulouse.jpg"
       },
-      "image": "photos/party-selfie.jpg",
-      "caption": "Floor selfie. This room is a movie.",
+      "image": "photos/forever-pride-sunrise.jpg",
+      "caption": "Forever Pride. Sunrise after the party.",
       "when": "8m",
       "tags": [
         "looks",
-        "party"
+        "party",
+        "forever"
       ],
       "likes": 73
     },
@@ -138,41 +139,6 @@
         "party"
       ],
       "likes": 6
-    },
-    {
-      "id": "maya-pregame-1",
-      "kind": "looks",
-      "user": {
-        "id": "maya",
-        "name": "Maya",
-        "photo": "photos/sellers/maya.jpg"
-      },
-      "image": "photos/pregame-apt.jpg",
-      "caption": "Drinks at the apartment. Then Gaze.",
-      "when": "22m",
-      "tags": [
-        "looks",
-        "party",
-        "gaze"
-      ],
-      "likes": 51,
-      "with": [
-        {
-          "id": "ido",
-          "name": "Ido",
-          "photo": "photos/sellers/ido.jpg"
-        },
-        {
-          "id": "noa",
-          "name": "Noa",
-          "photo": "photos/sellers/noa.jpg"
-        },
-        {
-          "id": "sam",
-          "name": "Sam",
-          "photo": "photos/sellers/sam.jpg"
-        }
-      ]
     },
     {
       "id": "alex-1",
@@ -279,8 +245,8 @@
       "kind": "looks",
       "user": {
         "id": "tal",
-        "name": "TAL",
-        "photo": "photos/sellers/tal.jpg"
+        "name": "Tal",
+        "photo": "photos/sellers/toulouse.jpg"
       },
       "image": "photos/beach-night.jpg",
       "caption": "Hilton light before the room.",
@@ -358,8 +324,8 @@
       "with": [
         {
           "id": "tal",
-          "name": "TAL",
-          "photo": "photos/sellers/tal.jpg"
+          "name": "Tal",
+          "photo": "photos/sellers/toulouse.jpg"
         },
         {
           "id": "ido",
@@ -470,23 +436,6 @@
       "likes": 19
     },
     {
-      "id": "tal-2",
-      "kind": "clip",
-      "user": {
-        "id": "tal",
-        "name": "TAL",
-        "photo": "photos/sellers/tal.jpg"
-      },
-      "image": "photos/pboi-festival.jpg",
-      "caption": "Yearly week loading.",
-      "when": "2d",
-      "tags": [
-        "clip",
-        "party"
-      ],
-      "likes": 54
-    },
-    {
       "id": "alex-3",
       "kind": "music",
       "user": {
@@ -503,23 +452,6 @@
         "party"
       ],
       "likes": 48
-    },
-    {
-      "id": "maya-2",
-      "kind": "looks",
-      "user": {
-        "id": "maya",
-        "name": "Maya",
-        "photo": "photos/sellers/maya.jpg"
-      },
-      "image": "photos/cocktails.jpg",
-      "caption": "First pour, then we decide.",
-      "when": "2d",
-      "tags": [
-        "looks",
-        "bar"
-      ],
-      "likes": 12
     }
   ]
 }

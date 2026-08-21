@@ -8,8 +8,8 @@ import { assetUrl } from '../lib/format.js'
 
 const ME = {
   id: 'tal',
-  name: wallet.nickname,
-  photo: wallet.photo,
+  name: displayName(wallet.nickname),
+  photo: 'photos/sellers/toulouse.jpg',
 }
 
 const PARTY_BY_ID = Object.fromEntries(
@@ -82,14 +82,22 @@ function Heart({ on }) {
   )
 }
 
+function displayName(name) {
+  const first = String(name || '').trim().split(/\s+/)[0] || ''
+  return first.charAt(0).toUpperCase() + first.slice(1).toLowerCase()
+}
+
 function peopleOn(post) {
-  return [post.user, ...(post.with || [])]
+  return [post.user, ...(post.with || [])].map((person) => ({
+    ...person,
+    name: displayName(person.name),
+  }))
 }
 
 function collabLabel(people) {
   if (people.length < 2) return people[0]?.name || ''
-  if (people.length === 2) return `${people[0].name} + ${people[1].name}`
-  return `${people[0].name} + ${people.length - 1}`
+  if (people.length === 2) return `${people[0].name} & ${people[1].name}`
+  return `${people[0].name} & ${people.length - 1}`
 }
 
 function onPost(post, userId) {
@@ -141,7 +149,7 @@ function kindLabel(kind) {
 function upvoteLine(entry, picked, me) {
   const votes = entry.votes || 0
   if (votes <= 0) return null
-  const lead = picked === entry.id ? me : entry.upvoters?.[0] || 'Someone'
+  const lead = displayName(picked === entry.id ? me : entry.upvoters?.[0] || 'Someone')
   if (votes === 1) return `${lead} upvoted`
   return `${lead} upvoted +${votes - 1} more`
 }
@@ -217,7 +225,7 @@ function UserFeed({ posts, startId, userId, onClose }) {
         {media.map((post, index) => (
           <article
             key={post.id}
-            className="user-feed-slide"
+            className={`user-feed-slide${post.frame === 'faces' ? ' is-faces' : ''}`}
             data-post={post.id}
           >
             {post.video ? (
@@ -501,7 +509,7 @@ export function FeedScreen() {
               ) : post.image ? (
                 <button
                   type="button"
-                  className={`feed-photo${post.kind === 'clip' ? ' is-clip' : ''}`}
+                  className={`feed-photo${post.kind === 'clip' ? ' is-clip' : ''}${post.frame === 'faces' ? ' is-faces' : ''}`}
                   onClick={() => openUser(post.user.id, post.id)}
                 >
                   <img src={assetUrl(post.image)} alt="" />

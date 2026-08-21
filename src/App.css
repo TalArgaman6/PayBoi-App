@@ -118,7 +118,9 @@
   color: var(--ink);
   border-radius: 28px 28px 0 0;
   padding: 18px 18px 88px;
-  overflow: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior-x: none;
 }
 
 .count-line {
@@ -187,7 +189,11 @@
 .filter-tabs {
   display: flex;
   gap: 6px;
-  overflow: auto;
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-x: contain;
   scrollbar-width: none;
 }
 
@@ -475,7 +481,8 @@
   justify-items: center;
   gap: 4px;
   flex-shrink: 0;
-  min-width: 44px;
+  min-width: 72px;
+  max-width: 78px;
 }
 
 .seller-face img {
@@ -489,18 +496,17 @@
 
 .seller-face em {
   display: inline-flex;
-  align-items: center;
+  align-items: flex-start;
+  justify-content: center;
   gap: 3px;
   font-style: normal;
-  font-size: 0.58rem;
+  font-size: 0.52rem;
   font-weight: 500;
-  line-height: 1;
+  line-height: 1.15;
   color: var(--muted);
-  max-width: 64px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  max-width: 78px;
   text-align: center;
+  white-space: normal;
 }
 
 .seller-ig {
@@ -813,6 +819,8 @@
 }
 
 .wallet-screen {
+  overflow-x: hidden;
+  max-width: 100%;
   background:
     radial-gradient(
       120% 90% at var(--wallet-top-x, 86%) var(--wallet-top-y, -6%),
@@ -948,10 +956,17 @@
   display: grid;
   justify-items: stretch;
   padding-top: 22px;
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior-x: none;
 }
 
 .spend-now {
   width: 100%;
+  max-width: 100%;
+  min-width: 0;
   margin-top: 22px;
 }
 
@@ -988,6 +1003,7 @@
   display: grid;
   gap: 2px;
   max-height: 106px;
+  overflow-x: hidden;
   overflow-y: auto;
   overscroll-behavior: contain;
 }
@@ -1110,7 +1126,7 @@
   font-weight: 400;
   font-style: normal;
   letter-spacing: 0.04em;
-  color: #353c4f;
+  color: #8b90a0;
   text-align: center;
 }
 
@@ -1119,7 +1135,7 @@
   width: 1px;
   height: 0.85em;
   margin-left: 3px;
-  background: #353c4f;
+  background: #8b90a0;
   vertical-align: -1px;
   animation: caret 1s step-end infinite;
 }
@@ -1438,6 +1454,11 @@
   gap: 8px;
 }
 
+.feed-card:not(:last-child) {
+  padding-bottom: 18px;
+  border-bottom: 1px solid rgb(255 255 255 / 8%);
+}
+
 .feed-photo {
   padding: 0;
   border: 0;
@@ -1452,7 +1473,14 @@
   width: 100%;
   height: 220px;
   object-fit: cover;
+  object-position: center center;
   display: block;
+}
+
+.feed-photo.is-faces img,
+.user-feed-slide.is-faces img {
+  height: 240px;
+  object-position: center 42%;
 }
 
 .feed-meta {
@@ -1518,6 +1546,8 @@
   font-family: var(--font-ui);
   font-size: 0.82rem;
   font-weight: 600;
+  text-transform: none;
+  letter-spacing: 0;
 }
 
 .feed-meta span,
