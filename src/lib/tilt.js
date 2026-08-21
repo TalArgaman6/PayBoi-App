@@ -9,7 +9,7 @@ function paint(node, x, y) {
   node.style.setProperty('--header-angle', `${145 + x * 22}deg`)
   node.style.setProperty('--header-glow-x', `${8 + x * 16}%`)
   node.style.setProperty('--header-glow-y', `${110 + y * 12}%`)
-  node.style.setProperty('--wallet-angle', `${145 + x * 22}deg`)
+  node.style.setProperty('--wallet-angle', `${172 + x * 22}deg`)
   node.style.setProperty('--wallet-blue-x', `${8 + x * 16}%`)
   node.style.setProperty('--wallet-blue-y', `${110 + y * 12}%`)
 }

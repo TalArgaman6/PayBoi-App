@@ -26,7 +26,19 @@ export default function App() {
     return (
       <div className="stage">
         <div className="phone">
-          <Splash onDone={() => setBooted(true)} />
+          <Splash
+            onDone={async () => {
+              const Sensor = window.DeviceOrientationEvent
+              if (Sensor && typeof Sensor.requestPermission === 'function') {
+                try {
+                  await Sensor.requestPermission()
+                } catch {
+                  /* tilt stays mouse-only */
+                }
+              }
+              setBooted(true)
+            }}
+          />
         </div>
       </div>
     )

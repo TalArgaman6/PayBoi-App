@@ -791,7 +791,7 @@
       transparent 50%
     ),
     linear-gradient(
-      var(--wallet-angle, 145deg),
+      var(--wallet-angle, 172deg),
       var(--wallet-deep, #1c1236) 0%,
       var(--wallet-mid, #35245e) 42%,
       var(--wallet-lift, #4a3280) 100%
@@ -1048,30 +1048,15 @@
   line-height: 1;
 }
 
-.splash-letters {
+.splash-mark {
   grid-area: 1 / 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-display);
-  font-size: 6.4rem;
-  font-weight: 600;
-  line-height: 0.78;
-  letter-spacing: -0.04em;
-  text-rendering: geometricPrecision;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  display: grid;
+  place-items: center;
 }
 
-.splash-letters b,
-.splash-letters span {
-  display: block;
-  font-weight: 600;
-}
-
-.splash-letters b {
-  color: var(--gold);
+.splash .pboi-logo {
+  font-size: 1.5rem;
+  color: #fff;
 }
 
 .splash-line {

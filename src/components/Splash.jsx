@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { PboiLogo } from './Logo.jsx'
 
 const LINE = 'a new lgbtq economy'
 
@@ -24,9 +25,8 @@ export function Splash({ onDone }) {
 
   return (
     <button type="button" className="splash" onClick={onDone} aria-label="Open pboi">
-      <span className="splash-letters" aria-hidden="true">
-        <b>p</b>
-        <span>b</span>
+      <span className="splash-mark" aria-hidden="true">
+        <PboiLogo />
       </span>
       <p className="splash-line">
         {shown}
