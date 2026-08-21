@@ -43,6 +43,24 @@
   ],
   "posts": [
     {
+      "id": "tal-purim-1",
+      "kind": "clip",
+      "user": {
+        "id": "tal",
+        "name": "Tal",
+        "photo": "photos/sellers/toulouse.jpg"
+      },
+      "video": "videos/forever-tlv-purim.mp4",
+      "caption": "Forever TLV. Purim party.",
+      "when": "4m",
+      "tags": [
+        "clip",
+        "party",
+        "forever"
+      ],
+      "likes": 86
+    },
+    {
       "id": "alex-ido-mirror-1",
       "kind": "looks",
       "user": {
@@ -241,23 +259,6 @@
       "likes": 4
     },
     {
-      "id": "tal-1",
-      "kind": "looks",
-      "user": {
-        "id": "tal",
-        "name": "Tal",
-        "photo": "photos/sellers/toulouse.jpg"
-      },
-      "image": "photos/beach-night.jpg",
-      "caption": "Hilton light before the room.",
-      "when": "4h",
-      "tags": [
-        "looks",
-        "bar"
-      ],
-      "likes": 29
-    },
-    {
       "id": "alex-rate-1",
       "kind": "rating",
       "user": {
@@ -434,24 +435,6 @@
         "bar"
       ],
       "likes": 19
-    },
-    {
-      "id": "alex-3",
-      "kind": "music",
-      "user": {
-        "id": "alex",
-        "name": "Alex",
-        "photo": "photos/sellers/alex.jpg"
-      },
-      "image": "photos/park-concert.jpg",
-      "track": "Offer Nissim \u2014 Pride mix",
-      "caption": "Park still ringing.",
-      "when": "3d",
-      "tags": [
-        "music",
-        "party"
-      ],
-      "likes": 48
     }
   ]
 }

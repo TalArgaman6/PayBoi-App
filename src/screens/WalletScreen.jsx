@@ -89,7 +89,7 @@ export function WalletScreen({ onSelect }) {
             onChange={setKind}
           />
           <FilterTabs
-            label="Invest"
+            size="sm"
             filters={PRICE_RANGES}
             active={price}
             onChange={setPrice}

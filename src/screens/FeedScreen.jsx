@@ -68,6 +68,37 @@ function ShareMark() {
   )
 }
 
+function FeedClip({ src, className }) {
+  function showControls(event) {
+    event.currentTarget.controls = true
+  }
+
+  function hideControls(event) {
+    event.currentTarget.controls = false
+  }
+
+  function keepMuted(event) {
+    if (!event.currentTarget.muted) event.currentTarget.muted = true
+    if (event.currentTarget.volume !== 0) event.currentTarget.volume = 0
+  }
+
+  return (
+    <video
+      className={className}
+      src={src}
+      playsInline
+      muted
+      defaultMuted
+      autoPlay
+      loop
+      preload="metadata"
+      onMouseEnter={showControls}
+      onMouseLeave={hideControls}
+      onVolumeChange={keepMuted}
+    />
+  )
+}
+
 function Heart({ on }) {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -229,7 +260,7 @@ function UserFeed({ posts, startId, userId, onClose }) {
             data-post={post.id}
           >
             {post.video ? (
-              <video src={assetUrl(post.video)} controls playsInline muted autoPlay loop />
+              <FeedClip src={assetUrl(post.video)} />
             ) : (
               <img src={assetUrl(post.image)} alt="" />
             )}
@@ -497,15 +528,7 @@ export function FeedScreen() {
           {visible.map((post) => (
             <article key={post.id} className="feed-card">
               {post.video ? (
-                <video
-                  className="feed-clip"
-                  src={assetUrl(post.video)}
-                  controls
-                  playsInline
-                  muted
-                  autoPlay
-                  loop
-                />
+                <FeedClip className="feed-clip" src={assetUrl(post.video)} />
               ) : post.image ? (
                 <button
                   type="button"

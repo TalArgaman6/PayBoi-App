@@ -201,6 +201,16 @@
   display: none;
 }
 
+.filter-tabs.is-sm {
+  gap: 4px;
+}
+
+.filter-tabs.is-sm button {
+  padding: 4px 8px;
+  font-size: 0.56rem;
+  letter-spacing: 0.04em;
+}
+
 .currency-lock {
   margin: 0;
   font-family: var(--font-ui);
@@ -1340,8 +1350,9 @@
 .feed-clip,
 .user-feed-slide video {
   width: 100%;
-  height: 220px;
+  height: 340px;
   object-fit: cover;
+  object-position: center 32%;
   display: block;
   border-radius: 18px;
   background: #2a2624;
