@@ -798,10 +798,12 @@
   letter-spacing: 0.04em;
   text-transform: uppercase;
   font-weight: 600;
+  transition: color 0.15s ease, font-size 0.15s ease;
 }
 
 .bottom-nav button.is-active {
   color: var(--ink);
+  font-size: 0.62rem;
 }
 
 .wallet-screen .screen-header h1,
@@ -1108,7 +1110,7 @@
   font-weight: 400;
   font-style: normal;
   letter-spacing: 0.04em;
-  color: #1f2332;
+  color: #353c4f;
   text-align: center;
 }
 
@@ -1117,7 +1119,7 @@
   width: 1px;
   height: 0.85em;
   margin-left: 3px;
-  background: #1f2332;
+  background: #353c4f;
   vertical-align: -1px;
   animation: caret 1s step-end infinite;
 }
