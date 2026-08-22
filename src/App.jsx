@@ -46,16 +46,13 @@ export default function App() {
         ref={phone}
         style={rankVars(wallet.balance, { premium: wallet.premium })}
       >
+        <RemixProvider>
           {tab === 'events' ? <EventsScreen onSelect={setSelected} /> : null}
           {tab === 'shop' ? <ShopScreen onSelect={setSelected} /> : null}
           {tab === 'marketplace' ? (
             <MarketplaceScreen onSelect={setSelected} />
           ) : null}
-          {tab === 'feed' ? (
-            <RemixProvider>
-              <FeedScreen />
-            </RemixProvider>
-          ) : null}
+          {tab === 'feed' ? <FeedScreen /> : null}
           {tab === 'wallet' ? <WalletScreen onSelect={setSelected} /> : null}
           <BottomNav tab={tab} onChange={setTab} />
           {selected ? (
@@ -99,6 +96,7 @@ export default function App() {
               </button>
             </aside>
           ) : null}
+        </RemixProvider>
       </div>
     </div>
   )

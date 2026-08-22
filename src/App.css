@@ -966,30 +966,29 @@
   background:
     radial-gradient(
       88% 72% at var(--wallet-bloom-x, 64%) var(--wallet-bloom-y, 56%),
-      rgb(255 252 236 / 82%) 0%,
-      rgb(255 214 120 / 46%) 18%,
-      rgb(255 176 80 / 0%) 52%
+      rgb(255 248 255 / 42%) 0%,
+      rgb(255 186 220 / 22%) 22%,
+      rgb(220 160 230 / 0%) 54%
     ),
     radial-gradient(
       70% 80% at var(--wallet-top-x, 82%) var(--wallet-top-y, 8%),
-      rgb(150 255 196 / 48%) 0%,
-      rgb(90 220 200 / 0%) 54%
+      rgb(150 230 210 / 32%) 0%,
+      rgb(90 210 200 / 0%) 54%
     ),
     radial-gradient(
       78% 86% at var(--wallet-blue-x, 16%) var(--wallet-blue-y, 88%),
-      rgb(196 64 176 / 62%) 0%,
+      rgb(176 64 168 / 52%) 0%,
       rgb(150 40 160 / 0%) 56%
     ),
     linear-gradient(
       var(--wallet-angle, 108deg),
-      #8a1e86 0%,
-      #d12e96 16%,
-      #f24b8c 32%,
-      #ff7a62 48%,
-      #ffc45a 64%,
-      #e8ef6a 78%,
-      #7ee08a 90%,
-      #3ec8c0 100%
+      #7a1c86 0%,
+      #c42d96 18%,
+      #e85aa8 36%,
+      #e08ab8 52%,
+      #c8a8d8 68%,
+      #8ed4c0 84%,
+      #48c4c0 100%
     );
 }
 
@@ -999,28 +998,19 @@
   pointer-events: none;
   z-index: 0;
   background-image:
-    radial-gradient(circle at 28% 36%, rgb(255 255 255 / 55%) 0 1px, transparent 2px),
-    radial-gradient(circle at 72% 22%, rgb(255 250 220 / 50%) 0 1.5px, transparent 3px),
-    radial-gradient(circle at 58% 68%, rgb(255 255 255 / 42%) 0 2px, transparent 4px),
-    radial-gradient(circle at 18% 74%, rgb(255 220 240 / 38%) 0 1px, transparent 3px),
-    radial-gradient(circle at 84% 58%, rgb(255 255 255 / 46%) 0 1.5px, transparent 3px),
+    radial-gradient(circle at 28% 36%, rgb(255 255 255 / 28%) 0 1px, transparent 2px),
+    radial-gradient(circle at 72% 22%, rgb(255 236 248 / 24%) 0 1.5px, transparent 3px),
     url('./assets/wallet-glitter.png');
   background-size:
-    120px 120px,
-    160px 160px,
     180px 180px,
-    140px 140px,
-    150px 150px,
-    220px 220px;
+    220px 220px,
+    320px 320px;
   background-position:
     var(--wallet-glitter-x, 42%) var(--wallet-glitter-y, 38%),
     var(--wallet-glitter-x2, 58%) var(--wallet-glitter-y2, 62%),
-    var(--wallet-bloom-x, 64%) var(--wallet-bloom-y, 56%),
-    var(--wallet-blue-x, 16%) var(--wallet-blue-y, 88%),
-    var(--wallet-top-x, 82%) var(--wallet-top-y, 8%),
     var(--wallet-glitter-x, 42%) var(--wallet-glitter-y, 38%);
   mix-blend-mode: screen;
-  opacity: 0.7;
+  opacity: 0.38;
   transform: translate3d(var(--wallet-spark-x, 0px), var(--wallet-spark-y, 0px), 0);
 }
 
@@ -1048,7 +1038,7 @@
     2% 50%,
     39% 35%
   );
-  box-shadow: 0 0 6px 1px rgb(255 255 255 / 70%);
+  box-shadow: 0 0 4px 1px rgb(255 255 255 / 42%);
   opacity: 0;
   animation-name: wallet-star-twinkle;
   animation-timing-function: ease-in-out;
@@ -1062,9 +1052,9 @@
   pointer-events: none;
   background: linear-gradient(
     var(--wallet-shine-angle, 118deg),
-    rgb(255 255 255 / 22%) 0%,
+    rgb(255 255 255 / 18%) 0%,
     rgb(255 190 230 / 0%) 36%,
-    rgb(255 236 170 / 10%) 58%,
+    rgb(255 220 240 / 8%) 58%,
     transparent 100%
   );
   mix-blend-mode: soft-light;
@@ -1078,9 +1068,9 @@
     filter: brightness(0.8);
   }
   45% {
-    opacity: 1;
+    opacity: 0.72;
     transform: scale(1);
-    filter: brightness(1.6);
+    filter: brightness(1.25);
   }
   70% {
     opacity: 0.25;
