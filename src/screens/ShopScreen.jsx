@@ -22,7 +22,7 @@ export function ShopScreen({ onSelect }) {
 
   return (
     <section className="screen screen-spend">
-      <ScreenHeader title="Drop" kicker="Lifestyle, shopping, nights" />
+      <ScreenHeader title="Drop" />
       <div className="sheet">
         <p className="count-line">{items.length} products</p>
         <SearchBar

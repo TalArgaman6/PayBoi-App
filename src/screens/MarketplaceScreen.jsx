@@ -29,7 +29,7 @@ export function MarketplaceScreen({ onSelect }) {
 
   return (
     <section className="screen screen-market">
-      <ScreenHeader title="Marketplace" kicker="Pre-owned, same price" />
+      <ScreenHeader title="Marketplace" />
       <div className="sheet">
         <div className="list-toolbar">
           <p className="count-line">

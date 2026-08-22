@@ -429,7 +429,7 @@ export function FeedScreen() {
 
   return (
     <section className="screen screen-feed">
-      <ScreenHeader title="Feed" kicker="Looks, clips, rides, votes" />
+      <ScreenHeader title="Feed" remix />
       <div className="sheet">
         <form
           className="feed-composer"

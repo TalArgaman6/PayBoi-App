@@ -43,24 +43,6 @@
   ],
   "posts": [
     {
-      "id": "tal-purim-1",
-      "kind": "clip",
-      "user": {
-        "id": "tal",
-        "name": "Tal",
-        "photo": "photos/sellers/toulouse.jpg"
-      },
-      "video": "videos/forever-tlv-purim.mp4",
-      "caption": "Forever TLV. Purim party.",
-      "when": "4m",
-      "tags": [
-        "clip",
-        "party",
-        "forever"
-      ],
-      "likes": 86
-    },
-    {
       "id": "alex-ido-mirror-1",
       "kind": "looks",
       "user": {
@@ -125,22 +107,51 @@
       ]
     },
     {
-      "id": "tal-pride-sunrise-1",
+      "id": "maya-1",
       "kind": "looks",
+      "user": {
+        "id": "maya",
+        "name": "Maya",
+        "photo": "photos/sellers/maya.jpg"
+      },
+      "image": "photos/pool-party.jpg",
+      "caption": "Crew looks before Gordon.",
+      "when": "6h",
+      "tags": [
+        "looks",
+        "sports"
+      ],
+      "likes": 33,
+      "with": [
+        {
+          "id": "tal",
+          "name": "Tal",
+          "photo": "photos/sellers/toulouse.jpg"
+        },
+        {
+          "id": "ido",
+          "name": "Ido",
+          "photo": "photos/sellers/ido.jpg"
+        }
+      ]
+    },
+    {
+      "id": "tal-purim-1",
+      "kind": "clip",
       "user": {
         "id": "tal",
         "name": "Tal",
         "photo": "photos/sellers/toulouse.jpg"
       },
-      "image": "photos/forever-pride-sunrise.jpg",
-      "caption": "Forever Pride. Sunrise after the party.",
-      "when": "8m",
+      "video": "videos/forever-tlv-purim.mp4",
+      "caption": "Forever TLV. Purim party.",
+      "when": "4m",
       "tags": [
-        "looks",
+        "clip",
         "party",
         "forever"
       ],
-      "likes": 73
+      "likes": 86
     },
     {
       "id": "ido-ride-1",
@@ -243,6 +254,24 @@
       "likes": 37
     },
     {
+      "id": "tal-pride-sunrise-1",
+      "kind": "looks",
+      "user": {
+        "id": "tal",
+        "name": "Tal",
+        "photo": "photos/sellers/toulouse.jpg"
+      },
+      "image": "photos/forever-pride-sunrise.jpg",
+      "caption": "Forever Pride. Sunrise after the party.",
+      "when": "8m",
+      "tags": [
+        "looks",
+        "party",
+        "forever"
+      ],
+      "likes": 73
+    },
+    {
       "id": "sam-ticket-1",
       "kind": "ticket",
       "user": {
@@ -305,35 +334,6 @@
         "party"
       ],
       "likes": 9
-    },
-    {
-      "id": "maya-1",
-      "kind": "looks",
-      "user": {
-        "id": "maya",
-        "name": "Maya",
-        "photo": "photos/sellers/maya.jpg"
-      },
-      "image": "photos/pool-party.jpg",
-      "caption": "Crew looks before Gordon.",
-      "when": "6h",
-      "tags": [
-        "looks",
-        "sports"
-      ],
-      "likes": 33,
-      "with": [
-        {
-          "id": "tal",
-          "name": "Tal",
-          "photo": "photos/sellers/toulouse.jpg"
-        },
-        {
-          "id": "ido",
-          "name": "Ido",
-          "photo": "photos/sellers/ido.jpg"
-        }
-      ]
     },
     {
       "id": "noa-ticket-1",

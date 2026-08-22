@@ -3,6 +3,7 @@ import { BottomNav } from './components/BottomNav.jsx'
 import { ItemThumb } from './components/ItemRow.jsx'
 import { EarnBadge } from './components/EarnBadge.jsx'
 import { SellerFace } from './components/SellerFace.jsx'
+import { RemixProvider } from './components/RemixPlayer.jsx'
 import { Splash } from './components/Splash.jsx'
 import wallet from './data/wallet.json'
 import { formatCost, formatEarn, formatPbs, formatTokenBalance, earnAmount, isEventItem } from './lib/format.js'
@@ -45,55 +46,59 @@ export default function App() {
         ref={phone}
         style={rankVars(wallet.balance, { premium: wallet.premium })}
       >
-        {tab === 'events' ? <EventsScreen onSelect={setSelected} /> : null}
-        {tab === 'shop' ? <ShopScreen onSelect={setSelected} /> : null}
-        {tab === 'marketplace' ? (
-          <MarketplaceScreen onSelect={setSelected} />
-        ) : null}
-        {tab === 'feed' ? <FeedScreen /> : null}
-        {tab === 'wallet' ? <WalletScreen onSelect={setSelected} /> : null}
-        <BottomNav tab={tab} onChange={setTab} />
-        {selected ? (
-          <aside className="detail-sheet" role="dialog" aria-label={selected.title}>
-            <div className="detail-handle" />
-            <div className="detail-head">
-              <ItemThumb
-                thumb={selected.thumb}
-                title={selected.title}
-                image={selected.image}
-              />
-              <div>
-                <strong>{selected.title}</strong>
-                <span>{selected.subtitle}</span>
+          {tab === 'events' ? <EventsScreen onSelect={setSelected} /> : null}
+          {tab === 'shop' ? <ShopScreen onSelect={setSelected} /> : null}
+          {tab === 'marketplace' ? (
+            <MarketplaceScreen onSelect={setSelected} />
+          ) : null}
+          {tab === 'feed' ? (
+            <RemixProvider>
+              <FeedScreen />
+            </RemixProvider>
+          ) : null}
+          {tab === 'wallet' ? <WalletScreen onSelect={setSelected} /> : null}
+          <BottomNav tab={tab} onChange={setTab} />
+          {selected ? (
+            <aside className="detail-sheet" role="dialog" aria-label={selected.title}>
+              <div className="detail-handle" />
+              <div className="detail-head">
+                <ItemThumb
+                  thumb={selected.thumb}
+                  title={selected.title}
+                  image={selected.image}
+                />
+                <div>
+                  <strong>{selected.title}</strong>
+                  <span>{selected.subtitle}</span>
+                </div>
+                {selected.seller ? (
+                  <SellerFace seller={selected.seller} size="detail" />
+                ) : (
+                  <span className="item-price">
+                    <span className="cost-mark">{formatCost(selected)}</span>
+                    {tab === 'events' && isEventItem(selected) ? (
+                      <EarnBadge item={selected} />
+                    ) : null}
+                  </span>
+                )}
               </div>
-              {selected.seller ? (
-                <SellerFace seller={selected.seller} size="detail" />
-              ) : (
-                <span className="item-price">
-                  <span className="cost-mark">{formatCost(selected)}</span>
-                  {tab === 'events' && isEventItem(selected) ? (
-                    <EarnBadge item={selected} />
-                  ) : null}
-                </span>
-              )}
-            </div>
-            <p>
-              {selected.seller
-                ? `Pay ${formatCost(selected)} to ${selected.seller.name}. Same price as the door — their profile is on the listing.`
-                : selected.pricePbs <= wallet.balance
-                  ? isEventItem(selected)
-                    ? `Pay ${formatCost(selected)}. You gain ${formatEarn(earnAmount(selected))} pbs, with ${formatPbs(wallet.balance - selected.pricePbs)} left.`
-                    : `Pay ${formatCost(selected)}. ${formatPbs(wallet.balance - selected.pricePbs)} left.`
-                  : `This is ${formatPbs(selected.pricePbs - wallet.balance)} over your ${formatTokenBalance(wallet.balance)} pbs.`}
-            </p>
-            <button type="button" className="pay-btn">
-              Pay {formatCost(selected)}
-            </button>
-            <button type="button" className="ghost-btn" onClick={() => setSelected(null)}>
-              Close
-            </button>
-          </aside>
-        ) : null}
+              <p>
+                {selected.seller
+                  ? `Pay ${formatCost(selected)} to ${selected.seller.name}. Same price as the door — their profile is on the listing.`
+                  : selected.pricePbs <= wallet.balance
+                    ? isEventItem(selected)
+                      ? `Pay ${formatCost(selected)}. You gain ${formatEarn(earnAmount(selected))} pbs, with ${formatPbs(wallet.balance - selected.pricePbs)} left.`
+                      : `Pay ${formatCost(selected)}. ${formatPbs(wallet.balance - selected.pricePbs)} left.`
+                    : `This is ${formatPbs(selected.pricePbs - wallet.balance)} over your ${formatTokenBalance(wallet.balance)} pbs.`}
+              </p>
+              <button type="button" className="pay-btn">
+                Pay {formatCost(selected)}
+              </button>
+              <button type="button" className="ghost-btn" onClick={() => setSelected(null)}>
+                Close
+              </button>
+            </aside>
+          ) : null}
       </div>
     </div>
   )
