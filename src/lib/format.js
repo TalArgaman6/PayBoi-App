@@ -11,6 +11,8 @@ export function formatWhen(date, time) {
   })
 }
 
+export const PBS_PER_ILS = 3
+
 export function formatPbs(amount) {
   return `${Number(amount).toLocaleString('en-US')} pbs`
 }
@@ -27,11 +29,15 @@ export function formatEarn(amount) {
 
 export function ilsAmount(item) {
   if (item?.priceIls != null) return item.priceIls
-  return Math.round((item?.pricePbs ?? 0) * 0.375)
+  return Math.round((item?.pricePbs ?? 0) / PBS_PER_ILS)
 }
 
 export function formatCost(item) {
   return `₪${ilsAmount(item)} / ${item?.pricePbs ?? 0} pbs`
+}
+
+export function formatFixedPrice(item) {
+  return `₪${ilsAmount(item)} / fixed`
 }
 
 export function earnAmount(item) {
@@ -46,6 +52,45 @@ export function isEventItem(item) {
 
 export function formatTokenBalance(amount) {
   return Number(amount).toLocaleString('en-US')
+}
+
+const LAST_BY_ID = {
+  tal: 'Argaman',
+  alex: 'Cohen',
+  maya: 'Levi',
+  ido: 'Mizrahi',
+  noa: 'Shalev',
+  sam: 'Azulay',
+  jordan: 'Hasson',
+}
+
+function titleCase(word) {
+  const value = String(word || '').trim()
+  if (!value) return ''
+  return value.charAt(0).toUpperCase() + value.slice(1).toLowerCase()
+}
+
+export function shortName(input, lastName) {
+  if (!input) return ''
+  if (typeof input === 'object') {
+    return shortName(input.name, lastName || input.last || LAST_BY_ID[input.id])
+  }
+
+  const raw = String(input).trim()
+  if (raw.includes('.')) {
+    const [first, last] = raw.split('.')
+    return shortName(first, lastName || last)
+  }
+
+  const parts = raw.split(/\s+/).filter(Boolean)
+  const first = titleCase(parts[0])
+  const last = lastName || parts[1] || LAST_BY_ID[first.toLowerCase()]
+  if (!last) return first
+  return `${first} ${String(last).charAt(0).toUpperCase()}`
+}
+
+export function boughtLine(wallet, extra = 4) {
+  return `${shortName(wallet?.user || wallet?.nickname)} + ${extra} friends purchased`
 }
 
 export function matchesQuery(item, query) {

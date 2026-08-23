@@ -4,11 +4,12 @@ import events from '../data/events.json'
 import wallet from '../data/wallet.json'
 import { FilterTabs } from '../components/FilterTabs.jsx'
 import { ScreenHeader } from '../components/ScreenHeader.jsx'
-import { assetUrl } from '../lib/format.js'
+import { ALT_EVENT_TYPES } from '../lib/filters.js'
+import { assetUrl, shortName } from '../lib/format.js'
 
 const ME = {
   id: 'tal',
-  name: displayName(wallet.nickname),
+  name: shortName(wallet.user || wallet.nickname),
   photo: wallet.photo || 'photos/sellers/tal.jpg',
 }
 
@@ -20,12 +21,17 @@ const RATE_PARTIES = events.items.filter(
   (item) => item.type === 'party' && item.country === 'IL',
 )
 
+const ALT_EVENTS = events.items.filter(
+  (item) => ALT_EVENT_TYPES.includes(item.type) && item.country === 'IL',
+)
+
 const MODES = [
   { id: 'live', label: 'Live' },
   { id: 'looks', label: 'Look' },
   { id: 'ticket', label: 'Ticket' },
   { id: 'ask', label: 'Ask' },
   { id: 'ride', label: 'Ride' },
+  { id: 'alternative', label: 'Alt' },
 ]
 
 const PLACEHOLDERS = {
@@ -34,14 +40,38 @@ const PLACEHOLDERS = {
   ride: 'Where, when, seats',
   ticket: 'Which night, how many',
   ask: 'Ask which night to pick',
+  alternative: 'Sports, gala, karaoke, theater',
 }
 
-const AUTO_TAGS = {
-  looks: ['looks', 'party'],
-  live: ['live', 'party'],
-  ride: ['ride', 'fff'],
-  ticket: ['ticket', 'party'],
-  ask: ['ask', 'party'],
+const LINE_TAGS = {
+  forever: 'forever',
+  shirazi: 'fff',
+  gaze: 'gaze',
+  drek: 'drek',
+  crush: 'crush',
+  beef: 'beef',
+  arisa: 'arisa',
+  pboi: 'pboi',
+  offer: 'offer',
+}
+
+function typeTag(mode) {
+  if (mode === 'rating' || mode === 'ask') return 'ask'
+  if (mode === 'clip' || mode === 'music') return 'live'
+  return mode
+}
+
+function lineTag(party) {
+  if (!party) return 'party'
+  if (party.line && LINE_TAGS[party.line]) return LINE_TAGS[party.line]
+  if (party.line) return party.line
+  if (ALT_EVENT_TYPES.includes(party.type)) return party.type
+  return 'party'
+}
+
+function autoTags(mode, pickIds) {
+  const party = PARTY_BY_ID[pickIds?.[0]]
+  return [typeTag(mode), lineTag(party)]
 }
 
 const FEED_FILTERS = catalog.tags.filter(
@@ -145,15 +175,10 @@ function Heart({ on }) {
   )
 }
 
-function displayName(name) {
-  const first = String(name || '').trim().split(/\s+/)[0] || ''
-  return first.charAt(0).toUpperCase() + first.slice(1).toLowerCase()
-}
-
 function peopleOn(post) {
   return [post.user, ...(post.with || [])].map((person) => ({
     ...person,
-    name: displayName(person.name),
+    name: shortName(person),
   }))
 }
 
@@ -205,13 +230,23 @@ function kindLabel(kind) {
   if (kind === 'ticket') return 'Ticket request'
   if (kind === 'live' || kind === 'clip' || kind === 'music') return 'Live'
   if (kind === 'looks') return 'Looks'
+  if (kind === 'alternative') return 'Alt'
   return 'Post'
+}
+
+function cardTone(post) {
+  if (post.kind === 'looks') return 'looks'
+  if (post.kind === 'ticket') return 'ticket'
+  if (post.kind === 'rating' || post.kind === 'ask') return 'ask'
+  if (post.kind === 'ride') return 'ride'
+  if (post.kind === 'alternative') return 'alt'
+  return 'live'
 }
 
 function upvoteLine(entry, picked, me) {
   const votes = entry.votes || 0
   if (votes <= 0) return null
-  const lead = displayName(picked === entry.id ? me : entry.upvoters?.[0] || 'Someone')
+  const lead = shortName(picked === entry.id ? me : entry.upvoters?.[0] || 'Someone')
   if (votes === 1) return `${lead} upvoted`
   return `${lead} upvoted +${votes - 1} more`
 }
@@ -310,9 +345,9 @@ function UserFeed({ posts, startId, userId, onClose }) {
 }
 
 function formatTag(tag) {
-  if (tag === 'fff') return '#FFF'
-  if (tag === 'live' || tag === 'clip') return '#Live'
-  return `#${tag.charAt(0).toUpperCase()}${tag.slice(1)}`
+  if (tag === 'clip') return '#live'
+  if (tag === 'alternative') return '#alt'
+  return `#${String(tag || '').toLowerCase()}`
 }
 
 function NightChips({ ids }) {
@@ -346,6 +381,9 @@ function matchesFilter(post, tag) {
       tags.includes('music') ||
       isLivePost(post)
     )
+  }
+  if (tag === 'alternative') {
+    return tags.includes('alternative') || post.kind === 'alternative'
   }
   return tags.includes(tag)
 }
@@ -382,6 +420,7 @@ export function FeedScreen() {
   const [media, setMedia] = useState('')
   const [isVideo, setIsVideo] = useState(false)
   const [picks, setPicks] = useState([])
+  const [tagOpen, setTagOpen] = useState(false)
   const [viewer, setViewer] = useState(null)
   const [mine, setMine] = useState({})
   const [liked, setLiked] = useState(() => new Set())
@@ -398,16 +437,17 @@ export function FeedScreen() {
   }, [posts, tag, sort])
 
   const isAskFlow = mode === 'ask' || mode === 'ride' || mode === 'ticket'
-  const canPost = isAskFlow ? picks.length === 1 : Boolean(media)
+  const canPost = picks.length === 1 && (isAskFlow || Boolean(media))
+  const eventPicks = mode === 'alternative' ? ALT_EVENTS : RATE_PARTIES
 
   function chooseMode(id) {
     setMode(id)
+    if ((id === 'alternative') !== (mode === 'alternative')) {
+      setPicks([])
+    }
     if (id !== 'live' && isVideo) {
       setMedia('')
       setIsVideo(false)
-    }
-    if (id !== 'ask' && id !== 'ride' && id !== 'ticket') {
-      setPicks([])
     }
   }
 
@@ -469,7 +509,7 @@ export function FeedScreen() {
   function publish() {
     if (!canPost) return
     const text = caption.trim()
-    const tags = AUTO_TAGS[mode] || [mode]
+    const tags = autoTags(mode, picks)
     const photo = media && !isVideo ? media : undefined
     const clip = media && isVideo ? media : undefined
     const base = {
@@ -499,12 +539,14 @@ export function FeedScreen() {
           : {
               ...base,
               kind: mode,
+              nights: picks.length ? picks : undefined,
             }
     setPosts((current) => [next, ...current])
     setCaption('')
     setMedia('')
     setIsVideo(false)
     setPicks([])
+    setTagOpen(false)
   }
 
   return (
@@ -519,7 +561,13 @@ export function FeedScreen() {
           }}
         >
           <img className="feed-composer-face" src={assetUrl(ME.photo)} alt="" />
-          <div className="feed-composer-body">
+          <div
+            className="feed-composer-body"
+            onBlur={(event) => {
+              if (event.currentTarget.contains(event.relatedTarget)) return
+              setTagOpen(false)
+            }}
+          >
             <div className="feed-mode">
               {MODES.map((item) => (
                 <button
@@ -535,7 +583,8 @@ export function FeedScreen() {
             <input
               value={caption}
               onChange={(event) => setCaption(event.target.value)}
-              maxLength={90}
+              onFocus={() => setTagOpen(true)}
+              maxLength={30}
               placeholder={PLACEHOLDERS[mode]}
               aria-label="Caption"
             />
@@ -545,19 +594,35 @@ export function FeedScreen() {
             {media && isVideo ? (
               <video className="feed-preview" src={assetUrl(media)} muted />
             ) : null}
-            {isAskFlow ? (
-              <div className="rate-picks">
-                {RATE_PARTIES.map((party) => (
-                  <button
-                    key={party.id}
-                    type="button"
-                    className={picks.includes(party.id) ? 'is-on' : ''}
-                    onClick={() => togglePick(party.id)}
-                  >
-                    {party.title}
-                  </button>
-                ))}
-              </div>
+            {tagOpen || picks.length ? (
+              <>
+                <div className={`rate-picks${tagOpen ? '' : ' is-locked'}`}>
+                  {(tagOpen
+                    ? eventPicks
+                    : eventPicks.filter((party) => picks.includes(party.id))
+                  ).map((party) =>
+                    tagOpen ? (
+                      <button
+                        key={party.id}
+                        type="button"
+                        className={picks.includes(party.id) ? 'is-on' : ''}
+                        onClick={() => togglePick(party.id)}
+                      >
+                        {party.title}
+                      </button>
+                    ) : (
+                      <span key={party.id} className="is-on">
+                        {party.title}
+                      </span>
+                    ),
+                  )}
+                </div>
+                {picks.length ? (
+                  <p className="feed-auto-tags">
+                    {autoTags(mode, picks).map((item) => formatTag(item)).join(' ')}
+                  </p>
+                ) : null}
+              </>
             ) : null}
             <div className="feed-composer-actions">
               <div className="feed-composer-tools">
@@ -600,7 +665,7 @@ export function FeedScreen() {
         />
         <div className="feed-list">
           {visible.map((post) => (
-            <article key={post.id} className="feed-card">
+            <article key={post.id} className={`feed-card is-${cardTone(post)}`}>
               {post.video ? (
                 <div className="feed-photo is-clip">
                   <FeedClip className="feed-clip" src={assetUrl(post.video)} />

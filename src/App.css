@@ -101,7 +101,6 @@
   left: auto;
   top: auto;
   bottom: auto;
-  transform: none;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -113,6 +112,7 @@
   text-align: center;
   z-index: 4;
   justify-self: center;
+  transform: translateY(7px);
 }
 
 .remix-now.is-muted {
@@ -555,15 +555,46 @@
 
 .item-sub,
 .item-meta,
+.item-bought,
 .empty {
   color: var(--muted);
   font-size: 0.72rem;
+}
+
+.item-bought {
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
 }
 
 .item-copy span:not(.ride-mark) {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.screen-events .item-row {
+  grid-template-columns: 58px 1fr auto;
+  padding: 14px 0;
+}
+
+.screen-events .item-thumb {
+  width: 58px;
+  height: 58px;
+}
+
+.screen-events .item-copy {
+  gap: 5px;
+}
+
+.screen-events .item-copy strong {
+  line-height: 1.3;
+}
+
+.screen-events .item-sub,
+.screen-events .item-meta,
+.screen-events .item-bought {
+  line-height: 1.35;
 }
 
 .price-badge {
@@ -1487,7 +1518,8 @@
   font-weight: 600;
 }
 
-.feed-tags {
+.feed-tags,
+.feed-auto-tags {
   margin: 0;
   color: var(--muted);
   font-size: 0.68rem;
@@ -1689,8 +1721,63 @@
 }
 
 .feed-card {
+  position: relative;
   display: grid;
   gap: 8px;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.feed-card::after {
+  content: '';
+  position: absolute;
+  right: -8%;
+  bottom: -18%;
+  width: 92%;
+  height: 110%;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(
+    ellipse 92% 82% at 86% 86%,
+    var(--feed-glow) 0%,
+    var(--feed-glow-mid) 36%,
+    transparent 74%
+  );
+}
+
+.feed-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.feed-card.is-live {
+  --feed-glow: rgb(255 255 255 / 11%);
+  --feed-glow-mid: rgb(255 243 204 / 5%);
+}
+
+.feed-card.is-looks {
+  --feed-glow: rgb(176 64 236 / 12%);
+  --feed-glow-mid: rgb(92 60 212 / 6%);
+}
+
+.feed-card.is-ticket {
+  --feed-glow: rgb(78 240 224 / 11%);
+  --feed-glow-mid: rgb(26 184 196 / 6%);
+}
+
+.feed-card.is-ask {
+  --feed-glow: rgb(236 96 204 / 12%);
+  --feed-glow-mid: rgb(176 64 236 / 5%);
+}
+
+.feed-card.is-ride {
+  --feed-glow: rgb(110 230 160 / 11%);
+  --feed-glow-mid: rgb(26 184 196 / 5%);
+}
+
+.feed-card.is-alt {
+  --feed-glow: rgb(255 243 204 / 14%);
+  --feed-glow-mid: rgb(255 208 138 / 6%);
 }
 
 .feed-card:not(:last-child) {
@@ -1970,6 +2057,10 @@
     min-height: calc(84px + env(safe-area-inset-top, 0px));
     padding-top: calc(32px + env(safe-area-inset-top, 0px));
     padding-bottom: 22px;
+  }
+
+  .remix-now {
+    transform: translateY(8px);
   }
 
   .bottom-nav {

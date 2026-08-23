@@ -6,7 +6,7 @@ import { ItemRow } from '../components/ItemRow.jsx'
 import { ScreenHeader } from '../components/ScreenHeader.jsx'
 import { SearchBar } from '../components/SearchBar.jsx'
 import { SellTicketSheet } from '../components/SellTicketSheet.jsx'
-import { formatPbs, matchesQuery } from '../lib/format.js'
+import { formatFixedPrice, formatPbs, matchesQuery } from '../lib/format.js'
 
 const ME = {
   name: wallet.nickname,
@@ -57,8 +57,8 @@ export function MarketplaceScreen({ onSelect }) {
           {items.map((item) => (
             <ItemRow
               key={item.id}
-              item={item}
-              meta={`${formatPbs(item.pricePbs)} / fixed price`}
+              item={{ ...item, subtitle: formatFixedPrice(item) }}
+              meta={formatPbs(item.pricePbs)}
               onSelect={onSelect}
             />
           ))}
@@ -80,6 +80,7 @@ export function MarketplaceScreen({ onSelect }) {
               seller: ME,
               city: event.city,
               pricePbs: event.pricePbs,
+              priceIls: event.priceIls,
               originalPbs: event.pricePbs,
               image: event.image,
               filters: ['tickets', 'transfers'],

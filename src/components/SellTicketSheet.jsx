@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import events from '../data/events.json'
-import { formatPbs } from '../lib/format.js'
+import { formatCost } from '../lib/format.js'
 
 const OPTIONS = events.items
   .filter((item) => item.country === 'IL' && item.type !== 'travel')
@@ -45,7 +45,7 @@ export function SellTicketSheet({ open, onClose, onList }) {
               ))}
             </select>
           </label>
-          <p className="price-range-readout">{formatPbs(picked.pricePbs)} / fixed price</p>
+          <p className="price-range-readout">{formatCost(picked)} / fixed</p>
         </div>
         <button
           type="button"

@@ -14,6 +14,8 @@ export const PRICE_SLIDER = {
 
 export const DEFAULT_COUNTRY = 'IL'
 
+export const ALT_EVENT_TYPES = ['sports', 'gala', 'karaoke', 'theater']
+
 export const CURRENCY_META = {
   ILS: { label: '₪ ILS', prefix: '₪' },
   EUR: { label: '€ EUR', prefix: '€' },

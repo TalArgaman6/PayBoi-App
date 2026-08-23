@@ -77,8 +77,8 @@
       "label": "Bar"
     },
     {
-      "id": "sports",
-      "label": "Sports"
+      "id": "alternative",
+      "label": "Alternative"
     },
     {
       "id": "travel",
@@ -123,6 +123,7 @@
     {
       "id": "pboi-festival",
       "title": "pboi Yearly Festival",
+      "line": "pboi",
       "subtitle": "Our public week — stages, market, rider",
       "venue": "Live Park",
       "city": "Tel Aviv",
@@ -130,8 +131,8 @@
       "type": "party",
       "date": "2026-09-18",
       "time": "16:00",
-      "pricePbs": 1200,
-      "earnPbs": 50,
+      "pricePbs": 960,
+      "earnPbs": 40,
       "featured": true,
       "kicker": "pboi 2026",
       "banner": "photos/pboi-festival.jpg",
@@ -152,12 +153,12 @@
       "type": "party",
       "date": "2026-08-19",
       "time": "23:00",
-      "pricePbs": 240,
+      "pricePbs": 210,
       "badge": "pearl",
       "image": "photos/dj-booth.jpg",
       "together": 5,
-      "priceIls": 80,
-      "earnPbs": 10
+      "priceIls": 70,
+      "earnPbs": 8
     },
     {
       "id": "callas-karaoke",
@@ -169,10 +170,10 @@
       "type": "bar",
       "date": "2026-08-19",
       "time": "21:00",
-      "pricePbs": 210,
+      "pricePbs": 150,
       "badge": "pearl",
       "image": "photos/drag-stage.jpg",
-      "priceIls": 65,
+      "priceIls": 50,
       "earnPbs": 8
     },
     {
@@ -185,11 +186,11 @@
       "type": "bar",
       "date": "2026-08-20",
       "time": "21:00",
-      "pricePbs": 220,
+      "pricePbs": 165,
       "badge": "pearl",
       "image": "photos/gay-bar.jpg",
-      "priceIls": 70,
-      "earnPbs": 9
+      "priceIls": 55,
+      "earnPbs": 8
     },
     {
       "id": "gaze-haoman",
@@ -202,13 +203,13 @@
       "type": "party",
       "date": "2026-08-21",
       "time": "23:00",
-      "pricePbs": 380,
+      "pricePbs": 270,
       "badge": "gold",
       "image": "photos/club-lasers.jpg",
       "rides": 4,
       "together": 5,
-      "priceIls": 140,
-      "earnPbs": 16
+      "priceIls": 90,
+      "earnPbs": 11
     },
     {
       "id": "hilton-beach",
@@ -220,11 +221,11 @@
       "type": "bar",
       "date": "2026-08-22",
       "time": "17:00",
-      "pricePbs": 230,
+      "pricePbs": 180,
       "badge": "pearl",
       "image": "photos/beach-night.jpg",
-      "priceIls": 75,
-      "earnPbs": 9
+      "priceIls": 60,
+      "earnPbs": 8
     },
     {
       "id": "lima-day",
@@ -236,10 +237,10 @@
       "type": "bar",
       "date": "2026-08-24",
       "time": "22:30",
-      "pricePbs": 200,
+      "pricePbs": 135,
       "badge": "pearl",
       "image": "photos/hiphop-club.jpg",
-      "priceIls": 60,
+      "priceIls": 45,
       "earnPbs": 8
     },
     {
@@ -252,11 +253,11 @@
       "type": "bar",
       "date": "2026-08-24",
       "time": "22:00",
-      "pricePbs": 220,
+      "pricePbs": 150,
       "badge": "pearl",
       "image": "photos/disco-inferno.jpg",
-      "priceIls": 70,
-      "earnPbs": 9
+      "priceIls": 50,
+      "earnPbs": 8
     },
     {
       "id": "shpagat-night",
@@ -268,10 +269,10 @@
       "type": "bar",
       "date": "2026-08-20",
       "time": "21:00",
-      "pricePbs": 210,
+      "pricePbs": 120,
       "badge": "pearl",
       "image": "photos/shpagat-night.jpg",
-      "priceIls": 65,
+      "priceIls": 40,
       "earnPbs": 8
     },
     {
@@ -285,13 +286,13 @@
       "type": "party",
       "date": "2026-08-28",
       "time": "23:00",
-      "pricePbs": 420,
+      "pricePbs": 255,
       "badge": "gold",
       "image": "photos/fff-shirazi.jpg",
       "rides": 5,
       "together": 5,
-      "priceIls": 155,
-      "earnPbs": 17
+      "priceIls": 85,
+      "earnPbs": 10
     },
     {
       "id": "forever-tlv",
@@ -304,13 +305,13 @@
       "type": "party",
       "date": "2026-08-29",
       "time": "23:00",
-      "pricePbs": 520,
+      "pricePbs": 540,
       "badge": "gold",
       "image": "photos/afterhours.jpg",
       "rides": 8,
       "together": 5,
       "priceIls": 180,
-      "earnPbs": 21
+      "earnPbs": 22
     },
     {
       "id": "arisa",
@@ -323,12 +324,12 @@
       "type": "party",
       "date": "2026-09-05",
       "time": "23:00",
-      "pricePbs": 400,
+      "pricePbs": 240,
       "badge": "gold",
       "image": "photos/arisa-night.jpg",
       "together": 5,
-      "priceIls": 150,
-      "earnPbs": 16
+      "priceIls": 80,
+      "earnPbs": 10
     },
     {
       "id": "crush-line",
@@ -341,12 +342,12 @@
       "type": "party",
       "date": "2026-09-04",
       "time": "23:00",
-      "pricePbs": 320,
+      "pricePbs": 225,
       "badge": "gold",
       "image": "photos/crush-line.jpg",
       "together": 5,
-      "priceIls": 120,
-      "earnPbs": 13
+      "priceIls": 75,
+      "earnPbs": 9
     },
     {
       "id": "beef-night",
@@ -359,12 +360,12 @@
       "type": "party",
       "date": "2026-09-12",
       "time": "23:00",
-      "pricePbs": 460,
+      "pricePbs": 270,
       "badge": "gold",
       "image": "photos/beef-night.jpg",
       "together": 5,
-      "priceIls": 165,
-      "earnPbs": 19
+      "priceIls": 90,
+      "earnPbs": 11
     },
     {
       "id": "tlv-volleyball",
@@ -376,11 +377,59 @@
       "type": "sports",
       "date": "2026-08-23",
       "time": "09:30",
-      "pricePbs": 200,
+      "pricePbs": 120,
       "badge": "pearl",
       "image": "photos/volleyball.jpg",
-      "priceIls": 60,
+      "priceIls": 40,
       "earnPbs": 8
+    },
+    {
+      "id": "tlv-gala",
+      "title": "TLV White Gala",
+      "subtitle": "Black-tie fundraiser, Hilton roof",
+      "venue": "Hilton Tel Aviv",
+      "city": "Tel Aviv",
+      "country": "IL",
+      "type": "gala",
+      "date": "2026-09-19",
+      "time": "20:00",
+      "pricePbs": 270,
+      "badge": "gold",
+      "image": "photos/forever-pride.jpg",
+      "priceIls": 90,
+      "earnPbs": 11
+    },
+    {
+      "id": "tlv-karaoke",
+      "title": "Karaoke Sunday",
+      "subtitle": "Open-mic drag karaoke, no cover after 23:00",
+      "venue": "Shpagat",
+      "city": "Tel Aviv",
+      "country": "IL",
+      "type": "karaoke",
+      "date": "2026-08-24",
+      "time": "22:00",
+      "pricePbs": 135,
+      "badge": "pearl",
+      "image": "photos/drag-stage.jpg",
+      "priceIls": 45,
+      "earnPbs": 8
+    },
+    {
+      "id": "habima-pride",
+      "title": "Habima Pride Night",
+      "subtitle": "Theater night, queer staging + talkback",
+      "venue": "Habima",
+      "city": "Tel Aviv",
+      "country": "IL",
+      "type": "theater",
+      "date": "2026-09-10",
+      "time": "20:30",
+      "pricePbs": 240,
+      "badge": "pearl",
+      "image": "photos/broadway-bundle.jpg",
+      "priceIls": 80,
+      "earnPbs": 10
     },
     {
       "id": "circuit-bcn",
@@ -392,12 +441,12 @@
       "type": "party",
       "date": "2026-08-08",
       "time": "23:00",
-      "pricePbs": 1100,
+      "pricePbs": 960,
       "badge": "pink",
       "image": "photos/circuit-bcn.jpg",
       "bracelet": true,
       "priceIls": 320,
-      "earnPbs": 46
+      "earnPbs": 40
     },
     {
       "id": "madrid-pride",
@@ -409,12 +458,12 @@
       "type": "party",
       "date": "2027-07-04",
       "time": "00:00",
-      "pricePbs": 980,
+      "pricePbs": 900,
       "badge": "gold",
       "image": "photos/rainbow-street.jpg",
       "bracelet": true,
       "priceIls": 300,
-      "earnPbs": 41
+      "earnPbs": 37
     },
     {
       "id": "forever-pride",
@@ -427,7 +476,7 @@
       "type": "party",
       "date": "2027-06-12",
       "time": "23:00",
-      "pricePbs": 900,
+      "pricePbs": 840,
       "badge": "pink",
       "featured": true,
       "kicker": "Big night",
@@ -436,7 +485,7 @@
       "together": 5,
       "bracelet": true,
       "priceIls": 280,
-      "earnPbs": 37
+      "earnPbs": 35
     },
     {
       "id": "gay-cruise",
@@ -448,14 +497,14 @@
       "type": "travel",
       "date": "2026-10-18",
       "time": "16:00",
-      "pricePbs": 1200,
+      "pricePbs": 960,
       "badge": "pink",
       "featured": true,
       "kicker": "Travel",
       "banner": "photos/cruise-banner.jpg",
       "image": "photos/cruise-banner.jpg",
       "priceIls": 320,
-      "earnPbs": 50
+      "earnPbs": 40
     },
     {
       "id": "snow-pride",
@@ -467,7 +516,7 @@
       "type": "travel",
       "date": "2027-01-17",
       "time": "08:00",
-      "pricePbs": 1050,
+      "pricePbs": 900,
       "badge": "pink",
       "featured": true,
       "kicker": "Winter",
@@ -475,11 +524,12 @@
       "image": "photos/ski-week.jpg",
       "bracelet": true,
       "priceIls": 300,
-      "earnPbs": 44
+      "earnPbs": 37
     },
     {
       "id": "offer-nissim-pride",
       "title": "Offer Nissim Pride",
+      "line": "offer",
       "subtitle": "Annual Pride concert, Park HaYarkon",
       "venue": "Park HaYarkon",
       "city": "Tel Aviv",
@@ -487,14 +537,14 @@
       "type": "party",
       "date": "2027-06-12",
       "time": "16:00",
-      "pricePbs": 720,
+      "pricePbs": 660,
       "badge": "gold",
       "image": "photos/park-concert.jpg",
       "rides": 6,
       "together": 5,
       "bracelet": true,
       "priceIls": 220,
-      "earnPbs": 30
+      "earnPbs": 27
     }
   ]
 }

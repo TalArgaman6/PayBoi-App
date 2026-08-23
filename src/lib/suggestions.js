@@ -8,7 +8,7 @@ function withKind(items, kind) {
 function pickDiverse(items, limit) {
   const used = new Set()
   const picks = []
-  const buckets = ['travel', 'party', 'bar', 'sports', 'shop']
+  const buckets = ['travel', 'party', 'bar', 'sports', 'gala', 'shop']
 
   for (const bucket of buckets) {
     const match = items.find((item) => {

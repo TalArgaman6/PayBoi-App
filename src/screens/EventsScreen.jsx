@@ -12,13 +12,15 @@ import {
   PRICE_SLIDER,
   currencyForCountry,
   currencyLabel,
+  ALT_EVENT_TYPES,
   inPbsSpan,
   isFullPriceSpan,
 } from '../lib/filters.js'
-import { formatWhen, matchesQuery } from '../lib/format.js'
+import { PBS_PER_ILS, boughtLine, formatWhen, matchesQuery } from '../lib/format.js'
+import wallet from '../data/wallet.json'
 
 function formatFilterPrice(pbs) {
-  return `₪${Math.round(pbs * 0.375)} / ${pbs} pbs`
+  return `₪${Math.round(pbs / PBS_PER_ILS)} / ${pbs} pbs`
 }
 
 export function EventsScreen({ onSelect, country = DEFAULT_COUNTRY }) {
@@ -45,7 +47,11 @@ export function EventsScreen({ onSelect, country = DEFAULT_COUNTRY }) {
   const items = useMemo(
     () =>
       catalog.items.filter((item) => {
-        const typeOk = type === 'all' || item.type === type
+        const typeOk =
+          type === 'all' ||
+          (type === 'alternative'
+            ? ALT_EVENT_TYPES.includes(item.type)
+            : item.type === type)
         const lineOk = line === 'all' || item.line === line
         const rideOk = ride === 'all' || Boolean(item.rides)
         const togetherOk = together === 'all' || Boolean(item.together)
@@ -174,6 +180,7 @@ export function EventsScreen({ onSelect, country = DEFAULT_COUNTRY }) {
               key={item.id}
               item={item}
               meta={`${formatWhen(item.date, item.time)} · ${item.venue}`}
+              note={boughtLine(wallet, Math.max(1, (item.together || 5) - 1))}
               showEarn
               onSelect={onSelect}
             />

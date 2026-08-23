@@ -23,6 +23,10 @@
     {
       "id": "ride",
       "label": "Ride"
+    },
+    {
+      "id": "alternative",
+      "label": "Alt"
     }
   ],
   "posts": [
@@ -35,11 +39,10 @@
         "photo": "photos/sellers/alex.jpg"
       },
       "image": "photos/mirror-looks.jpg",
-      "caption": "Mirror check. Out in 20. #Forever",
+      "caption": "Mirror check. Out in 20.",
       "when": "12m",
       "tags": [
         "looks",
-        "party",
         "forever"
       ],
       "likes": 38,
@@ -63,7 +66,7 @@
       "when": "48m",
       "tags": [
         "ask",
-        "party"
+        "forever"
       ],
       "likes": 18,
       "live": 4,
@@ -104,7 +107,7 @@
       "when": "6h",
       "tags": [
         "looks",
-        "sports"
+        "forever"
       ],
       "likes": 33,
       "with": [
@@ -133,7 +136,6 @@
       "when": "4m",
       "tags": [
         "live",
-        "party",
         "forever"
       ],
       "likes": 86
@@ -146,11 +148,11 @@
         "name": "Ido",
         "photo": "photos/sellers/ido.jpg"
       },
-      "caption": "Florentin \u2192 Haoman, 23:20. Two seats.",
+      "caption": "Florentin → Haoman, 23:20. Two seats.",
       "when": "1h",
       "tags": [
         "ride",
-        "fff"
+        "gaze"
       ],
       "nights": [
         "gaze-haoman"
@@ -170,7 +172,7 @@
       "when": "2h",
       "tags": [
         "live",
-        "party"
+        "gaze"
       ],
       "likes": 61
     },
@@ -187,7 +189,7 @@
       "when": "1h",
       "tags": [
         "looks",
-        "party"
+        "crush"
       ],
       "likes": 42
     },
@@ -203,7 +205,7 @@
       "when": "2h",
       "tags": [
         "ask",
-        "party"
+        "drek"
       ],
       "likes": 11,
       "live": 3,
@@ -233,12 +235,12 @@
         "photo": "photos/sellers/jordan.jpg"
       },
       "image": "photos/dj-booth.jpg",
-      "track": "FFF \u2014 closing hour set",
+      "track": "FFF — closing hour set",
       "caption": "Shirazi line, the last 20.",
       "when": "3h",
       "tags": [
         "live",
-        "party"
+        "fff"
       ],
       "likes": 37
     },
@@ -255,7 +257,6 @@
       "when": "8m",
       "tags": [
         "looks",
-        "party",
         "forever"
       ],
       "likes": 73
@@ -272,7 +273,7 @@
       "when": "2h",
       "tags": [
         "ticket",
-        "party"
+        "forever"
       ],
       "nights": [
         "forever-tlv"
@@ -291,7 +292,7 @@
       "when": "5h",
       "tags": [
         "ask",
-        "party"
+        "arisa"
       ],
       "likes": 15,
       "live": 4,
@@ -320,11 +321,11 @@
         "name": "Maya",
         "photo": "photos/sellers/maya.jpg"
       },
-      "caption": "North TLV \u2192 Forever, after 00:30.",
+      "caption": "North TLV → Forever, after 00:30.",
       "when": "4h",
       "tags": [
         "ride",
-        "fff"
+        "forever"
       ],
       "nights": [
         "forever-tlv"
@@ -343,7 +344,7 @@
       "when": "9h",
       "tags": [
         "ticket",
-        "party"
+        "gaze"
       ],
       "nights": [
         "gaze-haoman"
@@ -363,7 +364,7 @@
       "when": "8h",
       "tags": [
         "live",
-        "party"
+        "forever"
       ],
       "likes": 44
     },
@@ -380,13 +381,13 @@
       "when": "1d",
       "tags": [
         "looks",
-        "bar"
+        "party"
       ],
       "likes": 27
     },
     {
       "id": "ido-1",
-      "kind": "looks",
+      "kind": "alternative",
       "user": {
         "id": "ido",
         "name": "Ido",
@@ -396,7 +397,11 @@
       "caption": "Sunday nets at Gordon.",
       "when": "1d",
       "tags": [
+        "alternative",
         "sports"
+      ],
+      "nights": [
+        "tlv-volleyball"
       ],
       "likes": 21
     },
@@ -413,7 +418,7 @@
       "when": "1d",
       "tags": [
         "looks",
-        "bar"
+        "party"
       ],
       "likes": 16
     },
@@ -426,12 +431,12 @@
         "photo": "photos/sellers/sam.jpg"
       },
       "image": "photos/hiphop-club.jpg",
-      "track": "Lima Day \u2014 Monday hip-hop",
+      "track": "Lima Day — Monday hip-hop",
       "caption": "The club line tonight.",
       "when": "1d",
       "tags": [
         "live",
-        "bar"
+        "party"
       ],
       "likes": 19
     }

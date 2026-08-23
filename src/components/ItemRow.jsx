@@ -46,7 +46,7 @@ export function RideMark({ count }) {
   )
 }
 
-export function ItemRow({ item, meta, onSelect, showEarn = false }) {
+export function ItemRow({ item, meta, note, onSelect, showEarn = false }) {
   return (
     <button type="button" className="item-row" onClick={() => onSelect?.(item)}>
       <ItemThumb thumb={item.thumb} title={item.title} image={item.image} />
@@ -56,6 +56,7 @@ export function ItemRow({ item, meta, onSelect, showEarn = false }) {
           <RideMark count={item.rides} />
         </div>
         {item.subtitle ? <span className="item-sub">{item.subtitle}</span> : null}
+        {note ? <span className="item-bought">{note}</span> : null}
         {meta ? <span className="item-meta">{meta}</span> : null}
       </div>
       {item.seller ? (
