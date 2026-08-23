@@ -1724,6 +1724,8 @@
   position: relative;
   display: grid;
   gap: 8px;
+  margin-right: -18px;
+  padding-right: 18px;
   overflow: hidden;
   isolation: isolate;
 }
@@ -1731,16 +1733,13 @@
 .feed-card::after {
   content: '';
   position: absolute;
-  right: -8%;
-  bottom: -18%;
-  width: 92%;
-  height: 110%;
+  inset: 0;
   pointer-events: none;
   z-index: 0;
   background: radial-gradient(
-    ellipse 92% 82% at 86% 86%,
+    ellipse 78% 72% at 100% 100%,
     var(--feed-glow) 0%,
-    var(--feed-glow-mid) 36%,
+    var(--feed-glow-mid) 38%,
     transparent 74%
   );
 }
