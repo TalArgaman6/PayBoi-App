@@ -26,6 +26,44 @@ export function ItemThumb({ thumb, title, image }) {
   )
 }
 
+function TicketIcon() {
+  return (
+    <svg viewBox="0 0 16 16" aria-hidden="true">
+      <path
+        d="M2.5 5h11c.5 0 .9.3.9.8v.9a1.2 1.2 0 0 0 0 2.6v.9c0 .5-.4.8-.9.8h-11c-.5 0-.9-.3-.9-.8v-.9a1.2 1.2 0 0 0 0-2.6v-.9c0-.5.4-.8.9-.8Z"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.55"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M6.2 5.15v5.7"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.35"
+        strokeLinecap="round"
+        strokeDasharray="1.1 1.65"
+      />
+    </svg>
+  )
+}
+
+export function TicketMark({ count }) {
+  const tickets = Math.min(3, Math.max(0, Number(count) || 0))
+  if (!tickets) return null
+
+  return (
+    <span
+      className="ticket-mark"
+      title={`${tickets} ${tickets === 1 ? 'ticket' : 'tickets'}`}
+    >
+      {Array.from({ length: tickets }, (_, index) => (
+        <TicketIcon key={index} />
+      ))}
+    </span>
+  )
+}
+
 export function RideMark({ count }) {
   if (!count) return null
 
@@ -53,11 +91,12 @@ export function ItemRow({ item, meta, note, onSelect, showEarn = false }) {
       <div className="item-copy">
         <div className="item-title-row">
           <strong>{item.title}</strong>
+          <TicketMark count={item.tickets} />
           <RideMark count={item.rides} />
         </div>
         {item.subtitle ? <span className="item-sub">{item.subtitle}</span> : null}
-        {note ? <span className="item-bought">{note}</span> : null}
         {meta ? <span className="item-meta">{meta}</span> : null}
+        {note ? <span className="item-bought">{note}</span> : null}
       </div>
       {item.seller ? (
         <SellerFace seller={item.seller} />

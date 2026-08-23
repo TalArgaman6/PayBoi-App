@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react'
 import { BottomNav } from './components/BottomNav.jsx'
-import { ItemThumb } from './components/ItemRow.jsx'
+import { ItemThumb, TicketMark } from './components/ItemRow.jsx'
 import { EarnBadge } from './components/EarnBadge.jsx'
 import { SellerFace } from './components/SellerFace.jsx'
 import { RemixProvider } from './components/RemixPlayer.jsx'
@@ -65,7 +65,10 @@ export default function App() {
                   image={selected.image}
                 />
                 <div>
-                  <strong>{selected.title}</strong>
+                  <strong>
+                    {selected.title}
+                    <TicketMark count={selected.tickets} />
+                  </strong>
                   <span>{selected.subtitle}</span>
                 </div>
                 {selected.seller ? (

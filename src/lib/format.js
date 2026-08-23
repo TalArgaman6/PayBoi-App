@@ -11,6 +11,18 @@ export function formatWhen(date, time) {
   })
 }
 
+export function formatWhenVenue(item) {
+  if (!item?.date || !item?.venue) return ''
+  return `${formatWhen(item.date, item.time)} · ${item.venue}`
+}
+
+export function listingTitle(title) {
+  return String(title || '')
+    .replace(/\s+[—-]\s*\d+\s+tickets?\s*$/i, '')
+    .replace(/\s+X\d+\s*$/i, '')
+    .trim()
+}
+
 export const PBS_PER_ILS = 3
 
 export function formatPbs(amount) {
@@ -89,8 +101,28 @@ export function shortName(input, lastName) {
   return `${first} ${String(last).charAt(0).toUpperCase()}`
 }
 
-export function boughtLine(wallet, extra = 4) {
-  return `${shortName(wallet?.user || wallet?.nickname)} + ${extra} friends purchased`
+const CROWD_NAMES = [
+  'Tal A',
+  'Maya L',
+  'Alex C',
+  'Ido M',
+  'Noa S',
+  'Sam A',
+  'Jordan H',
+  'Gal W',
+  'Itay A',
+]
+
+function crowdHash(value) {
+  return [...String(value)].reduce((sum, char) => (sum * 33 + char.charCodeAt(0)) >>> 0, 7)
+}
+
+export function boughtLine(item) {
+  const hash = crowdHash(item?.id || item?.title)
+  const name = CROWD_NAMES[hash % CROWD_NAMES.length]
+  const extra = 1 + ((hash >> 4) % 8)
+  const noun = extra === 1 ? 'friend' : 'friends'
+  return `${name} + ${extra} ${noun} will be there`
 }
 
 export function matchesQuery(item, query) {
@@ -102,6 +134,7 @@ export function matchesQuery(item, query) {
     item.shop,
     item.seller?.name,
     item.city,
+    item.date,
   ]
     .filter(Boolean)
     .join(' ')

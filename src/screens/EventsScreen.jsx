@@ -17,7 +17,6 @@ import {
   isFullPriceSpan,
 } from '../lib/filters.js'
 import { PBS_PER_ILS, boughtLine, formatWhen, matchesQuery } from '../lib/format.js'
-import wallet from '../data/wallet.json'
 
 function formatFilterPrice(pbs) {
   return `₪${Math.round(pbs / PBS_PER_ILS)} / ${pbs} pbs`
@@ -180,7 +179,7 @@ export function EventsScreen({ onSelect, country = DEFAULT_COUNTRY }) {
               key={item.id}
               item={item}
               meta={`${formatWhen(item.date, item.time)} · ${item.venue}`}
-              note={boughtLine(wallet, Math.max(1, (item.together || 5) - 1))}
+              note={boughtLine(item)}
               showEarn
               onSelect={onSelect}
             />

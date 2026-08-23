@@ -8,7 +8,9 @@
   "items": [
     {
       "id": "resale-forever",
-      "title": "Forever TLV — 1 ticket",
+      "eventId": "forever-tlv",
+      "title": "Forever TLV",
+      "tickets": 1,
       "subtitle": "Fixed price",
       "shop": "From Gal Weizman",
       "seller": { "name": "Gal Weizman", "photo": "photos/sellers/guli.jpg" },
@@ -22,7 +24,9 @@
     },
     {
       "id": "resale-fff",
+      "eventId": "fff-shirazi",
       "title": "FFF by Shirazi pack",
+      "tickets": 2,
       "subtitle": "Fixed price",
       "shop": "From Itay Aharoni",
       "seller": { "name": "Itay Aharoni", "photo": "photos/sellers/kipi.jpg" },
@@ -36,7 +40,9 @@
     },
     {
       "id": "resale-pride",
+      "eventId": "forever-pride",
       "title": "Forever Pride Weekend",
+      "tickets": 3,
       "subtitle": "Fixed price",
       "shop": "From Tal Deri",
       "seller": { "name": "Tal Deri", "photo": "photos/sellers/taluli.jpg" },
@@ -50,7 +56,9 @@
     },
     {
       "id": "resale-gaze",
+      "eventId": "gaze-haoman",
       "title": "Gaze @ Haoman + drinks",
+      "tickets": 2,
       "subtitle": "Fixed price",
       "shop": "From Tal Argaman",
       "seller": { "name": "Tal Argaman", "photo": "photos/sellers/toulouse.jpg" },
@@ -64,7 +72,9 @@
     },
     {
       "id": "resale-nissim",
+      "eventId": "offer-nissim-pride",
       "title": "Offer Nissim Pride",
+      "tickets": 2,
       "subtitle": "Fixed price",
       "shop": "From Tal Argaman",
       "seller": { "name": "Tal Argaman", "photo": "photos/sellers/toulouse.jpg" },
@@ -78,7 +88,9 @@
     },
     {
       "id": "resale-arisa",
-      "title": "Arisa — 1 ticket",
+      "eventId": "arisa",
+      "title": "Arisa",
+      "tickets": 1,
       "subtitle": "Fixed price",
       "shop": "From Itay Aharoni",
       "seller": { "name": "Itay Aharoni", "photo": "photos/sellers/kipi.jpg" },

@@ -1,16 +1,40 @@
 import { useMemo, useState } from 'react'
 import catalog from '../data/marketplace.json'
+import events from '../data/events.json'
 import wallet from '../data/wallet.json'
 import { FilterTabs } from '../components/FilterTabs.jsx'
 import { ItemRow } from '../components/ItemRow.jsx'
 import { ScreenHeader } from '../components/ScreenHeader.jsx'
 import { SearchBar } from '../components/SearchBar.jsx'
 import { SellTicketSheet } from '../components/SellTicketSheet.jsx'
-import { formatFixedPrice, formatPbs, matchesQuery } from '../lib/format.js'
+import {
+  formatCost,
+  formatWhenVenue,
+  listingTitle,
+  matchesQuery,
+} from '../lib/format.js'
 
 const ME = {
   name: wallet.nickname,
   photo: wallet.photo,
+}
+
+const EVENTS = Object.fromEntries(events.items.map((item) => [item.id, item]))
+
+function listingItem(item) {
+  const event = EVENTS[item.eventId]
+  const dated = {
+    ...item,
+    date: item.date || event?.date,
+    time: item.time || event?.time,
+    venue: item.venue || event?.venue,
+  }
+
+  return {
+    ...dated,
+    title: listingTitle(dated.title),
+    subtitle: formatWhenVenue(dated) || dated.subtitle,
+  }
 }
 
 export function MarketplaceScreen({ onSelect }) {
@@ -21,9 +45,11 @@ export function MarketplaceScreen({ onSelect }) {
 
   const items = useMemo(
     () =>
-      [...mine, ...catalog.items].filter(
-        (item) => item.filters.includes(filter) && matchesQuery(item, query),
-      ),
+      [...mine, ...catalog.items]
+        .map(listingItem)
+        .filter(
+          (item) => item.filters.includes(filter) && matchesQuery(item, query),
+        ),
     [filter, mine, query],
   )
 
@@ -57,8 +83,8 @@ export function MarketplaceScreen({ onSelect }) {
           {items.map((item) => (
             <ItemRow
               key={item.id}
-              item={{ ...item, subtitle: formatFixedPrice(item) }}
-              meta={formatPbs(item.pricePbs)}
+              item={item}
+              meta={formatCost(item)}
               onSelect={onSelect}
             />
           ))}
@@ -74,11 +100,15 @@ export function MarketplaceScreen({ onSelect }) {
           setMine((current) => [
             {
               id: `sell-${event.id}-${Date.now()}`,
-              title: `${event.title} — 1 ticket`,
-              subtitle: 'Fixed price',
+              eventId: event.id,
+              title: event.title,
+              tickets: 1,
               shop: `From ${ME.name}`,
               seller: ME,
               city: event.city,
+              date: event.date,
+              time: event.time,
+              venue: event.venue,
               pricePbs: event.pricePbs,
               priceIls: event.priceIls,
               originalPbs: event.pricePbs,

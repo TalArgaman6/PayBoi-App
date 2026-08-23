@@ -536,6 +536,14 @@
   min-width: 0;
 }
 
+.ticket-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: -2px;
+  flex-shrink: 0;
+  color: var(--muted);
+}
+
 .ride-mark {
   display: inline-flex;
   align-items: center;
@@ -547,10 +555,15 @@
   letter-spacing: 0.01em;
 }
 
-.ride-mark svg {
+.ride-mark svg,
+.ticket-mark svg {
   width: 13px;
   height: 13px;
   display: block;
+}
+
+.ticket-mark svg {
+  transform: rotate(-90deg);
 }
 
 .item-sub,
@@ -567,7 +580,7 @@
   letter-spacing: 0.01em;
 }
 
-.item-copy span:not(.ride-mark) {
+.item-copy span:not(.ride-mark, .ticket-mark) {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -575,7 +588,7 @@
 
 .screen-events .item-row {
   grid-template-columns: 58px 1fr auto;
-  padding: 14px 0;
+  padding: 12px 0;
 }
 
 .screen-events .item-thumb {
@@ -584,17 +597,49 @@
 }
 
 .screen-events .item-copy {
-  gap: 5px;
+  gap: 3px;
 }
 
 .screen-events .item-copy strong {
-  line-height: 1.3;
+  line-height: 1.2;
 }
 
 .screen-events .item-sub,
-.screen-events .item-meta,
+.screen-events .item-meta {
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.22;
+}
+
 .screen-events .item-bought {
-  line-height: 1.35;
+  line-height: 1.22;
+}
+
+.screen-market .item-row {
+  grid-template-columns: 58px 1fr auto;
+  padding: 12px 0;
+}
+
+.screen-market .item-thumb {
+  width: 58px;
+  height: 58px;
+}
+
+.screen-market .item-copy {
+  gap: 3px;
+}
+
+.screen-market .item-copy strong {
+  line-height: 1.2;
+}
+
+.screen-market .item-sub,
+.screen-market .item-meta {
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.22;
 }
 
 .price-badge {
@@ -985,7 +1030,7 @@
 
 .bottom-nav button {
   color: var(--muted);
-  font-size: 0.54rem;
+  font-size: 0.62rem;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   font-weight: 600;
@@ -994,7 +1039,7 @@
 
 .bottom-nav button.is-active {
   color: var(--ink);
-  font-size: 0.62rem;
+  font-size: 0.7rem;
 }
 
 .wallet-screen .screen-header h1,
@@ -1999,8 +2044,15 @@
 }
 
 .detail-head strong {
+  display: flex;
+  align-items: center;
+  gap: 6px;
   font-family: var(--font-display);
   font-weight: 600;
+}
+
+.detail-head .ticket-mark {
+  color: var(--muted);
 }
 
 .detail-head span {

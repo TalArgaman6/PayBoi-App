@@ -45,7 +45,7 @@ export function SellTicketSheet({ open, onClose, onList }) {
               ))}
             </select>
           </label>
-          <p className="price-range-readout">{formatCost(picked)} / fixed</p>
+          <p className="price-range-readout">{formatCost(picked)}</p>
         </div>
         <button
           type="button"
