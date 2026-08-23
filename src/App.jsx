@@ -81,7 +81,7 @@ export default function App() {
               </div>
               <p>
                 {selected.seller
-                  ? `Pay ${formatCost(selected)} to ${selected.seller.name}. Same price as the door — their profile is on the listing.`
+                  ? `Pay ${formatCost(selected)} to ${selected.seller.name}. Fixed price — their profile is on the listing.`
                   : selected.pricePbs <= wallet.balance
                     ? isEventItem(selected)
                       ? `Pay ${formatCost(selected)}. You gain ${formatEarn(earnAmount(selected))} pbs, with ${formatPbs(wallet.balance - selected.pricePbs)} left.`

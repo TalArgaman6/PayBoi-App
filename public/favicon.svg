@@ -7,7 +7,7 @@
     </linearGradient>
   </defs>
   <rect width="32" height="32" fill="url(#g)"/>
-  <text x="16" y="21.4" text-anchor="middle" fill="#fff"
+  <text x="17" y="21.4" text-anchor="middle" fill="#fff"
     font-family="Plus Jakarta Sans, Figtree, system-ui, sans-serif"
     font-weight="600" font-size="15" letter-spacing="-0.4">pb</text>
 </svg>

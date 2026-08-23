@@ -21,11 +21,11 @@ const RATE_PARTIES = events.items.filter(
 )
 
 const MODES = [
-  { id: 'looks', label: 'Look' },
   { id: 'live', label: 'Live' },
-  { id: 'ride', label: 'Ride' },
+  { id: 'looks', label: 'Look' },
   { id: 'ticket', label: 'Ticket' },
   { id: 'ask', label: 'Ask' },
+  { id: 'ride', label: 'Ride' },
 ]
 
 const PLACEHOLDERS = {
@@ -44,7 +44,9 @@ const AUTO_TAGS = {
   ask: ['ask', 'party'],
 }
 
-const FEED_FILTERS = catalog.tags.filter((item) => item.id !== 'music')
+const FEED_FILTERS = catalog.tags.filter(
+  (item) => !['music', 'party', 'bar', 'travel', 'sports'].includes(item.id),
+)
 
 const SORT_FILTERS = [
   { id: 'new', label: 'New' },
@@ -396,7 +398,7 @@ export function FeedScreen() {
   }, [posts, tag, sort])
 
   const isAskFlow = mode === 'ask' || mode === 'ride' || mode === 'ticket'
-  const canPost = isAskFlow ? picks.length >= 2 : Boolean(media)
+  const canPost = isAskFlow ? picks.length === 1 : Boolean(media)
 
   function chooseMode(id) {
     setMode(id)
@@ -414,11 +416,7 @@ export function FeedScreen() {
   }
 
   function togglePick(id) {
-    setPicks((current) => {
-      if (current.includes(id)) return current.filter((item) => item !== id)
-      if (current.length >= 4) return current
-      return [...current, id]
-    })
+    setPicks((current) => (current[0] === id ? [] : [id]))
   }
 
   function vote(postId, optionId) {
@@ -574,7 +572,6 @@ export function FeedScreen() {
                     onChange={onFile}
                   />
                 </label>
-                {isAskFlow ? <span className="rate-hint">Pick 2–4 nights</span> : null}
               </div>
               <button type="submit" disabled={!canPost}>
                 Post

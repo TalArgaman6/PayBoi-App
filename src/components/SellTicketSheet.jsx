@@ -29,8 +29,8 @@ export function SellTicketSheet({ open, onClose, onList }) {
         </header>
         <div className="drawer-body sell-body">
           <p>
-            List at the original price. Buyers see your profile photo, not points.
-            Asking or taking more than the original price is illegal.
+            List at the ticket price. Buyers see your profile photo, not points.
+            The price is fixed and cannot be changed.
           </p>
           <label className="sell-field">
             Event
@@ -45,7 +45,7 @@ export function SellTicketSheet({ open, onClose, onList }) {
               ))}
             </select>
           </label>
-          <p className="price-range-readout">{formatPbs(picked.pricePbs)} original</p>
+          <p className="price-range-readout">{formatPbs(picked.pricePbs)} / fixed price</p>
         </div>
         <button
           type="button"

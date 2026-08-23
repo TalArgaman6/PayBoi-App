@@ -5,36 +5,24 @@
       "label": "All"
     },
     {
-      "id": "looks",
-      "label": "Looks"
-    },
-    {
-      "id": "party",
-      "label": "Party"
-    },
-    {
       "id": "live",
       "label": "Live"
     },
     {
-      "id": "ride",
-      "label": "Ride"
+      "id": "looks",
+      "label": "Looks"
     },
     {
       "id": "ticket",
       "label": "Ticket"
     },
     {
-      "id": "bar",
-      "label": "Bar"
+      "id": "ask",
+      "label": "Ask"
     },
     {
-      "id": "sports",
-      "label": "Sports"
-    },
-    {
-      "id": "travel",
-      "label": "Travel"
+      "id": "ride",
+      "label": "Ride"
     }
   ],
   "posts": [
@@ -165,8 +153,7 @@
         "fff"
       ],
       "nights": [
-        "gaze-haoman",
-        "forever-tlv"
+        "gaze-haoman"
       ],
       "likes": 6
     },
@@ -288,8 +275,7 @@
         "party"
       ],
       "nights": [
-        "forever-tlv",
-        "gaze-haoman"
+        "forever-tlv"
       ],
       "likes": 4
     },
@@ -341,8 +327,7 @@
         "fff"
       ],
       "nights": [
-        "forever-tlv",
-        "fff-shirazi"
+        "forever-tlv"
       ],
       "likes": 9
     },
@@ -361,8 +346,7 @@
         "party"
       ],
       "nights": [
-        "gaze-haoman",
-        "fff-shirazi"
+        "gaze-haoman"
       ],
       "likes": 3
     },

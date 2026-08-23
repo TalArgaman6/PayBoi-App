@@ -9,7 +9,7 @@
     {
       "id": "resale-forever",
       "title": "Forever TLV — 1 ticket",
-      "subtitle": "Resale at original price",
+      "subtitle": "Fixed price",
       "shop": "From Gal Weizman",
       "seller": { "name": "Gal Weizman", "photo": "photos/sellers/guli.jpg" },
       "city": "Tel Aviv",
@@ -22,7 +22,7 @@
     {
       "id": "resale-fff",
       "title": "FFF by Shirazi pack",
-      "subtitle": "Resale at original price",
+      "subtitle": "Fixed price",
       "shop": "From Itay Aharoni",
       "seller": { "name": "Itay Aharoni", "photo": "photos/sellers/kipi.jpg" },
       "city": "Tel Aviv",
@@ -35,7 +35,7 @@
     {
       "id": "resale-pride",
       "title": "Forever Pride Weekend",
-      "subtitle": "Transferable Hangar 11 pass",
+      "subtitle": "Fixed price",
       "shop": "From Tal Deri",
       "seller": { "name": "Tal Deri", "photo": "photos/sellers/taluli.jpg" },
       "city": "Tel Aviv",
@@ -48,7 +48,7 @@
     {
       "id": "resale-gaze",
       "title": "Gaze @ Haoman + drinks",
-      "subtitle": "Package, same-price resale",
+      "subtitle": "Fixed price",
       "shop": "From Tal Argaman",
       "seller": { "name": "Tal Argaman", "photo": "photos/sellers/toulouse.jpg" },
       "city": "Tel Aviv",
@@ -61,7 +61,7 @@
     {
       "id": "resale-nissim",
       "title": "Offer Nissim Pride",
-      "subtitle": "Loyalty points on transfer",
+      "subtitle": "Fixed price",
       "shop": "From Tal Argaman",
       "seller": { "name": "Tal Argaman", "photo": "photos/sellers/toulouse.jpg" },
       "city": "Tel Aviv",
@@ -74,7 +74,7 @@
     {
       "id": "resale-arisa",
       "title": "Arisa — 1 ticket",
-      "subtitle": "Transfer, no extra markup",
+      "subtitle": "Fixed price",
       "shop": "From Itay Aharoni",
       "seller": { "name": "Itay Aharoni", "photo": "photos/sellers/kipi.jpg" },
       "city": "Tel Aviv",

@@ -58,7 +58,7 @@ export function MarketplaceScreen({ onSelect }) {
             <ItemRow
               key={item.id}
               item={item}
-              meta={`original ${formatPbs(item.originalPbs)}`}
+              meta={`${formatPbs(item.pricePbs)} / fixed price`}
               onSelect={onSelect}
             />
           ))}
@@ -75,7 +75,7 @@ export function MarketplaceScreen({ onSelect }) {
             {
               id: `sell-${event.id}-${Date.now()}`,
               title: `${event.title} — 1 ticket`,
-              subtitle: 'Resale at original price',
+              subtitle: 'Fixed price',
               shop: `From ${ME.name}`,
               seller: ME,
               city: event.city,
