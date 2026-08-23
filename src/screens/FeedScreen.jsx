@@ -10,7 +10,7 @@ import { assetUrl, shortName } from '../lib/format.js'
 const ME = {
   id: 'tal',
   name: shortName(wallet.user || wallet.nickname),
-  photo: wallet.photo || 'photos/sellers/tal.jpg',
+  photo: wallet.photo || 'photos/sellers/toulouse.jpg',
 }
 
 const PARTY_BY_ID = Object.fromEntries(
