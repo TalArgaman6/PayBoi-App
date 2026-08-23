@@ -14,18 +14,6 @@ const totalWorth = wallet.gifts.reduce(
   0,
 )
 
-const WALLET_STARS = [
-  { id: 1, top: '9%', left: '16%', size: 5, delay: '0s', duration: '3.2s' },
-  { id: 2, top: '12%', left: '48%', size: 4, delay: '1.1s', duration: '3.8s' },
-  { id: 3, top: '8%', left: '78%', size: 6, delay: '0.5s', duration: '3.4s' },
-  { id: 4, top: '24%', left: '28%', size: 5, delay: '1.8s', duration: '4s' },
-  { id: 5, top: '22%', left: '64%', size: 4, delay: '0.8s', duration: '3.1s' },
-  { id: 6, top: '34%', left: '12%', size: 5, delay: '2.2s', duration: '3.6s' },
-  { id: 7, top: '36%', left: '52%', size: 6, delay: '1.4s', duration: '4.2s' },
-  { id: 8, top: '30%', left: '88%', size: 4, delay: '0.3s', duration: '3.5s' },
-  { id: 9, top: '18%', left: '91%', size: 5, delay: '2.6s', duration: '3.9s' },
-]
-
 const SUGGESTION_FILTERS = [
   { id: 'all', label: 'All' },
   { id: 'event', label: 'Events' },
@@ -55,31 +43,19 @@ export function WalletScreen({ onSelect }) {
 
   return (
     <section className="screen wallet-screen">
-      <div className="wallet-glitter" aria-hidden="true" />
-      <div className="wallet-stars" aria-hidden="true">
-        {WALLET_STARS.map((star) => (
-          <i
-            key={star.id}
-            style={{
-              top: star.top,
-              left: star.left,
-              width: `${star.size}px`,
-              height: `${star.size}px`,
-              animationDelay: star.delay,
-              animationDuration: star.duration,
-            }}
-          />
-        ))}
-      </div>
-      <div className="wallet-shine" aria-hidden="true" />
-      <ScreenHeader
-        title="Wallet"
-        kicker={wallet.nickname}
-      />
-      <div className="wallet-hero">
-        <WalletCard wallet={wallet} />
-        <div className="wallet-profile" aria-hidden="true">
-          <img src={assetUrl(wallet.photo)} alt="" />
+      <div className="wallet-top">
+        <div className="wallet-wash" aria-hidden="true">
+          <div className="wallet-wash-blur" />
+        </div>
+        <ScreenHeader
+          title="Wallet"
+          kicker={wallet.nickname}
+        />
+        <div className="wallet-hero">
+          <WalletCard wallet={wallet} />
+          <div className="wallet-profile" aria-hidden="true">
+            <img src={assetUrl(wallet.photo)} alt="" />
+          </div>
         </div>
       </div>
       <div className="sheet wallet-sheet">
