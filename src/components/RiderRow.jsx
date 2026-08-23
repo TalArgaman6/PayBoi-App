@@ -15,7 +15,6 @@ export function RiderRow({ gift, share, open, lit, onHover, onLight, onToggle })
         className="gift-info"
         aria-expanded={open}
         aria-label={`About ${gift.label}`}
-        title={gift.hint}
         onClick={(event) => {
           event.stopPropagation()
           onToggle()
@@ -23,11 +22,7 @@ export function RiderRow({ gift, share, open, lit, onHover, onLight, onToggle })
       >
         i
       </button>
-      {open ? (
-        <p className="gift-tip" style={{ '--tag': gift.color }}>
-          {gift.hint}
-        </p>
-      ) : null}
+      {open ? <p className="gift-tip">{gift.hint}</p> : null}
     </li>
   )
 }

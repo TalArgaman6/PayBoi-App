@@ -37,12 +37,12 @@ function paint(node, x, y) {
   node.style.setProperty('--header-glow-y', `${110 + y * 12}%`)
   node.style.setProperty('--wallet-shift-x', `${(x * 22).toFixed(2)}px`)
   node.style.setProperty('--wallet-shift-y', `${(y * 14).toFixed(2)}px`)
-  node.style.setProperty('--wallet-teal-x', `${18 + x * 16}%`)
-  node.style.setProperty('--wallet-teal-y', `${100 + y * 8}%`)
+  node.style.setProperty('--wallet-teal-x', `${16 + x * 14}%`)
+  node.style.setProperty('--wallet-teal-y', `${48 + y * 8}%`)
   node.style.setProperty('--wallet-gold-x', `${50 + x * 12}%`)
-  node.style.setProperty('--wallet-gold-y', `${102 + y * 6}%`)
-  node.style.setProperty('--wallet-pink-x', `${88 + x * 14}%`)
-  node.style.setProperty('--wallet-pink-y', `${100 + y * 8}%`)
+  node.style.setProperty('--wallet-gold-y', `${50 + y * 6}%`)
+  node.style.setProperty('--wallet-pink-x', `${84 + x * 12}%`)
+  node.style.setProperty('--wallet-pink-y', `${48 + y * 8}%`)
 }
 
 export { unlockMotion }

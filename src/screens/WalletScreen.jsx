@@ -43,10 +43,10 @@ export function WalletScreen({ onSelect }) {
 
   return (
     <section className="screen wallet-screen">
+      <div className="wallet-wash" aria-hidden="true">
+        <div className="wallet-wash-blur" />
+      </div>
       <div className="wallet-top">
-        <div className="wallet-wash" aria-hidden="true">
-          <div className="wallet-wash-blur" />
-        </div>
         <ScreenHeader
           title="Wallet"
           kicker={wallet.nickname}

@@ -18,7 +18,7 @@ import './App.css'
 
 export default function App() {
   const [booted, setBooted] = useState(false)
-  const [tab, setTab] = useState('events')
+  const [tab, setTab] = useState('feed')
   const [selected, setSelected] = useState(null)
   const phone = useRef(null)
   useWalletTilt(phone, booted)
