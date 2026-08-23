@@ -9,7 +9,7 @@ import { assetUrl } from '../lib/format.js'
 const ME = {
   id: 'tal',
   name: displayName(wallet.nickname),
-  photo: 'photos/sellers/toulouse.jpg',
+  photo: wallet.photo || 'photos/sellers/tal.jpg',
 }
 
 const PARTY_BY_ID = Object.fromEntries(
@@ -22,8 +22,7 @@ const RATE_PARTIES = events.items.filter(
 
 const MODES = [
   { id: 'looks', label: 'Look' },
-  { id: 'clip', label: 'Clip' },
-  { id: 'music', label: 'Music' },
+  { id: 'live', label: 'Live' },
   { id: 'ride', label: 'Ride' },
   { id: 'ticket', label: 'Ticket' },
   { id: 'ask', label: 'Ask' },
@@ -31,11 +30,47 @@ const MODES = [
 
 const PLACEHOLDERS = {
   looks: 'Looks, pre-drinks, the fit',
-  clip: 'Short clip from the floor',
-  music: 'DJ / song of the night',
+  live: 'From the floor, live',
   ride: 'Where, when, seats',
   ticket: 'Which night, how many',
   ask: 'Ask which night to pick',
+}
+
+const AUTO_TAGS = {
+  looks: ['looks', 'party'],
+  live: ['live', 'party'],
+  ride: ['ride', 'fff'],
+  ticket: ['ticket', 'party'],
+  ask: ['ask', 'party'],
+}
+
+const FEED_FILTERS = catalog.tags.filter((item) => item.id !== 'music')
+
+const SORT_FILTERS = [
+  { id: 'new', label: 'New' },
+  { id: 'top', label: 'Top' },
+]
+
+function UploadMark() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path
+        d="M12 15.5V5M8 9l4-4 4 4"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M5 16v2.2A1.8 1.8 0 0 0 6.8 20h10.4A1.8 1.8 0 0 0 19 18.2V16"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
+    </svg>
+  )
 }
 
 function VoteMark() {
@@ -166,8 +201,7 @@ function kindLabel(kind) {
   if (kind === 'rating') return 'Live rating'
   if (kind === 'ride') return 'Ride request'
   if (kind === 'ticket') return 'Ticket request'
-  if (kind === 'music') return 'Music set'
-  if (kind === 'clip') return 'Event clip'
+  if (kind === 'live' || kind === 'clip' || kind === 'music') return 'Live'
   if (kind === 'looks') return 'Looks'
   return 'Post'
 }
@@ -273,8 +307,49 @@ function UserFeed({ posts, startId, userId, onClose }) {
   )
 }
 
+function formatTag(tag) {
+  if (tag === 'fff') return '#FFF'
+  if (tag === 'live' || tag === 'clip') return '#Live'
+  return `#${tag.charAt(0).toUpperCase()}${tag.slice(1)}`
+}
+
+function NightChips({ ids }) {
+  if (!ids?.length) return null
+  return (
+    <div className="rate-picks is-locked">
+      {ids.map((id) => {
+        const party = PARTY_BY_ID[id]
+        if (!party) return null
+        return (
+          <span key={id} className="is-on">
+            {party.title}
+          </span>
+        )
+      })}
+    </div>
+  )
+}
+
+function isLivePost(post) {
+  return post.kind === 'live' || post.kind === 'clip' || post.kind === 'music'
+}
+
+function matchesFilter(post, tag) {
+  if (tag === 'all') return true
+  const tags = post.tags || []
+  if (tag === 'live') {
+    return (
+      tags.includes('live') ||
+      tags.includes('clip') ||
+      tags.includes('music') ||
+      isLivePost(post)
+    )
+  }
+  return tags.includes(tag)
+}
+
 async function shareToInstagram(post) {
-  const tags = (post.tags || []).map((tag) => `#${tag}`).join(' ')
+  const tags = (post.tags || []).map((tag) => formatTag(tag)).join(' ')
   const text = [post.caption, tags, '#pboi'].filter(Boolean).join(' ')
   try {
     if (post.image && navigator.share && navigator.canShare) {
@@ -300,11 +375,11 @@ export function FeedScreen() {
   const [posts, setPosts] = useState(catalog.posts)
   const [mode, setMode] = useState('looks')
   const [tag, setTag] = useState('all')
+  const [sort, setSort] = useState('new')
   const [caption, setCaption] = useState('')
   const [media, setMedia] = useState('')
   const [isVideo, setIsVideo] = useState(false)
   const [picks, setPicks] = useState([])
-  const [hash, setHash] = useState([])
   const [viewer, setViewer] = useState(null)
   const [mine, setMine] = useState({})
   const [liked, setLiked] = useState(() => new Set())
@@ -314,19 +389,25 @@ export function FeedScreen() {
     return posts.filter((post) => onPost(post, viewer.userId))
   }, [posts, viewer])
 
-  const visible = useMemo(
-    () =>
-      posts.filter(
-        (post) => tag === 'all' || (post.tags || []).includes(tag),
-      ),
-    [posts, tag],
-  )
+  const visible = useMemo(() => {
+    const filtered = posts.filter((post) => matchesFilter(post, tag))
+    if (sort !== 'top') return filtered
+    return [...filtered].sort((left, right) => (right.likes || 0) - (left.likes || 0))
+  }, [posts, tag, sort])
 
-  const needsMedia = mode === 'looks' || mode === 'clip'
-  const canPost =
-    mode === 'ask'
-      ? Boolean(caption.trim() && picks.length >= 2)
-      : Boolean(caption.trim() && (!needsMedia || media))
+  const isAskFlow = mode === 'ask' || mode === 'ride' || mode === 'ticket'
+  const canPost = isAskFlow ? picks.length >= 2 : Boolean(media)
+
+  function chooseMode(id) {
+    setMode(id)
+    if (id !== 'live' && isVideo) {
+      setMedia('')
+      setIsVideo(false)
+    }
+    if (id !== 'ask' && id !== 'ride' && id !== 'ticket') {
+      setPicks([])
+    }
+  }
 
   function openUser(userId, startId) {
     setViewer({ userId, startId })
@@ -338,14 +419,6 @@ export function FeedScreen() {
       if (current.length >= 4) return current
       return [...current, id]
     })
-  }
-
-  function toggleHash(id) {
-    setHash((current) =>
-      current.includes(id)
-        ? current.filter((item) => item !== id)
-        : [...current, id],
-    )
   }
 
   function vote(postId, optionId) {
@@ -387,15 +460,20 @@ export function FeedScreen() {
 
   function onFile(event) {
     const file = event.target.files?.[0]
+    event.target.value = ''
     if (!file) return
-    setIsVideo(file.type.startsWith('video/'))
+    const video = file.type.startsWith('video/')
+    if (video && mode !== 'live') return
+    setIsVideo(video)
     setMedia(URL.createObjectURL(file))
   }
 
   function publish() {
-    const text = caption.trim()
     if (!canPost) return
-    const tags = [...new Set([mode === 'ask' ? 'party' : mode, ...hash])]
+    const text = caption.trim()
+    const tags = AUTO_TAGS[mode] || [mode]
+    const photo = media && !isVideo ? media : undefined
+    const clip = media && isVideo ? media : undefined
     const base = {
       id: `mine-${Date.now()}`,
       user: ME,
@@ -403,6 +481,8 @@ export function FeedScreen() {
       when: 'now',
       tags,
       likes: 0,
+      image: photo,
+      video: clip,
     }
     const next =
       mode === 'ask'
@@ -412,19 +492,21 @@ export function FeedScreen() {
             live: 1,
             options: picks.map((id) => ({ id, votes: 0 })),
           }
-        : {
-            ...base,
-            kind: mode,
-            image: media && !isVideo ? media : undefined,
-            video: media && isVideo ? media : undefined,
-            track: mode === 'music' ? text : undefined,
-          }
+        : isAskFlow
+          ? {
+              ...base,
+              kind: mode,
+              nights: picks,
+            }
+          : {
+              ...base,
+              kind: mode,
+            }
     setPosts((current) => [next, ...current])
     setCaption('')
     setMedia('')
     setIsVideo(false)
     setPicks([])
-    setHash([])
   }
 
   return (
@@ -446,7 +528,7 @@ export function FeedScreen() {
                   key={item.id}
                   type="button"
                   className={mode === item.id ? 'is-active' : ''}
-                  onClick={() => setMode(item.id)}
+                  onClick={() => chooseMode(item.id)}
                 >
                   {item.label}
                 </button>
@@ -465,7 +547,7 @@ export function FeedScreen() {
             {media && isVideo ? (
               <video className="feed-preview" src={assetUrl(media)} muted />
             ) : null}
-            {mode === 'ask' ? (
+            {isAskFlow ? (
               <div className="rate-picks">
                 {RATE_PARTIES.map((party) => (
                   <button
@@ -479,43 +561,43 @@ export function FeedScreen() {
                 ))}
               </div>
             ) : null}
-            <div className="rate-picks">
-              {catalog.tags
-                .filter((item) => item.id !== 'all')
-                .map((item) => (
-                  <button
-                    key={item.id}
-                    type="button"
-                    className={hash.includes(item.id) ? 'is-on' : ''}
-                    onClick={() => toggleHash(item.id)}
-                  >
-                    #{item.label}
-                  </button>
-                ))}
-            </div>
             <div className="feed-composer-actions">
-              {needsMedia || mode === 'music' ? (
-                <label className="feed-photo-btn">
-                  {mode === 'clip' ? 'Video' : 'Photo'}
+              <div className="feed-composer-tools">
+                <label
+                  className="feed-photo-btn"
+                  aria-label={mode === 'live' ? 'Upload photo or video' : 'Upload photo'}
+                >
+                  <UploadMark />
                   <input
                     type="file"
-                    accept={mode === 'clip' ? 'video/*,image/*' : 'image/*'}
+                    accept={mode === 'live' ? 'image/*,video/*' : 'image/*'}
                     onChange={onFile}
                   />
                 </label>
-              ) : (
-                <span className="rate-hint">
-                  {mode === 'ask' ? 'Pick 2–4 nights' : 'No photo needed'}
-                </span>
-              )}
+                {isAskFlow ? <span className="rate-hint">Pick 2–4 nights</span> : null}
+              </div>
               <button type="submit" disabled={!canPost}>
                 Post
               </button>
             </div>
           </div>
         </form>
+        <div className="feed-sort" role="tablist" aria-label="Sort feed">
+          {SORT_FILTERS.map((item) => (
+            <button
+              key={item.id}
+              type="button"
+              role="tab"
+              aria-selected={sort === item.id}
+              className={sort === item.id ? 'is-active' : ''}
+              onClick={() => setSort(item.id)}
+            >
+              {item.label}
+            </button>
+          ))}
+        </div>
         <FilterTabs
-          filters={catalog.tags}
+          filters={FEED_FILTERS}
           active={tag}
           onChange={setTag}
         />
@@ -523,15 +605,18 @@ export function FeedScreen() {
           {visible.map((post) => (
             <article key={post.id} className="feed-card">
               {post.video ? (
-                <FeedClip className="feed-clip" src={assetUrl(post.video)} />
+                <div className="feed-photo is-clip">
+                  <FeedClip className="feed-clip" src={assetUrl(post.video)} />
+                  <i>Live</i>
+                </div>
               ) : post.image ? (
                 <button
                   type="button"
-                  className={`feed-photo${post.kind === 'clip' ? ' is-clip' : ''}${post.frame === 'faces' ? ' is-faces' : ''}`}
+                  className={`feed-photo${isLivePost(post) ? ' is-clip' : ''}${post.frame === 'faces' ? ' is-faces' : ''}`}
                   onClick={() => openUser(post.user.id, post.id)}
                 >
                   <img src={assetUrl(post.image)} alt="" />
-                  {post.kind === 'clip' ? <i>Clip</i> : null}
+                  {isLivePost(post) ? <i>Live</i> : null}
                 </button>
               ) : post.kind !== 'rating' ? (
                 <p className="rate-kicker">{kindLabel(post.kind)}</p>
@@ -541,10 +626,11 @@ export function FeedScreen() {
                 <span>{post.when}</span>
               </div>
               {post.track ? <p className="feed-track">{post.track}</p> : null}
-              <p>{post.caption}</p>
+              {post.caption ? <p>{post.caption}</p> : null}
+              <NightChips ids={post.nights} />
               {post.tags?.length ? (
                 <p className="feed-tags">
-                  {post.tags.map((item) => `#${item}`).join(' ')}
+                  {post.tags.map((item) => formatTag(item)).join(' ')}
                 </p>
               ) : null}
               {post.kind === 'rating' ? (

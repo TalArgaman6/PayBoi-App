@@ -1363,6 +1363,13 @@
   gap: 8px;
 }
 
+.feed-composer-tools {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
 .feed-photo-btn,
 .feed-composer-actions button {
   height: 32px;
@@ -1373,11 +1380,19 @@
 }
 
 .feed-photo-btn {
+  width: 32px;
+  padding: 0;
   display: inline-grid;
   place-items: center;
   background: var(--wash);
   color: var(--ink);
   cursor: pointer;
+}
+
+.feed-photo-btn svg {
+  width: 16px;
+  height: 16px;
+  display: block;
 }
 
 .feed-photo-btn input {
@@ -1396,8 +1411,9 @@
 
 .feed-mode {
   display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
+  flex-wrap: nowrap;
+  gap: 4px;
+  overflow-x: auto;
 }
 
 .feed-mode button {
@@ -1437,9 +1453,22 @@
   cursor: pointer;
 }
 
-.rate-picks button.is-on {
+.rate-picks button.is-on,
+.rate-picks span.is-on {
   background: var(--btn);
   color: var(--btn-ink);
+}
+
+.rate-picks span {
+  height: 28px;
+  padding: 0 10px;
+  border-radius: 999px;
+  background: var(--wash);
+  color: var(--muted);
+  font-size: 0.68rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
 }
 
 .rate-hint {
@@ -1622,6 +1651,40 @@
 
 .party-rate button.is-on {
   color: var(--gold);
+}
+
+.feed-sort {
+  display: flex;
+  width: fit-content;
+  gap: 2px;
+  margin: 14px 0 0;
+  padding: 3px;
+  border-radius: 999px;
+  background: var(--wash);
+}
+
+.feed-sort button {
+  height: 26px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--muted);
+  font-family: var(--font-ui);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.feed-sort button.is-active {
+  background: var(--btn);
+  color: var(--btn-ink);
+}
+
+.feed-sort + .filter-row {
+  margin-top: 8px;
 }
 
 .feed-list {
@@ -1905,20 +1968,20 @@
   }
 
   .screen-header {
-    padding-top: calc(56px + env(safe-area-inset-top, 0px));
+    padding-top: calc(46px + env(safe-area-inset-top, 0px));
   }
 
   .screen-header.has-remix {
-    min-height: calc(94px + env(safe-area-inset-top, 0px));
-    padding-top: calc(52px + env(safe-area-inset-top, 0px));
+    min-height: calc(84px + env(safe-area-inset-top, 0px));
+    padding-top: calc(42px + env(safe-area-inset-top, 0px));
   }
 
   .bottom-nav {
-    height: 42px;
-    padding: 4px 6px 4px;
+    height: 52px;
+    padding: 4px 6px 14px;
   }
 
   .sheet {
-    padding-bottom: 58px;
+    padding-bottom: 68px;
   }
 }

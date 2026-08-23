@@ -13,12 +13,8 @@
       "label": "Party"
     },
     {
-      "id": "clip",
-      "label": "Clips"
-    },
-    {
-      "id": "music",
-      "label": "Music"
+      "id": "live",
+      "label": "Live"
     },
     {
       "id": "ride",
@@ -78,6 +74,7 @@
       "caption": "Help me pick tonight.",
       "when": "48m",
       "tags": [
+        "ask",
         "party"
       ],
       "likes": 18,
@@ -137,7 +134,7 @@
     },
     {
       "id": "tal-purim-1",
-      "kind": "clip",
+      "kind": "live",
       "user": {
         "id": "tal",
         "name": "Tal",
@@ -147,7 +144,7 @@
       "caption": "Forever TLV. Purim party.",
       "when": "4m",
       "tags": [
-        "clip",
+        "live",
         "party",
         "forever"
       ],
@@ -165,13 +162,17 @@
       "when": "1h",
       "tags": [
         "ride",
-        "party"
+        "fff"
+      ],
+      "nights": [
+        "gaze-haoman",
+        "forever-tlv"
       ],
       "likes": 6
     },
     {
       "id": "alex-1",
-      "kind": "clip",
+      "kind": "live",
       "user": {
         "id": "alex",
         "name": "Alex",
@@ -181,7 +182,7 @@
       "caption": "Haoman floor, first drop.",
       "when": "2h",
       "tags": [
-        "clip",
+        "live",
         "party"
       ],
       "likes": 61
@@ -214,6 +215,7 @@
       "caption": "Drek or Crush this week?",
       "when": "2h",
       "tags": [
+        "ask",
         "party"
       ],
       "likes": 11,
@@ -237,7 +239,7 @@
     },
     {
       "id": "jordan-music-1",
-      "kind": "music",
+      "kind": "live",
       "user": {
         "id": "jordan",
         "name": "Jordan",
@@ -248,7 +250,7 @@
       "caption": "Shirazi line, the last 20.",
       "when": "3h",
       "tags": [
-        "music",
+        "live",
         "party"
       ],
       "likes": 37
@@ -285,6 +287,10 @@
         "ticket",
         "party"
       ],
+      "nights": [
+        "forever-tlv",
+        "gaze-haoman"
+      ],
       "likes": 4
     },
     {
@@ -298,6 +304,7 @@
       "caption": "Beef or Arisa Saturday?",
       "when": "5h",
       "tags": [
+        "ask",
         "party"
       ],
       "likes": 15,
@@ -331,7 +338,11 @@
       "when": "4h",
       "tags": [
         "ride",
-        "party"
+        "fff"
+      ],
+      "nights": [
+        "forever-tlv",
+        "fff-shirazi"
       ],
       "likes": 9
     },
@@ -349,11 +360,15 @@
         "ticket",
         "party"
       ],
+      "nights": [
+        "gaze-haoman",
+        "fff-shirazi"
+      ],
       "likes": 3
     },
     {
       "id": "alex-2",
-      "kind": "clip",
+      "kind": "live",
       "user": {
         "id": "alex",
         "name": "Alex",
@@ -363,7 +378,7 @@
       "caption": "Afters floor is kinder.",
       "when": "8h",
       "tags": [
-        "clip",
+        "live",
         "party"
       ],
       "likes": 44
@@ -420,7 +435,7 @@
     },
     {
       "id": "sam-music-1",
-      "kind": "music",
+      "kind": "live",
       "user": {
         "id": "sam",
         "name": "Sam",
@@ -431,7 +446,7 @@
       "caption": "The club line tonight.",
       "when": "1d",
       "tags": [
-        "music",
+        "live",
         "bar"
       ],
       "likes": 19
