@@ -1,4 +1,4 @@
-export function RiderRow({ gift, share, open, lit, onHover, onLight, onToggle }) {
+export function RiderRow({ gift, open, lit, onHover, onLight, onToggle }) {
   return (
     <li
       className={`${open ? 'is-open' : ''} ${lit ? 'is-lit' : ''}`.trim()}
@@ -9,7 +9,6 @@ export function RiderRow({ gift, share, open, lit, onHover, onLight, onToggle })
       <span style={{ background: gift.color }} />
       <em>{gift.label}</em>
       <b>{gift.count}</b>
-      <small>{share}%</small>
       <button
         type="button"
         className="gift-info"

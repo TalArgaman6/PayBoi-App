@@ -9,11 +9,6 @@ import { PRICE_RANGES, inPriceRange } from '../lib/filters.js'
 import { assetUrl, formatPbs } from '../lib/format.js'
 import { kindLabel, suggestionsForBalance } from '../lib/suggestions.js'
 
-const totalWorth = wallet.gifts.reduce(
-  (sum, gift) => sum + (gift.worth ?? gift.count),
-  0,
-)
-
 const SUGGESTION_FILTERS = [
   { id: 'all', label: 'All' },
   { id: 'event', label: 'Events' },
@@ -66,7 +61,6 @@ export function WalletScreen({ onSelect }) {
               <RiderRow
                 key={gift.id}
                 gift={gift}
-                share={Math.round(((gift.worth ?? gift.count) / totalWorth) * 100)}
                 open={openGift === gift.id}
                 lit={litGift === gift.id}
                 onHover={setHoverGift}
