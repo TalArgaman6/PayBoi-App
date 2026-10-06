@@ -18,6 +18,7 @@ function screenAngle() {
 }
 
 let motionOk = false
+let motionAsked = false
 let pendingUnlock = null
 let sensorsBound = false
 let sawOrient = false
@@ -96,6 +97,8 @@ export function unlockMotion() {
     bindSensors(prefer)
     return Promise.resolve(true)
   }
+
+  motionAsked = true
 
   pendingUnlock = Promise.resolve(request)
     .then((state) => {
@@ -221,6 +224,12 @@ export function useWalletTilt(ref, ready = true) {
     const unsubscribe = subscribeTilt(onReading)
     if (!needsMotionPrompt()) bindSensors('orient')
 
+    function onFirstDown() {
+      if (motionOk || motionAsked || pendingUnlock) return
+      unlockMotion()
+    }
+
+    node.addEventListener('pointerdown', onFirstDown)
     node.addEventListener('pointermove', onMouse)
     node.addEventListener('pointerleave', onLeave)
     raf = window.requestAnimationFrame(tick)
@@ -229,6 +238,7 @@ export function useWalletTilt(ref, ready = true) {
       live = false
       window.cancelAnimationFrame(raf)
       unsubscribe()
+      node.removeEventListener('pointerdown', onFirstDown)
       node.removeEventListener('pointermove', onMouse)
       node.removeEventListener('pointerleave', onLeave)
     }

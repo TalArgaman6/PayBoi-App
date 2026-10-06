@@ -6,44 +6,39 @@ const LINE = 'a new lgbtq economy'
 
 export function Splash({ onDone }) {
   const [shown, setShown] = useState('')
-  const [typed, setTyped] = useState(false)
 
   useEffect(() => {
     let index = 0
     const typeTimer = window.setInterval(() => {
       index += 1
       setShown(LINE.slice(0, index))
-      if (index >= LINE.length) {
-        window.clearInterval(typeTimer)
-        setTyped(true)
-      }
+      if (index >= LINE.length) window.clearInterval(typeTimer)
     }, 55)
 
-    return () => window.clearInterval(typeTimer)
-  }, [])
-
-  function allowTilt() {
-    unlockMotion().then((ok) => {
-      if (ok) onDone()
-    })
-  }
+    const doneTimer = window.setTimeout(onDone, 4200)
+    return () => {
+      window.clearInterval(typeTimer)
+      window.clearTimeout(doneTimer)
+    }
+  }, [onDone])
 
   return (
-    <div className="splash">
+    <button
+      type="button"
+      className="splash"
+      aria-label="Open pboi"
+      onClick={() => {
+        unlockMotion()
+        onDone()
+      }}
+    >
       <span className="splash-mark" aria-hidden="true">
         <PboiLogo />
       </span>
-      <div className="splash-foot">
-        <p className="splash-line">
-          {shown}
-          {typed ? null : <i />}
-        </p>
-        {typed ? (
-          <button type="button" className="splash-tilt" onClick={allowTilt}>
-            Confirm terms
-          </button>
-        ) : null}
-      </div>
-    </div>
+      <p className="splash-line">
+        {shown}
+        <i />
+      </p>
+    </button>
   )
 }
