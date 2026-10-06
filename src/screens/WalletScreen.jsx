@@ -5,6 +5,7 @@ import { ItemRow } from '../components/ItemRow.jsx'
 import { RiderRow } from '../components/RiderRow.jsx'
 import { ScreenHeader } from '../components/ScreenHeader.jsx'
 import { WalletCard } from '../components/WalletCard.jsx'
+import { WalletSky } from '../components/WalletSky.jsx'
 import { PRICE_RANGES, inPriceRange } from '../lib/filters.js'
 import { assetUrl, formatPbs } from '../lib/format.js'
 import { kindLabel, suggestionsForBalance } from '../lib/suggestions.js'
@@ -38,9 +39,7 @@ export function WalletScreen({ onSelect }) {
 
   return (
     <section className="screen wallet-screen">
-      <div className="wallet-wash" aria-hidden="true">
-        <div className="wallet-wash-blur" />
-      </div>
+      <WalletSky />
       <div className="wallet-top">
         <ScreenHeader
           title="Wallet"

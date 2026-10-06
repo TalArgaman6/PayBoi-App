@@ -8,7 +8,7 @@ import { Splash } from './components/Splash.jsx'
 import wallet from './data/wallet.json'
 import { formatCost, formatEarn, formatPbs, formatTokenBalance, earnAmount, isEventItem } from './lib/format.js'
 import { rankVars } from './lib/settings.js'
-import { unlockMotion, useWalletTilt } from './lib/tilt.js'
+import { useWalletTilt } from './lib/tilt.js'
 import { EventsScreen } from './screens/EventsScreen.jsx'
 import { FeedScreen } from './screens/FeedScreen.jsx'
 import { MarketplaceScreen } from './screens/MarketplaceScreen.jsx'
@@ -27,12 +27,7 @@ export default function App() {
     return (
       <div className="stage">
         <div className="phone">
-          <Splash
-            onDone={async () => {
-              await unlockMotion()
-              setBooted(true)
-            }}
-          />
+          <Splash onDone={() => setBooted(true)} />
         </div>
       </div>
     )
