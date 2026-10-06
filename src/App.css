@@ -1055,62 +1055,49 @@
   z-index: 1;
 }
 
-.wallet-wash {
+.wallet-hero-art {
   position: absolute;
   inset: 0;
   z-index: 0;
-  overflow: hidden;
-  pointer-events: none;
-  background: #1a1f2e;
-}
-
-.wallet-wash::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  height: 44px;
-  z-index: 3;
-  background: linear-gradient(180deg, #222838 0%, #1a1f2e 68%, rgb(26 31 46 / 0%) 100%);
+  overflow: visible;
   pointer-events: none;
 }
 
 .wallet-wash-blur {
   position: absolute;
-  left: -18%;
-  right: -18%;
-  top: 28px;
-  height: 46%;
+  left: -14%;
+  right: -14%;
+  top: -10%;
+  bottom: -8%;
   transform: translate3d(var(--wallet-shift-x, 0px), var(--wallet-shift-y, 0px), 0);
-  filter: blur(26px) saturate(1.35);
+  filter: blur(22px) saturate(1.35);
   background:
     radial-gradient(
-      ellipse 55% 70% at 18% 62%,
+      ellipse 55% 70% at 16% 58%,
       rgb(48 28 140 / 55%) 0%,
       rgb(20 18 70 / 0%) 72%
     ),
     radial-gradient(
-      ellipse 48% 60% at var(--wallet-pink-x, 62%) 58%,
-      rgb(150 30 170 / 42%) 0%,
+      ellipse 48% 60% at var(--wallet-pink-x, 58%) 52%,
+      rgb(150 30 170 / 40%) 0%,
       rgb(90 16 80 / 0%) 70%
     ),
     radial-gradient(
-      ellipse 42% 80% at 96% 48%,
-      rgb(255 150 40 / 50%) 0%,
+      ellipse 46% 80% at 100% 28%,
+      rgb(255 150 40 / 55%) 0%,
       rgb(255 70 20 / 0%) 68%
     ),
-    linear-gradient(180deg, #1a1f2e 0%, rgb(26 31 46 / 0%) 28%);
+    linear-gradient(180deg, #1a1f2e 0%, rgb(26 31 46 / 0%) 24%);
 }
 
 .wallet-rainbow {
   position: absolute;
-  left: 8%;
-  right: 16%;
-  top: 108px;
-  height: 146px;
+  left: 4%;
+  right: 2%;
+  top: 16%;
+  height: 72%;
   pointer-events: none;
-  border: 18px solid transparent;
+  border: 22px solid transparent;
   border-bottom: 0;
   border-radius: 50% 50% 0 0;
   background:
@@ -1135,10 +1122,10 @@
 
 .wallet-gold-brush {
   position: absolute;
-  top: 58px;
-  right: -10%;
-  width: 44%;
-  height: 210px;
+  top: -8%;
+  right: -14%;
+  width: 48%;
+  height: 118%;
   pointer-events: none;
   background:
     linear-gradient(

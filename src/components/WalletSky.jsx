@@ -11,8 +11,8 @@ function buildCoins(count, salt, kind) {
     const d = unit(i + 53 + salt * 13.3)
     const e = unit(i + 71 + salt * 19.1)
     const alongBrush = c > 0.34
-    const x = alongBrush ? 58 + a * 40 : 18 + a * 70
-    const y = 11 + b * 9
+    const x = alongBrush ? 54 + a * 42 : 8 + a * 78
+    const y = 10 + b * 58
     const dab = kind !== 'haze' && e > 0.48
     const size =
       kind === 'haze' ? 22 + a * 18 : kind === 'coin' ? 11 + a * 10 : 4 + a * 3
@@ -27,7 +27,7 @@ function buildCoins(count, salt, kind) {
       rot: e * 140 - 70,
       dab,
       opacity: kind === 'haze' ? 0.28 + c * 0.28 : 0.55 + c * 0.4,
-      blur: kind === 'haze' ? 2.4 : kind === 'coin' ? 0.4 : 0.2,
+      blur: kind === 'haze' ? 2.2 : kind === 'coin' ? 0.8 + a * 1.1 : 0.35,
       dur: (kind === 'haze' ? 18 : kind === 'coin' ? 12 : 16) + d * 10,
       delay: -e * 20,
       dx: (c - 0.5) * 14 * travel,
@@ -73,7 +73,7 @@ function SpeckLayer({ name, specks }) {
 
 export function WalletSky() {
   return (
-    <div className="wallet-wash" aria-hidden="true">
+    <div className="wallet-hero-art" aria-hidden="true">
       <div className="wallet-wash-blur" />
       <div className="wallet-rainbow" />
       <div className="wallet-gold-brush" />
