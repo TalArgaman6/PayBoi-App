@@ -144,6 +144,8 @@ export function useWalletTilt(ref, ready = true) {
     let raf = 0
     let live = true
     let sensorLive = false
+    let warmup = 4
+    const armAt = performance.now() + 400
 
     function apply(nextX, nextY) {
       targetX = clamp(nextX)
@@ -163,6 +165,12 @@ export function useWalletTilt(ref, ready = true) {
       } else if (angle === 180) {
         g = -gamma
         b = -beta
+      }
+
+      if (performance.now() < armAt || warmup > 0) {
+        warmup -= 1
+        apply(g / 22, (b - 55) / 28)
+        return
       }
 
       if (restG === null) {
