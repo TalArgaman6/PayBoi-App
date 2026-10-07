@@ -1,5 +1,6 @@
 {
   "user": "TAL.ARGAMAN",
+  "name": "Tal Argaman",
   "nickname": "TAL",
   "photo": "photos/sellers/toulouse.jpg",
   "token": "pbs",
@@ -12,7 +13,7 @@
   "gifts": [
     {
       "id": "greenroom",
-      "label": "Green room",
+      "label": "VIP pass",
       "hint": "Backstage / quiet booth access at pboi festival and circuit nights.",
       "color": "#e0a420",
       "metal": "gold",
@@ -59,6 +60,14 @@
       "color": "#18c4d6",
       "count": 4,
       "worth": 1
+    },
+    {
+      "id": "scooter",
+      "label": "Scooter / bike credits",
+      "hint": "A scooter or bike when you don't want a cab. Credit is already on the app.",
+      "color": "#34cc62",
+      "count": 2,
+      "worth": 2
     }
   ]
 }

@@ -5,7 +5,7 @@ import { FilterDrawer } from '../components/FilterDrawer.jsx'
 import { FilterTabs } from '../components/FilterTabs.jsx'
 import { ItemRow } from '../components/ItemRow.jsx'
 import { PriceRangeBar } from '../components/PriceRangeBar.jsx'
-import { ScreenHeader } from '../components/ScreenHeader.jsx'
+import { LocationPin, ScreenHeader } from '../components/ScreenHeader.jsx'
 import { SearchBar } from '../components/SearchBar.jsx'
 import {
   DEFAULT_COUNTRY,
@@ -110,12 +110,16 @@ export function EventsScreen({ onSelect, country = DEFAULT_COUNTRY }) {
 
   return (
     <section className="screen screen-events">
-      <ScreenHeader title="Events" kicker={place} />
+      <ScreenHeader title="Events" />
       <div className="sheet">
         <FeaturedBanner items={featured} onSelect={onSelect} />
         <div className="list-toolbar">
           <p className="count-line">
-            {items.length} events · {place}
+            {items.length} events ·{' '}
+            <span className="count-place">
+              <LocationPin />
+              {place}
+            </span>
           </p>
           <div className="filter-tools">
             <button

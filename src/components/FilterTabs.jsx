@@ -1,3 +1,16 @@
+function TabLabel({ label }) {
+  const parts = String(label).split(/(pbs)/i)
+  return parts.map((part, index) =>
+    /^pbs$/i.test(part) ? (
+      <span key={index} className="pbs-unit">
+        pbs
+      </span>
+    ) : (
+      part
+    ),
+  )
+}
+
 export function FilterTabs({ label, note, filters, active, onChange, size }) {
   return (
     <div className="filter-row">
@@ -11,7 +24,7 @@ export function FilterTabs({ label, note, filters, active, onChange, size }) {
             className={filter.id === active ? 'is-active' : ''}
             onClick={() => onChange(filter.id)}
           >
-            {filter.label}
+            <TabLabel label={filter.label} />
           </button>
         ))}
       </div>

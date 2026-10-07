@@ -36,8 +36,13 @@ export function Splash({ onDone }) {
         <PboiLogo />
       </span>
       <p className="splash-line">
-        {shown}
-        <i />
+        <span className="splash-line-ghost" aria-hidden="true">
+          {LINE}
+        </span>
+        <span className="splash-line-live">
+          {shown}
+          <i />
+        </span>
       </p>
     </button>
   )

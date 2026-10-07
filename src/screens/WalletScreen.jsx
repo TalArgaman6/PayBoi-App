@@ -41,7 +41,7 @@ export function WalletScreen({ onSelect }) {
     <section className="screen wallet-screen">
       <WalletSky />
       <div className="wallet-top">
-        <ScreenHeader title="Wallet" kicker={wallet.nickname} />
+        <ScreenHeader title={wallet.name} />
         <div className="wallet-hero">
           <WalletCard wallet={wallet} />
           <div className="wallet-profile" aria-hidden="true">
