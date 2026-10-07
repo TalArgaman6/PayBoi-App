@@ -6,10 +6,12 @@ export function WalletCard({ wallet }) {
       <div className="pay-card-foot">
         <p className="token-balance">
           <small>{wallet.token}</small>
-          {formatTokenBalance(wallet.balance)}
-        </p>
-        <p className="fiat-balance">
-          ₪{wallet.fiat.toLocaleString('en-US')}
+          <span className="token-amount">
+            {formatTokenBalance(wallet.balance)}
+            <span className="fiat-balance">
+              ₪{wallet.fiat.toLocaleString('en-US')}
+            </span>
+          </span>
         </p>
       </div>
     </article>
