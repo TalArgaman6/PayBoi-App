@@ -1,8 +1,8 @@
 const TABS = [
+  { id: 'wallet', label: 'Wallet' },
   { id: 'feed', label: 'Feed' },
   { id: 'events', label: 'Events' },
   { id: 'marketplace', label: 'Market' },
-  { id: 'wallet', label: 'Wallet' },
 ]
 
 export function BottomNav({ tab, onChange }) {

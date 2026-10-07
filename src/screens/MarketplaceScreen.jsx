@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react'
 import catalog from '../data/marketplace.json'
+import products from '../data/products.json'
 import events from '../data/events.json'
 import wallet from '../data/wallet.json'
 import { FilterTabs } from '../components/FilterTabs.jsx'
@@ -18,6 +19,8 @@ const ME = {
   name: wallet.nickname,
   photo: wallet.photo,
 }
+
+const MARKET_FILTERS = [{ id: 'drop', label: 'Drop' }, ...catalog.filters]
 
 const EVENTS = Object.fromEntries(events.items.map((item) => [item.id, item]))
 
@@ -39,19 +42,21 @@ function listingItem(item) {
 
 export function MarketplaceScreen({ onSelect }) {
   const [query, setQuery] = useState('')
-  const [filter, setFilter] = useState(catalog.filters[0].id)
+  const [filter, setFilter] = useState(MARKET_FILTERS[0].id)
   const [selling, setSelling] = useState(false)
   const [mine, setMine] = useState([])
 
-  const items = useMemo(
-    () =>
-      [...mine, ...catalog.items]
-        .map(listingItem)
-        .filter(
-          (item) => item.filters.includes(filter) && matchesQuery(item, query),
-        ),
-    [filter, mine, query],
-  )
+  const drop = filter === 'drop'
+  const items = useMemo(() => {
+    if (drop) {
+      return products.items.filter((item) => matchesQuery(item, query))
+    }
+    return [...mine, ...catalog.items]
+      .map(listingItem)
+      .filter(
+        (item) => item.filters.includes(filter) && matchesQuery(item, query),
+      )
+  }, [drop, filter, mine, query])
 
   return (
     <section className="screen screen-market">
@@ -59,7 +64,9 @@ export function MarketplaceScreen({ onSelect }) {
       <div className="sheet">
         <div className="list-toolbar">
           <p className="count-line">
-            {items.length} listings · platinum access
+            {drop
+              ? `${items.length} products`
+              : `${items.length} listings · platinum access`}
           </p>
           <button
             type="button"
@@ -72,10 +79,14 @@ export function MarketplaceScreen({ onSelect }) {
         <SearchBar
           value={query}
           onChange={setQuery}
-          placeholder="Search second-hand tickets"
+          placeholder={
+            drop
+              ? 'Search lifestyle, shopping, travel'
+              : 'Search second-hand tickets'
+          }
         />
         <FilterTabs
-          filters={catalog.filters}
+          filters={MARKET_FILTERS}
           active={filter}
           onChange={setFilter}
         />
@@ -84,12 +95,14 @@ export function MarketplaceScreen({ onSelect }) {
             <ItemRow
               key={item.id}
               item={item}
-              meta={formatCost(item)}
+              meta={drop ? `${item.shop} · ${item.city}` : formatCost(item)}
               onSelect={onSelect}
             />
           ))}
           {items.length === 0 ? (
-            <p className="empty">No listings in this lane.</p>
+            <p className="empty">
+              {drop ? 'No products in this aisle.' : 'No listings in this lane.'}
+            </p>
           ) : null}
         </div>
       </div>

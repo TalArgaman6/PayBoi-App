@@ -18,7 +18,7 @@ function screenAngle() {
 }
 
 let motionOk = false
-let motionAsked = false
+let motionDenied = false
 let pendingUnlock = null
 let sensorsBound = false
 let sawOrient = false
@@ -40,6 +40,7 @@ function emit(reading) {
 
 function onOrient(event) {
   if (event.gamma == null || event.beta == null) return
+  if (event.type === 'deviceorientationabsolute' && sawOrient) return
   sawOrient = true
   emit({ kind: 'orient', gamma: event.gamma, beta: event.beta })
 }
@@ -59,6 +60,7 @@ function bindSensors(prefer) {
     return
   }
   window.addEventListener('deviceorientation', onOrient)
+  window.addEventListener('deviceorientationabsolute', onOrient)
   window.setTimeout(() => {
     if (!sawOrient) window.addEventListener('devicemotion', onMotion)
   }, 1200)
@@ -69,49 +71,60 @@ export function subscribeTilt(listener) {
   return () => tiltListeners.delete(listener)
 }
 
-// iOS only shows the motion dialog if requestPermission() runs inside the tap,
-// before any await. Listeners have to be attached in that same grant callback
-// or later events never arrive.
+function askPermission(api) {
+  if (!api || typeof api.requestPermission !== 'function') return null
+  try {
+    return api.requestPermission()
+  } catch {
+    return Promise.reject(new Error('motion-request-failed'))
+  }
+}
+
+// iOS only shows the motion dialog from a click, and it rejects the same
+// call made on pointerdown. A rejected attempt must stay retryable, or the
+// following click can never ask again.
 export function unlockMotion() {
   if (motionOk) return Promise.resolve(true)
+  if (motionDenied) return Promise.resolve(false)
   if (pendingUnlock) return pendingUnlock
 
-  const orient = window.DeviceOrientationEvent
-  const motion = window.DeviceMotionEvent
-  let request = null
-  let prefer = 'orient'
+  const asks = [
+    askPermission(window.DeviceOrientationEvent),
+    askPermission(window.DeviceMotionEvent),
+  ].filter(Boolean)
 
-  try {
-    if (orient && typeof orient.requestPermission === 'function') {
-      request = orient.requestPermission()
-    } else if (motion && typeof motion.requestPermission === 'function') {
-      request = motion.requestPermission()
-      prefer = 'motion'
-    }
-  } catch {
-    return Promise.resolve(false)
-  }
-
-  if (!request) {
+  if (asks.length === 0) {
     motionOk = true
-    bindSensors(prefer)
+    bindSensors('orient')
     return Promise.resolve(true)
   }
 
-  motionAsked = true
-
-  pendingUnlock = Promise.resolve(request)
-    .then((state) => {
-      motionOk = state === 'granted'
-      if (motionOk) bindSensors(prefer)
-      return motionOk
+  pendingUnlock = Promise.all(
+    asks.map((request) => Promise.resolve(request).then(
+      (state) => state,
+      () => 'error',
+    )),
+  )
+    .then((states) => {
+      if (states.includes('granted')) {
+        motionOk = true
+        bindSensors('orient')
+        return true
+      }
+      if (states.includes('denied')) motionDenied = true
+      return false
     })
-    .catch(() => false)
     .finally(() => {
       pendingUnlock = null
     })
 
   return pendingUnlock
+}
+
+if (typeof window !== 'undefined') {
+  window.addEventListener('click', () => {
+    unlockMotion()
+  }, true)
 }
 
 function paint(node, x, y) {
@@ -224,12 +237,6 @@ export function useWalletTilt(ref, ready = true) {
     const unsubscribe = subscribeTilt(onReading)
     if (!needsMotionPrompt()) bindSensors('orient')
 
-    function onFirstDown() {
-      if (motionOk || motionAsked || pendingUnlock) return
-      unlockMotion()
-    }
-
-    node.addEventListener('pointerdown', onFirstDown)
     node.addEventListener('pointermove', onMouse)
     node.addEventListener('pointerleave', onLeave)
     raf = window.requestAnimationFrame(tick)
@@ -238,7 +245,6 @@ export function useWalletTilt(ref, ready = true) {
       live = false
       window.cancelAnimationFrame(raf)
       unsubscribe()
-      node.removeEventListener('pointerdown', onFirstDown)
       node.removeEventListener('pointermove', onMouse)
       node.removeEventListener('pointerleave', onLeave)
     }
