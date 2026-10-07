@@ -198,6 +198,9 @@
       "city": "Tel Aviv",
       "pricePbs": 190,
       "image": "photos/shenkin-edit.jpg",
+      "banner": "photos/shenkin-edit.jpg",
+      "featured": true,
+      "kicker": "Drop",
       "filters": [
         "shopping"
       ],
@@ -268,6 +271,9 @@
       "city": "Tel Aviv",
       "pricePbs": 175,
       "image": "photos/drag-closet.jpg",
+      "banner": "photos/drag-closet.jpg",
+      "featured": true,
+      "kicker": "Stage",
       "filters": [
         "shopping"
       ],
@@ -338,6 +344,9 @@
       "city": "Worldwide",
       "pricePbs": 280,
       "image": "photos/cruise-hold.jpg",
+      "banner": "photos/cruise-hold.jpg",
+      "featured": true,
+      "kicker": "Travel",
       "filters": [
         "travel"
       ],
@@ -352,6 +361,9 @@
       "city": "Tel Aviv",
       "pricePbs": 240,
       "image": "photos/airline-tlv.jpg",
+      "banner": "photos/airline-tlv.jpg",
+      "featured": true,
+      "kicker": "Fly",
       "filters": [
         "travel"
       ],

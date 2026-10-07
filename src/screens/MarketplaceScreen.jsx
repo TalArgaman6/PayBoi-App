@@ -3,6 +3,7 @@ import catalog from '../data/marketplace.json'
 import products from '../data/products.json'
 import events from '../data/events.json'
 import wallet from '../data/wallet.json'
+import { FeaturedBanner } from '../components/FeaturedBanner.jsx'
 import { FilterTabs } from '../components/FilterTabs.jsx'
 import { ItemRow } from '../components/ItemRow.jsx'
 import { ScreenHeader } from '../components/ScreenHeader.jsx'
@@ -47,6 +48,10 @@ export function MarketplaceScreen({ onSelect }) {
   const [mine, setMine] = useState([])
 
   const drop = filter === 'drop'
+  const featuredDrops = useMemo(
+    () => products.items.filter((item) => item.featured),
+    [],
+  )
   const items = useMemo(() => {
     if (drop) {
       return products.items.filter((item) => matchesQuery(item, query))
@@ -60,8 +65,15 @@ export function MarketplaceScreen({ onSelect }) {
 
   return (
     <section className="screen screen-market">
-      <ScreenHeader title="Marketplace" />
+      <ScreenHeader title="Market" />
       <div className="sheet">
+        {drop ? (
+          <FeaturedBanner
+            items={featuredDrops}
+            onSelect={onSelect}
+            caption={(item) => `${item.city} · ${formatCost(item)} · ${item.shop}`}
+          />
+        ) : null}
         <div className="list-toolbar">
           <p className="count-line">
             {drop

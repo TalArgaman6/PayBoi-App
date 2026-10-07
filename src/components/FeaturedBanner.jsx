@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { assetUrl, earnAmount, formatCost, formatEarn } from '../lib/format.js'
 
-export function FeaturedBanner({ items, onSelect }) {
+export function FeaturedBanner({ items, onSelect, caption }) {
   const [index, setIndex] = useState(0)
   const current = items[index]
 
@@ -27,7 +27,9 @@ export function FeaturedBanner({ items, onSelect }) {
           <span>{current.kicker || 'Featured'}</span>
           <strong>{current.title}</strong>
           <em>
-            {current.city} · {formatCost(current)} · gain {formatEarn(earnAmount(current))} pbs
+            {caption
+              ? caption(current)
+              : `${current.city} · ${formatCost(current)} · gain ${formatEarn(earnAmount(current))} pbs`}
           </em>
         </div>
       </button>
