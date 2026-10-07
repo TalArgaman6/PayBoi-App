@@ -18,26 +18,31 @@ function buildStars(count, salt, kind) {
           : kind === 'star'
             ? 1.8 + a * 2.2
             : 1 + a * 1.1
-    const travel = kind === 'near' ? 1 : kind === 'glow' ? 0.45 : kind === 'star' ? 0.35 : 0.18
+    const travel = kind === 'near' ? 1.15 : kind === 'glow' ? 0.9 : kind === 'star' ? 1 : 0.55
+    const opacity =
+      kind === 'near'
+        ? 0.55 + c * 0.4
+        : kind === 'glow'
+          ? 0.3 + c * 0.35
+          : kind === 'star'
+            ? 0.6 + c * 0.4
+            : 0.4 + c * 0.45
 
     return {
       id: `${kind}-${i}`,
       x: a * 100,
       y: b * 100,
       size,
-      opacity:
-        kind === 'near'
-          ? 0.55 + c * 0.4
-          : kind === 'glow'
-            ? 0.3 + c * 0.35
-            : kind === 'star'
-              ? 0.6 + c * 0.4
-              : 0.4 + c * 0.45,
+      opacity,
       blur: kind === 'near' ? 0.6 : kind === 'glow' ? 1.6 + a * 1.4 : 0,
-      dur: (kind === 'near' ? 11 : kind === 'glow' ? 18 : kind === 'star' ? 15 : 22) + d * 8,
-      delay: -e * 20,
-      dx: (c - 0.5) * 16 * travel,
-      dy: -(4 + d * 14) * travel,
+      dur: (kind === 'near' ? 5.5 : kind === 'glow' ? 8 : kind === 'star' ? 6.5 : 11) + d * 3,
+      delay: -e * 14,
+      shine: (kind === 'near' ? 1.7 : kind === 'star' ? 2.1 : kind === 'glow' ? 3.4 : 4.6) + a * 1.8,
+      shineDelay: -b * 6,
+      dim: opacity * (kind === 'dust' ? 0.45 : 0.2),
+      bright: Math.min(1, opacity + (kind === 'dust' ? 0.2 : 0.55)),
+      dx: (c - 0.5) * 72 * travel,
+      dy: (d - 0.5) * 58 * travel,
     }
   })
 }
@@ -59,6 +64,10 @@ function SpeckLayer({ name, specks }) {
             top: `${speck.y}%`,
             '--dur': `${speck.dur}s`,
             '--delay': `${speck.delay}s`,
+            '--shine': `${speck.shine}s`,
+            '--shine-delay': `${speck.shineDelay}s`,
+            '--dim': speck.dim,
+            '--bright': speck.bright,
             '--dx': `${speck.dx}px`,
             '--dy': `${speck.dy}px`,
           }}

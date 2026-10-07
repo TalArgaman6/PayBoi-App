@@ -63,9 +63,6 @@ export function WalletScreen({ onSelect }) {
                 open={openGift === gift.id}
                 lit={litGift === gift.id}
                 onHover={setHoverGift}
-                onLight={(id) =>
-                  setSelectedGift((current) => (current === id ? null : id))
-                }
                 onToggle={() => {
                   setOpenGift((current) => {
                     const next = current === gift.id ? null : gift.id

@@ -161,18 +161,6 @@ export function RemixProvider({ children }) {
   )
 }
 
-function PlayMark({ playing }) {
-  return playing ? (
-    <svg viewBox="0 0 16 16" aria-hidden="true">
-      <path fill="currentColor" d="M5 3.5h2.2v9H5zm3.8 0H11v9H8.8z" />
-    </svg>
-  ) : (
-    <svg viewBox="0 0 16 16" aria-hidden="true">
-      <path fill="currentColor" d="M5 3.2v9.6L13 8z" />
-    </svg>
-  )
-}
-
 function MuteMark({ muted }) {
   return muted ? (
     <svg viewBox="0 0 16 16" aria-hidden="true">
@@ -195,33 +183,18 @@ export function RemixNowPlaying() {
   const now = useContext(RemixContext)
   if (!now || (!now.title && !remix.url)) return null
 
+  const line = [now.title, now.dj].filter(Boolean).join(' · ')
+
   return (
     <div className={`remix-now${now.muted ? ' is-muted' : ''}`}>
-      <button
-        type="button"
-        className="remix-copy"
-        onClick={now.toggleMute}
-        aria-label={now.muted ? 'Unmute remix' : 'Mute remix'}
-      >
-        <strong>{now.title}</strong>
-      </button>
       <div className="remix-now-line">
-        <span>
-          {[now.dj, now.party].filter(Boolean).join(' · ')}
-        </span>
+        <span>{line}</span>
         <button
           type="button"
           onClick={now.toggleMute}
           aria-label={now.muted ? 'Unmute remix' : 'Mute remix'}
         >
           <MuteMark muted={now.muted} />
-        </button>
-        <button
-          type="button"
-          onClick={now.togglePlay}
-          aria-label={now.playing ? 'Pause remix' : 'Play remix'}
-        >
-          <PlayMark playing={now.playing} />
         </button>
       </div>
     </div>

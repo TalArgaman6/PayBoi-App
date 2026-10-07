@@ -1,26 +1,24 @@
-export function RiderRow({ gift, open, lit, onHover, onLight, onToggle }) {
+export function RiderRow({ gift, open, lit, onHover, onToggle }) {
+  function onKeyDown(event) {
+    if (event.key !== 'Enter' && event.key !== ' ') return
+    event.preventDefault()
+    onToggle()
+  }
+
   return (
     <li
       className={`${open ? 'is-open' : ''} ${lit ? 'is-lit' : ''}`.trim()}
+      role="button"
+      tabIndex={0}
+      aria-expanded={open}
       onPointerEnter={() => onHover(gift.id)}
       onPointerLeave={() => onHover(null)}
-      onClick={() => onLight(gift.id)}
+      onClick={onToggle}
+      onKeyDown={onKeyDown}
     >
-      <span style={{ background: gift.color }} />
+      <span />
       <em>{gift.label}</em>
       <b>{gift.count}</b>
-      <button
-        type="button"
-        className="gift-info"
-        aria-expanded={open}
-        aria-label={`About ${gift.label}`}
-        onClick={(event) => {
-          event.stopPropagation()
-          onToggle()
-        }}
-      >
-        i
-      </button>
       {open ? <p className="gift-tip">{gift.hint}</p> : null}
     </li>
   )
