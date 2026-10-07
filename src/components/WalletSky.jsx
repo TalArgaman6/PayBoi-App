@@ -3,42 +3,49 @@ function unit(n) {
   return x - Math.floor(x)
 }
 
-function buildCoins(count, salt, kind) {
+function buildStars(count, salt, kind) {
   return Array.from({ length: count }, (_, i) => {
     const a = unit(i + 1 + salt)
     const b = unit(i + 19 + salt * 3.1)
     const c = unit(i + 37 + salt * 7.7)
     const d = unit(i + 53 + salt * 13.3)
     const e = unit(i + 71 + salt * 19.1)
-    const alongBrush = c > 0.34
-    const x = alongBrush ? 54 + a * 42 : 8 + a * 78
-    const y = 10 + b * 58
-    const dab = kind !== 'haze' && e > 0.48
     const size =
-      kind === 'haze' ? 22 + a * 18 : kind === 'coin' ? 11 + a * 10 : 4 + a * 3
-    const travel = kind === 'coin' ? 0.7 : kind === 'haze' ? 0.25 : 0.4
+      kind === 'near'
+        ? 7 + a * 9
+        : kind === 'glow'
+          ? 5 + a * 8
+          : kind === 'star'
+            ? 1.8 + a * 2.2
+            : 1 + a * 1.1
+    const travel = kind === 'near' ? 1 : kind === 'glow' ? 0.45 : kind === 'star' ? 0.35 : 0.18
 
     return {
       id: `${kind}-${i}`,
-      x,
-      y,
-      w: dab ? size * 2.1 : size,
-      h: dab ? size * 0.62 : size * (0.72 + e * 0.4),
-      rot: e * 140 - 70,
-      dab,
-      opacity: kind === 'haze' ? 0.28 + c * 0.28 : 0.55 + c * 0.4,
-      blur: kind === 'haze' ? 2.2 : kind === 'coin' ? 0.8 + a * 1.1 : 0.35,
-      dur: (kind === 'haze' ? 18 : kind === 'coin' ? 12 : 16) + d * 10,
+      x: a * 100,
+      y: b * 100,
+      size,
+      opacity:
+        kind === 'near'
+          ? 0.55 + c * 0.4
+          : kind === 'glow'
+            ? 0.3 + c * 0.35
+            : kind === 'star'
+              ? 0.6 + c * 0.4
+              : 0.4 + c * 0.45,
+      blur: kind === 'near' ? 0.6 : kind === 'glow' ? 1.6 + a * 1.4 : 0,
+      dur: (kind === 'near' ? 11 : kind === 'glow' ? 18 : kind === 'star' ? 15 : 22) + d * 8,
       delay: -e * 20,
-      dx: (c - 0.5) * 14 * travel,
-      dy: -(4 + d * 12) * travel,
+      dx: (c - 0.5) * 16 * travel,
+      dy: -(4 + d * 14) * travel,
     }
   })
 }
 
-const HAZE = buildCoins(5, 4.2, 'haze')
-const COINS = buildCoins(14, 8.6, 'coin')
-const FAR = buildCoins(10, 2.4, 'far')
+const DUST = buildStars(70, 2.4, 'dust')
+const GLOW = buildStars(12, 15.2, 'glow')
+const STARS = buildStars(40, 8.6, 'star')
+const NEAR = buildStars(8, 21.4, 'near')
 
 function SpeckLayer({ name, specks }) {
   return (
@@ -46,7 +53,7 @@ function SpeckLayer({ name, specks }) {
       {specks.map((speck) => (
         <span
           key={speck.id}
-          className={speck.dab ? 'wallet-speck is-dab' : 'wallet-speck'}
+          className="wallet-speck"
           style={{
             left: `${speck.x}%`,
             top: `${speck.y}%`,
@@ -58,11 +65,10 @@ function SpeckLayer({ name, specks }) {
         >
           <i
             style={{
-              width: speck.w,
-              height: speck.h,
+              width: speck.size,
+              height: speck.size,
               opacity: speck.opacity,
-              transform: `rotate(${speck.rot}deg)`,
-              filter: `blur(${speck.blur}px)`,
+              filter: speck.blur ? `blur(${speck.blur}px)` : undefined,
             }}
           />
         </span>
@@ -73,15 +79,16 @@ function SpeckLayer({ name, specks }) {
 
 export function WalletSky() {
   return (
-    <div className="wallet-hero-art" aria-hidden="true">
-      <div className="wallet-wash-blur" />
-      <div className="wallet-rainbow" />
-      <div className="wallet-gold-brush" />
+    <div className="wallet-wash" aria-hidden="true">
       <div className="wallet-sky">
         <div className="wallet-field">
-          <SpeckLayer name="haze" specks={HAZE} />
-          <SpeckLayer name="far" specks={FAR} />
-          <SpeckLayer name="coin" specks={COINS} />
+          <div className="wallet-plane wallet-plane-far" />
+          <div className="wallet-plane wallet-plane-mid" />
+          <div className="wallet-plane wallet-plane-near" />
+          <SpeckLayer name="dust" specks={DUST} />
+          <SpeckLayer name="glow" specks={GLOW} />
+          <SpeckLayer name="star" specks={STARS} />
+          <SpeckLayer name="near" specks={NEAR} />
         </div>
       </div>
     </div>

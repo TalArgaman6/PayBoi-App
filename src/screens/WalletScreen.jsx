@@ -39,13 +39,13 @@ export function WalletScreen({ onSelect }) {
 
   return (
     <section className="screen wallet-screen">
+      <WalletSky />
       <div className="wallet-top">
         <ScreenHeader
           title="Wallet"
           kicker={wallet.nickname}
         />
         <div className="wallet-hero">
-          <WalletSky />
           <WalletCard wallet={wallet} />
           <div className="wallet-profile" aria-hidden="true">
             <img src={assetUrl(wallet.photo)} alt="" />
