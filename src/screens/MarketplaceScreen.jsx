@@ -48,6 +48,7 @@ export function MarketplaceScreen({ onSelect }) {
   const [mine, setMine] = useState([])
 
   const drop = filter === 'drop'
+  const canSell = filter === 'tickets' || filter === 'bracelets'
   const featuredDrops = useMemo(
     () => products.items.filter((item) => item.featured),
     [],
@@ -78,13 +79,15 @@ export function MarketplaceScreen({ onSelect }) {
               ? `${items.length} products`
               : `${items.length} listings · platinum access`}
           </p>
-          <button
-            type="button"
-            className="filter-launch"
-            onClick={() => setSelling(true)}
-          >
-            Sell your ticket
-          </button>
+          {canSell ? (
+            <button
+              type="button"
+              className="filter-launch"
+              onClick={() => setSelling(true)}
+            >
+              Sell your ticket
+            </button>
+          ) : null}
         </div>
         <SearchBar
           value={query}
@@ -92,7 +95,9 @@ export function MarketplaceScreen({ onSelect }) {
           placeholder={
             drop
               ? 'Search lifestyle, shopping, travel'
-              : 'Search second-hand tickets'
+              : filter === 'bracelets'
+                ? 'Search bracelets'
+                : 'Search second-hand tickets'
           }
         />
         <FilterTabs
@@ -136,7 +141,7 @@ export function MarketplaceScreen({ onSelect }) {
               priceIls: event.priceIls,
               originalPbs: event.pricePbs,
               image: event.image,
-              filters: ['tickets', 'transfers'],
+              filters: ['tickets'],
             },
             ...current,
           ])

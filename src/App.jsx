@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { BottomNav } from './components/BottomNav.jsx'
 import { ItemThumb, TicketMark } from './components/ItemRow.jsx'
 import { EarnBadge } from './components/EarnBadge.jsx'
@@ -19,12 +19,31 @@ import './App.css'
 
 const redeemedPassId = consumeLocationRedeem(wallet.gifts)
 
+function pmName(seller) {
+  const first = String(seller?.name || '').trim().split(/\s+/)[0]
+  if (!first) return ''
+  return first.charAt(0).toUpperCase() + first.slice(1).toLowerCase()
+}
+
 export default function App() {
   const [booted, setBooted] = useState(Boolean(redeemedPassId))
   const [tab, setTab] = useState(redeemedPassId ? 'wallet' : 'feed')
   const [selected, setSelected] = useState(null)
+  const [pmOpen, setPmOpen] = useState(false)
+  const [pmDraft, setPmDraft] = useState('')
+  const [pmSent, setPmSent] = useState(false)
   const phone = useRef(null)
   useWalletTilt(phone, booted)
+
+  useEffect(() => {
+    setPmOpen(false)
+    setPmDraft('')
+    setPmSent(false)
+  }, [selected?.id])
+
+  function closeDetail() {
+    setSelected(null)
+  }
 
   if (!booted) {
     return (
@@ -67,7 +86,10 @@ export default function App() {
                 <div>
                   <strong>
                     {selected.title}
-                    <TicketMark count={selected.tickets} />
+                    <TicketMark
+                      count={selected.tickets}
+                      kind={selected.filters?.includes('bracelets') ? 'bracelet' : 'ticket'}
+                    />
                   </strong>
                   <span>{selected.subtitle}</span>
                 </div>
@@ -82,21 +104,69 @@ export default function App() {
                   </span>
                 )}
               </div>
-              <p>
-                {selected.seller
-                  ? `Pay ${formatCost(selected)} to ${selected.seller.name}. Fixed price — their profile is on the listing.`
-                  : selected.pricePbs <= wallet.balance
-                    ? isEventItem(selected)
-                      ? `Pay ${formatCost(selected)}. You gain ${formatEarn(earnAmount(selected))} pbs, with ${formatPbs(wallet.balance - selected.pricePbs)} left.`
-                      : `Pay ${formatCost(selected)}. ${formatPbs(wallet.balance - selected.pricePbs)} left.`
-                    : `This is ${formatPbs(selected.pricePbs - wallet.balance)} over your ${formatTokenBalance(wallet.balance)} pbs.`}
-              </p>
-              <button type="button" className="pay-btn">
-                Pay {formatCost(selected)}
-              </button>
-              <button type="button" className="ghost-btn" onClick={() => setSelected(null)}>
-                Close
-              </button>
+              {pmOpen && selected.seller ? (
+                <>
+                  <p>
+                    {pmSent
+                      ? `Sent to ${pmName(selected.seller)}.`
+                      : `Message ${pmName(selected.seller)} about ${selected.title}.`}
+                  </p>
+                  {pmSent ? null : (
+                    <textarea
+                      className="pm-draft"
+                      rows={3}
+                      placeholder={`Message ${pmName(selected.seller)}`}
+                      value={pmDraft}
+                      autoFocus
+                      onChange={(event) => setPmDraft(event.target.value)}
+                    />
+                  )}
+                  {pmSent ? null : (
+                    <button
+                      type="button"
+                      className="pay-btn"
+                      disabled={!pmDraft.trim()}
+                      onClick={() => setPmSent(true)}
+                    >
+                      Send
+                    </button>
+                  )}
+                  <button
+                    type="button"
+                    className="ghost-btn"
+                    onClick={() => {
+                      setPmOpen(false)
+                      setPmDraft('')
+                      setPmSent(false)
+                    }}
+                  >
+                    Back
+                  </button>
+                </>
+              ) : (
+                <>
+                  <p>
+                    {selected.seller
+                      ? `Pay ${formatCost(selected)} to ${selected.seller.name}. Fixed price — their profile is on the listing.`
+                      : selected.pricePbs <= wallet.balance
+                        ? isEventItem(selected)
+                          ? `Pay ${formatCost(selected)}. You gain ${formatEarn(earnAmount(selected))} pbs, with ${formatPbs(wallet.balance - selected.pricePbs)} left.`
+                          : `Pay ${formatCost(selected)}. ${formatPbs(wallet.balance - selected.pricePbs)} left.`
+                        : `This is ${formatPbs(selected.pricePbs - wallet.balance)} over your ${formatTokenBalance(wallet.balance)} pbs.`}
+                  </p>
+                  <button type="button" className="pay-btn">
+                    Pay {formatCost(selected)}
+                  </button>
+                  {selected.seller ? (
+                    <button type="button" className="ghost-btn" onClick={() => setPmOpen(true)}>
+                      PM {pmName(selected.seller)}
+                    </button>
+                  ) : null}
+                  <button type="button" className="ghost-btn" onClick={closeDetail}>
+                    Close
+                  </button>
+                </>
+              )}
             </aside>
           ) : null}
         </RemixProvider>

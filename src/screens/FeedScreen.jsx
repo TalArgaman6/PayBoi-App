@@ -236,12 +236,14 @@ function kindLabel(kind) {
   if (kind === 'ticket') return 'Ticket request'
   if (kind === 'live' || kind === 'clip' || kind === 'music') return 'Live'
   if (kind === 'looks') return 'Looks'
+  if (kind === 'tonight') return 'Tonight'
   if (kind === 'alternative') return 'Alt'
   return 'Post'
 }
 
 function cardTone(post) {
   if (post.kind === 'looks') return 'looks'
+  if (post.kind === 'tonight') return 'tonight'
   if (post.kind === 'ticket') return 'ticket'
   if (post.kind === 'rating' || post.kind === 'ask') return 'ask'
   if (post.kind === 'ride') return 'ride'

@@ -587,6 +587,10 @@
   transform: rotate(-90deg);
 }
 
+.ticket-mark.is-bracelet svg {
+  transform: none;
+}
+
 .item-sub,
 .item-meta,
 .item-bought,
@@ -2252,6 +2256,11 @@
   --feed-glow-mid: rgb(72 28 150 / 14%);
 }
 
+.feed-card.is-tonight {
+  --feed-glow: rgb(210 158 78 / 22%);
+  --feed-glow-mid: rgb(82 131 191 / 14%);
+}
+
 .feed-card.is-ticket {
   --feed-glow: rgb(24 196 214 / 22%);
   --feed-glow-mid: rgb(16 80 130 / 12%);
@@ -2371,10 +2380,12 @@
 .feed-user strong .feed-feat {
   background-image: linear-gradient(
     90deg,
-    rgb(236 108 34) 0%,
-    rgb(224 164 32) 34%,
-    rgb(52 204 98) 68%,
-    rgb(24 196 214) 100%
+    rgb(210 158 78) 0%,
+    rgb(184 172 100) 20%,
+    rgb(153 182 132) 40%,
+    rgb(123 182 167) 60%,
+    rgb(100 162 191) 80%,
+    rgb(82 131 191) 100%
   );
   -webkit-background-clip: text;
   background-clip: text;
@@ -2545,6 +2556,28 @@
 
 .ghost-btn {
   background: var(--wash);
+}
+
+.pm-draft {
+  width: 100%;
+  min-height: 72px;
+  resize: none;
+  border: 0;
+  border-radius: 12px;
+  background: var(--wash);
+  color: var(--ink);
+  padding: 10px 12px;
+  font: inherit;
+  font-size: 0.86rem;
+  outline: none;
+}
+
+.pm-draft::placeholder {
+  color: var(--muted);
+}
+
+.pay-btn:disabled {
+  opacity: 0.45;
 }
 
 .empty {

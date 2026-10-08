@@ -48,17 +48,43 @@ function TicketIcon() {
   )
 }
 
-export function TicketMark({ count }) {
-  const tickets = Math.min(3, Math.max(0, Number(count) || 0))
-  if (!tickets) return null
+function BraceletIcon() {
+  return (
+    <svg viewBox="0 0 16 16" aria-hidden="true">
+      <path
+        d="M4.7 4.2a4.35 4.35 0 1 0 6.6 0"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.55"
+        strokeLinecap="round"
+      />
+      <path
+        d="M4.7 4.2h1.7M9.6 4.2h1.7"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.55"
+        strokeLinecap="round"
+      />
+    </svg>
+  )
+}
+
+export function TicketMark({ count, kind = 'ticket' }) {
+  const total = Math.min(3, Math.max(0, Number(count) || 0))
+  if (!total) return null
+  const bracelet = kind === 'bracelet'
+  const noun = bracelet
+    ? total === 1 ? 'bracelet' : 'bracelets'
+    : total === 1 ? 'ticket' : 'tickets'
+  const Icon = bracelet ? BraceletIcon : TicketIcon
 
   return (
     <span
-      className="ticket-mark"
-      title={`${tickets} ${tickets === 1 ? 'ticket' : 'tickets'}`}
+      className={`ticket-mark${bracelet ? ' is-bracelet' : ''}`}
+      title={`${total} ${noun}`}
     >
-      {Array.from({ length: tickets }, (_, index) => (
-        <TicketIcon key={index} />
+      {Array.from({ length: total }, (_, index) => (
+        <Icon key={index} />
       ))}
     </span>
   )
@@ -91,7 +117,10 @@ export function ItemRow({ item, meta, note, onSelect, showEarn = false }) {
       <div className="item-copy">
         <div className="item-title-row">
           <strong>{item.title}</strong>
-          <TicketMark count={item.tickets} />
+          <TicketMark
+            count={item.tickets}
+            kind={item.filters?.includes('bracelets') ? 'bracelet' : 'ticket'}
+          />
           <RideMark count={item.rides} />
         </div>
         {item.subtitle ? <span className="item-sub">{item.subtitle}</span> : null}

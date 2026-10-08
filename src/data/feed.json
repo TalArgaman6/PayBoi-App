@@ -9,12 +9,16 @@
       "label": "Live"
     },
     {
-      "id": "looks",
-      "label": "Looks"
+      "id": "tonight",
+      "label": "Tonight"
+    },
+    {
+      "id": "alternative",
+      "label": "Alt"
     },
     {
       "id": "ticket",
-      "label": "Ticket"
+      "label": "Tickets"
     },
     {
       "id": "ask",
@@ -23,10 +27,6 @@
     {
       "id": "ride",
       "label": "Ride"
-    },
-    {
-      "id": "alternative",
-      "label": "Alt"
     }
   ],
   "posts": [
@@ -53,6 +53,23 @@
           "photo": "photos/sellers/jordan.jpg"
         }
       ]
+    },
+    {
+      "id": "drag-room-1",
+      "kind": "looks",
+      "user": {
+        "id": "refael",
+        "name": "Refael Haim",
+        "photo": "photos/sellers/sam.jpg"
+      },
+      "image": "photos/drag-room-selfie.jpg",
+      "caption": "Drag check. Leaving after this.",
+      "when": "18m",
+      "tags": [
+        "looks",
+        "party"
+      ],
+      "likes": 24
     },
     {
       "id": "maya-rate-1",
@@ -96,7 +113,7 @@
     },
     {
       "id": "maya-1",
-      "kind": "looks",
+      "kind": "tonight",
       "user": {
         "id": "shani",
         "name": "Shani Amsalem",
@@ -106,7 +123,7 @@
       "caption": "Crew looks before Gordon.",
       "when": "6h",
       "tags": [
-        "looks",
+        "tonight",
         "forever"
       ],
       "likes": 33,
@@ -178,7 +195,7 @@
     },
     {
       "id": "noa-look-1",
-      "kind": "looks",
+      "kind": "alternative",
       "user": {
         "id": "gal",
         "name": "Gal Weizman",
@@ -188,7 +205,7 @@
       "caption": "Pre-drinks looks. Shenkin 21:00.",
       "when": "1h",
       "tags": [
-        "looks",
+        "alternative",
         "crush"
       ],
       "likes": 42,
@@ -253,7 +270,7 @@
     },
     {
       "id": "tal-pride-sunrise-1",
-      "kind": "looks",
+      "kind": "tonight",
       "user": {
         "id": "tal",
         "name": "Tal Argaman",
@@ -263,7 +280,7 @@
       "caption": "Forever Pride. Sunrise after the party.",
       "when": "8m",
       "tags": [
-        "looks",
+        "tonight",
         "forever"
       ],
       "likes": 73
@@ -377,7 +394,7 @@
     },
     {
       "id": "jordan-1",
-      "kind": "looks",
+      "kind": "alternative",
       "user": {
         "id": "refael",
         "name": "Refael Haim",
@@ -387,7 +404,7 @@
       "caption": "Callas karaoke fit.",
       "when": "1d",
       "tags": [
-        "looks",
+        "alternative",
         "party"
       ],
       "likes": 27
@@ -414,7 +431,7 @@
     },
     {
       "id": "noa-2",
-      "kind": "looks",
+      "kind": "alternative",
       "user": {
         "id": "sagi",
         "name": "Sagi Levi",
@@ -424,14 +441,14 @@
       "caption": "Shpagat terrace, 21:00.",
       "when": "1d",
       "tags": [
-        "looks",
+        "alternative",
         "party"
       ],
       "likes": 16
     },
     {
       "id": "sam-music-1",
-      "kind": "live",
+      "kind": "tonight",
       "user": {
         "id": "itay",
         "name": "Itay Aharoni",
@@ -442,7 +459,7 @@
       "caption": "The club line tonight.",
       "when": "1d",
       "tags": [
-        "live",
+        "tonight",
         "party"
       ],
       "likes": 19,

@@ -2,8 +2,7 @@
   "premiumOnly": true,
   "filters": [
     { "id": "tickets", "label": "Tickets" },
-    { "id": "packages", "label": "Packages" },
-    { "id": "transfers", "label": "Transfers" }
+    { "id": "bracelets", "label": "Bracelets" }
   ],
   "items": [
     {
@@ -35,7 +34,7 @@
       "pricePbs": 255,
       "originalPbs": 255,
       "image": "photos/fff-shirazi.jpg",
-      "filters": ["packages"],
+      "filters": ["bracelets"],
       "badge": "gold"
     },
     {
@@ -51,7 +50,7 @@
       "pricePbs": 840,
       "originalPbs": 840,
       "image": "photos/forever-pride.jpg",
-      "filters": ["tickets", "transfers"],
+      "filters": ["tickets"],
       "badge": "pink"
     },
     {
@@ -67,7 +66,7 @@
       "pricePbs": 270,
       "originalPbs": 270,
       "image": "photos/club-lasers.jpg",
-      "filters": ["packages"],
+      "filters": ["bracelets"],
       "badge": "gold"
     },
     {
@@ -83,7 +82,7 @@
       "pricePbs": 660,
       "originalPbs": 660,
       "image": "photos/park-concert.jpg",
-      "filters": ["tickets", "transfers"],
+      "filters": ["tickets"],
       "badge": "gold"
     },
     {
