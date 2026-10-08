@@ -70,10 +70,10 @@ const LAST_BY_ID = {
   tal: 'Argaman',
   alex: 'Cohen',
   maya: 'Levi',
-  ido: 'Mizrahi',
-  noa: 'Shalev',
-  sam: 'Azulay',
-  jordan: 'Hasson',
+  ido: 'Goldberg',
+  noa: 'Oz',
+  sam: 'Meir',
+  jordan: 'Levi',
 }
 
 function titleCase(word) {
@@ -85,7 +85,10 @@ function titleCase(word) {
 export function shortName(input, lastName) {
   if (!input) return ''
   if (typeof input === 'object') {
-    return shortName(input.name, lastName || input.last || LAST_BY_ID[input.id])
+    const given = String(input.name || '').trim()
+    const hasSurname = given.split(/\s+/).filter(Boolean).length > 1
+    const fallback = input.last || (hasSurname ? undefined : LAST_BY_ID[input.id])
+    return shortName(given, lastName || fallback)
   }
 
   const raw = String(input).trim()
@@ -98,7 +101,7 @@ export function shortName(input, lastName) {
   const first = titleCase(parts[0])
   const last = lastName || parts[1] || LAST_BY_ID[first.toLowerCase()]
   if (!last) return first
-  return `${first} ${String(last).charAt(0).toUpperCase()}`
+  return `${first} ${titleCase(last)}`
 }
 
 const CROWD_NAMES = [

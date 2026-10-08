@@ -1611,7 +1611,8 @@
   visibility: hidden;
 }
 
-.splash-line-live {
+.splash-line-live,
+.feed-feat {
   background-image: linear-gradient(
     90deg,
     rgb(128 60 222) 0%,
@@ -2182,6 +2183,11 @@
   font-weight: 600;
   text-transform: none;
   letter-spacing: 0;
+}
+
+.feed-user strong .feed-feat {
+  color: transparent;
+  margin-inline: 1px;
 }
 
 .feed-meta span,

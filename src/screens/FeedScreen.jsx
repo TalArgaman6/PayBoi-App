@@ -182,10 +182,14 @@ function peopleOn(post) {
   }))
 }
 
-function collabLabel(people) {
+function CollabName({ people }) {
   if (people.length < 2) return people[0]?.name || ''
-  if (people.length === 2) return `${people[0].name} & ${people[1].name}`
-  return `${people[0].name} & ${people.length - 1}`
+  const rest = people.length === 2 ? people[1].name : people.length - 1
+  return (
+    <>
+      {people[0].name} <span className="feed-feat">feat.</span> {rest}
+    </>
+  )
 }
 
 function onPost(post, userId) {
@@ -218,7 +222,9 @@ function FeedPeople({ post, onOpen }) {
         className="feed-user-copy"
         onClick={() => onOpen(post.user.id, post.id)}
       >
-        <strong>{collabLabel(people)}</strong>
+        <strong>
+          <CollabName people={people} />
+        </strong>
       </button>
     </div>
   )
