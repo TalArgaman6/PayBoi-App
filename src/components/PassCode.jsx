@@ -33,7 +33,7 @@ export function PassCode({ gift, onGranted }) {
       type: 'svg',
       margin: 1,
       errorCorrectionLevel: 'M',
-      color: { dark: '#000000', light: '#00000000' },
+      color: { dark: '#ffffff', light: '#00000000' },
     }).then((svg) => {
       if (!cancel) setMarkup(svg)
     })

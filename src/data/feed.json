@@ -9,20 +9,24 @@
       "label": "Live"
     },
     {
-      "id": "tonight",
-      "label": "Tonight"
+      "id": "watchme",
+      "label": "WM"
+    },
+    {
+      "id": "featured",
+      "label": "Featured"
     },
     {
       "id": "alternative",
       "label": "Alt"
     },
     {
-      "id": "ticket",
-      "label": "Tickets"
-    },
-    {
       "id": "ask",
       "label": "Ask"
+    },
+    {
+      "id": "ticket",
+      "label": "Tickets"
     },
     {
       "id": "ride",
@@ -32,7 +36,7 @@
   "posts": [
     {
       "id": "alex-ido-mirror-1",
-      "kind": "looks",
+      "kind": "watchme",
       "user": {
         "id": "sagi",
         "name": "Sagi Levi",
@@ -42,7 +46,7 @@
       "caption": "Mirror check. Out in 20.",
       "when": "12m",
       "tags": [
-        "looks",
+        "watchme",
         "forever"
       ],
       "likes": 38,
@@ -56,7 +60,7 @@
     },
     {
       "id": "drag-room-1",
-      "kind": "looks",
+      "kind": "watchme",
       "user": {
         "id": "refael",
         "name": "Refael Haim",
@@ -66,7 +70,7 @@
       "caption": "Drag check. Leaving after this.",
       "when": "18m",
       "tags": [
-        "looks",
+        "watchme",
         "party"
       ],
       "likes": 24
@@ -113,7 +117,7 @@
     },
     {
       "id": "maya-1",
-      "kind": "tonight",
+      "kind": "featured",
       "user": {
         "id": "shani",
         "name": "Shani Amsalem",
@@ -123,7 +127,7 @@
       "caption": "Crew looks before Gordon.",
       "when": "6h",
       "tags": [
-        "tonight",
+        "featured",
         "forever"
       ],
       "likes": 33,
@@ -270,7 +274,7 @@
     },
     {
       "id": "tal-pride-sunrise-1",
-      "kind": "tonight",
+      "kind": "featured",
       "user": {
         "id": "tal",
         "name": "Tal Argaman",
@@ -280,7 +284,7 @@
       "caption": "Forever Pride. Sunrise after the party.",
       "when": "8m",
       "tags": [
-        "tonight",
+        "featured",
         "forever"
       ],
       "likes": 73
@@ -448,7 +452,7 @@
     },
     {
       "id": "sam-music-1",
-      "kind": "tonight",
+      "kind": "featured",
       "user": {
         "id": "itay",
         "name": "Itay Aharoni",
@@ -459,7 +463,7 @@
       "caption": "The club line tonight.",
       "when": "1d",
       "tags": [
-        "tonight",
+        "featured",
         "party"
       ],
       "likes": 19,

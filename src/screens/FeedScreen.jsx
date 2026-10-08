@@ -27,7 +27,8 @@ const ALT_EVENTS = events.items.filter(
 
 const MODES = [
   { id: 'live', label: 'Live' },
-  { id: 'looks', label: 'Look' },
+  { id: 'featured', label: 'Featured' },
+  { id: 'watchme', label: 'WM', title: 'Watch me' },
   { id: 'ticket', label: 'Ticket' },
   { id: 'ask', label: 'Ask' },
   { id: 'ride', label: 'Ride' },
@@ -35,8 +36,9 @@ const MODES = [
 ]
 
 const PLACEHOLDERS = {
-  looks: 'Looks, pre-drinks, the fit',
+  watchme: 'Watch me, the fit',
   live: 'From the floor, live',
+  featured: "What's featured",
   ride: 'Where, when, seats',
   ticket: 'Which night, how many',
   ask: 'Ask which night to pick',
@@ -235,15 +237,15 @@ function kindLabel(kind) {
   if (kind === 'ride') return 'Ride request'
   if (kind === 'ticket') return 'Ticket request'
   if (kind === 'live' || kind === 'clip' || kind === 'music') return 'Live'
-  if (kind === 'looks') return 'Looks'
-  if (kind === 'tonight') return 'Tonight'
+  if (kind === 'watchme') return 'Watch me'
+  if (kind === 'featured') return 'Featured'
   if (kind === 'alternative') return 'Alt'
   return 'Post'
 }
 
 function cardTone(post) {
-  if (post.kind === 'looks') return 'looks'
-  if (post.kind === 'tonight') return 'tonight'
+  if (post.kind === 'watchme') return 'watchme'
+  if (post.kind === 'featured') return 'featured'
   if (post.kind === 'ticket') return 'ticket'
   if (post.kind === 'rating' || post.kind === 'ask') return 'ask'
   if (post.kind === 'ride') return 'ride'
@@ -421,7 +423,7 @@ async function shareToInstagram(post) {
 
 export function FeedScreen() {
   const [posts, setPosts] = useState(catalog.posts)
-  const [mode, setMode] = useState('looks')
+  const [mode, setMode] = useState('watchme')
   const [tag, setTag] = useState('all')
   const [sort, setSort] = useState('new')
   const [caption, setCaption] = useState('')
@@ -582,6 +584,7 @@ export function FeedScreen() {
                   key={item.id}
                   type="button"
                   className={mode === item.id ? 'is-active' : ''}
+                  title={item.title}
                   onClick={() => chooseMode(item.id)}
                 >
                   {item.label}

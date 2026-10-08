@@ -1727,13 +1727,14 @@
   height: 120px;
   padding: 6px;
   border-radius: 12px;
-  background: rgb(255 255 255 / 40%);
+  background: transparent;
 }
 
 .gift-pass-code svg {
   display: block;
   width: 100%;
   height: 100%;
+  opacity: 0.7;
 }
 
 .gift-pass small,
@@ -1936,23 +1937,32 @@
   opacity: 0.45;
 }
 
+.screen-feed .filter-tabs {
+  gap: 2px;
+}
+
+.screen-feed .filter-tabs button {
+  font-size: calc(0.62rem - 1px);
+  padding: 5px 6px;
+}
+
 .feed-mode {
   display: flex;
   flex-wrap: nowrap;
-  gap: 4px;
+  gap: 1px;
   overflow-x: auto;
 }
 
 .feed-mode button {
   height: 26px;
-  padding: 0 9px;
+  padding: 0 6px;
   border: 0;
   border-radius: 999px;
   background: transparent;
   color: var(--muted);
-  font-size: 0.62rem;
+  font-size: calc(0.62rem - 1px);
   font-weight: 600;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   cursor: pointer;
 }
@@ -2247,18 +2257,18 @@
 }
 
 .feed-card.is-live {
-  --feed-glow: rgb(46 92 242 / 22%);
-  --feed-glow-mid: rgb(16 40 90 / 12%);
+  --feed-glow: rgb(214 38 50 / 24%);
+  --feed-glow-mid: rgb(120 28 48 / 13%);
 }
 
-.feed-card.is-looks {
+.feed-card.is-watchme {
   --feed-glow: rgb(112 42 214 / 26%);
   --feed-glow-mid: rgb(72 28 150 / 14%);
 }
 
-.feed-card.is-tonight {
-  --feed-glow: rgb(210 158 78 / 22%);
-  --feed-glow-mid: rgb(82 131 191 / 14%);
+.feed-card.is-featured {
+  --feed-glow: rgb(224 164 32 / 46%);
+  --feed-glow-mid: rgb(210 158 78 / 20%);
 }
 
 .feed-card.is-ticket {
@@ -2267,8 +2277,8 @@
 }
 
 .feed-card.is-ask {
-  --feed-glow: rgb(214 38 50 / 24%);
-  --feed-glow-mid: rgb(120 28 48 / 13%);
+  --feed-glow: rgb(46 92 242 / 22%);
+  --feed-glow-mid: rgb(16 40 90 / 12%);
 }
 
 .feed-card.is-ride {
@@ -2277,8 +2287,8 @@
 }
 
 .feed-card.is-alt {
-  --feed-glow: rgb(224 164 32 / 24%);
-  --feed-glow-mid: rgb(206 120 28 / 12%);
+  --feed-glow: rgb(255 255 255 / 34%);
+  --feed-glow-mid: rgb(255 255 255 / 12%);
 }
 
 .feed-card:not(:last-child) {
