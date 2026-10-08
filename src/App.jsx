@@ -8,6 +8,7 @@ import { Splash } from './components/Splash.jsx'
 import wallet from './data/wallet.json'
 import { formatCost, formatEarn, formatPbs, formatTokenBalance, earnAmount, isEventItem } from './lib/format.js'
 import { rankVars } from './lib/settings.js'
+import { consumeLocationRedeem } from './lib/passes.js'
 import { useWalletTilt } from './lib/tilt.js'
 import { EventsScreen } from './screens/EventsScreen.jsx'
 import { FeedScreen } from './screens/FeedScreen.jsx'
@@ -16,9 +17,11 @@ import { ShopScreen } from './screens/ShopScreen.jsx'
 import { WalletScreen } from './screens/WalletScreen.jsx'
 import './App.css'
 
+const redeemedPassId = consumeLocationRedeem(wallet.gifts)
+
 export default function App() {
-  const [booted, setBooted] = useState(false)
-  const [tab, setTab] = useState('feed')
+  const [booted, setBooted] = useState(Boolean(redeemedPassId))
+  const [tab, setTab] = useState(redeemedPassId ? 'wallet' : 'feed')
   const [selected, setSelected] = useState(null)
   const phone = useRef(null)
   useWalletTilt(phone, booted)
@@ -48,7 +51,9 @@ export default function App() {
             <MarketplaceScreen onSelect={setSelected} />
           ) : null}
           {tab === 'feed' ? <FeedScreen /> : null}
-          {tab === 'wallet' ? <WalletScreen onSelect={setSelected} /> : null}
+          {tab === 'wallet' ? (
+            <WalletScreen onSelect={setSelected} openedPass={redeemedPassId} />
+          ) : null}
           <BottomNav tab={tab} onChange={setTab} />
           {selected ? (
             <aside className="detail-sheet" role="dialog" aria-label={selected.title}>

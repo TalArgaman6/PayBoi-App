@@ -12,15 +12,6 @@
   "caption": "What your nights unlocked",
   "gifts": [
     {
-      "id": "greenroom",
-      "label": "VIP pass",
-      "hint": "Backstage / quiet booth access at pboi festival and circuit nights.",
-      "color": "#e0a420",
-      "metal": "gold",
-      "count": 2,
-      "worth": 6
-    },
-    {
       "id": "door",
       "label": "Skip the door",
       "hint": "Walk in at partner clubs. No queue, no guest-list texting.",
@@ -36,6 +27,15 @@
       "color": "#34cc62",
       "count": 1,
       "worth": 2
+    },
+    {
+      "id": "greenroom",
+      "label": "VIP pass",
+      "hint": "Backstage / quiet booth access at pboi festival and circuit nights.",
+      "color": "#e0a420",
+      "metal": "gold",
+      "count": 2,
+      "worth": 6
     },
     {
       "id": "afters",

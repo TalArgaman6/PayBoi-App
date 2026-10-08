@@ -1,3 +1,5 @@
+import { PassCode } from './PassCode.jsx'
+
 function GiftIcon({ id }) {
   const pen = {
     fill: 'none',
@@ -10,12 +12,9 @@ function GiftIcon({ id }) {
   const mark = {
     greenroom: (
       <>
-        <path
-          {...pen}
-          d="M2.1 8.4c1-2.3 2.7-3.2 4.6-2.4.6.6 1.1.9 1.3 1 .2-.1.7-.4 1.3-1 1.9-.8 3.6.1 4.6 2.4-1 2.1-2.7 2.8-4.6 2-.6-.5-1-.7-1.3-.7s-.7.2-1.3.7c-1.9.8-3.6.1-4.6-2z"
-        />
-        <ellipse {...pen} cx="5.6" cy="8.5" rx="1.2" ry=".95" />
-        <ellipse {...pen} cx="10.4" cy="8.5" rx="1.2" ry=".95" />
+        <path {...pen} d="M8 8 2 4.2v7.6L8 8z" />
+        <path {...pen} d="M8 8 14 4.2v7.6L8 8z" />
+        <path {...pen} d="M7.05 6.15h1.9v3.7h-1.9z" />
       </>
     ),
     door: (
@@ -45,12 +44,19 @@ function GiftIcon({ id }) {
       </>
     ),
     cab: (
-      <>
-        <path {...pen} d="M1.5 9.1h2.6l1.7-3.1h3.5l1.8 3.1H14.5v2.3H1.5z" />
-        <path {...pen} d="M6.2 8.7 7.3 6.5h2.1l1.1 2.2" />
-        <circle {...pen} cx="4.5" cy="11.8" r="1.25" />
-        <circle {...pen} cx="11.5" cy="11.8" r="1.25" />
-      </>
+      <text
+        x="17"
+        y="11.2"
+        textAnchor="middle"
+        fill="currentColor"
+        stroke="none"
+        fontFamily="var(--font-ui), sans-serif"
+        fontSize="8"
+        fontWeight="700"
+        letterSpacing="0.4"
+      >
+        TAXI
+      </text>
     ),
     scooter: (
       <>
@@ -63,15 +69,22 @@ function GiftIcon({ id }) {
     ),
   }[id]
 
+  const word = id === 'cab'
+
   return (
-    <svg className="gift-icon" viewBox="0 0 16 16" aria-hidden="true">
+    <svg
+      className={`gift-icon${word ? ' is-word' : ''}`}
+      viewBox={word ? '0 0 34 16' : '0 0 16 16'}
+      aria-hidden="true"
+    >
       {mark}
     </svg>
   )
 }
 
-export function RiderRow({ gift, open, lit, onHover, onToggle }) {
+export function RiderRow({ gift, count, open, lit, onHover, onToggle, onGranted }) {
   function onKeyDown(event) {
+    if (event.target !== event.currentTarget) return
     if (event.key !== 'Enter' && event.key !== ' ') return
     event.preventDefault()
     onToggle()
@@ -90,8 +103,9 @@ export function RiderRow({ gift, open, lit, onHover, onToggle }) {
     >
       <GiftIcon id={gift.id} />
       <em>{gift.label}</em>
-      <b>{gift.count}</b>
+      <b>{count}</b>
       {open ? <p className="gift-tip">{gift.hint}</p> : null}
+      {open ? <PassCode gift={gift} onGranted={onGranted} /> : null}
     </li>
   )
 }

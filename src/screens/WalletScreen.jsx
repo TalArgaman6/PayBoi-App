@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import wallet from '../data/wallet.json'
 import { FilterTabs } from '../components/FilterTabs.jsx'
 import { ItemRow } from '../components/ItemRow.jsx'
@@ -8,6 +8,7 @@ import { WalletCard } from '../components/WalletCard.jsx'
 import { WalletSky } from '../components/WalletSky.jsx'
 import { PRICE_RANGES, inPriceRange } from '../lib/filters.js'
 import { assetUrl, formatPbs } from '../lib/format.js'
+import { passCounts, watchPasses } from '../lib/passes.js'
 import { kindLabel, suggestionsForBalance } from '../lib/suggestions.js'
 
 const SUGGESTION_FILTERS = [
@@ -16,13 +17,17 @@ const SUGGESTION_FILTERS = [
   { id: 'shop', label: 'Drop' },
 ]
 
-export function WalletScreen({ onSelect }) {
+export function WalletScreen({ onSelect, openedPass = null }) {
   const [kind, setKind] = useState('all')
   const [price, setPrice] = useState('all')
-  const [openGift, setOpenGift] = useState(null)
+  const [openGift, setOpenGift] = useState(openedPass)
+  const [passTick, setPassTick] = useState(0)
   const [hoverGift, setHoverGift] = useState(null)
   const [selectedGift, setSelectedGift] = useState(null)
   const litGift = hoverGift || selectedGift || openGift
+  const counts = useMemo(() => passCounts(wallet.gifts), [passTick])
+
+  useEffect(() => watchPasses(() => setPassTick((tick) => tick + 1)), [])
   const curated = useMemo(
     () => suggestionsForBalance(wallet.balance),
     [],
@@ -57,6 +62,7 @@ export function WalletScreen({ onSelect }) {
               <RiderRow
                 key={gift.id}
                 gift={gift}
+                count={counts[gift.id]}
                 open={openGift === gift.id}
                 lit={litGift === gift.id}
                 onHover={setHoverGift}
@@ -66,6 +72,10 @@ export function WalletScreen({ onSelect }) {
                     setSelectedGift(next)
                     return next
                   })
+                }}
+                onGranted={() => {
+                  setOpenGift(null)
+                  setSelectedGift(null)
                 }}
               />
             ))}

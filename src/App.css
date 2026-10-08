@@ -1518,7 +1518,7 @@
 
 .gift-room li {
   display: grid;
-  grid-template-columns: 16px 1fr auto;
+  grid-template-columns: 34px 1fr auto;
   gap: 10px;
   align-items: center;
   padding: 8px 0;
@@ -1534,8 +1534,13 @@
 .gift-icon {
   width: 16px;
   height: 16px;
+  justify-self: center;
   display: block;
   color: rgb(255 255 255 / 88%);
+}
+
+.gift-icon.is-word {
+  width: 34px;
 }
 
 .gift-room em {
@@ -1551,13 +1556,192 @@
 
 .gift-tip {
   grid-column: 1 / -1;
-  margin: 0 0 6px 26px;
+  margin: 0 0 6px 44px;
   padding: 2px 0 4px;
   border-radius: 0;
   background: transparent;
   color: var(--ink);
   font-size: 0.75rem;
   line-height: 1.4;
+}
+
+.gift-pass {
+  grid-column: 1 / -1;
+  display: grid;
+  justify-items: start;
+  gap: 6px;
+  margin: 2px 0 10px 44px;
+}
+
+.gift-pass small {
+  text-align: left;
+}
+
+.gift-pass-side {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.gift-grant {
+  width: 28px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+
+.gift-grant svg {
+  width: 26px;
+  height: 20px;
+}
+
+.gift-pop {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgb(8 6 18 / 46%);
+}
+
+.gift-pop-card {
+  width: min(260px, 100%);
+  padding: 10px 12px 0;
+  border-radius: 16px;
+  background: rgb(22 24 31 / 94%);
+}
+
+.gift-pop-search {
+  width: 100%;
+  margin: 0 0 6px;
+  padding: 7px 10px;
+  border: 0;
+  border-radius: 8px;
+  outline: none;
+  appearance: none;
+  background: rgb(255 255 255 / 10%);
+  color: #fff;
+  font: inherit;
+  font-size: 0.78rem;
+}
+
+.gift-pop-search::placeholder {
+  color: rgb(255 255 255 / 48%);
+}
+
+.gift-pop-list {
+  max-height: 170px;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.gift-pop-list::-webkit-scrollbar {
+  display: none;
+}
+
+.gift-pop-list button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 8px 2px;
+  border: 0;
+  border-bottom: 1px solid rgb(255 255 255 / 28%);
+  background: transparent;
+  color: #fff;
+  font: inherit;
+  font-size: 0.78rem;
+  text-align: left;
+  cursor: pointer;
+}
+
+.gift-pop-list button:last-child {
+  border-bottom: 0;
+}
+
+.gift-pop-list img {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.gift-pop-confirm {
+  display: grid;
+  justify-items: center;
+  gap: 12px;
+  padding: 14px 4px 16px;
+  text-align: center;
+  color: #fff;
+}
+
+.gift-pop-confirm img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.gift-pop-confirm p {
+  margin: 0;
+  font-size: 0.84rem;
+  line-height: 1.35;
+}
+
+.gift-pop-actions {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+}
+
+.gift-pop-actions button {
+  flex: 1;
+  border: 0;
+  border-radius: 999px;
+  padding: 8px 10px;
+  background: rgb(255 255 255 / 12%);
+  color: #fff;
+  -webkit-text-fill-color: #fff;
+  font: inherit;
+  font-size: 0.78rem;
+  cursor: pointer;
+}
+
+.gift-pop-actions button.is-confirm {
+  background: #fff;
+  color: #12141c;
+  -webkit-text-fill-color: #12141c;
+}
+
+.gift-pass-code {
+  width: 120px;
+  height: 120px;
+  padding: 6px;
+  border-radius: 12px;
+  background: rgb(255 255 255 / 40%);
+}
+
+.gift-pass-code svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.gift-pass small,
+.gift-pass-note {
+  margin: 0;
+  color: rgb(255 255 255 / 78%);
+  font-size: 0.68rem;
+}
+
+.gift-pass-note {
+  grid-column: 1 / -1;
+  margin: 0 0 8px 44px;
 }
 
 .splash {
@@ -1594,7 +1778,7 @@
   display: grid;
   margin: 0 0 64px;
   min-height: 1.2em;
-  font-family: var(--font-ui);
+  font-family: Figtree, system-ui, sans-serif;
   font-size: 0.62rem;
   font-weight: 600;
   font-style: normal;
@@ -1611,8 +1795,7 @@
   visibility: hidden;
 }
 
-.splash-line-live,
-.feed-feat {
+.splash-line-live {
   background-image: linear-gradient(
     90deg,
     rgb(128 60 222) 0%,
@@ -2186,7 +2369,17 @@
 }
 
 .feed-user strong .feed-feat {
+  background-image: linear-gradient(
+    90deg,
+    rgb(236 108 34) 0%,
+    rgb(224 164 32) 34%,
+    rgb(52 204 98) 68%,
+    rgb(24 196 214) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
   color: transparent;
+  -webkit-text-fill-color: transparent;
   margin-inline: 1px;
 }
 
