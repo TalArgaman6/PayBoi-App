@@ -2142,7 +2142,7 @@
   font-size: 0.62rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--gold);
+  color: var(--violet);
 }
 
 .feed-track {
@@ -2480,15 +2480,18 @@
 }
 
 .feed-user strong .feed-feat {
-  /* Bowl height matches the name letters. Stems paint outside the line. */
-  --bowl: 0.757em;
+  /* Bowl height sits a little under the name letters. Stems paint outside
+     the line. The box is baseline-aligned, so shrinking the bowl would drop
+     its optical centre; the lift puts that centre back where it was. */
+  --bowl: 0.66em;
+  --bowl-lift: calc(0.049em - 1px);
   font-size: 1em;
   display: inline-block;
   position: relative;
   width: calc(var(--bowl) * 354 / 190);
   height: var(--bowl);
   margin-inline: 0.08em;
-  vertical-align: baseline;
+  vertical-align: var(--bowl-lift);
 }
 
 .feed-user strong .feed-feat::before {
