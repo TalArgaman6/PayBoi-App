@@ -3015,6 +3015,16 @@
   letter-spacing: 0.02em;
 }
 
+/* The confirming button picks up the accent on hover — a soft amethyst plate
+   with the lifted purple ink. :not(:disabled) so a button you can't press
+   doesn't promise that you can. */
+.pay-btn:not(:disabled):hover,
+.pay-btn:not(:disabled):active {
+  background: #30275a;
+  color: var(--live-lift);
+  -webkit-text-fill-color: var(--live-lift);
+}
+
 .ghost-btn {
   background: var(--wash);
 }
