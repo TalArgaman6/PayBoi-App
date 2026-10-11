@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { BottomNav } from './components/BottomNav.jsx'
 import { ItemThumb } from './components/ItemRow.jsx'
-import { EarnBadge } from './components/EarnBadge.jsx'
 import { RemixProvider } from './components/RemixPlayer.jsx'
 import { Splash } from './components/Splash.jsx'
 import wallet from './data/wallet.json'
@@ -96,15 +95,8 @@ export default function App() {
                   <strong>{selected.title}</strong>
                   <span>{selected.subtitle}</span>
                 </div>
-                {/* The seller's face used to take this corner on listings; the
-                    price belongs there on every sheet, and their name is
-                    already on the PM button below. */}
-                <span className="item-price">
-                  <span className="cost-mark">{formatCost(selected)}</span>
-                  {tab === 'events' && isEventItem(selected) ? (
-                    <EarnBadge item={selected} />
-                  ) : null}
-                </span>
+                {/* Nothing in this corner. The price is on the pay line and on
+                    the button right below it; a third copy was just noise. */}
               </div>
               {pmOpen && selected.seller ? (
                 <>

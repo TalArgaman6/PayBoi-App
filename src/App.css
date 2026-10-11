@@ -2953,16 +2953,9 @@
 
 .detail-head {
   display: grid;
-  grid-template-columns: 64px 1fr auto;
+  grid-template-columns: 64px 1fr;
   gap: 12px;
   align-items: start;
-}
-
-/* The price sits on the title's line rather than floating at the centre of a
-   two-line head — start, plus the title's own cap offset. */
-.detail-head > .item-price {
-  align-self: start;
-  margin-top: 2px;
 }
 
 .detail-head .item-thumb {
