@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react'
 import { BottomNav } from './components/BottomNav.jsx'
 import { ItemThumb, TicketMark } from './components/ItemRow.jsx'
 import { EarnBadge } from './components/EarnBadge.jsx'
-import { SellerFace } from './components/SellerFace.jsx'
 import { RemixProvider } from './components/RemixPlayer.jsx'
 import { Splash } from './components/Splash.jsx'
 import wallet from './data/wallet.json'
@@ -101,16 +100,15 @@ export default function App() {
                   </strong>
                   <span>{selected.subtitle}</span>
                 </div>
-                {selected.seller ? (
-                  <SellerFace seller={selected.seller} size="detail" />
-                ) : (
-                  <span className="item-price">
-                    <span className="cost-mark">{formatCost(selected)}</span>
-                    {tab === 'events' && isEventItem(selected) ? (
-                      <EarnBadge item={selected} />
-                    ) : null}
-                  </span>
-                )}
+                {/* The seller's face used to take this corner on listings; the
+                    price belongs there on every sheet, and their name is
+                    already on the PM button below. */}
+                <span className="item-price">
+                  <span className="cost-mark">{formatCost(selected)}</span>
+                  {tab === 'events' && isEventItem(selected) ? (
+                    <EarnBadge item={selected} />
+                  ) : null}
+                </span>
               </div>
               {pmOpen && selected.seller ? (
                 <>
