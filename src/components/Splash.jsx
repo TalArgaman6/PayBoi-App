@@ -41,7 +41,8 @@ export function Splash({ onDone }) {
         </span>
         <span className="splash-line-live">
           {shown}
-          <i />
+          {/* A full stop, not a caret — it only belongs once the line is written. */}
+          {shown.length >= LINE.length ? <i /> : null}
         </span>
       </p>
     </button>

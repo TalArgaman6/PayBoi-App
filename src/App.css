@@ -222,10 +222,12 @@
 
 .screen-header h1 {
   margin: 0;
-  font-family: Outfit, var(--font-ui), sans-serif;
-  font-size: 1.518rem;
-  font-weight: 200;
-  letter-spacing: 0.14em;
+  /* Serif caps run smaller on the body than a sans at the same size, so the
+     point size goes up to keep the optical height the header had. */
+  font-family: var(--font-title);
+  font-size: 1.85rem;
+  font-weight: 300;
+  letter-spacing: 0.13em;
   text-transform: uppercase;
   line-height: 1;
   margin-top: -0.087rem;
@@ -1200,7 +1202,7 @@
 .wallet-opal-4,
 .wallet-opal-5,
 .wallet-opal-6 {
-  --gain: 1.7;
+  --gain: 2.2;
   will-change: opacity;
   opacity: clamp(
     0,
@@ -2032,13 +2034,15 @@
   -webkit-text-fill-color: #fff;
 }
 
+/* A blinking full stop rather than a caret bar — same pulse, softer mark. */
 .splash-line i {
   display: inline-block;
-  width: 1px;
-  height: 0.85em;
-  margin-left: 3px;
-  background: #8b90a0;
-  vertical-align: -1px;
+  width: 2.5px;
+  height: 2.5px;
+  margin-left: 0.42em;
+  border-radius: 50%;
+  background: currentColor;
+  vertical-align: baseline;
   animation: caret 1s step-end infinite;
 }
 

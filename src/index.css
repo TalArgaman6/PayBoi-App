@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600&family=Inter:wght@400;600;700&family=Outfit:wght@200&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Sora:wght@200&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Figtree:wght@400;500;600&family=Inter:wght@400;600;700&family=Outfit:wght@200&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Sora:wght@200&display=swap');
 
 :root {
   font-family: Figtree, system-ui, sans-serif;
@@ -10,6 +10,8 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   --font-display: "Plus Jakarta Sans", system-ui, sans-serif;
+  /* High-contrast serif for screen titles — thin stems, wide caps. */
+  --font-title: "Cormorant Garamond", Didot, Georgia, serif;
   --font-ui: "Plus Jakarta Sans", system-ui, sans-serif;
   --accent: #d1b45f;
   --accent-ink: #1c1a18;
