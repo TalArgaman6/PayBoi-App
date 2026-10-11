@@ -3020,9 +3020,9 @@
    doesn't promise that you can. */
 .pay-btn:not(:disabled):hover,
 .pay-btn:not(:disabled):active {
-  background: #30275a;
-  color: var(--live-lift);
-  -webkit-text-fill-color: var(--live-lift);
+  background: var(--live-lift);
+  color: #fff;
+  -webkit-text-fill-color: #fff;
 }
 
 .ghost-btn {
