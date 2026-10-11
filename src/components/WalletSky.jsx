@@ -8,12 +8,12 @@ import { assetUrl } from '../lib/format.js'
  * full circle the highlight can travel anywhere. App.css does the weighting.
  */
 const LIGHT_FRAMES = [
-  'wallet-crystal-1.webp?v=glass',
-  'wallet-crystal-2.webp?v=glass',
-  'wallet-crystal-3.webp?v=glass',
-  'wallet-crystal-4.webp?v=glass',
-  'wallet-crystal-5.webp?v=glass',
-  'wallet-crystal-6.webp?v=glass',
+  'wallet-crystal-1.webp?v=facet3',
+  'wallet-crystal-2.webp?v=facet3',
+  'wallet-crystal-3.webp?v=facet3',
+  'wallet-crystal-4.webp?v=facet3',
+  'wallet-crystal-5.webp?v=facet3',
+  'wallet-crystal-6.webp?v=facet3',
 ]
 
 export function WalletSky() {
