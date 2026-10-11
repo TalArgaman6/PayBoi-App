@@ -245,9 +245,14 @@ export function useWalletTilt(ref, ready = true) {
       y += dy
 
       const speed = Math.min(Math.hypot(dx, dy) * 11, 1)
-      level = speed > level ? speed : level + (speed - level) * 0.1
-      if (level > 0.015) phase += 0.17 + level * 0.2
-      const beat = ((1 + Math.cos(phase)) / 2) ** 4
+      // Ease up to the peak rather than snapping to it, and fall away slowly,
+      // so the light swells instead of striking.
+      level += (speed - level) * (speed > level ? 0.22 : 0.07)
+      // A slower pulse, and a squared cosine rather than a fourth power: the
+      // bright part is broad and the gaps between beats are shallow, so it
+      // breathes across the facets instead of strobing.
+      if (level > 0.015) phase += 0.075 + level * 0.09
+      const beat = ((1 + Math.cos(phase)) / 2) ** 2
 
       paint(node, x, y, level * beat)
       if (live) raf = window.requestAnimationFrame(tick)
