@@ -286,7 +286,9 @@ function RemixAbout({ open, onClose, dj, party }) {
       />
       <aside className="drawer-panel" role="dialog" aria-label="About the set">
         <header className="drawer-head">
-          <h2>Tonight&apos;s DJ</h2>
+          {/* No title — the cards name themselves. The empty heading is kept
+              so the head keeps its height and the Close button its position. */}
+          <h2 aria-hidden="true">&nbsp;</h2>
           <button type="button" className="drawer-text" onClick={onClose}>
             Close
           </button>
