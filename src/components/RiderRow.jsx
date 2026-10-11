@@ -2,7 +2,6 @@ import { assetUrl } from '../lib/format.js'
 import { PassCode } from './PassCode.jsx'
 
 const GIFT_MASKS = {
-  door: 'icons/skip-door.png',
   pour: 'icons/first-pour.png',
   scooter: 'icons/scooter.png',
   afters: 'icons/afters-bracelet.png',
@@ -12,7 +11,7 @@ function GiftIcon({ id }) {
   if (GIFT_MASKS[id]) {
     return (
       <span
-        className={`gift-icon is-mask${id === 'door' ? ' is-wide' : ''}`}
+        className={`gift-icon is-mask${id === 'afters' ? ' is-afters' : ''}`}
         style={{ '--icon': `url("${assetUrl(GIFT_MASKS[id])}")` }}
         aria-hidden="true"
       />
@@ -28,6 +27,32 @@ function GiftIcon({ id }) {
   }
 
   const mark = {
+    // Skip the door: an old lever key with a trefoil bow. Drawn upright on
+    // the 16px grid, then rotated so it sits on the same diagonal as the
+    // other marks instead of standing straight up.
+    door: (
+      <g transform="rotate(-38 8 8)">
+        <circle {...pen} strokeWidth="1.15" cx="8" cy="2.95" r="1.42" />
+        <circle {...pen} strokeWidth="1.15" cx="5.9" cy="4.55" r="1.42" />
+        <circle {...pen} strokeWidth="1.15" cx="10.1" cy="4.55" r="1.42" />
+        <path
+          {...pen}
+          strokeWidth="1.25"
+          d="M8 6.05v7.15"
+        />
+        <path
+          {...pen}
+          strokeWidth="1.15"
+          d="M6.95 9.15h2.1"
+        />
+        <path
+          {...pen}
+          strokeWidth="1.15"
+          strokeLinecap="square"
+          d="M8.25 11.1h1.75M8.25 12.75h1.45"
+        />
+      </g>
+    ),
     greenroom: (
       <path
         fill="currentColor"
@@ -63,7 +88,7 @@ function GiftIcon({ id }) {
 
   return (
     <svg
-      className={`gift-icon${word ? ' is-word' : ''}`}
+      className={`gift-icon${word ? ' is-word' : ''}${id === 'door' ? ' is-key' : ''}`}
       viewBox={word ? '0 0 34 16' : '0 0 16 16'}
       aria-hidden="true"
     >

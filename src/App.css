@@ -1107,6 +1107,97 @@
   pointer-events: none;
 }
 
+/*
+ * Light drift. Each frame is the same crystal lit from a different angle,
+ * so crossfading them makes the shading travel across the facets. Long and
+ * offset so the loop never announces itself.
+ */
+/*
+ * The three frames are the same crystal lit from different angles, so their
+ * blend decides where the light falls. Tilt and hover both feed --tilt-x /
+ * --tilt-y (see lib/tilt.js), which means moving the phone or the mouse
+ * swings the light across the facets.
+ *
+ * Frame 1 (lit from the right) is the opaque base, so the hero never shows
+ * through. Frames 2 and 3 are the upper-left and lower-left renders; their
+ * opacity rises as the tilt points that way. The idle animation underneath
+ * keeps it alive when nothing is touching it.
+ */
+.wallet-opal-1 {
+  opacity: 1;
+}
+
+/*
+ * Animating opacity directly would beat the tilt value, since animations
+ * outrank normal declarations. So the idle drift animates a registered
+ * custom property instead and gets *added* to the tilt term below. Where
+ * @property is unsupported it stays 0 and tilt simply takes over.
+ */
+@property --wallet-idle {
+  syntax: '<number>';
+  inherits: false;
+  initial-value: 0;
+}
+
+.wallet-opal-2,
+.wallet-opal-3 {
+  will-change: opacity;
+  animation: wallet-idle 27s ease-in-out infinite;
+}
+
+/* Upper-left source: strongest when tilted left and away. */
+.wallet-opal-2 {
+  opacity: clamp(
+    0,
+    calc(
+      (var(--tilt-x, 0) * -1 - var(--tilt-y, 0)) * 0.85 + var(--wallet-idle)
+    ),
+    1
+  );
+  animation-delay: -18s;
+}
+
+/* Lower-left source: strongest when tilted left and toward you. */
+.wallet-opal-3 {
+  opacity: clamp(
+    0,
+    calc(
+      (var(--tilt-x, 0) * -1 + var(--tilt-y, 0)) * 0.85 + var(--wallet-idle)
+    ),
+    1
+  );
+  animation-delay: -9s;
+}
+
+/* Shallow, so a real tilt always reads louder than the idle drift. */
+@keyframes wallet-idle {
+  0%,
+  66%,
+  100% {
+    --wallet-idle: 0;
+  }
+
+  22%,
+  44% {
+    --wallet-idle: 0.4;
+  }
+}
+
+@media (hover: hover) {
+  .wallet-opal-2,
+  .wallet-opal-3 {
+    transition: opacity 180ms ease-out;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wallet-opal-2,
+  .wallet-opal-3 {
+    animation: none;
+  }
+}
+
+
 .wallet-sky {
   position: absolute;
   inset: 0;
@@ -1532,12 +1623,26 @@
   border-bottom: 0;
 }
 
+/* Every mark sits in the same square box so the column reads evenly; masks
+   use `contain`, so a wide source (the bracelet) just fills less of it. */
 .gift-icon {
-  width: 13px;
-  height: 13px;
+  width: 14px;
+  height: 14px;
   justify-self: center;
   display: block;
   color: #fff;
+}
+
+/* The key runs on a diagonal, so it eats less of its box than the upright
+   marks do. A little extra width evens it out optically. */
+.gift-icon.is-key {
+  width: 16px;
+  height: 16px;
+}
+
+/* Tilt the bracelet onto roughly the same diagonal as the key. */
+.gift-icon.is-afters {
+  transform: rotate(-14deg);
 }
 
 .gift-icon.is-mask {
@@ -1785,6 +1890,25 @@
   grid-area: 1 / 1;
   display: grid;
   place-items: center;
+}
+
+/* Recolorable variant: the white logo art is used as a mask, so the box
+   paints in currentColor. A span has no intrinsic size, hence the ratio. */
+.pboi-logo.is-tinted {
+  aspect-ratio: 652 / 378;
+  background-color: currentColor;
+  -webkit-mask-image: var(--logo);
+  mask-image: var(--logo);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+}
+
+.screen-header .pboi-logo {
+  color: var(--gold-soft);
 }
 
 .splash .pboi-logo {
@@ -2035,7 +2159,7 @@
 .feed-card > p.feed-tags,
 .feed-auto-tags {
   margin: 0;
-  color: var(--rose);
+  color: var(--gold-soft);
   font-size: 0.74rem;
 }
 
@@ -2378,7 +2502,7 @@
   top: calc(var(--bowl) * -74 / 190);
   width: 100%;
   height: calc(var(--bowl) * 326 / 190);
-  background: var(--rose);
+  background: var(--gold-soft);
   -webkit-mask-image: var(--mark);
   mask-image: var(--mark);
   -webkit-mask-repeat: no-repeat;
