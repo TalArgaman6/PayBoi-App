@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600&family=Inter:wght@400;600;700&family=Outfit:wght@200&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Sora:wght@200&display=swap');
+
+:root {
+  font-family: Figtree, system-ui, sans-serif;
+  color: #fff;
+  background: #12141c;
+  color-scheme: dark only;
+  supported-color-schemes: dark;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  --font-display: "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-ui: "Plus Jakarta Sans", system-ui, sans-serif;
+  --accent: #d1b45f;
+  --accent-ink: #1c1a18;
+  --gold: #d1b45f;
+  --sky: #8ec8ea;
+  --ink: #fff;
+  --chrome: #101218;
+  --sheet: #16181f;
+  --muted: #8b90a0;
+  --kicker: #ececec;
+  --btn: #2a2d38;
+  --btn-ink: #d7dbe8;
+  --wash: #1c1f28;
+  --line: #2a2e3a;
+  --nav: #12141a;
+  --header-grad: linear-gradient(135deg, #2db0e0 0%, #3b82f0 48%, #3d74dc 100%);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  min-height: 100%;
+  touch-action: pan-x pan-y;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  min-width: 320px;
+}
+
+button,
+input,
+select {
+  font: inherit;
+  color: inherit;
+  -webkit-text-fill-color: inherit;
+}
+
+a,
+a:visited,
+a:hover,
+a:active,
+a[x-apple-data-detectors],
+a[href^='tel:'],
+a[href^='sms:'] {
+  color: inherit;
+  -webkit-text-fill-color: inherit;
+  text-decoration: none;
+}
