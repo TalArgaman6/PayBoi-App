@@ -153,7 +153,7 @@ export default function App() {
                 <>
                   <p>
                     {selected.seller
-                      ? `Pay ${formatCost(selected)} to ${selected.seller.name}. Fixed price — their profile is on the listing.`
+                      ? `${formatCost(selected)} to ${pmName(selected.seller)} · fixed price`
                       : selected.pricePbs <= wallet.balance
                         ? isEventItem(selected)
                           ? `${formatCost(selected)} · earn ${formatEarn(earnAmount(selected))} · ${formatPbs(wallet.balance - selected.pricePbs)} left`
