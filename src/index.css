@@ -10,10 +10,9 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   --font-display: "Plus Jakarta Sans", system-ui, sans-serif;
-  /* Screen titles. A rounded geometric that shares its construction with the
-     pboi wordmark, so the header reads as one lockup rather than a serif
-     sitting next to a logo it has nothing in common with. */
-  --font-title: Quicksand, "Plus Jakarta Sans", system-ui, sans-serif;
+  /* Screen titles share the display face used for names elsewhere in the app,
+     so the header speaks in the same voice as the cards beneath it. */
+  --font-title: "Plus Jakarta Sans", system-ui, sans-serif;
   --font-ui: "Plus Jakarta Sans", system-ui, sans-serif;
   --accent: #d1b45f;
   --accent-ink: #1c1a18;

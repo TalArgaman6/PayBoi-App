@@ -222,13 +222,12 @@
 
 .screen-header h1 {
   margin: 0;
-  /* Rounded geometric caps sit optically larger than the serif did, so the
-     point size comes back down and the tracking opens up to keep the airy,
-     spaced-out feel the header had. */
+  /* A grotesque at 700 carries far more weight per cap than the rounded face
+     did, so the size and tracking both come in to stop it shouting. */
   font-family: var(--font-title);
-  font-size: 1.35rem;
-  font-weight: 600;
-  letter-spacing: 0.14em;
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   line-height: 1;
   margin-top: -0.087rem;
