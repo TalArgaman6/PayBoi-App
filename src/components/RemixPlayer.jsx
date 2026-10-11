@@ -229,7 +229,6 @@ export function RemixBanner() {
           <PlayMark playing={now.playing} />
         </span>
         <div className="feature-copy">
-          <span>{now.playing ? 'Now playing' : 'Paused'}</span>
           <strong>{now.title}</strong>
           <em>{line}</em>
         </div>
