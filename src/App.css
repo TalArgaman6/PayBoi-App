@@ -2270,6 +2270,28 @@
   flex-shrink: 0;
   display: block;
   color: var(--live-deep);
+  /* A recording light: full for most of the beat, then a quick dip. It never
+     reaches zero, so the mark pulses rather than blinking out of the line. */
+  animation: live-pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes live-pulse {
+  0%,
+  55%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  78% {
+    opacity: 0.3;
+    transform: scale(0.88);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .live-heart {
+    animation: none;
+  }
 }
 
 .feed-track {
