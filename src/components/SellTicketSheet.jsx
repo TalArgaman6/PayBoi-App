@@ -1,7 +1,6 @@
 import { useRef, useState } from 'react'
 import events from '../data/events.json'
 import { ItemThumb } from './ItemRow.jsx'
-import { formatCost } from '../lib/format.js'
 import { useDismissOnOutside } from '../lib/dismiss.js'
 
 const OPTIONS = events.items
@@ -48,9 +47,6 @@ export function SellTicketSheet({ open, onClose, onList }) {
           <strong>{picked.title}</strong>
           <span>{picked.subtitle}</span>
         </div>
-        <span className="item-price">
-          <span className="cost-mark">{formatCost(picked)}</span>
-        </span>
       </div>
       <p>Listed at face value. Buyers see your photo, not your points.</p>
       <label className="sell-field">
