@@ -2217,7 +2217,9 @@
   height: 2.5px;
   margin-left: 0.42em;
   border-radius: 50%;
-  background: currentColor;
+  /* The one accent on the splash — the full stop lands in amethyst rather
+     than inheriting the white of the line it closes. */
+  background: var(--live);
   vertical-align: baseline;
   animation: caret 1s step-end infinite;
 }
