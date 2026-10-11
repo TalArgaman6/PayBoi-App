@@ -1234,6 +1234,14 @@
   object-fit: cover;
   object-position: center 18%;
   pointer-events: none;
+  /* Only the right 60% of the render is used, blown up to fill the frame:
+     1 / 0.6 ≈ 1.667, anchored to the right edge so that slice is what lands.
+     Done with a transform rather than by cropping the files, so the sources
+     stay at full resolution — at 1440px wide the 60% slice is still ~860px
+     against a ~390pt frame, well above 2x, and .wallet-wash clips the rest. */
+  --crop: 1.6667;
+  transform: scale(var(--crop));
+  transform-origin: 100% 18%;
 }
 
 /*
