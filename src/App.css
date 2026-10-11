@@ -3020,7 +3020,7 @@
    doesn't promise that you can. */
 .pay-btn:not(:disabled):hover,
 .pay-btn:not(:disabled):active {
-  background: var(--live-lift);
+  background: rgb(183 140 232 / 22%);
   color: #fff;
   -webkit-text-fill-color: #fff;
 }
