@@ -3,7 +3,7 @@ import catalog from '../data/feed.json'
 import events from '../data/events.json'
 import wallet from '../data/wallet.json'
 import { FilterTabs } from '../components/FilterTabs.jsx'
-import { RemixNowPlaying } from '../components/RemixPlayer.jsx'
+import { RemixBanner } from '../components/RemixPlayer.jsx'
 import { ScreenHeader } from '../components/ScreenHeader.jsx'
 import { ALT_EVENT_TYPES } from '../lib/filters.js'
 import { assetUrl, shortName } from '../lib/format.js'
@@ -571,6 +571,7 @@ export function FeedScreen() {
     <section className="screen screen-feed">
       <ScreenHeader title="Feed" />
       <div className="sheet">
+        <RemixBanner />
         <form
           className="feed-composer"
           onSubmit={(event) => {
@@ -678,7 +679,6 @@ export function FeedScreen() {
               </button>
             ))}
           </div>
-          <RemixNowPlaying />
         </div>
         <FilterTabs
           filters={FEED_FILTERS}

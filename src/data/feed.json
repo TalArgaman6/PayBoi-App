@@ -53,7 +53,7 @@
       "with": [
         {
           "id": "sahar",
-          "name": "Sahar Avraham",
+          "name": "Sahar Liam",
           "photo": "photos/sellers/jordan.jpg"
         }
       ]
@@ -185,7 +185,7 @@
       "kind": "live",
       "user": {
         "id": "sahar",
-        "name": "Sahar Avraham",
+        "name": "Sahar Liam",
         "photo": "photos/sellers/jordan.jpg"
       },
       "image": "photos/club-lasers.jpg",
@@ -418,7 +418,7 @@
       "kind": "alternative",
       "user": {
         "id": "sahar",
-        "name": "Sahar Avraham",
+        "name": "Sahar Liam",
         "photo": "photos/sellers/jordan.jpg"
       },
       "image": "photos/volleyball.jpg",

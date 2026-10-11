@@ -7,6 +7,7 @@ import {
   useState,
 } from 'react'
 import remix from '../data/remix.json'
+import { assetUrl } from '../lib/format.js'
 
 const RemixContext = createContext(null)
 const LIVE_VOL = 80
@@ -199,6 +200,49 @@ function MuteMark({ muted }) {
         d="M2.2 6.1h2.1L7.6 3.4v9.2L4.3 9.9H2.2zm7.2.4c.7.5 1.1 1.2 1.1 1.5s-.4 1-.1 1.5l-.8.5c-.2-.4-.5-.8-.5-2s.3-1.6.5-2zm1.9-1.4c1.1.9 1.8 2 1.8 2.9s-.7 2-1.8 2.9l-.7-.7c.9-.7 1.4-1.5 1.4-2.2s-.5-1.5-1.4-2.2z"
       />
     </svg>
+  )
+}
+
+/*
+ * The feed's version of the Events/Market featured slide: same frame, but
+ * it only ever holds one item — the track that's playing — so there are no
+ * dots and the slide itself is the play control.
+ */
+export function RemixBanner() {
+  const now = useContext(RemixContext)
+  if (!now || !remix.url) return null
+
+  const line = [now.dj, now.party].filter(Boolean).join(' · ')
+
+  return (
+    <div className={`feature-banner is-remix${now.muted ? ' is-muted' : ''}`}>
+      <button
+        type="button"
+        className="feature-slide"
+        onClick={now.togglePlay}
+        aria-label={now.playing ? 'Pause remix' : 'Play remix'}
+      >
+        {remix.cover ? (
+          <img src={assetUrl(remix.cover)} alt="" />
+        ) : null}
+        <span className="remix-badge" aria-hidden="true">
+          <PlayMark playing={now.playing} />
+        </span>
+        <div className="feature-copy">
+          <span>{now.playing ? 'Now playing' : 'Paused'}</span>
+          <strong>{now.title}</strong>
+          <em>{line}</em>
+        </div>
+      </button>
+      <button
+        type="button"
+        className="remix-mute"
+        onClick={now.toggleMute}
+        aria-label={now.muted ? 'Unmute remix' : 'Mute remix'}
+      >
+        <MuteMark muted={now.muted} />
+      </button>
+    </div>
   )
 }
 
