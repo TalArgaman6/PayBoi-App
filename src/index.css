@@ -29,6 +29,7 @@
   /* Warm, slightly orange red — it stays legible on the dark sheet where a
      pure red would vibrate against it. */
   --live: #f0544c;
+  --live-deep: #b4332a;
   --ink: #fff;
   --chrome: #101218;
   --sheet: #16181f;

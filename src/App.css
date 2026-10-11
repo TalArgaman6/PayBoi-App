@@ -2256,7 +2256,20 @@
 /* The one kicker that reports something happening right now, so it takes the
    live red rather than the gold the other kickers share. */
 .rate-kicker.is-live {
+  display: flex;
+  align-items: center;
+  gap: 6px;
   color: var(--live);
+}
+
+/* Deeper than the words beside it, so the mark anchors the line instead of
+   competing with it. */
+.live-heart {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  display: block;
+  color: var(--live-deep);
 }
 
 .feed-track {

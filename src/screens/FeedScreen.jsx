@@ -269,12 +269,43 @@ function upvoteLine(entry, picked, me) {
   return `${lead} upvoted +${votes - 1} more`
 }
 
+/*
+ * A heart with a level meter cut out of it. The bars are not drawn on top —
+ * they are strokes in the sheet's own colour, so they read as gaps punched
+ * through the heart and the mark stays a single solid shape at 14px.
+ */
+function LiveHeartMark() {
+  return (
+    <svg className="live-heart" viewBox="0 0 24 24" aria-hidden="true">
+      <path
+        fill="currentColor"
+        d="M12 21.1 3.5 12.6a5.5 5.5 0 0 1 7.8-7.8l.7.7.7-.7a5.5 5.5 0 0 1 7.8 7.8z"
+      />
+      <g
+        stroke="var(--sheet)"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        fill="none"
+      >
+        <path d="M6.6 10.1v2.6" />
+        <path d="M9 7.6v7.3" />
+        <path d="M12 6.4v10.2" />
+        <path d="M15 7.6v7.3" />
+        <path d="M17.4 10.1v2.6" />
+      </g>
+    </svg>
+  )
+}
+
 function RatingOptions({ options, picked, onVote, me, live = 4 }) {
   const ranked = [...options].sort((left, right) => right.votes - left.votes)
 
   return (
     <div>
-      <p className="rate-kicker is-live">Live rating · {live} live</p>
+      <p className="rate-kicker is-live">
+        <LiveHeartMark />
+        Live rating · {live} live
+      </p>
       <ul className="party-rate">
         {ranked.map((entry) => {
           const party = PARTY_BY_ID[entry.id]
@@ -712,7 +743,7 @@ export function FeedScreen() {
               {post.track ? <p className="feed-track">{post.track}</p> : null}
               {post.caption ? <p>{post.caption}</p> : null}
               <NightChips ids={post.nights} />
-              {post.tags?.length ? (
+              {post.tags?.length && post.kind !== 'rating' ? (
                 <p className="feed-tags">
                   {post.tags.map((item) => formatTag(item)).join(' ')}
                 </p>
