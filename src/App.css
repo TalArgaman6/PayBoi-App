@@ -1250,6 +1250,14 @@
   font-weight: 600;
 }
 
+/* a:hover in index.css is more specific than .remix-ig, so the hover colour
+   has to be restated here or the link flips to white. */
+.remix-ig:hover,
+.remix-ig:active {
+  color: var(--live-lift);
+  -webkit-text-fill-color: var(--live-lift);
+}
+
 .remix-ig svg {
   width: 13px;
   height: 13px;

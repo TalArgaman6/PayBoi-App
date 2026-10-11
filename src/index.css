@@ -25,6 +25,9 @@
      read as purple against the blue-grey sheet, dark enough that a solid
      mask like the co-post glyph doesn't glare. */
   --live: #9360d8;
+  /* Hover for accent links. index.css resets a:hover to inherit, which would
+     drop them to white — this is the same amethyst lifted a couple of steps. */
+  --live-lift: #b78ce8;
   --ink: #fff;
   --chrome: #101218;
   --sheet: #16181f;
