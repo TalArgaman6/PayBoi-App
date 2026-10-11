@@ -784,6 +784,60 @@
   color: var(--muted);
 }
 
+/* Label on the left, holdings ratio on the right, both on the caption line
+   above the control so the field keeps its single-column rhythm. */
+.sell-field-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.sell-ratio {
+  font-style: normal;
+  letter-spacing: 0.08em;
+  color: var(--ink);
+}
+
+/* Minus and plus pinned to the ends, the count centred between them, so the
+   number sits still as it changes instead of shifting with its own width. */
+.sell-stepper {
+  display: grid;
+  grid-template-columns: 42px 1fr 42px;
+  align-items: center;
+  height: 42px;
+  border-radius: 12px;
+  background: var(--wash);
+  overflow: hidden;
+}
+
+.sell-stepper button {
+  height: 100%;
+  border: 0;
+  padding: 0;
+  background: none;
+  color: var(--ink);
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.sell-stepper button:disabled {
+  color: var(--muted);
+  opacity: 0.45;
+  cursor: default;
+}
+
+.sell-stepper strong {
+  text-align: center;
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--ink);
+}
+
 .sell-field select {
   height: 42px;
   border: 0;

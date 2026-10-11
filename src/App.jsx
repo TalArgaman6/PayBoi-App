@@ -9,6 +9,7 @@ import wallet from './data/wallet.json'
 import { formatCost, formatEarn, formatPbs, formatTokenBalance, earnAmount, isEventItem } from './lib/format.js'
 import { rankVars } from './lib/settings.js'
 import { consumeLocationRedeem } from './lib/passes.js'
+import { useDismissOnOutside } from './lib/dismiss.js'
 import { useWalletTilt } from './lib/tilt.js'
 import { EventsScreen } from './screens/EventsScreen.jsx'
 import { FeedScreen } from './screens/FeedScreen.jsx'
@@ -33,7 +34,9 @@ export default function App() {
   const [pmDraft, setPmDraft] = useState('')
   const [pmSent, setPmSent] = useState(false)
   const phone = useRef(null)
+  const detail = useRef(null)
   useWalletTilt(phone, booted)
+  useDismissOnOutside(detail, Boolean(selected), closeDetail)
 
   useEffect(() => {
     setPmOpen(false)
@@ -75,7 +78,12 @@ export default function App() {
           ) : null}
           <BottomNav tab={tab} onChange={setTab} />
           {selected ? (
-            <aside className="detail-sheet" role="dialog" aria-label={selected.title}>
+            <aside
+              ref={detail}
+              className="detail-sheet"
+              role="dialog"
+              aria-label={selected.title}
+            >
               <div className="detail-handle" />
               <div className="detail-head">
                 <ItemThumb

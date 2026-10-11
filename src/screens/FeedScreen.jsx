@@ -7,6 +7,7 @@ import { RemixBanner } from '../components/RemixPlayer.jsx'
 import { ScreenHeader } from '../components/ScreenHeader.jsx'
 import { ALT_EVENT_TYPES } from '../lib/filters.js'
 import { assetUrl, shortName } from '../lib/format.js'
+import { useDismissOnOutside } from '../lib/dismiss.js'
 
 const ME = {
   id: 'tal',
@@ -348,6 +349,8 @@ function RatingOptions({ options, picked, onVote, me, live = 4 }) {
 
 function UserFeed({ posts, startId, userId, onClose }) {
   const scroller = useRef(null)
+  const panel = useRef(null)
+  useDismissOnOutside(panel, true, onClose)
   const media = posts.filter((post) => post.image || post.video)
   const person =
     media.flatMap(peopleOn).find((item) => item.id === userId) || media[0]?.user
@@ -363,7 +366,12 @@ function UserFeed({ posts, startId, userId, onClose }) {
   if (!person) return null
 
   return (
-    <aside className="user-feed" role="dialog" aria-label={`${person.name}'s posts`}>
+    <aside
+      ref={panel}
+      className="user-feed"
+      role="dialog"
+      aria-label={`${person.name}'s posts`}
+    >
       <header className="user-feed-head">
         <div className="feed-user">
           <img src={assetUrl(person.photo)} alt="" />
