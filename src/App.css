@@ -1176,6 +1176,29 @@
   color: var(--btn-ink);
 }
 
+/* index.css forces every link to inherit its colour so iOS can't autolink
+   phone numbers in blue — so the accent has to be set here explicitly. */
+.remix-ig {
+  margin-top: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 11px 6px 9px;
+  border-radius: 999px;
+  background: var(--wash);
+  color: var(--live);
+  -webkit-text-fill-color: var(--live);
+  font-size: 0.76rem;
+  font-weight: 600;
+}
+
+.remix-ig svg {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+  display: block;
+}
+
 .feature-dots button.is-on {
   background: var(--live);
   width: 14px;

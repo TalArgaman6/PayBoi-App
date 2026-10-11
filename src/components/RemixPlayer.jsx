@@ -208,6 +208,49 @@ function MuteMark({ muted }) {
  * right over the feed. Nothing in here is a control — it is just the two
  * paragraphs, so the music carries on untouched behind it.
  */
+function InstagramMark() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <rect
+        x="3"
+        y="3"
+        width="18"
+        height="18"
+        rx="5.2"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+      />
+      <circle
+        cx="12"
+        cy="12"
+        r="4.1"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+      />
+      <circle cx="17.2" cy="6.8" r="1.2" fill="currentColor" />
+    </svg>
+  )
+}
+
+function Handle({ at }) {
+  if (!at) return null
+
+  return (
+    <a
+      className="remix-ig"
+      href={`https://instagram.com/${at}`}
+      target="_blank"
+      // Instagram opens in its own tab with no handle back to this one.
+      rel="noreferrer noopener"
+    >
+      <InstagramMark />
+      <span>@{at}</span>
+    </a>
+  )
+}
+
 function RemixAbout({ open, onClose, dj, party }) {
   if (!open) return null
 
@@ -231,12 +274,14 @@ function RemixAbout({ open, onClose, dj, party }) {
             <section>
               <h3>{dj}</h3>
               <p>{remix.djBio}</p>
+              <Handle at={remix.djInstagram} />
             </section>
           ) : null}
           {party && remix.partyBio ? (
             <section>
               <h3>{party}</h3>
               <p>{remix.partyBio}</p>
+              <Handle at={remix.partyInstagram} />
             </section>
           ) : null}
         </div>
