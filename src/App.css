@@ -996,6 +996,24 @@
   cursor: pointer;
 }
 
+/* The set-notes drawer closes with a mark rather than the word. Sized to the
+   same box the label occupied so the header keeps its rhythm. */
+.drawer-x {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  margin-right: -6px;
+}
+
+.drawer-x svg {
+  width: 16px;
+  height: 16px;
+  display: block;
+}
+
 .drawer-body {
   flex: 1;
   overflow: auto;

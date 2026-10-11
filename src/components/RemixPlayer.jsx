@@ -289,8 +289,21 @@ function RemixAbout({ open, onClose, dj, party }) {
           {/* No title — the cards name themselves. The empty heading is kept
               so the head keeps its height and the Close button its position. */}
           <h2 aria-hidden="true">&nbsp;</h2>
-          <button type="button" className="drawer-text" onClick={onClose}>
-            Close
+          <button
+            type="button"
+            className="drawer-text drawer-x"
+            onClick={onClose}
+            aria-label="Close"
+          >
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <path
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.6"
+                strokeLinecap="round"
+                d="M4 4l8 8M12 4l-8 8"
+              />
+            </svg>
           </button>
         </header>
         <div className="drawer-body remix-about">
