@@ -1228,6 +1228,15 @@
   color: var(--btn-ink);
 }
 
+/* Instagram and SoundCloud sit side by side; they wrap onto a second line
+   on a narrow drawer rather than squeezing the name column. */
+.remix-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 14px;
+}
+
 /* index.css forces every link to inherit its colour so iOS can't autolink
    phone numbers in blue — so the accent has to be set here explicitly. */
 .remix-ig {

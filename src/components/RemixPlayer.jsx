@@ -234,20 +234,50 @@ function InstagramMark() {
   )
 }
 
-function Handle({ at }) {
-  if (!at) return null
+function SoundcloudMark() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path
+        fill="currentColor"
+        d="M2 11.4c.3 0 .5.2.5.5l.3 2.6-.3 2.5c0 .3-.2.5-.5.5s-.5-.2-.5-.5L1.2 14.5l.3-2.6c0-.3.2-.5.5-.5zm2.4-1.3c.3 0 .5.2.6.5l.3 3.9-.3 3.8c0 .3-.3.5-.6.5s-.5-.2-.5-.5l-.3-3.8.3-3.9c0-.3.2-.5.5-.5zm2.5-.7c.3 0 .6.2.6.6l.3 4.5-.3 3.8c0 .3-.3.6-.6.6s-.6-.3-.6-.6l-.2-3.8.2-4.5c0-.4.3-.6.6-.6zm2.5-.4c.4 0 .6.3.7.6l.2 4.9-.2 3.8c0 .3-.3.6-.7.6-.3 0-.6-.3-.6-.6l-.2-3.8.2-4.9c0-.3.3-.6.6-.6zm2.6-.3c.4 0 .7.3.7.7l.2 5.1-.2 3.7c0 .4-.3.7-.7.7s-.7-.3-.7-.7l-.2-3.7.2-5.1c0-.4.3-.7.7-.7zm2.6 1.1c.4 0 .7.3.7.7l.2 4-.2 3.7c0 .4-.3.7-.7.7s-.7-.3-.7-.7l-.2-3.7.2-4c0-.4.3-.7.7-.7zM19 10a3.9 3.9 0 0 1 3.9 4 3.9 3.9 0 0 1-3.9 4h-2.4a.6.6 0 0 1-.6-.6V7.8c0-.3.1-.5.4-.6a4.3 4.3 0 0 1 1.5-.3c.5 0 .9.1 1.1.3v2.9c.1-.1.3-.1.6-.1z"
+      />
+    </svg>
+  )
+}
+
+/*
+ * The two off-app links under a name. Same row, same accent — the glyph is
+ * what tells them apart, so neither needs the service spelled out.
+ */
+function Handles({ at, cloud }) {
+  if (!at && !cloud) return null
 
   return (
-    <a
-      className="remix-ig"
-      href={`https://instagram.com/${at}`}
-      target="_blank"
-      // Instagram opens in its own tab with no handle back to this one.
-      rel="noreferrer noopener"
-    >
-      <InstagramMark />
-      <span>{at}</span>
-    </a>
+    <span className="remix-links">
+      {at ? (
+        <a
+          className="remix-ig"
+          href={`https://instagram.com/${at}`}
+          target="_blank"
+          // Instagram opens in its own tab with no handle back to this one.
+          rel="noreferrer noopener"
+        >
+          <InstagramMark />
+          <span>{at}</span>
+        </a>
+      ) : null}
+      {cloud ? (
+        <a
+          className="remix-ig"
+          href={`https://soundcloud.com/${cloud}`}
+          target="_blank"
+          rel="noreferrer noopener"
+        >
+          <SoundcloudMark />
+          <span>{cloud}</span>
+        </a>
+      ) : null}
+    </span>
   )
 }
 
@@ -256,7 +286,7 @@ function Handle({ at }) {
  * the photo and the handle on the same line means the two cards read as a
  * pair of entries rather than two walls of text with a picture bolted on.
  */
-function AboutCard({ name, photo, bio, at }) {
+function AboutCard({ name, photo, bio, at, cloud }) {
   if (!name || !bio) return null
 
   return (
@@ -265,7 +295,7 @@ function AboutCard({ name, photo, bio, at }) {
         {photo ? <img src={assetUrl(photo)} alt="" /> : null}
         <div>
           <strong>{name}</strong>
-          <Handle at={at} />
+          <Handles at={at} cloud={cloud} />
         </div>
       </div>
       <p>{bio}</p>
@@ -312,12 +342,14 @@ function RemixAbout({ open, onClose, dj, party }) {
             photo={remix.djPhoto}
             bio={remix.djBio}
             at={remix.djInstagram}
+            cloud={remix.djSoundcloud}
           />
           <AboutCard
             name={remix.party || party}
             photo={remix.partyPhoto}
             bio={remix.partyBio}
             at={remix.partyInstagram}
+            cloud={remix.partySoundcloud}
           />
         </div>
       </aside>
