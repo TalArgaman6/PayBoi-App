@@ -48,7 +48,6 @@ export function SellTicketSheet({ open, onClose, onList }) {
           <span>{picked.subtitle}</span>
         </div>
       </div>
-      <p>Listed at face value. Buyers see your photo, not your points.</p>
       <label className="sell-field">
         Event
         <select
