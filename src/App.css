@@ -2259,14 +2259,14 @@
   color: var(--live);
 }
 
-/* Deeper than the words beside it, so the mark anchors the line instead of
-   competing with it. */
+/* Same red as every other accent mark; the pulse below is what makes it
+   stand out, not a separate shade. */
 .live-heart {
   width: 14px;
   height: 14px;
   flex-shrink: 0;
   display: block;
-  color: var(--live-deep);
+  color: var(--live);
   /* A recording light: full for most of the beat, then a quick dip. It never
      reaches zero, so the mark pulses rather than blinking out of the line. */
   animation: live-pulse 1.6s ease-in-out infinite;
