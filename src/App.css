@@ -1168,6 +1168,52 @@
 }
 
 /*
+ * Facet lighting. Each mask is cut to a handful of whole panes of the
+ * crystal, so a layer fading in lights those panes and leaves the rest
+ * alone — separate pieces of the puzzle catching the light, rather than a
+ * glow sliding across the surface. `screen` means the layer can only add
+ * light, never darken, so the facet breaks underneath stay intact.
+ */
+.wallet-shard {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(158deg, #9db9e4 0%, #d2e2f6 46%, #89a9d8 100%);
+  mix-blend-mode: screen;
+  opacity: 0;
+  -webkit-mask-image: var(--shard);
+  mask-image: var(--shard);
+  -webkit-mask-size: cover;
+  mask-size: cover;
+  -webkit-mask-position: center 18%;
+  mask-position: center 18%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  will-change: opacity;
+  animation: wallet-shard var(--dur) ease-in-out infinite;
+  animation-delay: var(--delay);
+}
+
+/* Lit for roughly a fifth of each cycle, so only a few panes are up at once. */
+@keyframes wallet-shard {
+  0%,
+  78%,
+  100% {
+    opacity: 0;
+  }
+  86%,
+  93% {
+    opacity: var(--peak);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wallet-shard {
+    animation: none;
+  }
+}
+
+/*
  * Six renders of the same crystal, each lit from a key light 60 degrees
  * further around the circle. Crossfading them moves the light source itself,
  * so facets brighten and fall off in sequence rather than the whole image
