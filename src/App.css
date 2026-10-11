@@ -706,7 +706,7 @@
   min-width: 44px;
   padding: 3px 5px 4px;
   border-radius: 6px;
-  background: rgb(147 96 216 / 82%);
+  background: rgb(147 96 216 / 68%);
   /* The plate carries the purple; the figure on it reads white so the number
      stays legible at 0.66rem. */
   color: #fff;
