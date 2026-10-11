@@ -19,10 +19,10 @@
   --sky: #8ec8ea;
   --rose: #e2b08a;
   /* Shared accent: the co-post glyph, the kickers, the earn badges, cast
-     upvotes and the active slide dot. Warm and slightly orange, so it stays
-     legible on the dark sheet where a pure red would vibrate against it. */
-  --live: #f0544c;
-  --live-deep: #b4332a;
+     upvotes and the active slide dot. A deep oxblood — dark and
+     carrying enough blue to sit calmly on the dark sheet. */
+  --live: #b8324e;
+  --live-deep: #8c2239;
   --ink: #fff;
   --chrome: #101218;
   --sheet: #16181f;
