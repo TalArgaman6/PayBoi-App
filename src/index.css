@@ -26,6 +26,9 @@
   --gold-rich: #d9aa43;
   --gold-antique: #c89a4f;
   --gold-bronze: #ad8238;
+  /* Warm, slightly orange red — it stays legible on the dark sheet where a
+     pure red would vibrate against it. */
+  --live: #f0544c;
   --ink: #fff;
   --chrome: #101218;
   --sheet: #16181f;

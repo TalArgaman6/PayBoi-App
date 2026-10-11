@@ -274,7 +274,7 @@ function RatingOptions({ options, picked, onVote, me, live = 4 }) {
 
   return (
     <div>
-      <p className="rate-kicker">Live rating · {live} live</p>
+      <p className="rate-kicker is-live">Live rating · {live} live</p>
       <ul className="party-rate">
         {ranked.map((entry) => {
           const party = PARTY_BY_ID[entry.id]

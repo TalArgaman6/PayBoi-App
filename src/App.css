@@ -2253,6 +2253,12 @@
   color: var(--gold-antique);
 }
 
+/* The one kicker that reports something happening right now, so it takes the
+   live red rather than the gold the other kickers share. */
+.rate-kicker.is-live {
+  color: var(--live);
+}
+
 .feed-track {
   margin: 0;
   font-family: var(--font-ui);
