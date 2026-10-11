@@ -1155,22 +1155,55 @@
   display: block;
 }
 
-.remix-about section + section {
-  margin-top: 18px;
+.remix-card + .remix-card {
+  margin-top: 14px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
 }
 
-.remix-about h3 {
-  margin: 0 0 6px;
+/* Portrait on the left, the three stacked lines on the right. min-width: 0
+   on the text column lets a long handle wrap instead of pushing the row
+   wider than the drawer. */
+.remix-card-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.remix-card-head > div {
+  min-width: 0;
+  display: grid;
+  gap: 2px;
+  justify-items: start;
+}
+
+.remix-card-head img {
+  width: 58px;
+  height: 58px;
+  flex-shrink: 0;
+  border-radius: 14px;
+  object-fit: cover;
+  display: block;
+}
+
+.remix-role {
   font-family: var(--font-ui);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--live);
+  color: var(--muted);
 }
 
-.remix-about p {
-  margin: 0;
+.remix-card-head strong {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.remix-card p {
+  margin: 10px 0 0;
   font-size: 0.82rem;
   line-height: 1.55;
   color: var(--btn-ink);
@@ -1179,22 +1212,19 @@
 /* index.css forces every link to inherit its colour so iOS can't autolink
    phone numbers in blue — so the accent has to be set here explicitly. */
 .remix-ig {
-  margin-top: 10px;
+  margin-top: 3px;
   display: inline-flex;
   align-items: center;
-  gap: 7px;
-  padding: 6px 11px 6px 9px;
-  border-radius: 999px;
-  background: var(--wash);
+  gap: 5px;
   color: var(--live);
   -webkit-text-fill-color: var(--live);
-  font-size: 0.76rem;
+  font-size: 0.74rem;
   font-weight: 600;
 }
 
 .remix-ig svg {
-  width: 15px;
-  height: 15px;
+  width: 13px;
+  height: 13px;
   flex-shrink: 0;
   display: block;
 }

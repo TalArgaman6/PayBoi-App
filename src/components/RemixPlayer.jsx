@@ -251,6 +251,29 @@ function Handle({ at }) {
   )
 }
 
+/*
+ * Portrait, name and handle on one row, the paragraph beneath it. Keeping
+ * the photo and the handle on the same line means the two cards read as a
+ * pair of entries rather than two walls of text with a picture bolted on.
+ */
+function AboutCard({ role, name, photo, bio, at }) {
+  if (!name || !bio) return null
+
+  return (
+    <section className="remix-card">
+      <div className="remix-card-head">
+        {photo ? <img src={assetUrl(photo)} alt="" /> : null}
+        <div>
+          <span className="remix-role">{role}</span>
+          <strong>{name}</strong>
+          <Handle at={at} />
+        </div>
+      </div>
+      <p>{bio}</p>
+    </section>
+  )
+}
+
 function RemixAbout({ open, onClose, dj, party }) {
   if (!open) return null
 
@@ -270,20 +293,20 @@ function RemixAbout({ open, onClose, dj, party }) {
           </button>
         </header>
         <div className="drawer-body remix-about">
-          {dj && remix.djBio ? (
-            <section>
-              <h3>{dj}</h3>
-              <p>{remix.djBio}</p>
-              <Handle at={remix.djInstagram} />
-            </section>
-          ) : null}
-          {party && remix.partyBio ? (
-            <section>
-              <h3>{party}</h3>
-              <p>{remix.partyBio}</p>
-              <Handle at={remix.partyInstagram} />
-            </section>
-          ) : null}
+          <AboutCard
+            role="Tonight's DJ"
+            name={dj}
+            photo={remix.djPhoto}
+            bio={remix.djBio}
+            at={remix.djInstagram}
+          />
+          <AboutCard
+            role="The line"
+            name={party}
+            photo={remix.partyPhoto}
+            bio={remix.partyBio}
+            at={remix.partyInstagram}
+          />
         </div>
       </aside>
     </div>
