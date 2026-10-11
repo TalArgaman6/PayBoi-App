@@ -706,8 +706,8 @@
   min-width: 44px;
   padding: 3px 5px 4px;
   border-radius: 6px;
-  background: #33280f;
-  color: var(--gold-rich);
+  background: #3a1a17;
+  color: var(--live);
   font-family: var(--font-ui);
   font-size: 0.66rem;
   font-weight: 600;
@@ -1001,7 +1001,7 @@
   font-size: 0.62rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--gold-antique);
+  color: var(--live);
   font-weight: 600;
 }
 
@@ -1094,7 +1094,7 @@
 }
 
 .feature-dots button.is-on {
-  background: var(--gold-rich);
+  background: var(--live);
   width: 14px;
   border-radius: 999px;
 }
@@ -2249,11 +2249,9 @@
   font-size: 0.62rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--gold-antique);
+  color: var(--live);
 }
 
-/* The one kicker that reports something happening right now, so it takes the
-   live red rather than the gold the other kickers share. */
 .rate-kicker.is-live {
   display: flex;
   align-items: center;
@@ -2334,9 +2332,9 @@
   display: block;
 }
 
-/* Cast upvotes take the accent gold; the old pink belonged to a heart. */
+/* Cast upvotes take the live red, same as the other accent marks. */
 .feed-actions button.is-on {
-  color: var(--gold-rich);
+  color: var(--live);
 }
 
 .feed-clip,
@@ -2460,7 +2458,7 @@
 }
 
 .party-rate button.is-on {
-  color: var(--gold);
+  color: var(--live);
 }
 
 .feed-tools {
@@ -2650,7 +2648,7 @@
   top: calc(var(--bowl) * -74 / 190);
   width: 100%;
   height: calc(var(--bowl) * 326 / 190);
-  background: var(--gold-rich);
+  background: var(--live);
   -webkit-mask-image: var(--mark);
   mask-image: var(--mark);
   -webkit-mask-repeat: no-repeat;
