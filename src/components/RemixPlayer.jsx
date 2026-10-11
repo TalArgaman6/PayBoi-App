@@ -295,10 +295,10 @@ function AboutCard({ name, photo, bio, at, cloud }) {
         {photo ? <img src={assetUrl(photo)} alt="" /> : null}
         <div>
           <strong>{name}</strong>
-          <Handles at={at} cloud={cloud} />
         </div>
       </div>
       <p>{bio}</p>
+      <Handles at={at} cloud={cloud} />
     </section>
   )
 }
