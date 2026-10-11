@@ -2987,10 +2987,19 @@
   color: var(--muted);
 }
 
+/* The when-and-where line stays on one row; it reads as a single fact, and
+   broken over two it looks like two. Ellipsis if a venue name runs long. */
 .detail-head span {
   color: rgb(255 255 255 / 78%);
   -webkit-text-fill-color: rgb(255 255 255 / 78%);
   font-size: 0.78rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.detail-head > div {
+  min-width: 0;
 }
 
 /* The pay line and the sell blurb carry real information, so on the lifted
