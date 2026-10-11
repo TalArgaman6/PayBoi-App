@@ -2978,13 +2978,18 @@
 }
 
 .detail-head span {
-  color: var(--muted);
+  color: rgb(255 255 255 / 78%);
+  -webkit-text-fill-color: rgb(255 255 255 / 78%);
   font-size: 0.78rem;
 }
 
+/* The pay line and the sell blurb carry real information, so on the lifted
+   popup surface they sit at full white rather than the old warm grey, which
+   was nearly invisible against #222838. */
 .detail-sheet p {
   margin: 0;
-  color: #5c564f;
+  color: #fff;
+  -webkit-text-fill-color: #fff;
   font-size: 0.86rem;
 }
 
