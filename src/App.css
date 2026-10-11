@@ -1097,7 +1097,7 @@
  * a little taller and the image is cropped from its middle.
  */
 .feature-banner.is-remix .feature-slide img {
-  object-position: center 42%;
+  object-position: center 50%;
   filter: brightness(0.56);
 }
 
@@ -2701,7 +2701,7 @@
 .feed-photo.is-faces img,
 .user-feed-slide.is-faces img {
   height: 240px;
-  object-position: center 42%;
+  object-position: center 50%;
 }
 
 .feed-meta {

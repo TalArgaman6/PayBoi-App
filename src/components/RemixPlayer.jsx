@@ -246,7 +246,7 @@ function Handle({ at }) {
       rel="noreferrer noopener"
     >
       <InstagramMark />
-      <span>@{at}</span>
+      <span>{at}</span>
     </a>
   )
 }
@@ -256,7 +256,7 @@ function Handle({ at }) {
  * the photo and the handle on the same line means the two cards read as a
  * pair of entries rather than two walls of text with a picture bolted on.
  */
-function AboutCard({ role, name, photo, bio, at }) {
+function AboutCard({ name, photo, bio, at }) {
   if (!name || !bio) return null
 
   return (
@@ -264,7 +264,6 @@ function AboutCard({ role, name, photo, bio, at }) {
       <div className="remix-card-head">
         {photo ? <img src={assetUrl(photo)} alt="" /> : null}
         <div>
-          <span className="remix-role">{role}</span>
           <strong>{name}</strong>
           <Handle at={at} />
         </div>
@@ -294,15 +293,13 @@ function RemixAbout({ open, onClose, dj, party }) {
         </header>
         <div className="drawer-body remix-about">
           <AboutCard
-            role="Tonight's DJ"
-            name={dj}
+            name={remix.dj || dj}
             photo={remix.djPhoto}
             bio={remix.djBio}
             at={remix.djInstagram}
           />
           <AboutCard
-            role="Hosted by"
-            name={party}
+            name={remix.party || party}
             photo={remix.partyPhoto}
             bio={remix.partyBio}
             at={remix.partyInstagram}
