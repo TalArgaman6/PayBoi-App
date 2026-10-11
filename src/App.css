@@ -1533,8 +1533,8 @@
 }
 
 .gift-icon {
-  width: 16px;
-  height: 16px;
+  width: 13px;
+  height: 13px;
   justify-self: center;
   display: block;
   color: #fff;
@@ -2035,7 +2035,7 @@
 .feed-card > p.feed-tags,
 .feed-auto-tags {
   margin: 0;
-  color: var(--sky);
+  color: var(--rose);
   font-size: 0.74rem;
 }
 
@@ -2378,7 +2378,7 @@
   top: calc(var(--bowl) * -74 / 190);
   width: 100%;
   height: calc(var(--bowl) * 326 / 190);
-  background: var(--sky);
+  background: var(--rose);
   -webkit-mask-image: var(--mark);
   mask-image: var(--mark);
   -webkit-mask-repeat: no-repeat;
