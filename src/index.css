@@ -30,6 +30,9 @@
   --ink: #fff;
   --chrome: #101218;
   --sheet: #16181f;
+  /* Popups sit on top of a sheet the same colour, so they need to be a step
+     lighter or the edge between them disappears into the feed. */
+  --sheet-raised: #20242f;
   --muted: #8b90a0;
   --kicker: #ececec;
   --btn: #2a2d38;
