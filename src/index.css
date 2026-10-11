@@ -19,9 +19,10 @@
   --sky: #8ec8ea;
   --rose: #e2b08a;
   /* Shared accent: the co-post glyph, the kickers, the earn badges, cast
-     upvotes and the active slide dot. A deep oxblood — dark and
-     carrying enough blue to sit calmly on the dark sheet. */
-  --live: #b8324e;
+     upvotes and the active slide dot. A deep amethyst — enough violet to
+     read as purple against the blue-grey sheet, dark enough that a solid
+     mask like the co-post glyph doesn't glare. */
+  --live: #9360d8;
   --ink: #fff;
   --chrome: #101218;
   --sheet: #16181f;
