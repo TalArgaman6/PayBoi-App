@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { BottomNav } from './components/BottomNav.jsx'
-import { ItemThumb, TicketMark } from './components/ItemRow.jsx'
+import { ItemThumb } from './components/ItemRow.jsx'
 import { EarnBadge } from './components/EarnBadge.jsx'
 import { RemixProvider } from './components/RemixPlayer.jsx'
 import { Splash } from './components/Splash.jsx'
@@ -91,13 +91,9 @@ export default function App() {
                   image={selected.image}
                 />
                 <div>
-                  <strong>
-                    {selected.title}
-                    <TicketMark
-                      count={selected.tickets}
-                      kind={selected.filters?.includes('bracelets') ? 'bracelet' : 'ticket'}
-                    />
-                  </strong>
+                  {/* No ticket or bracelet mark here — the count matters when
+                      you're scanning a list, not once you've opened the one. */}
+                  <strong>{selected.title}</strong>
                   <span>{selected.subtitle}</span>
                 </div>
                 {/* The seller's face used to take this corner on listings; the
