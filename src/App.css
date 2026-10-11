@@ -714,6 +714,14 @@
   letter-spacing: 0.02em;
 }
 
+/* The plate is a fixed colour, so on the lifted popup surface it flips from
+   reading lighter than its background to darker — the badge looks like a hole
+   rather than a tag. Same step above #222838 as it sits above the feed. */
+.detail-sheet .earn-badge,
+.drawer-panel .earn-badge {
+  background: #312a58;
+}
+
 .earn-badge small {
   font-family: Figtree, Georgia, serif;
   font-size: 0.95em;
