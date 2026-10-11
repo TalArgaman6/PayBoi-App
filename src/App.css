@@ -1001,7 +1001,9 @@
   font-size: 0.62rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--live);
+  /* Off-white, not the accent: on the header slides the kicker sits over
+     artwork, and a coloured one competed with the slide itself. */
+  color: var(--kicker);
   font-weight: 600;
 }
 
