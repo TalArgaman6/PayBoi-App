@@ -18,9 +18,14 @@
   --gold: #d1b45f;
   --sky: #8ec8ea;
   --rose: #e2b08a;
-  /* Shared accent for feed hashtags, the co-post glyph and the header mark.
-     Kept separate from --gold, which stays on buttons and price chips. */
-  --violet: #ab86f0;
+  /* Shared accent for feed hashtags, the co-post glyph and the kickers.
+     Kept separate from --gold, which stays on buttons and price chips.
+     Three weights off one leaf: the rich one carries marks and tags, the
+     antique one sits back for small caps, the bronze one is for fills that
+     should read as a surface rather than as ink. */
+  --gold-rich: #d9aa43;
+  --gold-antique: #c89a4f;
+  --gold-bronze: #ad8238;
   --ink: #fff;
   --chrome: #101218;
   --sheet: #16181f;

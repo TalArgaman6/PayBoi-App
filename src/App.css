@@ -706,8 +706,8 @@
   min-width: 44px;
   padding: 3px 5px 4px;
   border-radius: 6px;
-  background: #272042;
-  color: #c3a7f5;
+  background: #33280f;
+  color: var(--gold-rich);
   font-family: var(--font-ui);
   font-size: 0.66rem;
   font-weight: 600;
@@ -1001,7 +1001,7 @@
   font-size: 0.62rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--violet);
+  color: var(--gold-antique);
   font-weight: 600;
 }
 
@@ -1094,7 +1094,7 @@
 }
 
 .feature-dots button.is-on {
-  background: var(--violet);
+  background: var(--gold-rich);
   width: 14px;
   border-radius: 999px;
 }
@@ -2249,7 +2249,7 @@
   font-size: 0.62rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--violet);
+  color: var(--gold-antique);
 }
 
 .feed-track {
@@ -2262,7 +2262,7 @@
 .feed-card > p.feed-tags,
 .feed-auto-tags {
   margin: 0;
-  color: var(--violet);
+  color: var(--gold-rich);
   font-size: 0.74rem;
 }
 
@@ -2608,7 +2608,7 @@
   top: calc(var(--bowl) * -74 / 190);
   width: 100%;
   height: calc(var(--bowl) * 326 / 190);
-  background: var(--violet);
+  background: var(--gold-rich);
   -webkit-mask-image: var(--mark);
   mask-image: var(--mark);
   -webkit-mask-repeat: no-repeat;
