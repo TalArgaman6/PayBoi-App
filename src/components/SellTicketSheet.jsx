@@ -52,7 +52,7 @@ export function SellTicketSheet({ open, onClose, onList }) {
           <span className="cost-mark">{formatCost(picked)}</span>
         </span>
       </div>
-      <p>List at the ticket price. Buyers see your profile photo, not points.</p>
+      <p>Listed at face value. Buyers see your photo, not your points.</p>
       <label className="sell-field">
         Event
         <select
