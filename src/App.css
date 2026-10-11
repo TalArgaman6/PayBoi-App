@@ -706,7 +706,7 @@
   min-width: 44px;
   padding: 3px 5px 4px;
   border-radius: 6px;
-  background: #251a3f;
+  background: var(--live);
   /* The plate carries the purple; the figure on it reads white so the number
      stays legible at 0.66rem. */
   color: #fff;
@@ -715,14 +715,6 @@
   font-size: 0.66rem;
   font-weight: 600;
   letter-spacing: 0.02em;
-}
-
-/* The plate is a fixed colour, so on the lifted popup surface it flips from
-   reading lighter than its background to darker — the badge looks like a hole
-   rather than a tag. Same step above #222838 as it sits above the feed. */
-.detail-sheet .earn-badge,
-.drawer-panel .earn-badge {
-  background: #312a58;
 }
 
 .earn-badge small {
