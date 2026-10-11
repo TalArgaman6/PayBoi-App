@@ -704,8 +704,8 @@
   min-width: 44px;
   padding: 3px 5px 4px;
   border-radius: 6px;
-  background: #1d3328;
-  color: #8fd4a8;
+  background: #272042;
+  color: #c3a7f5;
   font-family: var(--font-ui);
   font-size: 0.66rem;
   font-weight: 600;
@@ -1907,10 +1907,6 @@
   mask-size: contain;
 }
 
-.screen-header .pboi-logo {
-  color: var(--gold-soft);
-}
-
 .splash .pboi-logo {
   height: 64px;
   margin-top: 0;
@@ -2159,7 +2155,7 @@
 .feed-card > p.feed-tags,
 .feed-auto-tags {
   margin: 0;
-  color: var(--gold-soft);
+  color: var(--violet);
   font-size: 0.74rem;
 }
 
@@ -2502,7 +2498,7 @@
   top: calc(var(--bowl) * -74 / 190);
   width: 100%;
   height: calc(var(--bowl) * 326 / 190);
-  background: var(--gold-soft);
+  background: var(--violet);
   -webkit-mask-image: var(--mark);
   mask-image: var(--mark);
   -webkit-mask-repeat: no-repeat;

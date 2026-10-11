@@ -16,9 +16,9 @@
   --gold: #d1b45f;
   --sky: #8ec8ea;
   --rose: #e2b08a;
-  /* Warm antique gold for feed hashtags and the co-post glyph — softer and
-     less yellow than --gold, which is reserved for accents and buttons. */
-  --gold-soft: #cbab77;
+  /* Shared accent for feed hashtags, the co-post glyph and the header mark.
+     Kept separate from --gold, which stays on buttons and price chips. */
+  --violet: #ab86f0;
   --ink: #fff;
   --chrome: #101218;
   --sheet: #16181f;

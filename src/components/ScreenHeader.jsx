@@ -12,7 +12,7 @@ export function ScreenHeader({ title, kicker, pin = false }) {
           </p>
         ) : null}
       </div>
-      <PboiLogo tinted />
+      <PboiLogo />
     </header>
   )
 }
