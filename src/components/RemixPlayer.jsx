@@ -287,7 +287,7 @@ function RemixAbout({ open, onClose, dj, party }) {
       />
       <aside className="drawer-panel" role="dialog" aria-label="About the set">
         <header className="drawer-head">
-          <h2>The set</h2>
+          <h2>Tonight&apos;s DJ</h2>
           <button type="button" className="drawer-text" onClick={onClose}>
             Close
           </button>
@@ -301,7 +301,7 @@ function RemixAbout({ open, onClose, dj, party }) {
             at={remix.djInstagram}
           />
           <AboutCard
-            role="The line"
+            role="Hosted by"
             name={party}
             photo={remix.partyPhoto}
             bio={remix.partyBio}
