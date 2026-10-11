@@ -2334,8 +2334,9 @@
   display: block;
 }
 
+/* Cast upvotes take the accent gold; the old pink belonged to a heart. */
 .feed-actions button.is-on {
-  color: #c48693;
+  color: var(--gold-rich);
 }
 
 .feed-clip,

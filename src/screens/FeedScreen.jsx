@@ -164,15 +164,21 @@ function FeedClip({ src, className }) {
   )
 }
 
-function Heart({ on }) {
+/*
+ * An upvote, not a like. One outline that fills in once it is cast, so the
+ * cast and uncast states are the same shape at the same weight and only the
+ * fill changes — the count beside it never shifts.
+ */
+function Upvote({ on }) {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true">
       <path
-        d="M12 20s-7-4.4-9.2-8.6C1.4 8.6 3.2 5 6.8 5c2 0 3.3 1.1 4.2 2.4C12 6.1 13.2 5 15.2 5c3.6 0 5.4 3.6 4 6.4C19 15.6 12 20 12 20z"
+        d="M12 4.6 20.2 13h-4.5v6.4H8.3V13H3.8z"
         fill={on ? 'currentColor' : 'none'}
         stroke="currentColor"
         strokeWidth="1.8"
         strokeLinejoin="round"
+        strokeLinecap="round"
       />
     </svg>
   )
@@ -761,10 +767,10 @@ export function FeedScreen() {
                 <button
                   type="button"
                   className={liked.has(post.id) ? 'is-on' : ''}
-                  aria-label="Like"
+                  aria-label="Upvote"
                   onClick={() => like(post.id)}
                 >
-                  <Heart on={liked.has(post.id)} />
+                  <Upvote on={liked.has(post.id)} />
                   {post.likes || 0}
                 </button>
                 <button
