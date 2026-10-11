@@ -1037,6 +1037,11 @@
   height: 100%;
   object-fit: cover;
   display: block;
+}
+
+/* The dimming existed only to keep overlaid copy legible. The featured
+   slides carry no copy now, so only the remix player still needs it. */
+.feature-banner.is-remix .feature-slide img {
   filter: brightness(0.68);
 }
 

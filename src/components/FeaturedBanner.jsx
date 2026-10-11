@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
-import { assetUrl, earnAmount, formatCost, formatEarn } from '../lib/format.js'
+import { assetUrl } from '../lib/format.js'
 
-export function FeaturedBanner({ items, onSelect, caption }) {
+export function FeaturedBanner({ items, onSelect }) {
   const [index, setIndex] = useState(0)
   const current = items[index]
 
@@ -21,17 +21,12 @@ export function FeaturedBanner({ items, onSelect, caption }) {
         type="button"
         className="feature-slide"
         onClick={() => onSelect(current)}
+        aria-label={current.title}
       >
+        {/* The artwork carries the slide on its own — no copy over it. The
+            title lives on the button's label so the slide is still named to
+            a screen reader. */}
         <img src={assetUrl(current.banner || current.image)} alt="" />
-        <div className="feature-copy">
-          <span>{current.kicker || 'Featured'}</span>
-          <strong>{current.title}</strong>
-          <em>
-            {caption
-              ? caption(current)
-              : `${current.city} · ${formatCost(current)} · gain ${formatEarn(earnAmount(current))} pbs`}
-          </em>
-        </div>
       </button>
       <div className="feature-dots">
         {items.map((item, itemIndex) => (
