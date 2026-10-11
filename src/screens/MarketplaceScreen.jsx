@@ -68,7 +68,11 @@ export function MarketplaceScreen({ onSelect }) {
     <section className="screen screen-market">
       <ScreenHeader title="Market" />
       <div className="sheet">
-        <FeaturedBanner items={featuredDrops} onSelect={onSelect} />
+        <FeaturedBanner
+          items={featuredDrops}
+          onSelect={onSelect}
+          caption={(item) => `${item.city} · ${formatCost(item)} · ${item.shop}`}
+        />
         <div className="list-toolbar">
           <p className="count-line">
             {drop
