@@ -127,8 +127,9 @@ if (typeof window !== 'undefined') {
   }, true)
 }
 
-function paint(node, x, y) {
+function paint(node, x, y, rush) {
   if (!node) return
+  node.style.setProperty('--tilt-rush', rush.toFixed(3))
   node.style.setProperty('--header-angle', `${145 + x * 22}deg`)
   node.style.setProperty('--header-glow-x', `${8 + x * 16}%`)
   node.style.setProperty('--header-glow-y', `${110 + y * 12}%`)
@@ -227,10 +228,20 @@ export function useWalletTilt(ref, ready = true) {
       apply(0, 0)
     }
 
+    // How fast the light is travelling this frame, not where it is. Glass
+    // throws a hard glint while it is turning and settles the moment it
+    // stops, so speed drives the flash: it rises almost instantly and falls
+    // away over a few frames.
+    let rush = 0
+
     function tick() {
-      x += (targetX - x) * 0.28
-      y += (targetY - y) * 0.28
-      paint(node, x, y)
+      const dx = (targetX - x) * 0.28
+      const dy = (targetY - y) * 0.28
+      x += dx
+      y += dy
+      const speed = Math.min(Math.hypot(dx, dy) * 11, 1)
+      rush = speed > rush ? speed : rush + (speed - rush) * 0.12
+      paint(node, x, y, rush)
       if (live) raf = window.requestAnimationFrame(tick)
     }
 
