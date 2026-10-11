@@ -1159,9 +1159,9 @@
      and contrast ride it together so the facet breaks flare while the dark
      panes between them stay dark — a glint, not a wash of grey. One filter
      on the container covers all six frames at once. */
-  filter: brightness(calc(1 + var(--tilt-rush, 0) * 0.62))
-    contrast(calc(1 + var(--tilt-rush, 0) * 0.3))
-    saturate(calc(1 + var(--tilt-rush, 0) * 0.45));
+  filter: brightness(calc(1 + var(--tilt-rush, 0) * 0.85))
+    contrast(calc(1 + var(--tilt-rush, 0) * 0.38))
+    saturate(calc(1 + var(--tilt-rush, 0) * 0.5));
 }
 
 @media (prefers-reduced-motion: reduce) {

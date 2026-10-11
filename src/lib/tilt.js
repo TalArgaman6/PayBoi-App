@@ -228,20 +228,28 @@ export function useWalletTilt(ref, ready = true) {
       apply(0, 0)
     }
 
-    // How fast the light is travelling this frame, not where it is. Glass
-    // throws a hard glint while it is turning and settles the moment it
-    // stops, so speed drives the flash: it rises almost instantly and falls
-    // away over a few frames.
-    let rush = 0
+    // Two parts. `level` is how much movement there is: it rises the instant
+    // the light starts travelling and falls away over a few frames once it
+    // stops. `phase` is a pulse that only advances while there is movement,
+    // and raising its cosine to the fourth power turns a smooth wave into
+    // brief spikes with dark gaps between them. Multiplied together, the
+    // crystal flashes over and over for as long as the finger or the device
+    // keeps moving, then goes quiet when it settles.
+    let level = 0
+    let phase = 0
 
     function tick() {
       const dx = (targetX - x) * 0.28
       const dy = (targetY - y) * 0.28
       x += dx
       y += dy
+
       const speed = Math.min(Math.hypot(dx, dy) * 11, 1)
-      rush = speed > rush ? speed : rush + (speed - rush) * 0.12
-      paint(node, x, y, rush)
+      level = speed > level ? speed : level + (speed - level) * 0.1
+      if (level > 0.015) phase += 0.17 + level * 0.2
+      const beat = ((1 + Math.cos(phase)) / 2) ** 4
+
+      paint(node, x, y, level * beat)
       if (live) raf = window.requestAnimationFrame(tick)
     }
 
