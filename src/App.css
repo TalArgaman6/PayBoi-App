@@ -478,9 +478,10 @@
   box-shadow: none;
 }
 
+/* The chosen pill is marked by its gold label as much as by its fill. */
 .filter-tabs button.is-active {
   background: var(--btn);
-  color: var(--btn-ink);
+  color: var(--gold-rich);
   box-shadow: none;
 }
 
@@ -2203,7 +2204,7 @@
 
 .feed-mode button.is-active {
   background: var(--btn);
-  color: var(--btn-ink);
+  color: var(--gold-rich);
 }
 
 .rate-picks {
@@ -2227,7 +2228,7 @@
 .rate-picks button.is-on,
 .rate-picks span.is-on {
   background: var(--btn);
-  color: var(--btn-ink);
+  color: var(--gold-rich);
 }
 
 .rate-picks span {
@@ -2468,7 +2469,7 @@
 
 .feed-sort button.is-active {
   background: var(--btn);
-  color: var(--btn-ink);
+  color: var(--gold-rich);
 }
 
 .feed-tools + .filter-row {
