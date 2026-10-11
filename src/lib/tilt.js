@@ -201,7 +201,7 @@ export function useWalletTilt(ref, ready = true) {
         restG = median(gs)
         restB = median(bs)
       }
-      apply((g - restG) / 18, (b - restB) / 18)
+      apply((g - restG) / 12, (b - restB) / 12)
     }
 
     function onReading(reading) {
@@ -228,8 +228,8 @@ export function useWalletTilt(ref, ready = true) {
     }
 
     function tick() {
-      x += (targetX - x) * 0.18
-      y += (targetY - y) * 0.18
+      x += (targetX - x) * 0.28
+      y += (targetY - y) * 0.28
       paint(node, x, y)
       if (live) raf = window.requestAnimationFrame(tick)
     }

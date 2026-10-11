@@ -1,15 +1,19 @@
 import { assetUrl } from '../lib/format.js'
 
 /*
- * Three renders of the same crystal, each lit from a different angle.
- * Crossfading between them moves the light across the facets rather than
- * sliding a highlight over a static picture: individual triangles brighten
- * and fall off as the source swings around.
+ * Six renders of the same crystal, each lit from a key light 60 degrees
+ * further around the circle. Crossfading between them moves the light source
+ * rather than sliding a highlight over a static picture: individual triangles
+ * brighten and fall off as the source swings, and because the lights ring the
+ * full circle the highlight can travel anywhere. App.css does the weighting.
  */
 const LIGHT_FRAMES = [
-  'wallet-crystal-1.png?v=sharp',
-  'wallet-crystal-2.png?v=sharp',
-  'wallet-crystal-3.png?v=sharp',
+  'wallet-crystal-1.webp',
+  'wallet-crystal-2.webp',
+  'wallet-crystal-3.webp',
+  'wallet-crystal-4.webp',
+  'wallet-crystal-5.webp',
+  'wallet-crystal-6.webp',
 ]
 
 export function WalletSky() {
@@ -21,7 +25,7 @@ export function WalletSky() {
           className={`wallet-opal wallet-opal-${index + 1}`}
           src={assetUrl(frame)}
           alt=""
-          loading={index === 0 ? 'eager' : 'lazy'}
+          loading="eager"
           decoding="async"
         />
       ))}

@@ -1108,20 +1108,18 @@
 }
 
 /*
- * Light drift. Each frame is the same crystal lit from a different angle,
- * so crossfading them makes the shading travel across the facets. Long and
- * offset so the loop never announces itself.
- */
-/*
- * The three frames are the same crystal lit from different angles, so their
- * blend decides where the light falls. Tilt and hover both feed --tilt-x /
- * --tilt-y (see lib/tilt.js), which means moving the phone or the mouse
- * swings the light across the facets.
+ * Six renders of the same crystal, each lit from a key light 60 degrees
+ * further around the circle. Crossfading them moves the light source itself,
+ * so facets brighten and fall off in sequence rather than the whole image
+ * sliding — nothing about the geometry moves.
  *
- * Frame 1 (lit from the right) is the opaque base, so the hero never shows
- * through. Frames 2 and 3 are the upper-left and lower-left renders; their
- * opacity rises as the tilt points that way. The idle animation underneath
- * keeps it alive when nothing is touching it.
+ * Tilt and hover both feed --tilt-x / --tilt-y (see lib/tilt.js). Each frame
+ * weights itself by how closely the tilt points at its own light, which is
+ * the dot product below: tilt-x * cos(angle) - tilt-y * sin(angle). Because
+ * the lights ring the full circle, the highlight can now travel anywhere
+ * instead of swinging between three fixed positions.
+ *
+ * Frame 1 is the opaque base so the hero never shows through.
  */
 .wallet-opal-1 {
   opacity: 1;
@@ -1140,59 +1138,93 @@
 }
 
 .wallet-opal-2,
-.wallet-opal-3 {
+.wallet-opal-3,
+.wallet-opal-4,
+.wallet-opal-5,
+.wallet-opal-6 {
+  --gain: 1.7;
   will-change: opacity;
-  animation: wallet-idle 27s ease-in-out infinite;
-}
-
-/* Upper-left source: strongest when tilted left and away. */
-.wallet-opal-2 {
   opacity: clamp(
     0,
     calc(
-      (var(--tilt-x, 0) * -1 - var(--tilt-y, 0)) * 0.85 + var(--wallet-idle)
+      (var(--tilt-x, 0) * var(--lx) - var(--tilt-y, 0) * var(--ly))
+        * var(--gain)
+      + var(--wallet-idle)
     ),
     1
   );
+
+  /* Staggered so the idle light walks around the ring in order. */
+  animation: wallet-idle 30s ease-in-out infinite;
+}
+
+/* Light at 80deg — above. */
+.wallet-opal-2 {
+  --lx: 0.173;
+  --ly: -0.985;
+  animation-delay: -24s;
+}
+
+/* 140deg — upper left. */
+.wallet-opal-3 {
+  --lx: -0.766;
+  --ly: -0.643;
   animation-delay: -18s;
 }
 
-/* Lower-left source: strongest when tilted left and toward you. */
-.wallet-opal-3 {
-  opacity: clamp(
-    0,
-    calc(
-      (var(--tilt-x, 0) * -1 + var(--tilt-y, 0)) * 0.85 + var(--wallet-idle)
-    ),
-    1
-  );
-  animation-delay: -9s;
+/* 200deg — left and slightly below. */
+.wallet-opal-4 {
+  --lx: -0.94;
+  --ly: 0.343;
+  animation-delay: -12s;
 }
 
-/* Shallow, so a real tilt always reads louder than the idle drift. */
+/* 260deg — below. */
+.wallet-opal-5 {
+  --lx: -0.173;
+  --ly: 0.985;
+  animation-delay: -6s;
+}
+
+/* 320deg — lower right. */
+.wallet-opal-6 {
+  --lx: 0.766;
+  --ly: 0.643;
+  animation-delay: 0s;
+}
+
+/* Each frame peaks in its own sixth of the loop, so at rest the highlight
+   makes one slow pass around the crystal. Shallow, so a real tilt still
+   reads louder than the drift. */
 @keyframes wallet-idle {
   0%,
-  66%,
+  22%,
   100% {
     --wallet-idle: 0;
   }
 
-  22%,
-  44% {
-    --wallet-idle: 0.4;
+  8%,
+  14% {
+    --wallet-idle: 0.5;
   }
 }
 
 @media (hover: hover) {
   .wallet-opal-2,
-  .wallet-opal-3 {
-    transition: opacity 180ms ease-out;
+  .wallet-opal-3,
+  .wallet-opal-4,
+  .wallet-opal-5,
+  .wallet-opal-6 {
+    transition: opacity 110ms ease-out;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .wallet-opal-2,
-  .wallet-opal-3 {
+  .wallet-opal-3,
+  .wallet-opal-4,
+  .wallet-opal-5,
+  .wallet-opal-6 {
     animation: none;
   }
 }
