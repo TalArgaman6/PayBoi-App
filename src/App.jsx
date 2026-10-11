@@ -150,8 +150,8 @@ export default function App() {
                       ? `Pay ${formatCost(selected)} to ${selected.seller.name}. Fixed price — their profile is on the listing.`
                       : selected.pricePbs <= wallet.balance
                         ? isEventItem(selected)
-                          ? `Pay ${formatCost(selected)}. You gain ${formatEarn(earnAmount(selected))} pbs, with ${formatPbs(wallet.balance - selected.pricePbs)} left.`
-                          : `Pay ${formatCost(selected)}. ${formatPbs(wallet.balance - selected.pricePbs)} left.`
+                          ? `${formatCost(selected)} · earn ${formatEarn(earnAmount(selected))} · ${formatPbs(wallet.balance - selected.pricePbs)} left`
+                          : `${formatCost(selected)} · ${formatPbs(wallet.balance - selected.pricePbs)} left`
                         : `This is ${formatPbs(selected.pricePbs - wallet.balance)} over your ${formatTokenBalance(wallet.balance)} pbs.`}
                   </p>
                   <button type="button" className="pay-btn">
