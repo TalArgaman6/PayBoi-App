@@ -739,14 +739,12 @@ export function FeedScreen() {
                   <i>Live</i>
                 </div>
               ) : post.image ? (
-                <button
-                  type="button"
+                <div
                   className={`feed-photo${isLivePost(post) ? ' is-clip' : ''}${post.frame === 'faces' ? ' is-faces' : ''}`}
-                  onClick={() => openUser(post.user.id, post.id)}
                 >
                   <img src={assetUrl(post.image)} alt="" />
                   {isLivePost(post) ? <i>Live</i> : null}
-                </button>
+                </div>
               ) : post.kind !== 'rating' ? (
                 <p className="rate-kicker">{kindLabel(post.kind)}</p>
               ) : null}

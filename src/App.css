@@ -2591,13 +2591,14 @@
   border-bottom: 1px solid rgb(255 255 255 / 8%);
 }
 
+/* Not a control — the picture is the post. Only the names beside it open a
+   profile, so there is nothing here to press. */
 .feed-photo {
   padding: 0;
   border: 0;
   background: #2a2624;
   border-radius: 18px;
   overflow: hidden;
-  cursor: pointer;
 }
 
 .feed-photo img,
