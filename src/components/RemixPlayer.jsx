@@ -204,44 +204,104 @@ function MuteMark({ muted }) {
 }
 
 /*
- * The feed's version of the Events/Market featured slide: same frame, but
- * it only ever holds one item — the track that's playing — so there are no
- * dots and the slide itself is the play control.
+ * Who is playing and where. Opens from the cover art, slides in from the
+ * right over the feed. Nothing in here is a control — it is just the two
+ * paragraphs, so the music carries on untouched behind it.
+ */
+function RemixAbout({ open, onClose, dj, party }) {
+  if (!open) return null
+
+  return (
+    <div className="drawer-root">
+      <button
+        type="button"
+        className="drawer-scrim"
+        onClick={onClose}
+        aria-label="Close"
+      />
+      <aside className="drawer-panel" role="dialog" aria-label="About the set">
+        <header className="drawer-head">
+          <h2>The set</h2>
+          <button type="button" className="drawer-text" onClick={onClose}>
+            Close
+          </button>
+        </header>
+        <div className="drawer-body remix-about">
+          {dj && remix.djBio ? (
+            <section>
+              <h3>{dj}</h3>
+              <p>{remix.djBio}</p>
+            </section>
+          ) : null}
+          {party && remix.partyBio ? (
+            <section>
+              <h3>{party}</h3>
+              <p>{remix.partyBio}</p>
+            </section>
+          ) : null}
+        </div>
+      </aside>
+    </div>
+  )
+}
+
+/*
+ * The feed's version of the Events/Market featured slide: same frame, but it
+ * only ever holds one item — the track that's playing — so there are no dots.
+ * Tapping the cover opens the set notes; play and mute are their own badges.
  */
 export function RemixBanner() {
   const now = useContext(RemixContext)
+  const [about, setAbout] = useState(false)
   if (!now || !remix.url) return null
 
   const line = [now.dj, now.party].filter(Boolean).join(' · ')
 
   return (
-    <div className={`feature-banner is-remix${now.muted ? ' is-muted' : ''}`}>
-      <button
-        type="button"
-        className="feature-slide"
-        onClick={now.togglePlay}
-        aria-label={now.playing ? 'Pause remix' : 'Play remix'}
-      >
-        {remix.cover ? (
-          <img src={assetUrl(remix.cover)} alt="" />
-        ) : null}
-        <span className="remix-badge" aria-hidden="true">
+    <>
+      <div className={`feature-banner is-remix${now.muted ? ' is-muted' : ''}`}>
+        {/* The cover opens the notes; the badge over it stays the play
+            control, so the two readings of a tap stay separate. */}
+        <button
+          type="button"
+          className="feature-slide"
+          onClick={() => setAbout(true)}
+          aria-label={`About ${line || now.title}`}
+        >
+          {remix.cover ? (
+            <img src={assetUrl(remix.cover)} alt="" />
+          ) : null}
+          <div className="feature-copy">
+            <strong>{now.title}</strong>
+            <em>{line}</em>
+          </div>
+        </button>
+        <button
+          type="button"
+          className="remix-badge"
+          onClick={now.togglePlay}
+          aria-label={now.playing ? 'Pause remix' : 'Play remix'}
+        >
           <PlayMark playing={now.playing} />
-        </span>
-        <div className="feature-copy">
-          <strong>{now.title}</strong>
-          <em>{line}</em>
-        </div>
-      </button>
-      <button
-        type="button"
-        className="remix-mute"
-        onClick={now.toggleMute}
-        aria-label={now.muted ? 'Unmute remix' : 'Mute remix'}
-      >
-        <MuteMark muted={now.muted} />
-      </button>
-    </div>
+        </button>
+        <button
+          type="button"
+          className="remix-mute"
+          onClick={now.toggleMute}
+          aria-label={now.muted ? 'Unmute remix' : 'Mute remix'}
+        >
+          <MuteMark muted={now.muted} />
+        </button>
+      </div>
+      {/* Outside the banner: it has overflow:hidden and its own positioning
+          context, which would clip the drawer to the 140px slide. */}
+      <RemixAbout
+        open={about}
+        onClose={() => setAbout(false)}
+        dj={now.dj}
+        party={now.party}
+      />
+    </>
   )
 }
 

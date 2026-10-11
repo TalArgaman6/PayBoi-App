@@ -1102,18 +1102,24 @@
 }
 
 /* Play state reads at a glance from the corner mark. */
+/* A real control now, not decoration: the cover beneath it opens the set
+   notes, so play has to be its own target. */
 .remix-badge {
   position: absolute;
   left: 16px;
   top: 14px;
+  z-index: 2;
   width: 30px;
   height: 30px;
+  padding: 0;
   display: grid;
   place-items: center;
+  border: 0;
   border-radius: 50%;
   background: rgb(10 12 18 / 46%);
   backdrop-filter: blur(6px);
   color: #fff;
+  cursor: pointer;
 }
 
 .remix-badge svg {
@@ -1147,6 +1153,27 @@
   width: 15px;
   height: 15px;
   display: block;
+}
+
+.remix-about section + section {
+  margin-top: 18px;
+}
+
+.remix-about h3 {
+  margin: 0 0 6px;
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--live);
+}
+
+.remix-about p {
+  margin: 0;
+  font-size: 0.82rem;
+  line-height: 1.55;
+  color: var(--btn-ink);
 }
 
 .feature-dots button.is-on {
