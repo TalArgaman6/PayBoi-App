@@ -32,7 +32,7 @@ const MODES = [
   { id: 'featured', label: 'Featured' },
   { id: 'watchme', label: 'WM', title: 'Watch me' },
   { id: 'ticket', label: 'Ticket' },
-  { id: 'ask', label: 'Ask' },
+  { id: 'ask', label: 'Vote' },
   { id: 'ride', label: 'Ride' },
   { id: 'alternative', label: 'Alt' },
 ]
@@ -43,7 +43,7 @@ const PLACEHOLDERS = {
   featured: "What's featured",
   ride: 'Where, when, seats',
   ticket: 'Which night, how many',
-  ask: 'Ask which night to pick',
+  ask: 'Which night should it be',
   alternative: 'Sports, gala, karaoke, theater',
 }
 
