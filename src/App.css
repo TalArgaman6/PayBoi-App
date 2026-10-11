@@ -1202,7 +1202,7 @@
 .wallet-opal-4,
 .wallet-opal-5,
 .wallet-opal-6 {
-  --gain: 2.2;
+  --gain: 1.7;
   will-change: opacity;
   opacity: clamp(
     0,
