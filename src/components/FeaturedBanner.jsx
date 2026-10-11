@@ -24,7 +24,6 @@ export function FeaturedBanner({ items, onSelect, caption }) {
       >
         <img src={assetUrl(current.banner || current.image)} alt="" />
         <div className="feature-copy">
-          <span>{current.kicker || 'Featured'}</span>
           <strong>{current.title}</strong>
           <em>
             {caption
