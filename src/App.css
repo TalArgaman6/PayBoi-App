@@ -588,11 +588,13 @@
   transform: none;
 }
 
-/* A mask rather than an img, so the bracelet takes the row's colour. */
+/* A mask rather than an img, so the bracelet takes the row's colour. The
+   tilt matches the one the Afters pass uses in the wallet. */
 .bracelet-mark {
   width: 14px;
   height: 14px;
   display: block;
+  transform: rotate(-14deg);
   background-color: currentColor;
   -webkit-mask-image: var(--icon);
   mask-image: var(--icon);
