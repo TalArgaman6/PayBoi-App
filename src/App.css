@@ -1302,15 +1302,24 @@
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  color: var(--live);
-  -webkit-text-fill-color: var(--live);
   font-size: 0.74rem;
   font-weight: 600;
 }
 
-/* a:hover in index.css is more specific than .remix-ig, so the hover colour
-   has to be restated here or the link flips to white. */
+/* a:visited and a:hover in index.css both sit at (0,1,1), above a bare class —
+   so every state has to be named here or a link the browser has already seen
+   drops back to inherited white. This is why one of the four looked wrong. */
+.remix-ig,
+.remix-ig:link,
+.remix-ig:visited {
+  color: var(--live);
+  -webkit-text-fill-color: var(--live);
+}
+
 .remix-ig:hover,
+.remix-ig:link:hover,
+.remix-ig:visited:hover,
+.remix-ig:focus-visible,
 .remix-ig:active {
   color: var(--live-lift);
   -webkit-text-fill-color: var(--live-lift);
