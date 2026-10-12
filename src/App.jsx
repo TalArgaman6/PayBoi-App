@@ -94,6 +94,20 @@ export default function App() {
                       you're scanning a list, not once you've opened the one. */}
                   <strong>{selected.title}</strong>
                   <span>{selected.subtitle}</span>
+                  {/* The money sits with the title as a third line rather than
+                      as its own paragraph above the button — same size as the
+                      subtitle, so the head reads as one block of facts. */}
+                  {pmOpen && selected.seller ? null : (
+                    <span className="detail-pay">
+                      {selected.seller
+                        ? `${formatCost(selected)} to ${pmName(selected.seller)} · fixed price`
+                        : selected.pricePbs <= wallet.balance
+                          ? isEventItem(selected)
+                            ? `${formatCost(selected)} · earn ${formatEarn(earnAmount(selected))} · ${formatPbs(wallet.balance - selected.pricePbs)} left`
+                            : `${formatCost(selected)} · ${formatPbs(wallet.balance - selected.pricePbs)} left`
+                          : `This is ${formatPbs(selected.pricePbs - wallet.balance)} over your ${formatTokenBalance(wallet.balance)} pbs.`}
+                    </span>
+                  )}
                 </div>
                 {/* Nothing in this corner. The price is on the pay line and on
                     the button right below it; a third copy was just noise. */}
@@ -139,16 +153,7 @@ export default function App() {
                 </>
               ) : (
                 <>
-                  <p>
-                    {selected.seller
-                      ? `${formatCost(selected)} to ${pmName(selected.seller)} · fixed price`
-                      : selected.pricePbs <= wallet.balance
-                        ? isEventItem(selected)
-                          ? `${formatCost(selected)} · earn ${formatEarn(earnAmount(selected))} · ${formatPbs(wallet.balance - selected.pricePbs)} left`
-                          : `${formatCost(selected)} · ${formatPbs(wallet.balance - selected.pricePbs)} left`
-                        : `This is ${formatPbs(selected.pricePbs - wallet.balance)} over your ${formatTokenBalance(wallet.balance)} pbs.`}
-                  </p>
-                  {/* The price is already on the line above; the button only
+                  {/* The price is already in the head; the button only
                       has to say what pressing it does. */}
                   <button type="button" className="pay-btn">
                     PAY NOW

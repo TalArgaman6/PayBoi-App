@@ -3176,6 +3176,16 @@
   min-width: 0;
 }
 
+/* The third line in the head. Same size as the subtitle above it, full
+   white because it's the number you're deciding on. */
+.detail-pay {
+  display: block;
+  margin-top: 2px;
+  color: #fff;
+  -webkit-text-fill-color: #fff;
+  white-space: normal;
+}
+
 /* The pay line and the sell blurb carry real information, so on the lifted
    popup surface they sit at full white rather than the old warm grey, which
    was nearly invisible against #222838. */
