@@ -247,6 +247,9 @@ function FeedPeople({ post, onOpen }) {
   )
 }
 
+// Cards that lead with a kicker line instead of a top label and hashtags.
+const REQUEST_KINDS = ['ride', 'ticket']
+
 function kindLabel(kind) {
   if (kind === 'rating') return 'Live rating'
   if (kind === 'ride') return 'Ride request'
@@ -328,11 +331,28 @@ function WheelMark() {
 }
 
 /*
- * The ride card's footer line, built like the rating kicker: a mark, what
- * kind of post this is, and the night it's headed to. The hashtags it used
- * to carry said the same two things in a weaker voice.
+ * A ticket, cut like the wheel: one solid shape with the perforation and the
+ * notches punched through it, so it survives being 14px tall.
  */
-function RideKicker({ ids }) {
+function TicketRequestMark() {
+  return (
+    <svg className="live-heart is-wheel" viewBox="0 0 24 24" aria-hidden="true">
+      <path
+        fill="currentColor"
+        fillRule="evenodd"
+        d="M3.4 6.2h17.2c.6 0 1.1.5 1.1 1.1v2.4a2.3 2.3 0 0 0 0 4.6v2.4c0 .6-.5 1.1-1.1 1.1H3.4c-.6 0-1.1-.5-1.1-1.1v-2.4a2.3 2.3 0 0 0 0-4.6V7.3c0-.6.5-1.1 1.1-1.1zm5.4 1.9a.7.7 0 0 0-.7.7v1.3a.7.7 0 0 0 1.4 0V8.8a.7.7 0 0 0-.7-.7zm0 3.9a.7.7 0 0 0-.7.7v1.3a.7.7 0 0 0 1.4 0v-1.3a.7.7 0 0 0-.7-.7zm0 3.9a.7.7 0 0 0-.7.7v1.3a.7.7 0 0 0 1.4 0v-1.3a.7.7 0 0 0-.7-.7z"
+      />
+    </svg>
+  )
+}
+
+/*
+ * The one line a request card leads with: a mark, what the post is asking
+ * for, and the night it's about. Rides and ticket requests share it, and it
+ * is built like the rating kicker — which is what the hashtags underneath
+ * used to say, only quieter.
+ */
+function RequestKicker({ ids, label, mark }) {
   const party = PARTY_BY_ID[ids?.[0]]
 
   /*
@@ -344,8 +364,9 @@ function RideKicker({ ids }) {
   return (
     <div>
       <p className="rate-kicker is-live">
-        <WheelMark />
-        Ride request{party ? ` · ${party.title}` : ''}
+        {mark}
+        {label}
+        {party ? ` · ${party.title}` : ''}
       </p>
     </div>
   )
@@ -792,7 +813,7 @@ export function FeedScreen() {
                   <img src={assetUrl(post.image)} alt="" />
                   {isLivePost(post) ? <i>Live</i> : null}
                 </div>
-              ) : post.kind !== 'rating' && post.kind !== 'ride' ? (
+              ) : !REQUEST_KINDS.includes(post.kind) && post.kind !== 'rating' ? (
                 /* Ride posts carry their kicker at the foot instead, next to
                    the night, the way a rating does. */
                 <p className="rate-kicker">{kindLabel(post.kind)}</p>
@@ -801,13 +822,19 @@ export function FeedScreen() {
                 <FeedPeople post={post} onOpen={openUser} />
                 <span>{post.when}</span>
               </div>
-              {/* On a ride, the kicker sits directly under the name — you
-                  read what the post is before you read the route. */}
-              {post.kind === 'ride' ? <RideKicker ids={post.nights} /> : null}
+              {/* On a request, the kicker sits directly under the name —
+                  you read what is being asked for before the detail. */}
+              {REQUEST_KINDS.includes(post.kind) ? (
+                <RequestKicker
+                  ids={post.nights}
+                  label={kindLabel(post.kind)}
+                  mark={post.kind === 'ride' ? <WheelMark /> : <TicketRequestMark />}
+                />
+              ) : null}
               {post.track ? <p className="feed-track">{post.track}</p> : null}
               {post.caption ? <p>{post.caption}</p> : null}
-              {post.kind === 'ride' ? null : <NightChips ids={post.nights} />}
-              {post.tags?.length && post.kind !== 'rating' && post.kind !== 'ride' ? (
+              {REQUEST_KINDS.includes(post.kind) ? null : <NightChips ids={post.nights} />}
+              {post.tags?.length && post.kind !== 'rating' && !REQUEST_KINDS.includes(post.kind) ? (
                 <p className="feed-tags">
                   {post.tags.map((item) => formatTag(item)).join(' ')}
                 </p>
