@@ -23,6 +23,7 @@ const SUGGESTION_FILTERS = [
 const CRYSTALS = [
   // Peacock leads: it's the one an untouched wallet should open on.
   'photos/wallet-crystal-peacock.jpg',
+  'photos/wallet-crystal-plume.jpg',
   'photos/wallet-crystal-black.jpg',
   'photos/wallet-crystal.jpg',
   'photos/wallet-crystal-aurora.jpg',
