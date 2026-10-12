@@ -3222,6 +3222,9 @@
 
 .ghost-btn {
   background: var(--wash);
+  /* An inset ring rather than a real border, so the button keeps its 42px
+     height and stays level with the pay button beside it. */
+  box-shadow: inset 0 0 0 1px #8c53cf;
   transition: background 0.18s ease, color 0.18s ease;
 }
 
@@ -3229,6 +3232,7 @@
    the two swap places under the pointer rather than both lighting up. */
 .ghost-btn:not(:disabled):hover,
 .ghost-btn:not(:disabled):active {
+  box-shadow: inset 0 0 0 1px #8c53cf;
   background: var(--btn);
   color: var(--btn-ink);
   -webkit-text-fill-color: var(--btn-ink);
