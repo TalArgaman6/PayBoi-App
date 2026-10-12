@@ -3172,10 +3172,11 @@
      its optical centre; the lift puts that centre back where it was. */
   /* Sized to the names on either side: the glyph runs from the art box's top
      down to its own baseline, 264 of the 326 grid, so a bowl of 0.518em puts
-     that at 0.72em — the cap height of the type it sits between. The lift
-     goes to zero with it, since the glyph has no descender to hang and should
-     simply stand on the text's baseline. */
-  --bowl: 0.518em;
+     that a little over the cap height of the type it sits between — a light
+     serif needs the extra to carry the same weight. The lift goes to zero,
+     since the glyph has no descender to hang and should simply stand on the
+     text's baseline. */
+  --bowl: 0.64em;
   --bowl-lift: 0;
   font-size: 1em;
   display: inline-block;
