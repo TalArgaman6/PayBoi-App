@@ -889,6 +889,10 @@ export function FeedScreen() {
                   onVote={(optionId) => vote(post.id, optionId)}
                 />
               ) : null}
+              {/* A rating card already is the vote — the row of options is the
+                  action, so a second upvote and a share underneath it only
+                  compete with it. */}
+              {post.kind === 'rating' ? null : (
               <div className="feed-actions">
                 {/* A request isn't something you agree with, it's something
                     you answer — so the upvote gives way to a direct line to
@@ -921,6 +925,7 @@ export function FeedScreen() {
                   <ShareMark />
                 </button>
               </div>
+              )}
             </article>
           ))}
         </div>
