@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { BottomNav } from './components/BottomNav.jsx'
 import { ItemThumb } from './components/ItemRow.jsx'
 import { RemixProvider } from './components/RemixPlayer.jsx'
@@ -33,6 +33,9 @@ export default function App() {
   const [pmSent, setPmSent] = useState(false)
   const phone = useRef(null)
   const detail = useRef(null)
+  // Where the press that opened the sheet landed, in phone coordinates.
+  const anchor = useRef(null)
+  const [sheetTop, setSheetTop] = useState(null)
   useWalletTilt(phone, booted)
   useDismissOnOutside(detail, Boolean(selected), closeDetail)
 
@@ -41,6 +44,64 @@ export default function App() {
     setPmDraft('')
     setPmSent(false)
   }, [selected?.id])
+
+  /*
+   * Every press inside the phone records the row it hit. Doing it here rather
+   * than threading a rect through every onSelect means the anchor works the
+   * same whether the sheet was opened from a list row, a coin or a banner.
+   */
+  useEffect(() => {
+    const node = phone.current
+    if (!booted || !node) return undefined
+
+    function remember(event) {
+      const hit = event.target.closest?.('button, [role="button"]')
+      if (!hit || !node.contains(hit)) {
+        anchor.current = null
+        return
+      }
+      const box = hit.getBoundingClientRect()
+      const frame = node.getBoundingClientRect()
+      anchor.current = { top: box.top - frame.top, bottom: box.bottom - frame.top }
+    }
+
+    node.addEventListener('pointerdown', remember, true)
+    return () => node.removeEventListener('pointerdown', remember, true)
+  }, [booted])
+
+  /*
+   * Open the sheet just under the row it came from, then pull it back inside
+   * the phone if it would run off either end. Measured after paint because we
+   * need the sheet's real height, which depends on how long the title wraps.
+   */
+  useLayoutEffect(() => {
+    if (!selected) {
+      setSheetTop(null)
+      return
+    }
+
+    const node = detail.current
+    const frame = phone.current
+    const from = anchor.current
+    if (!node || !frame || !from) {
+      setSheetTop(null)
+      return
+    }
+
+    const height = node.offsetHeight
+    const limit = frame.clientHeight
+    const GAP = 10
+    const TOP_EDGE = 12
+    // Clear of the tab bar at the bottom.
+    const BOTTOM_EDGE = 84
+
+    let top = from.bottom + GAP
+    if (top + height > limit - BOTTOM_EDGE) {
+      // No room below: try above the row before falling back to pinned.
+      top = Math.min(from.top - GAP - height, limit - BOTTOM_EDGE - height)
+    }
+    setSheetTop(Math.max(TOP_EDGE, top))
+  }, [selected?.id, pmOpen, pmSent])
 
   function closeDetail() {
     setSelected(null)
@@ -81,6 +142,11 @@ export default function App() {
               className="detail-sheet"
               role="dialog"
               aria-label={selected.title}
+              style={
+                sheetTop === null
+                  ? undefined
+                  : { top: `${sheetTop}px`, bottom: 'auto' }
+              }
             >
               <div className="detail-handle" />
               <div className="detail-head">
