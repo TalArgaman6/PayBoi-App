@@ -2088,7 +2088,7 @@
   flex-wrap: wrap;
   gap: 4px;
   min-width: 1.4rem;
-  min-height: 22px;
+  min-height: 18px;
 }
 
 /* Same height, radius and purple as the earn badge on a listing, so a pass
@@ -2096,8 +2096,8 @@
 .gift-count i {
   /* Exactly the earn badge's footprint: its 44px min-width and the height its
      padding and type add up to. */
-  width: 44px;
-  height: 22px;
+  width: 36px;
+  height: 18px;
   flex-shrink: 0;
   border-radius: 6px;
   /* The badge's own plate, not its ink — a pip is the whole tag with the
