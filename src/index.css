@@ -33,7 +33,7 @@
   /* Popups and drawers take the colour the header sits on — the top stop of
      the phone's gradient — so they read as the chrome coming forward rather
      than as another card on the feed. */
-  --sheet-raised: #222838;
+  --sheet-raised: #08101d;
   --muted: #8b90a0;
   --kicker: #ececec;
   --btn: #2a2d38;

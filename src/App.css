@@ -26,18 +26,20 @@
 .phone[data-tab='marketplace'],
 .phone[data-tab='feed'],
 .splash {
-  background-color: #12141c;
+  background-color: #08101d;
+  /* The peacock palette's deep blue leads now: the header sits in it, and the
+     gradient falls away from it into the near-black the lists sit on. */
   background-image: linear-gradient(
     135deg,
-    #222838 0%,
-    #1a1f2e 34%,
-    #12141c 68%
+    #08101d 0%,
+    #0b1526 34%,
+    #0d1119 68%
   );
 }
 
 .phone[data-tab='wallet'] {
-  background-color: #1a1f2e;
-  background-image: linear-gradient(180deg, #222838 0%, #1a1f2e 42px, #1a1f2e 100%);
+  background-color: #0b1526;
+  background-image: linear-gradient(180deg, #08101d 0%, #0b1526 42px, #0b1526 100%);
 }
 
 .screen {
