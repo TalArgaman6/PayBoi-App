@@ -1303,7 +1303,7 @@
   align-items: center;
   gap: 5px;
   font-size: 0.74rem;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 /* a:visited and a:hover in index.css both sit at (0,1,1), above a bare class —
@@ -1353,7 +1353,7 @@
   align-items: center;
   gap: 7px;
   font-size: 0.74rem;
-  font-weight: 500;
+  font-weight: 400;
   line-height: 1.3;
 }
 
