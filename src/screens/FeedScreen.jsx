@@ -917,13 +917,17 @@ export function FeedScreen() {
                     {post.likes || 0}
                   </button>
                 )}
-                <button
-                  type="button"
-                  aria-label="Share"
-                  onClick={() => shareToInstagram(post)}
-                >
-                  <ShareMark />
-                </button>
+                {/* Nothing to share on a request — it's one person asking one
+                    room for a favour, not a night worth passing on. */}
+                {REQUEST_KINDS.includes(post.kind) ? null : (
+                  <button
+                    type="button"
+                    aria-label="Share"
+                    onClick={() => shareToInstagram(post)}
+                  >
+                    <ShareMark />
+                  </button>
+                )}
               </div>
               )}
             </article>
