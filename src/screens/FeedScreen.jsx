@@ -335,11 +335,19 @@ function WheelMark() {
 function RideKicker({ ids }) {
   const party = PARTY_BY_ID[ids?.[0]]
 
+  /*
+   * Wrapped in a div on purpose: `.feed-card > p` sets the caption's larger
+   * size and outranks `.rate-kicker`, so a bare <p> here would come out
+   * bigger than the identical line on a rating card. The rating kicker is
+   * nested the same way, inside RatingOptions.
+   */
   return (
-    <p className="rate-kicker is-live">
-      <WheelMark />
-      Ride request{party ? ` · ${party.title}` : ''}
-    </p>
+    <div>
+      <p className="rate-kicker is-live">
+        <WheelMark />
+        Ride request{party ? ` · ${party.title}` : ''}
+      </p>
+    </div>
   )
 }
 
