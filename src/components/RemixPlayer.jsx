@@ -370,8 +370,8 @@ export function RemixBanner() {
   return (
     <>
       <div className={`feature-banner is-remix${now.muted ? ' is-muted' : ''}`}>
-        {/* The cover opens the notes; the badge over it stays the play
-            control, so the two readings of a tap stay separate. */}
+        {/* The cover opens the notes; the equaliser in the corner is the only
+            control, and it reads as its own state. */}
         <button
           type="button"
           className="feature-slide"
@@ -385,14 +385,6 @@ export function RemixBanner() {
             <strong>{now.title}</strong>
             <em>{line}</em>
           </div>
-        </button>
-        <button
-          type="button"
-          className="remix-badge"
-          onClick={now.togglePlay}
-          aria-label={now.playing ? 'Pause remix' : 'Play remix'}
-        >
-          <PlayMark playing={now.playing} />
         </button>
         <button
           type="button"
