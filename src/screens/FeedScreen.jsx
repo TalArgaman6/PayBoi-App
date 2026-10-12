@@ -173,8 +173,12 @@ function FeedClip({ src, className }) {
 function Peck({ on }) {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true">
+      {/* A beak striking up and to the left: the upper edge is the long
+          curve, the short back edge closes it, and the under edge sweeps
+          back to the point. It keeps the old arrow's direction, which is
+          what lets a vote read without a word next to it. */}
       <path
-        d="M12 4.6 20.2 13h-4.5v6.4H8.3V13H3.8z"
+        d="M3.4 4.9c6 1.3 12 4.6 16.6 8.6l-2.2 5.9C12.2 15.4 7 10.5 3.4 4.9z"
         fill={on ? 'currentColor' : 'none'}
         stroke="currentColor"
         strokeWidth="1.8"
