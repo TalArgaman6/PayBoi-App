@@ -2088,7 +2088,7 @@
   flex-wrap: wrap;
   gap: 4px;
   min-width: 1.4rem;
-  min-height: 15px;
+  min-height: 12px;
 }
 
 /* Same height, radius and purple as the earn badge on a listing, so a pass
@@ -2096,10 +2096,10 @@
 .gift-count i {
   /* Exactly the earn badge's footprint: its 44px min-width and the height its
      padding and type add up to. */
-  width: 35px;
-  height: 15px;
+  width: 32px;
+  height: 12px;
   flex-shrink: 0;
-  border-radius: 5px;
+  border-radius: 4px;
   /* A deep aubergine at rest; the purple only comes up under the pointer. */
   background: #593786;
   transition: background 0.18s ease, box-shadow 0.18s ease;
