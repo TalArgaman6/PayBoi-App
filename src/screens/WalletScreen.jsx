@@ -68,7 +68,13 @@ export function WalletScreen({ onSelect, openedPass = null }) {
   )
 
   return (
-    <section className="screen wallet-screen">
+    <section
+      className={`screen wallet-screen${
+        /* The ivory plume is the one pale backdrop in the set, so the header
+           above it has to flip to ink or it disappears into the feathers. */
+        CRYSTALS[skin].includes('ivory') ? ' is-light' : ''
+      }`}
+    >
       {/* A shot of cut glass behind the whole screen. It fades to black down
           the bottom where the sheet sits, so the colour reads as a glow above
           the card rather than as noise under the lists. */}

@@ -3567,3 +3567,18 @@
   justify-self: end;
   object-fit: contain;
 }
+
+/* The pale backdrop. Everything in the wallet header is white-on-dark by
+   default, which vanishes against the ivory plume — so the title drops to ink
+   and the peacock mark, being white art on transparent, is inverted to match.
+   Only the header flips: the card and the sheet below it keep their own
+   grounds and stay as they are. */
+.wallet-screen.is-light .screen-header h1,
+.wallet-screen.is-light .screen-header p {
+  color: #11151d;
+  -webkit-text-fill-color: #11151d;
+}
+
+.wallet-screen.is-light .screen-header .peacock-logo {
+  filter: invert(1);
+}
