@@ -180,20 +180,26 @@ export default function App() {
               </div>
               {pmOpen && selected.seller ? (
                 <>
-                  <p>
-                    {pmSent
-                      ? `Sent to ${pmName(selected.seller)}.`
-                      : `Message ${pmName(selected.seller)} about ${selected.title}.`}
-                  </p>
-                  {pmSent ? null : (
-                    <textarea
-                      className="pm-draft"
-                      rows={3}
-                      placeholder={`Message ${pmName(selected.seller)}`}
-                      value={pmDraft}
-                      autoFocus
-                      onChange={(event) => setPmDraft(event.target.value)}
-                    />
+                  {/* Built like the sell sheet: a labelled field rather than a
+                      sentence of instructions, and the same two buttons in the
+                      same voice underneath. */}
+                  {pmSent ? (
+                    <p>Sent to {pmName(selected.seller)}.</p>
+                  ) : (
+                    <label className="sell-field">
+                      <span className="sell-field-row">
+                        Message
+                        <em className="sell-ratio">to {pmName(selected.seller)}</em>
+                      </span>
+                      <textarea
+                        className="pm-draft"
+                        rows={3}
+                        placeholder={`About ${selected.title}`}
+                        value={pmDraft}
+                        autoFocus
+                        onChange={(event) => setPmDraft(event.target.value)}
+                      />
+                    </label>
                   )}
                   {pmSent ? null : (
                     <button
@@ -202,7 +208,7 @@ export default function App() {
                       disabled={!pmDraft.trim()}
                       onClick={() => setPmSent(true)}
                     >
-                      Send
+                      SEND
                     </button>
                   )}
                   <button
@@ -214,7 +220,7 @@ export default function App() {
                       setPmSent(false)
                     }}
                   >
-                    Back
+                    GO BACK
                   </button>
                 </>
               ) : (

@@ -3316,9 +3316,14 @@
   background: var(--wash);
   color: var(--ink);
   padding: 10px 12px;
-  font: inherit;
-  font-size: 0.86rem;
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
   outline: none;
+  /* It sits inside a .sell-field label now, which is uppercase and tracked
+     out for the caption above it — the field's own text has to opt back out,
+     the same way the event select does. */
+  letter-spacing: 0;
+  text-transform: none;
 }
 
 .pm-draft::placeholder {
