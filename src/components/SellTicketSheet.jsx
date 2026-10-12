@@ -104,7 +104,7 @@ export function SellTicketSheet({ open, onClose, onList }) {
         {listing === 1 ? 'List ticket' : `List ${listing} tickets`}
       </button>
       <button type="button" className="ghost-btn" onClick={onClose}>
-        Close
+        GO BACK
       </button>
     </aside>
   )

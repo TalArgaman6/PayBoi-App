@@ -159,7 +159,7 @@ export default function App() {
                     </button>
                   ) : null}
                   <button type="button" className="ghost-btn" onClick={closeDetail}>
-                    Close
+                    GO BACK
                   </button>
                 </>
               )}
