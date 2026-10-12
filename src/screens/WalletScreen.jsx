@@ -21,16 +21,30 @@ const SUGGESTION_FILTERS = [
  * through them — a testing affordance while we settle on one, not a setting.
  */
 const CRYSTALS = [
+  // Black leads: it's the one the screen is designed against, so an untouched
+  // wallet looks the way it's meant to.
+  'photos/wallet-crystal-black.jpg',
   'photos/wallet-crystal.jpg',
   'photos/wallet-crystal-aurora.jpg',
   'photos/wallet-crystal-rainbow.jpg',
   'photos/wallet-crystal-gold.jpg',
-  'photos/wallet-crystal-black.jpg',
   'photos/wallet-crystal-pearl.jpg',
 ]
 
+/*
+ * The screen unmounts when you leave the tab, so the choice has to live
+ * outside the component or every trip to the feed would reset it. A module
+ * variable is enough — it should survive moving around the app, not a reload.
+ */
+let lastSkin = 0
+
 export function WalletScreen({ onSelect, openedPass = null }) {
-  const [skin, setSkin] = useState(0)
+  const [skin, setSkinState] = useState(lastSkin)
+
+  function setSkin(next) {
+    lastSkin = next
+    setSkinState(next)
+  }
   const [kind, setKind] = useState('all')
   const [price, setPrice] = useState('all')
   const [openGift, setOpenGift] = useState(openedPass)
@@ -72,7 +86,7 @@ export function WalletScreen({ onSelect, openedPass = null }) {
       <div className="wallet-top">
         <ScreenHeader
           title={wallet.name}
-          onLogo={() => setSkin((current) => (current + 1) % CRYSTALS.length)}
+          onLogo={() => setSkin((skin + 1) % CRYSTALS.length)}
         />
         <div className="wallet-hero">
           <WalletCard wallet={wallet} />
