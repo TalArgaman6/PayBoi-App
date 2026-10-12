@@ -129,7 +129,7 @@ function ShareMark() {
         strokeLinejoin="round"
       />
       <path
-        d="M6 13v6.2A1.8 1.8 0 0 0 7.8 21h8.4A1.8 1.8 0 0 0 18 19.2V13"
+        d="M3.8 13v6.2A1.8 1.8 0 0 0 5.6 21h12.8a1.8 1.8 0 0 0 1.8-1.8V13"
         fill="none"
         stroke="currentColor"
         strokeWidth="1.8"
