@@ -304,6 +304,45 @@ function LiveHeartMark() {
   )
 }
 
+/*
+ * A steering wheel, cut the same way as the heart above: the spokes are
+ * strokes in the sheet's colour punched through a solid disc, so it holds
+ * together at 14px instead of turning into a grey smudge.
+ */
+function WheelMark() {
+  return (
+    <svg className="live-heart is-wheel" viewBox="0 0 24 24" aria-hidden="true">
+      <path
+        fill="currentColor"
+        fillRule="evenodd"
+        d="M12 2.2a9.8 9.8 0 1 0 0 19.6 9.8 9.8 0 0 0 0-19.6zm0 2.1a7.7 7.7 0 1 1 0 15.4 7.7 7.7 0 0 1 0-15.4z"
+      />
+      <circle cx="12" cy="12" r="3.1" fill="currentColor" />
+      <g stroke="currentColor" strokeWidth="1.7" strokeLinecap="round">
+        <path d="M12 4.3v4.6" />
+        <path d="M5.4 15.8l4-2.3" />
+        <path d="M18.6 15.8l-4-2.3" />
+      </g>
+    </svg>
+  )
+}
+
+/*
+ * The ride card's footer line, built like the rating kicker: a mark, what
+ * kind of post this is, and the night it's headed to. The hashtags it used
+ * to carry said the same two things in a weaker voice.
+ */
+function RideKicker({ ids }) {
+  const party = PARTY_BY_ID[ids?.[0]]
+
+  return (
+    <p className="rate-kicker is-live">
+      <WheelMark />
+      Ride request{party ? ` · ${party.title}` : ''}
+    </p>
+  )
+}
+
 function RatingOptions({ options, picked, onVote, me, live = 4 }) {
   const ranked = [...options].sort((left, right) => right.votes - left.votes)
 
@@ -745,7 +784,9 @@ export function FeedScreen() {
                   <img src={assetUrl(post.image)} alt="" />
                   {isLivePost(post) ? <i>Live</i> : null}
                 </div>
-              ) : post.kind !== 'rating' ? (
+              ) : post.kind !== 'rating' && post.kind !== 'ride' ? (
+                /* Ride posts carry their kicker at the foot instead, next to
+                   the night, the way a rating does. */
                 <p className="rate-kicker">{kindLabel(post.kind)}</p>
               ) : null}
               <div className="feed-meta">
@@ -754,8 +795,12 @@ export function FeedScreen() {
               </div>
               {post.track ? <p className="feed-track">{post.track}</p> : null}
               {post.caption ? <p>{post.caption}</p> : null}
-              <NightChips ids={post.nights} />
-              {post.tags?.length && post.kind !== 'rating' ? (
+              {post.kind === 'ride' ? (
+                <RideKicker ids={post.nights} />
+              ) : (
+                <NightChips ids={post.nights} />
+              )}
+              {post.tags?.length && post.kind !== 'rating' && post.kind !== 'ride' ? (
                 <p className="feed-tags">
                   {post.tags.map((item) => formatTag(item)).join(' ')}
                 </p>

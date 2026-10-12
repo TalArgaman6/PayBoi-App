@@ -2652,6 +2652,11 @@
   animation: live-pulse 1.6s ease-in-out infinite;
 }
 
+/* The wheel is a label, not a recording light — it holds still. */
+.live-heart.is-wheel {
+  animation: none;
+}
+
 @keyframes live-pulse {
   0%,
   55%,
