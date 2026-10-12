@@ -226,12 +226,13 @@
 
 .screen-header h1 {
   margin: 0;
-  /* A grotesque at 700 carries far more weight per cap than the rounded face
-     did, so the size and tracking both come in to stop it shouting. */
+  /* A light classic serif, set in caps: it reads as engraved rather than
+     shouted, so it takes a larger size and a lighter weight than the
+     grotesque did, with the tracking opened up to match. */
   font-family: var(--font-title);
-  font-size: 1.3rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
+  font-size: 1.62rem;
+  font-weight: 300;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   line-height: 1;
   margin-top: -0.087rem;

@@ -10,9 +10,9 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   --font-display: "Plus Jakarta Sans", system-ui, sans-serif;
-  /* Screen titles share the display face used for names elsewhere in the app,
-     so the header speaks in the same voice as the cards beneath it. */
-  --font-title: "Plus Jakarta Sans", system-ui, sans-serif;
+  /* Screen titles step away from the app's grotesque into a light classic
+     serif — the headers set the tone, the cards beneath them carry the UI. */
+  --font-title: "Cormorant Garamond", Didot, Georgia, serif;
   --font-ui: "Plus Jakarta Sans", system-ui, sans-serif;
   --accent: #d1b45f;
   --accent-ink: #1c1a18;
