@@ -166,23 +166,21 @@ function FeedClip({ src, className }) {
 }
 
 /*
- * A peck, not a like. One outline that fills in once it is cast, so the
- * cast and uncast states are the same shape at the same weight and only the
- * fill changes — the count beside it never shifts.
+ * A peck, not a like. The mark never fills — casting only turns it gold,
+ * which the button's own colour does, so the shape and its weight are the
+ * same either way and the count beside it never shifts.
  */
-function Peck({ on }) {
+function Peck() {
   return (
     <svg className="peck-mark" viewBox="0 0 24 24" aria-hidden="true">
       {/* A peacock feather, upright: the plume is a teardrop with the eye cut
-          out of it as a second subpath, so evenodd leaves a ring rather than
-          needing a second colour to punch the hole. The quill curls off the
-          bottom. Cast fills the plume; the quill is drawn either way, so the
-          weight never changes. */}
+          out of it as a second subpath. Outline only, so the eye reads as an
+          eye; the quill curls off the bottom. */}
       <path
         d="M12 2.4c3.5 2.9 5.4 6.2 5.4 9.1 0 3.5-2.4 5.8-5.4 5.8s-5.4-2.3-5.4-5.8c0-2.9 1.9-6.2 5.4-9.1z
            M12 8.3a2.7 2.7 0 1 0 0 5.4 2.7 2.7 0 1 0 0-5.4z"
         fillRule="evenodd"
-        fill={on ? 'currentColor' : 'none'}
+        fill="none"
         stroke="currentColor"
         strokeWidth="1.6"
         strokeLinejoin="round"
@@ -996,7 +994,7 @@ export function FeedScreen() {
                     aria-label="Peck"
                     onClick={() => like(post.id)}
                   >
-                    <Peck on={liked.has(post.id)} />
+                    <Peck />
                     {post.likes || 0}
                   </button>
                 )}
