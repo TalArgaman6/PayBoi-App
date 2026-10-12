@@ -805,7 +805,7 @@
   display: grid;
   grid-template-columns: 42px 1fr 42px;
   align-items: center;
-  height: 38px;
+  height: 42px;
   border-radius: 12px;
   background: var(--wash);
   overflow: hidden;
