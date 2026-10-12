@@ -1354,11 +1354,13 @@
   line-height: 1.3;
 }
 
+/* Purple at rest like every other link in the drawer; white on hover, so the
+   line you're pointing at is the one that steps forward. */
 .remix-set,
 .remix-set:link,
 .remix-set:visited {
-  color: rgb(255 255 255 / 80%);
-  -webkit-text-fill-color: rgb(255 255 255 / 80%);
+  color: var(--live);
+  -webkit-text-fill-color: var(--live);
 }
 
 .remix-set:hover,
@@ -1366,8 +1368,8 @@
 .remix-set:visited:hover,
 .remix-set:focus-visible,
 .remix-set:active {
-  color: var(--live-lift);
-  -webkit-text-fill-color: var(--live-lift);
+  color: #fff;
+  -webkit-text-fill-color: #fff;
 }
 
 .remix-set svg {
@@ -1375,11 +1377,6 @@
   height: 15px;
   flex-shrink: 0;
   display: block;
-  color: var(--live);
-}
-
-.remix-set:hover svg {
-  color: var(--live-lift);
 }
 
 .remix-ig svg {
