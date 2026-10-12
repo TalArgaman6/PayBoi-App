@@ -2093,7 +2093,7 @@
 /* Same height, radius and purple as the earn badge on a listing, so a pass
    you're holding and a pass you'd earn look like the same currency. */
 .gift-count i {
-  width: 14px;
+  width: 26px;
   height: 20px;
   border-radius: 6px;
   background: var(--live);
