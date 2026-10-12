@@ -27,19 +27,21 @@
 .phone[data-tab='feed'],
 .splash {
   background-color: #08101d;
-  /* The peacock palette's deep blue leads now: the header sits in it, and the
-     gradient falls away from it into the near-black the lists sit on. */
+  /* The icon's own colour, read top to bottom: emerald teal where the header
+     sits, cooling through the palette's royal blue into the deep blue the
+     lists sit on. */
   background-image: linear-gradient(
-    135deg,
-    #08101d 0%,
-    #0b1526 34%,
-    #0d1119 68%
+    150deg,
+    #0a7371 0%,
+    #0d4a5c 22%,
+    #112b56 48%,
+    #08101d 78%
   );
 }
 
 .phone[data-tab='wallet'] {
   background-color: #0b1526;
-  background-image: linear-gradient(180deg, #08101d 0%, #0b1526 42px, #0b1526 100%);
+  background-image: linear-gradient(180deg, #0a7371 0%, #10404f 42px, #0b1526 180px, #0b1526 100%);
 }
 
 .screen {
