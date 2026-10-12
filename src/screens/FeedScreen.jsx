@@ -166,11 +166,11 @@ function FeedClip({ src, className }) {
 }
 
 /*
- * An upvote, not a like. One outline that fills in once it is cast, so the
+ * A peck, not a like. One outline that fills in once it is cast, so the
  * cast and uncast states are the same shape at the same weight and only the
  * fill changes — the count beside it never shifts.
  */
-function Upvote({ on }) {
+function Peck({ on }) {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true">
       <path
@@ -271,12 +271,12 @@ function cardTone(post) {
   return 'live'
 }
 
-function upvoteLine(entry, picked, me) {
+function peckLine(entry, picked, me) {
   const votes = entry.votes || 0
   if (votes <= 0) return null
   const lead = shortName(picked === entry.id ? me : entry.upvoters?.[0] || 'Someone')
-  if (votes === 1) return `${lead} upvoted`
-  return `${lead} upvoted +${votes - 1} more`
+  if (votes === 1) return `${lead} pecked`
+  return `${lead} pecked +${votes - 1} more`
 }
 
 /*
@@ -347,7 +347,7 @@ function TicketRequestMark() {
 }
 
 /*
- * An envelope at the weight of the upvote it stands in for: outline only, so
+ * An envelope at the weight of the peck it stands in for: outline only, so
  * the action row still reads as two quiet controls rather than one shouting.
  */
 function EnvelopeMark() {
@@ -427,7 +427,7 @@ function RatingOptions({ options, picked, onVote, me }) {
           const party = PARTY_BY_ID[entry.id]
           if (!party) return null
           const on = picked === entry.id
-          const fans = upvoteLine(entry, picked, me)
+          const fans = peckLine(entry, picked, me)
           return (
             <li key={entry.id}>
               <img src={assetUrl(party.image)} alt="" />
@@ -960,12 +960,12 @@ export function FeedScreen() {
                 />
               ) : null}
               {/* A rating card already is the vote — the row of options is the
-                  action, so a second upvote and a share underneath it only
+                  action, so a second peck and a share underneath it only
                   compete with it. */}
               {post.kind === 'rating' ? null : (
               <div className="feed-actions">
                 {/* A request isn't something you agree with, it's something
-                    you answer — so the upvote gives way to a direct line to
+                    you answer — so the peck gives way to a direct line to
                     whoever posted it. */}
                 {REQUEST_KINDS.includes(post.kind) ? (
                   <button
@@ -980,10 +980,10 @@ export function FeedScreen() {
                   <button
                     type="button"
                     className={liked.has(post.id) ? 'is-on' : ''}
-                    aria-label="Upvote"
+                    aria-label="Peck"
                     onClick={() => like(post.id)}
                   >
-                    <Upvote on={liked.has(post.id)} />
+                    <Peck on={liked.has(post.id)} />
                     {post.likes || 0}
                   </button>
                 )}

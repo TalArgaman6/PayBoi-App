@@ -2871,7 +2871,7 @@
   display: block;
 }
 
-/* Cast upvotes take the live red, same as the other accent marks. */
+/* Cast pecks take the live red, same as the other accent marks. */
 .feed-actions button.is-on {
   color: var(--live);
 }
