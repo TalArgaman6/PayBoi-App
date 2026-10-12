@@ -21,15 +21,11 @@ const SUGGESTION_FILTERS = [
  * through them — a testing affordance while we settle on one, not a setting.
  */
 const CRYSTALS = [
-  // The plume leads: it's the one an untouched wallet should open on.
-  'photos/wallet-crystal-plume.jpg',
-  'photos/wallet-crystal-peacock.jpg',
-  'photos/wallet-crystal-black.jpg',
-  'photos/wallet-crystal.jpg',
-  'photos/wallet-crystal-aurora.jpg',
-  'photos/wallet-crystal-rainbow.jpg',
-  'photos/wallet-crystal-gold.jpg',
-  'photos/wallet-crystal-pearl.jpg',
+  // The four plume treatments, under test. Teal leads.
+  'photos/wallet-plume.jpg',
+  'photos/wallet-plume-dusk.jpg',
+  'photos/wallet-plume-gold.jpg',
+  'photos/wallet-plume-noir.jpg',
 ]
 
 /*
@@ -70,17 +66,13 @@ export function WalletScreen({ onSelect, openedPass = null }) {
       (kind === 'all' || item.kind === kind) && inPriceRange(item, price),
   )
 
-  /* The pearl plate is already near-white; it takes a gentler version of the
-     glow so the facets don't blow out. See .wallet-crystal.is-pearl. */
-  const crystalClass = CRYSTALS[skin].includes('pearl') ? ' is-pearl' : ''
-
   return (
     <section className="screen wallet-screen">
       {/* A shot of cut glass behind the whole screen. It fades to black down
           the bottom where the sheet sits, so the colour reads as a glow above
           the card rather than as noise under the lists. */}
       <div
-        className={`wallet-crystal${crystalClass}`}
+        className="wallet-crystal"
         style={{ backgroundImage: `url("${assetUrl(CRYSTALS[skin])}")` }}
         aria-hidden="true"
       />
