@@ -28,6 +28,24 @@ export function useDismissOnOutside(ref, open, onClose) {
       const node = ref.current
       if (!node || node.contains(event.target)) return
       latest.current?.()
+
+      // A press that dismisses only dismisses. Without this the same press
+      // lands on whatever card is underneath and opens the next panel in the
+      // same gesture, so you never actually see the thing close. Swallowing
+      // pointerdown isn't enough — the browser still delivers a click — so a
+      // one-shot capture listener eats that too, and a timeout clears it in
+      // case the press ends as a drag and no click ever arrives.
+      event.stopPropagation()
+
+      const eat = (click) => {
+        click.stopPropagation()
+        click.preventDefault()
+      }
+
+      document.addEventListener('click', eat, true)
+      window.setTimeout(() => {
+        document.removeEventListener('click', eat, true)
+      }, 400)
     }
 
     function onKey(event) {
