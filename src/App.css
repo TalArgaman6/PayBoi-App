@@ -2092,8 +2092,8 @@
 
 .gift-count i {
   width: 11px;
-  height: 5px;
-  border-radius: 2.5px;
+  height: 8px;
+  border-radius: 3px;
   background: #fff;
   /* A hair of glow so the bars read as lit rather than as printed blocks. */
   box-shadow: 0 0 6px rgb(255 255 255 / 22%);
