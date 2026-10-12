@@ -1328,8 +1328,8 @@
 /* Sets sit a step below the handles — a faint rule separates them so the two
    groups don't read as one long list of blue-ish text. */
 .remix-sets {
-  margin-top: 12px;
-  padding-top: 10px;
+  margin-top: 16px;
+  padding-top: 16px;
   border-top: 1px solid rgb(255 255 255 / 9%);
   display: flex;
   flex-direction: column;
@@ -1337,6 +1337,9 @@
 }
 
 .remix-sets-label {
+  /* The label needs air on both sides or it sticks to the rule above it and
+     crowds the first set below. */
+  margin-bottom: 4px;
   font-size: 0.62rem;
   font-weight: 700;
   letter-spacing: 0.1em;
