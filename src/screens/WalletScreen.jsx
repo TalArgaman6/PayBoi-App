@@ -20,7 +20,14 @@ const SUGGESTION_FILTERS = [
  * Backdrops to choose between. Tapping the pboi mark in the header steps
  * through them — a testing affordance while we settle on one, not a setting.
  */
-const CRYSTALS = ['photos/wallet-crystal.jpg', 'photos/wallet-crystal-aurora.jpg']
+const CRYSTALS = [
+  'photos/wallet-crystal.jpg',
+  'photos/wallet-crystal-aurora.jpg',
+  'photos/wallet-crystal-rainbow.jpg',
+  'photos/wallet-crystal-gold.jpg',
+  'photos/wallet-crystal-black.jpg',
+  'photos/wallet-crystal-pearl.jpg',
+]
 
 export function WalletScreen({ onSelect, openedPass = null }) {
   const [skin, setSkin] = useState(0)
