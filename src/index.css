@@ -20,13 +20,13 @@
   --sky: #8ec8ea;
   --rose: #e2b08a;
   /* Shared accent: the co-post glyph, the kickers, the earn badges, cast
-     upvotes and the active slide dot. A deep amethyst — enough violet to
-     read as purple against the blue-grey sheet, dark enough that a solid
-     mask like the co-post glyph doesn't glare. */
-  --live: #9360d8;
+     upvotes and the active slide dot. The peacock palette's luminous gold —
+     warm enough to carry against the blue-grey sheet, deep enough that a
+     solid mask like the co-post glyph doesn't glare. */
+  --live: #d4a359;
   /* Hover for accent links. index.css resets a:hover to inherit, which would
-     drop them to white — this is the same amethyst lifted a couple of steps. */
-  --live-lift: #b78ce8;
+     drop them to white — this is the same gold lifted a couple of steps. */
+  --live-lift: #e8c489;
   --ink: #fff;
   --chrome: #101218;
   --sheet: #16181f;
