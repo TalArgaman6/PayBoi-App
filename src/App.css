@@ -1648,12 +1648,13 @@
   /* Dimmed a step: it's a backdrop, and the card has to stay the brightest
      thing on the screen. */
   opacity: 0.78;
-  /* The glass breathes. Brightness and saturation swing together on a slow,
-     uneven loop while the crop drifts a few pixels, so the facets look like
-     they're catching a light that's moving rather than cycling a filter.
-     Twenty-three seconds is long enough that you never catch it repeating. */
-  animation: crystal-shine 23s ease-in-out infinite;
+  /* The glass breathes. Brightness, saturation and hue swing together while
+     the crop drifts, so the facets look like they're catching a light that's
+     moving rather than cycling a filter. The range is wide on purpose —
+     anything subtler just reads as the screen not doing anything. */
+  animation: crystal-shine 14s ease-in-out infinite;
   will-change: filter;
+  overflow: hidden;
   -webkit-mask-image: linear-gradient(
     to bottom,
     #000 0%,
@@ -1671,36 +1672,74 @@
   pointer-events: none;
 }
 
+/* A band of light that travels across the facets, separate from the breathing
+   above. Screen-blended so it only ever adds, which is how a highlight on
+   glass behaves — it never darkens what it crosses. */
+.wallet-crystal::after {
+  content: '';
+  position: absolute;
+  inset: -20% -60%;
+  background: linear-gradient(
+    104deg,
+    transparent 36%,
+    rgb(255 255 255 / 20%) 48%,
+    rgb(190 230 255 / 28%) 52%,
+    transparent 64%
+  );
+  mix-blend-mode: screen;
+  animation: crystal-sweep 9s ease-in-out infinite;
+}
+
 @keyframes crystal-shine {
   0% {
-    filter: brightness(0.86) saturate(0.92);
-    background-position: center top;
+    filter: brightness(0.8) saturate(0.85) hue-rotate(-8deg);
+    background-position: 48% top;
   }
 
-  28% {
-    filter: brightness(1.12) saturate(1.16);
-    background-position: 46% top;
-  }
-
-  55% {
-    filter: brightness(0.94) saturate(1.04);
+  30% {
+    filter: brightness(1.25) saturate(1.3) hue-rotate(6deg);
     background-position: 54% 1%;
   }
 
-  78% {
-    filter: brightness(1.2) saturate(1.22);
-    background-position: 52% top;
+  60% {
+    filter: brightness(0.92) saturate(1) hue-rotate(-4deg);
+    background-position: 46% top;
   }
 
   100% {
-    filter: brightness(0.86) saturate(0.92);
-    background-position: center top;
+    filter: brightness(0.8) saturate(0.85) hue-rotate(-8deg);
+    background-position: 48% top;
+  }
+}
+
+@keyframes crystal-sweep {
+  0% {
+    transform: translate3d(-42%, 0, 0);
+    opacity: 0;
+  }
+
+  18% {
+    opacity: 1;
+  }
+
+  72% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate3d(42%, 0, 0);
+    opacity: 0;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .wallet-crystal {
+  .wallet-crystal,
+  .wallet-crystal::after {
     animation: none;
+  }
+
+  .wallet-crystal::after {
+    opacity: 0;
   }
 }
 
