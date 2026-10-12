@@ -173,16 +173,22 @@ function FeedClip({ src, className }) {
 function Peck({ on }) {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true">
-      {/* A beak striking up and to the left: the upper edge is the long
-          curve, the short back edge closes it, and the under edge sweeps
-          back to the point. It keeps the old arrow's direction, which is
-          what lets a vote read without a word next to it. */}
+      {/* A feather, laid on the diagonal: the vane is one closed curve and
+          the quill runs through it to the tip. Cast fills the vane; the
+          quill is drawn either way, so the weight never changes. */}
       <path
-        d="M3.4 4.9c6 1.3 12 4.6 16.6 8.6l-2.2 5.9C12.2 15.4 7 10.5 3.4 4.9z"
+        d="M19.8 3.6c.8 6.8-2.5 12.4-8.4 14.8-2.3.9-4.3 1.2-6 1 .2-1.8.7-3.7 1.8-5.7 2.9-5.4 8-9 12.6-10.1z"
         fill={on ? 'currentColor' : 'none'}
         stroke="currentColor"
-        strokeWidth="1.8"
+        strokeWidth="1.7"
         strokeLinejoin="round"
+        strokeLinecap="round"
+      />
+      <path
+        d="M19.8 3.6 4.4 19.8"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.7"
         strokeLinecap="round"
       />
     </svg>
