@@ -169,7 +169,7 @@
         "name": "Refael Haim",
         "photo": "photos/sellers/sam.jpg"
       },
-      "caption": "Florentin \u2192 Haoman, 23:20. Two seats.",
+      "caption": "Florentin → Haoman, 23:20. Two seats.",
       "when": "1h",
       "tags": [
         "ride",
@@ -263,7 +263,7 @@
         "photo": "photos/sellers/taluli.jpg"
       },
       "image": "photos/dj-booth.jpg",
-      "track": "FFF \u2014 closing hour set",
+      "track": "FFF — closing hour set",
       "caption": "Shirazi line, the last 20.",
       "when": "3h",
       "tags": [
@@ -349,7 +349,7 @@
         "name": "Shay Geva",
         "photo": "photos/sellers/ido.jpg"
       },
-      "caption": "North TLV \u2192 Forever, after 00:30.",
+      "caption": "North TLV → Forever, after 00:30.",
       "when": "4h",
       "tags": [
         "ride",
@@ -359,25 +359,6 @@
         "forever-tlv"
       ],
       "likes": 9
-    },
-    {
-      "id": "noa-ticket-1",
-      "kind": "ticket",
-      "user": {
-        "id": "shani",
-        "name": "Shani Amsalem",
-        "photo": "photos/sellers/maya.jpg"
-      },
-      "caption": "Looking for Gaze + drinks pack.",
-      "when": "9h",
-      "tags": [
-        "ticket",
-        "gaze"
-      ],
-      "nights": [
-        "gaze-haoman"
-      ],
-      "likes": 3
     },
     {
       "id": "alex-2",
@@ -434,6 +415,25 @@
       "likes": 21
     },
     {
+      "id": "noa-ticket-1",
+      "kind": "ticket",
+      "user": {
+        "id": "shani",
+        "name": "Shani Amsalem",
+        "photo": "photos/sellers/maya.jpg"
+      },
+      "caption": "Looking for Gaze + drinks pack.",
+      "when": "9h",
+      "tags": [
+        "ticket",
+        "gaze"
+      ],
+      "nights": [
+        "gaze-haoman"
+      ],
+      "likes": 3
+    },
+    {
       "id": "noa-2",
       "kind": "alternative",
       "user": {
@@ -459,7 +459,7 @@
         "photo": "photos/sellers/kipi.jpg"
       },
       "image": "photos/hiphop-club.jpg",
-      "track": "Lima Day \u2014 Monday hip-hop",
+      "track": "Lima Day — Monday hip-hop",
       "caption": "The club line tonight.",
       "when": "1d",
       "tags": [
