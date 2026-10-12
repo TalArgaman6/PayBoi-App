@@ -21,11 +21,11 @@ const SUGGESTION_FILTERS = [
  * through them — a testing affordance while we settle on one, not a setting.
  */
 const CRYSTALS = [
-  // The four plume treatments, under test. Teal leads.
+  // The four plume treatments, under test. The black noir plume leads.
+  'photos/wallet-plume-noir.jpg',
   'photos/wallet-plume.jpg',
   'photos/wallet-plume-dusk.jpg',
   'photos/wallet-plume-gold.jpg',
-  'photos/wallet-plume-noir.jpg',
 ]
 
 /*
