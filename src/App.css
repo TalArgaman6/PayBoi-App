@@ -730,7 +730,9 @@
   min-width: 44px;
   padding: 3px 5px 4px;
   border-radius: 6px;
-  background: #251a3f;
+  /* The plate is the accent taken right down — a warm shadow of the gold it
+     carries, the way it used to be a shadow of the amethyst. */
+  background: #322412;
   color: var(--live);
   font-family: var(--font-ui);
   font-size: 0.66rem;
