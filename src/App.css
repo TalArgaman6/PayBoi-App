@@ -1647,14 +1647,11 @@
   /* Dimmed a step: it's a backdrop, and the card has to stay the brightest
      thing on the screen. */
   opacity: 0.78;
-  /* The base plate is dark and still until the phone moves. `--tilt-rush` is
-     painted every frame by useWalletTilt — it rises as the device turns and
-     falls away once it settles — so the glass lights up in the hand and goes
-     quiet on the table, the way a real facet does. */
-  filter:
-    brightness(calc(0.55 + var(--tilt-rush, 0) * 0.8))
-    saturate(calc(0.8 + var(--tilt-rush, 0) * 0.7))
-    hue-rotate(calc(var(--tilt-x, 0) * 10deg));
+  /* Lit is the resting state. The glass glows on its own and breathes on a
+     slow loop; `--tilt-rush` — painted every frame by useWalletTilt as the
+     device turns — only adds on top of that, so moving the phone makes an
+     already-bright thing flare rather than switching the light on. */
+  animation: crystal-shine 13s ease-in-out infinite;
   /* And the crop slides a little against the tilt, so the light looks like
      it's raking across a surface rather than fading up in place. */
   background-position: calc(50% + var(--tilt-x, 0) * 4%) calc(0% + var(--tilt-y, 0) * 2%);
@@ -1692,16 +1689,55 @@
     transparent 64%
   );
   mix-blend-mode: screen;
-  transform: translate3d(calc(var(--tilt-x, 0) * 34%), calc(var(--tilt-y, 0) * 10%), 0);
-  /* A little light even at rest, so the band is already there to be moved
-     rather than appearing out of nothing on the first nudge. */
-  opacity: calc(0.18 + var(--tilt-rush, 0) * 0.82);
+  /* The band travels on its own clock; the tilt term inside the keyframes
+     shoves it further along, so turning the phone pushes the highlight
+     ahead of where the loop would have put it. */
+  animation: crystal-sweep 11s ease-in-out infinite;
+}
+
+@keyframes crystal-shine {
+  0%,
+  100% {
+    filter:
+      brightness(calc(1 + var(--tilt-rush, 0) * 0.45))
+      saturate(calc(1.02 + var(--tilt-rush, 0) * 0.4))
+      hue-rotate(calc(var(--tilt-x, 0) * 10deg));
+  }
+
+  45% {
+    filter:
+      brightness(calc(1.24 + var(--tilt-rush, 0) * 0.45))
+      saturate(calc(1.26 + var(--tilt-rush, 0) * 0.4))
+      hue-rotate(calc(6deg + var(--tilt-x, 0) * 10deg));
+  }
+}
+
+@keyframes crystal-sweep {
+  0% {
+    transform: translate3d(calc(-40% + var(--tilt-x, 0) * 30%), calc(var(--tilt-y, 0) * 10%), 0);
+    opacity: calc(0.45 + var(--tilt-rush, 0) * 0.55);
+  }
+
+  50% {
+    transform: translate3d(calc(40% + var(--tilt-x, 0) * 30%), calc(var(--tilt-y, 0) * 10%), 0);
+    opacity: calc(0.9 + var(--tilt-rush, 0) * 0.1);
+  }
+
+  100% {
+    transform: translate3d(calc(-40% + var(--tilt-x, 0) * 30%), calc(var(--tilt-y, 0) * 10%), 0);
+    opacity: calc(0.45 + var(--tilt-rush, 0) * 0.55);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .wallet-crystal,
+  .wallet-crystal::after {
+    animation: none;
+  }
+
   .wallet-crystal::after {
     transform: none;
-    opacity: 0.18;
+    opacity: 0.6;
   }
 }
 
