@@ -1312,8 +1312,8 @@
 .remix-ig,
 .remix-ig:link,
 .remix-ig:visited {
-  color: var(--live);
-  -webkit-text-fill-color: var(--live);
+  color: var(--live-lift);
+  -webkit-text-fill-color: var(--live-lift);
 }
 
 .remix-ig:hover,
@@ -1321,8 +1321,8 @@
 .remix-ig:visited:hover,
 .remix-ig:focus-visible,
 .remix-ig:active {
-  color: var(--live-lift);
-  -webkit-text-fill-color: var(--live-lift);
+  color: #fff;
+  -webkit-text-fill-color: #fff;
 }
 
 /* Sets sit a step below the handles — a faint rule separates them so the two
@@ -1359,8 +1359,8 @@
 .remix-set,
 .remix-set:link,
 .remix-set:visited {
-  color: var(--live);
-  -webkit-text-fill-color: var(--live);
+  color: var(--live-lift);
+  -webkit-text-fill-color: var(--live-lift);
 }
 
 .remix-set:hover,
