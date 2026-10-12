@@ -3389,9 +3389,9 @@
 
 .pay-btn {
   /* The one gold button on the screen — it's the action everything else
-     in the sheet is leading to. Hover goes deeper, not lighter, so pressing
-     it reads as the button taking the weight. */
-  background: #d4a359;
+     in the sheet is leading to. It rests in the deeper gold and brightens
+     under the pointer. */
+  background: #b1813a;
   color: #fff;
   -webkit-text-fill-color: #fff;
   font-family: var(--font-ui);
@@ -3399,12 +3399,12 @@
   letter-spacing: 0.02em;
 }
 
-/* The confirming button goes a step deeper on hover — the same gold with the
-   light taken out of it. :not(:disabled) so a button you can't press doesn't
+/* The confirming button lights up on hover — the same gold with the light
+   put back into it. :not(:disabled) so a button you can't press doesn't
    promise that you can. */
 .pay-btn:not(:disabled):hover,
 .pay-btn:not(:disabled):active {
-  background: #b1813a;
+  background: #d4a359;
   color: #fff;
   -webkit-text-fill-color: #fff;
 }
