@@ -2241,8 +2241,8 @@
   height: 9px;
   flex-shrink: 0;
   border-radius: 3px;
-  /* The palette's emerald teal at rest; the pointer swaps it for the gold. */
-  background: #2e8c8a;
+  /* A cool silver at rest; the pointer takes it up to white. */
+  background: #a7aebb;
   transition: background 0.18s ease, box-shadow 0.18s ease;
 }
 
@@ -2250,19 +2250,19 @@
    of trailing off into the rule. */
 .gift-count i.is-spent {
   background: transparent;
-  box-shadow: inset 0 0 0 1px rgb(46 140 138 / 70%);
+  box-shadow: inset 0 0 0 1px rgb(167 174 187 / 70%);
 }
 
-/* The open or hovered row turns the teal to gold. */
+/* The open or hovered row lifts the silver to white. */
 .gift-room li.is-open .gift-count i,
 .gift-room li.is-lit .gift-count i {
-  background: #d4a359;
+  background: #fff;
 }
 
 .gift-room li.is-open .gift-count i.is-spent,
 .gift-room li.is-lit .gift-count i.is-spent {
   background: transparent;
-  box-shadow: inset 0 0 0 1px #d4a359;
+  box-shadow: inset 0 0 0 1px #fff;
 }
 
 /* Too many to tally — back to a digit. */
