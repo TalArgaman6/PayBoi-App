@@ -21,14 +21,13 @@ const SUGGESTION_FILTERS = [
  * through them — a testing affordance while we settle on one, not a setting.
  */
 const CRYSTALS = [
-  // Black leads: it's the one the screen is designed against, so an untouched
-  // wallet looks the way it's meant to.
+  // Peacock leads: it's the one an untouched wallet should open on.
+  'photos/wallet-crystal-peacock.jpg',
   'photos/wallet-crystal-black.jpg',
   'photos/wallet-crystal.jpg',
   'photos/wallet-crystal-aurora.jpg',
   'photos/wallet-crystal-rainbow.jpg',
   'photos/wallet-crystal-gold.jpg',
-  'photos/wallet-crystal-peacock.jpg',
   'photos/wallet-crystal-pearl.jpg',
 ]
 
