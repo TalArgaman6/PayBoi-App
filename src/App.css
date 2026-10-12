@@ -3199,8 +3199,11 @@
 }
 
 .pay-btn {
-  background: var(--btn);
-  color: var(--btn-ink);
+  /* The one purple button on the screen — it's the action everything else
+     in the sheet is leading to. */
+  background: var(--live);
+  color: #fff;
+  -webkit-text-fill-color: #fff;
   font-family: var(--font-ui);
   font-weight: 700;
   letter-spacing: 0.02em;
@@ -3211,7 +3214,7 @@
    doesn't promise that you can. */
 .pay-btn:not(:disabled):hover,
 .pay-btn:not(:disabled):active {
-  background: rgb(183 140 232 / 22%);
+  background: var(--live-lift);
   color: #fff;
   -webkit-text-fill-color: #fff;
 }
