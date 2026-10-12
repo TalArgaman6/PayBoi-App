@@ -148,8 +148,10 @@ export default function App() {
                           : `${formatCost(selected)} · ${formatPbs(wallet.balance - selected.pricePbs)} left`
                         : `This is ${formatPbs(selected.pricePbs - wallet.balance)} over your ${formatTokenBalance(wallet.balance)} pbs.`}
                   </p>
+                  {/* The price is already on the line above; the button only
+                      has to say what pressing it does. */}
                   <button type="button" className="pay-btn">
-                    Pay {formatCost(selected)}
+                    PAY NOW
                   </button>
                   {selected.seller ? (
                     <button type="button" className="ghost-btn" onClick={() => setPmOpen(true)}>
