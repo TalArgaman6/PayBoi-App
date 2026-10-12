@@ -44,7 +44,9 @@ export function WalletScreen({ onSelect, openedPass = null }) {
 
   return (
     <section className="screen wallet-screen">
-      <WalletSky />
+      {/* Crystal wash parked for now — the screen runs on the flat app
+          background until we come back to it. */}
+      {false ? <WalletSky /> : null}
       <div className="wallet-top">
         <ScreenHeader title={wallet.name} />
         <div className="wallet-hero">
