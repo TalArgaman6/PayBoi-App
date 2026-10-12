@@ -55,13 +55,17 @@ export function WalletScreen({ onSelect, openedPass = null }) {
       (kind === 'all' || item.kind === kind) && inPriceRange(item, price),
   )
 
+  /* The pearl plate is already near-white; it takes a gentler version of the
+     glow so the facets don't blow out. See .wallet-crystal.is-pearl. */
+  const crystalClass = CRYSTALS[skin].includes('pearl') ? ' is-pearl' : ''
+
   return (
     <section className="screen wallet-screen">
       {/* A shot of cut glass behind the whole screen. It fades to black down
           the bottom where the sheet sits, so the colour reads as a glow above
           the card rather than as noise under the lists. */}
       <div
-        className="wallet-crystal"
+        className={`wallet-crystal${crystalClass}`}
         style={{ backgroundImage: `url("${assetUrl(CRYSTALS[skin])}")` }}
         aria-hidden="true"
       />

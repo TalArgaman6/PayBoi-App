@@ -3499,3 +3499,32 @@
   cursor: pointer;
   line-height: 0;
 }
+
+/* The pearl backdrop arrives at almost full white, so the shared glow pushes
+   it past the point where the facets read. It gets the same loop at roughly
+   half the swing, and the travelling band pulled right back. */
+.wallet-crystal.is-pearl {
+  opacity: 0.6;
+  animation-name: crystal-shine-pearl;
+}
+
+.wallet-crystal.is-pearl::after {
+  opacity: 0.3;
+}
+
+@keyframes crystal-shine-pearl {
+  0%,
+  100% {
+    filter:
+      brightness(calc(0.82 + var(--tilt-rush, 0) * 0.16))
+      saturate(calc(1 + var(--tilt-rush, 0) * 0.2))
+      hue-rotate(calc(var(--tilt-x, 0) * 10deg));
+  }
+
+  45% {
+    filter:
+      brightness(calc(0.94 + var(--tilt-rush, 0) * 0.16))
+      saturate(calc(1.12 + var(--tilt-rush, 0) * 0.2))
+      hue-rotate(calc(6deg + var(--tilt-x, 0) * 10deg));
+  }
+}
