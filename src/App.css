@@ -2991,14 +2991,17 @@
   /* Bowl height sits a little under the name letters. Stems paint outside
      the line. The box is baseline-aligned, so shrinking the bowl would drop
      its optical centre; the lift puts that centre back where it was. */
-  --bowl: 0.66em;
-  --bowl-lift: calc(0.049em - 1px);
+  /* Ten percent off the bowl. The lift and the side margins are recomputed
+     from it so the mark's optical centre and the gaps to the names on either
+     side land exactly where they did at the old size. */
+  --bowl: 0.594em;
+  --bowl-lift: calc(0.0841em - 1px);
   font-size: 1em;
   display: inline-block;
   position: relative;
   width: calc(var(--bowl) * 354 / 190);
   height: var(--bowl);
-  margin-inline: 0.08em;
+  margin-inline: 0.1415em;
   vertical-align: var(--bowl-lift);
 }
 
