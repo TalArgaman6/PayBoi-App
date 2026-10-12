@@ -1325,6 +1325,63 @@
   -webkit-text-fill-color: var(--live-lift);
 }
 
+/* Sets sit a step below the handles — a faint rule separates them so the two
+   groups don't read as one long list of blue-ish text. */
+.remix-sets {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid rgb(255 255 255 / 9%);
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.remix-sets-label {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgb(255 255 255 / 42%);
+  -webkit-text-fill-color: rgb(255 255 255 / 42%);
+}
+
+.remix-set {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.74rem;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.remix-set,
+.remix-set:link,
+.remix-set:visited {
+  color: rgb(255 255 255 / 80%);
+  -webkit-text-fill-color: rgb(255 255 255 / 80%);
+}
+
+.remix-set:hover,
+.remix-set:link:hover,
+.remix-set:visited:hover,
+.remix-set:focus-visible,
+.remix-set:active {
+  color: var(--live-lift);
+  -webkit-text-fill-color: var(--live-lift);
+}
+
+.remix-set svg {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+  display: block;
+  color: var(--live);
+}
+
+.remix-set:hover svg {
+  color: var(--live-lift);
+}
+
 .remix-ig svg {
   width: 13px;
   height: 13px;

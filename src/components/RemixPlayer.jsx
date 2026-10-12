@@ -281,7 +281,48 @@ function Handles({ at, cloud }) {
  * the photo and the handle on the same line means the two cards read as a
  * pair of entries rather than two walls of text with a picture bolted on.
  */
-function AboutCard({ name, photo, bio, at, cloud }) {
+function PlayLink() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        d="M3.2 8.1a3 3 0 0 1 2.5-2.5C7.6 5.3 9.8 5.2 12 5.2s4.4.1 6.3.4a3 3 0 0 1 2.5 2.5c.2 1.3.3 2.6.3 3.9s-.1 2.6-.3 3.9a3 3 0 0 1-2.5 2.5c-1.9.3-4.1.4-6.3.4s-4.4-.1-6.3-.4a3 3 0 0 1-2.5-2.5A25 25 0 0 1 2.9 12c0-1.3.1-2.6.3-3.9Z"
+      />
+      <path fill="currentColor" d="M10.2 9.3v5.4L14.9 12z" />
+    </svg>
+  )
+}
+
+/*
+ * Full recorded sets, beneath the handles. They're a bigger ask than a profile
+ * tap — an hour of someone's night — so each gets its own line with the
+ * occasion and the room named, rather than hiding behind a bare link.
+ */
+function SetLinks({ sets }) {
+  if (!sets || !sets.length) return null
+
+  return (
+    <div className="remix-sets">
+      <span className="remix-sets-label">Recommended sets</span>
+      {sets.map((set) => (
+        <a
+          key={set.url}
+          className="remix-set"
+          href={set.url}
+          target="_blank"
+          rel="noreferrer noopener"
+        >
+          <PlayLink />
+          <span>{set.title}</span>
+        </a>
+      ))}
+    </div>
+  )
+}
+
+function AboutCard({ name, photo, bio, at, cloud, sets }) {
   if (!name || !bio) return null
 
   return (
@@ -294,6 +335,7 @@ function AboutCard({ name, photo, bio, at, cloud }) {
       </div>
       <p>{bio}</p>
       <Handles at={at} cloud={cloud} />
+      <SetLinks sets={sets} />
     </section>
   )
 }
@@ -343,6 +385,7 @@ function RemixAbout({ open, onClose, dj, party }) {
             bio={remix.djBio}
             at={remix.djInstagram}
             cloud={remix.djSoundcloud}
+            sets={remix.djSets}
           />
           <AboutCard
             name={remix.party || party}
@@ -350,6 +393,7 @@ function RemixAbout({ open, onClose, dj, party }) {
             bio={remix.partyBio}
             at={remix.partyInstagram}
             cloud={remix.partySoundcloud}
+            sets={remix.partySets}
           />
         </div>
       </aside>

@@ -8,8 +8,16 @@
   "djInstagram": "mstermiss",
   "djSoundcloud": "mstermiss",
   "djBio": "MisterMiss came up on the Tel Aviv after-hours circuit and still plays like it — long, patient builds that hold a room past the point most sets would break. The edits lean on Levantine vocal lines and old disco records, cut fresh the week they're played.",
+  "djSets": [
+    { "title": "LIVE: Pride 2026 · Hangar 11", "url": "https://www.youtube.com/watch?v=KxHUn1h8qR8" },
+    { "title": "LIVE: Rosh Hashanah 2026 · Shalvata", "url": "https://www.youtube.com/watch?v=o6F5dMQzcpo" }
+  ],
   "partyPhoto": "photos/party-forever.jpg",
   "partyInstagram": "forevertlv",
   "partySoundcloud": "forevertlv",
+  "partySets": [
+    { "title": "DJ Sagi Kariv · Purim 2025 · Haoman 17", "url": "https://www.youtube.com/watch?v=gTqWTk-s_jI" },
+    { "title": "DJ Jetfire · Hanukkah 2025 · Haoman 17", "url": "https://www.youtube.com/watch?v=gFakyIA9wnE" }
+  ],
   "partyBio": "Forever runs the largest queer nights in Tel Aviv, from the beachfront warehouses to the yearly festival week. It started as a one-off birthday party in 2011 and never stopped, and the room is known for booking local residents over touring names."
 }
