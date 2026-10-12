@@ -3180,7 +3180,14 @@
   color: var(--ink);
   border-radius: 22px;
   padding: 12px 16px 16px;
-  box-shadow: 0 18px 50px rgb(31 28 26 / 22%);
+  /* Three layers, outside in: a hairline of white on the edge so the sheet
+     separates from a dark screen behind it, a soft white halo just beyond
+     that, and the old drop shadow underneath to keep it sitting on top
+     rather than floating free. */
+  box-shadow:
+    0 0 0 1px rgb(255 255 255 / 14%),
+    0 0 24px rgb(255 255 255 / 10%),
+    0 18px 50px rgb(0 0 0 / 45%);
   display: grid;
   gap: 12px;
 }
