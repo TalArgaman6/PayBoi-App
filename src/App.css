@@ -3596,3 +3596,11 @@
   color: rgb(17 21 29 / 78%);
   -webkit-text-fill-color: rgb(17 21 29 / 78%);
 }
+
+/* The portrait's double ring is white for the same reason the title was —
+   it reads as a cut-out against the dark plume and as nothing at all against
+   the ivory one. */
+.wallet-screen.is-light .wallet-profile img {
+  box-shadow: 0 0 0 1px rgb(17 21 29 / 85%);
+  outline: 1px solid rgb(17 21 29 / 62%);
+}
