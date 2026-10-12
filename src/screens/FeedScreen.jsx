@@ -456,6 +456,74 @@ function RatingOptions({ options, picked, onVote, me }) {
   )
 }
 
+/*
+ * Answering a request. The same sheet the marketplace uses to message a
+ * seller — a labelled field and the two familiar buttons — so a PM looks like
+ * one thing wherever it starts from.
+ */
+function PmSheet({ post, onClose }) {
+  const [draft, setDraft] = useState('')
+  const [sent, setSent] = useState(false)
+  const sheet = useRef(null)
+  useDismissOnOutside(sheet, Boolean(post), onClose)
+
+  if (!post) return null
+
+  const name = shortName(post.user?.name || '')
+
+  return (
+    <aside
+      ref={sheet}
+      className="detail-sheet"
+      role="dialog"
+      aria-label={`Message ${name}`}
+    >
+      <div className="detail-handle" />
+      <div className="detail-head">
+        <div className="item-thumb">
+          <img src={assetUrl(post.user?.photo)} alt="" />
+        </div>
+        <div>
+          <strong>{name}</strong>
+          <span>{kindLabel(post.kind)}</span>
+          <span className="detail-pay">{post.caption}</span>
+        </div>
+      </div>
+      {sent ? (
+        <p>Sent to {name}.</p>
+      ) : (
+        <label className="sell-field">
+          <span className="sell-field-row">
+            Message
+            <em className="sell-ratio">to {name}</em>
+          </span>
+          <textarea
+            className="pm-draft"
+            rows={3}
+            placeholder={`Reply to ${name}`}
+            value={draft}
+            autoFocus
+            onChange={(event) => setDraft(event.target.value)}
+          />
+        </label>
+      )}
+      {sent ? null : (
+        <button
+          type="button"
+          className="pay-btn"
+          disabled={!draft.trim()}
+          onClick={() => setSent(true)}
+        >
+          SEND
+        </button>
+      )}
+      <button type="button" className="ghost-btn" onClick={onClose}>
+        GO BACK
+      </button>
+    </aside>
+  )
+}
+
 function UserFeed({ posts, startId, userId, onClose }) {
   const scroller = useRef(null)
   const panel = useRef(null)
@@ -594,6 +662,8 @@ export function FeedScreen() {
   const [picks, setPicks] = useState([])
   const [tagOpen, setTagOpen] = useState(false)
   const [viewer, setViewer] = useState(null)
+  // The request whose PM composer is open, if any.
+  const [pm, setPm] = useState(null)
   const [mine, setMine] = useState({})
   const [liked, setLiked] = useState(() => new Set())
 
@@ -901,7 +971,7 @@ export function FeedScreen() {
                   <button
                     type="button"
                     aria-label={`Message ${post.user?.name || 'poster'}`}
-                    onClick={() => openUser(post.user?.id, post.id)}
+                    onClick={() => setPm(post)}
                   >
                     <EnvelopeMark />
                     PM
@@ -942,6 +1012,9 @@ export function FeedScreen() {
           onClose={() => setViewer(null)}
         />
       ) : null}
+      {/* Keyed on the post so a second request opens a clean draft rather
+          than inheriting the last one's half-written message. */}
+      <PmSheet key={pm?.id} post={pm} onClose={() => setPm(null)} />
     </section>
   )
 }
