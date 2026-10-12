@@ -2088,7 +2088,7 @@
   flex-wrap: wrap;
   gap: 4px;
   min-width: 1.4rem;
-  min-height: 18px;
+  min-height: 20px;
 }
 
 /* Same height, radius and purple as the earn badge on a listing, so a pass
@@ -2096,8 +2096,8 @@
 .gift-count i {
   /* Exactly the earn badge's footprint: its 44px min-width and the height its
      padding and type add up to. */
-  width: 36px;
-  height: 18px;
+  width: 44px;
+  height: 20px;
   flex-shrink: 0;
   border-radius: 6px;
   /* A step up from the base accent — close to the hover purple but held one
