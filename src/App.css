@@ -3582,3 +3582,17 @@
 .wallet-screen.is-light .screen-header .peacock-logo {
   filter: invert(1);
 }
+
+/* The card sits straight on the plume — it has no ground of its own — so the
+   balance follows the header to ink over the pale backdrop. */
+.wallet-screen.is-light .pay-card .token-balance,
+.wallet-screen.is-light .pay-card .token-balance small,
+.wallet-screen.is-light .pay-card .token-amount {
+  color: #11151d;
+  -webkit-text-fill-color: #11151d;
+}
+
+.wallet-screen.is-light .pay-card .fiat-balance {
+  color: rgb(17 21 29 / 78%);
+  -webkit-text-fill-color: rgb(17 21 29 / 78%);
+}
