@@ -185,29 +185,22 @@ function PlayMark({ playing }) {
   )
 }
 
-function MuteMark({ muted }) {
-  return muted ? (
-    <svg viewBox="0 0 16 16" aria-hidden="true">
-      <path
-        fill="currentColor"
-        d="M2.2 6.1h2.1L7.6 3.4v9.2L4.3 9.9H2.2zm8.2 1.9 1.5-1.5.9.9-1.5 1.5 1.5 1.5-.9.9-1.5-1.5-1.5 1.5-.9-.9 1.5-1.5-1.5-1.5.9-.9z"
-      />
-    </svg>
-  ) : (
-    <svg viewBox="0 0 16 16" aria-hidden="true">
-      <path
-        fill="currentColor"
-        d="M2.2 6.1h2.1L7.6 3.4v9.2L4.3 9.9H2.2zm7.2.4c.7.5 1.1 1.2 1.1 1.5s-.4 1-.1 1.5l-.8.5c-.2-.4-.5-.8-.5-2s.3-1.6.5-2zm1.9-1.4c1.1.9 1.8 2 1.8 2.9s-.7 2-1.8 2.9l-.7-.7c.9-.7 1.4-1.5 1.4-2.2s-.5-1.5-1.4-2.2z"
-      />
-    </svg>
+/*
+ * Four bars that dance while the sound is actually coming through, and drop
+ * to a flat line the moment it's muted or paused. The animation is CSS, so it
+ * costs nothing to leave running and stops dead when the class comes off.
+ */
+function MuteMark({ muted, playing }) {
+  return (
+    <span className={`eq${muted || !playing ? ' is-off' : ''}`} aria-hidden="true">
+      <i />
+      <i />
+      <i />
+      <i />
+    </span>
   )
 }
 
-/*
- * Who is playing and where. Opens from the cover art, slides in from the
- * right over the feed. Nothing in here is a control — it is just the two
- * paragraphs, so the music carries on untouched behind it.
- */
 function InstagramMark() {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -303,6 +296,11 @@ function AboutCard({ name, photo, bio, at, cloud }) {
   )
 }
 
+/*
+ * Who is playing and where. Opens from the cover art, slides in from the
+ * right over the feed. Nothing in here is a control — it is just the two
+ * paragraphs, so the music carries on untouched behind it.
+ */
 function RemixAbout({ open, onClose, dj, party }) {
   if (!open) return null
 
@@ -402,7 +400,7 @@ export function RemixBanner() {
           onClick={now.toggleMute}
           aria-label={now.muted ? 'Unmute remix' : 'Mute remix'}
         >
-          <MuteMark muted={now.muted} />
+          <MuteMark muted={now.muted} playing={now.playing} />
         </button>
       </div>
       {/* Outside the banner: it has overflow:hidden and its own positioning
@@ -439,7 +437,7 @@ export function RemixNowPlaying() {
           onClick={now.toggleMute}
           aria-label={now.muted ? 'Unmute remix' : 'Mute remix'}
         >
-          <MuteMark muted={now.muted} />
+          <MuteMark muted={now.muted} playing={now.playing} />
         </button>
       </div>
     </div>
