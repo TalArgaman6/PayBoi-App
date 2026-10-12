@@ -1168,9 +1168,9 @@
 }
 
 /* Four bars standing on a shared baseline. Each runs the same keyframes at a
-   different delay and height, which is enough to read as sound without any of
-   them lining up. is-off parks them flat — animation-play-state would freeze
-   them mid-dance instead, which looks broken rather than silent. */
+   different delay and duration, which is enough to read as sound without any
+   of them lining up. Silence swaps the whole mark for a play triangle, so
+   there's no off state to style here. */
 .eq {
   display: flex;
   align-items: flex-end;
@@ -1206,11 +1206,6 @@
 .eq i:nth-child(4) {
   animation-delay: -0.1s;
   animation-duration: 0.8s;
-}
-
-.eq.is-off i {
-  animation: none;
-  transform: scaleY(0.14);
 }
 
 @keyframes eq-bar {

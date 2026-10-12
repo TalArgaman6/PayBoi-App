@@ -186,13 +186,15 @@ function PlayMark({ playing }) {
 }
 
 /*
- * Four bars that dance while the sound is actually coming through, and drop
- * to a flat line the moment it's muted or paused. The animation is CSS, so it
- * costs nothing to leave running and stops dead when the class comes off.
+ * One mark, two states. While the sound is actually coming through it's four
+ * bars dancing; silent, it falls back to a play triangle — which says what the
+ * tap will do rather than what the track is already doing.
  */
 function MuteMark({ muted, playing }) {
+  if (muted || !playing) return <PlayMark playing={false} />
+
   return (
-    <span className={`eq${muted || !playing ? ' is-off' : ''}`} aria-hidden="true">
+    <span className="eq" aria-hidden="true">
       <i />
       <i />
       <i />
