@@ -19,3 +19,11 @@ export function PboiLogo({ tinted = false }) {
     <img className="pboi-logo" src={assetUrl('pboi-logo.png')} alt="pboi" />
   )
 }
+
+// The peacock mark — white on transparent like the wordmark, so it can be
+// tinted the same way later. For now it only stands in the screen headers.
+export function PeacockLogo() {
+  return (
+    <img className="peacock-logo" src={assetUrl('peacock-logo.png')} alt="pboi" />
+  )
+}

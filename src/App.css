@@ -3533,3 +3533,15 @@
       hue-rotate(calc(6deg + var(--tilt-x, 0) * 10deg));
   }
 }
+
+/* The peacock mark in the screen headers. It's a tall portrait next to the
+   wordmark's landscape, so it's sized by height against the title and sits on
+   the baseline rather than being nudged up the way the wordmark was. */
+.peacock-logo {
+  display: block;
+  height: 38px;
+  width: auto;
+  flex-shrink: 0;
+  justify-self: end;
+  object-fit: contain;
+}
