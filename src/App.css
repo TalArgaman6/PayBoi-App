@@ -2239,7 +2239,7 @@
   flex-shrink: 0;
   border-radius: 3px;
   /* Gold at rest, held back a step; the pointer brings it to full strength. */
-  background: rgb(212 163 89 / 80%);
+  background: rgb(212 163 89 / 70%);
   transition: background 0.18s ease, box-shadow 0.18s ease;
 }
 
