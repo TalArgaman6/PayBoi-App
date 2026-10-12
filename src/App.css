@@ -32,16 +32,16 @@
      lists sit on. */
   background-image: linear-gradient(
     150deg,
-    #0a7371 0%,
-    #0d4a5c 22%,
-    #112b56 48%,
-    #08101d 78%
+    #1f2c39 0%,
+    #1a2735 24%,
+    #131d2b 52%,
+    #08101d 82%
   );
 }
 
 .phone[data-tab='wallet'] {
   background-color: #0b1526;
-  background-image: linear-gradient(180deg, #0a7371 0%, #10404f 42px, #0b1526 180px, #0b1526 100%);
+  background-image: linear-gradient(180deg, #1f2c39 0%, #16222f 42px, #0b1526 180px, #0b1526 100%);
 }
 
 .screen {
