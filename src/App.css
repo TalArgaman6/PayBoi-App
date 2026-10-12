@@ -2130,7 +2130,7 @@
 .gift-room li.is-open .gift-count i.is-spent,
 .gift-room li.is-lit .gift-count i.is-spent {
   background: transparent;
-  box-shadow: inset 0 0 0 1px #6b3da3;
+  box-shadow: inset 0 0 0 1px #8c53cf;
 }
 
 /* Too many to tally — back to a digit. */
