@@ -2506,6 +2506,12 @@
   margin-top: 0;
 }
 
+/* The peacock wordmark is close to square, so it needs more height than the
+   old one did to carry the same weight on an empty screen. */
+.splash .peacock-logo {
+  height: 104px;
+}
+
 .splash-line {
   grid-area: 1 / 1;
   align-self: end;
