@@ -3193,6 +3193,9 @@
 .ghost-btn {
   height: 42px;
   border-radius: 12px;
+  /* Buttons inherit the sheet's 1rem, which at 700 and uppercase outweighs
+     the title above them. A step down puts them back in line with it. */
+  font-size: 0.9rem;
 }
 
 .pay-btn {
