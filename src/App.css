@@ -1648,6 +1648,12 @@
   /* Dimmed a step: it's a backdrop, and the card has to stay the brightest
      thing on the screen. */
   opacity: 0.78;
+  /* The glass breathes. Brightness and saturation swing together on a slow,
+     uneven loop while the crop drifts a few pixels, so the facets look like
+     they're catching a light that's moving rather than cycling a filter.
+     Twenty-three seconds is long enough that you never catch it repeating. */
+  animation: crystal-shine 23s ease-in-out infinite;
+  will-change: filter;
   -webkit-mask-image: linear-gradient(
     to bottom,
     #000 0%,
@@ -1663,6 +1669,39 @@
     transparent 74%
   );
   pointer-events: none;
+}
+
+@keyframes crystal-shine {
+  0% {
+    filter: brightness(0.86) saturate(0.92);
+    background-position: center top;
+  }
+
+  28% {
+    filter: brightness(1.12) saturate(1.16);
+    background-position: 46% top;
+  }
+
+  55% {
+    filter: brightness(0.94) saturate(1.04);
+    background-position: 54% 1%;
+  }
+
+  78% {
+    filter: brightness(1.2) saturate(1.22);
+    background-position: 52% top;
+  }
+
+  100% {
+    filter: brightness(0.86) saturate(0.92);
+    background-position: center top;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wallet-crystal {
+    animation: none;
+  }
 }
 
 .wallet-sky {
