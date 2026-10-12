@@ -2085,16 +2085,20 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  flex-wrap: wrap;
   gap: 4px;
   min-width: 1.4rem;
-  min-height: 14px;
+  min-height: 22px;
 }
 
 /* Same height, radius and purple as the earn badge on a listing, so a pass
    you're holding and a pass you'd earn look like the same currency. */
 .gift-count i {
-  width: 26px;
-  height: 20px;
+  /* Exactly the earn badge's footprint: its 44px min-width and the height its
+     padding and type add up to. */
+  width: 44px;
+  height: 22px;
+  flex-shrink: 0;
   border-radius: 6px;
   background: var(--live);
   transition: background 0.18s ease, box-shadow 0.18s ease;
