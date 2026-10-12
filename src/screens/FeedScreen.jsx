@@ -801,13 +801,12 @@ export function FeedScreen() {
                 <FeedPeople post={post} onOpen={openUser} />
                 <span>{post.when}</span>
               </div>
+              {/* On a ride, the kicker sits directly under the name — you
+                  read what the post is before you read the route. */}
+              {post.kind === 'ride' ? <RideKicker ids={post.nights} /> : null}
               {post.track ? <p className="feed-track">{post.track}</p> : null}
               {post.caption ? <p>{post.caption}</p> : null}
-              {post.kind === 'ride' ? (
-                <RideKicker ids={post.nights} />
-              ) : (
-                <NightChips ids={post.nights} />
-              )}
+              {post.kind === 'ride' ? null : <NightChips ids={post.nights} />}
               {post.tags?.length && post.kind !== 'rating' && post.kind !== 'ride' ? (
                 <p className="feed-tags">
                   {post.tags.map((item) => formatTag(item)).join(' ')}
