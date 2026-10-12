@@ -3110,8 +3110,10 @@
 
 .detail-sheet {
   position: absolute;
-  left: 12px;
-  right: 12px;
+  /* Inset further than the feed cards are, so a popup reads as something
+     laid on top of the screen rather than as another full-width row. */
+  left: 22px;
+  right: 22px;
   bottom: 84px;
   background: var(--sheet-raised);
   color: var(--ink);
@@ -3182,6 +3184,9 @@
   color: #fff;
   -webkit-text-fill-color: #fff;
   font-size: 0.86rem;
+  /* Centred over the button it belongs to — it's the caption for the action,
+     not body copy, so it shares the button's axis. */
+  text-align: center;
 }
 
 .pay-btn,
