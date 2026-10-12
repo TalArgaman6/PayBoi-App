@@ -28,6 +28,7 @@ const CRYSTALS = [
   'photos/wallet-crystal-aurora.jpg',
   'photos/wallet-crystal-rainbow.jpg',
   'photos/wallet-crystal-gold.jpg',
+  'photos/wallet-crystal-peacock.jpg',
   'photos/wallet-crystal-pearl.jpg',
 ]
 
