@@ -97,6 +97,32 @@ function GiftIcon({ id }) {
   )
 }
 
+/*
+ * How many you're holding, counted rather than written. At these numbers a
+ * row of tallies is quicker to read than a digit, and it makes a thin row
+ * feel like a thing you own a few of. Past six it goes back to a number —
+ * nobody counts seven bars at a glance.
+ */
+const PIP_MAX = 6
+
+function CountPips({ count }) {
+  const n = Math.max(0, Number(count) || 0)
+
+  if (n > PIP_MAX) {
+    return <b className="gift-count is-many">{n}</b>
+  }
+
+  return (
+    <b className="gift-count" aria-label={`${n} left`}>
+      {n === 0 ? (
+        <i className="is-spent" />
+      ) : (
+        Array.from({ length: n }, (_, i) => <i key={i} />)
+      )}
+    </b>
+  )
+}
+
 export function RiderRow({ gift, count, open, lit, onHover, onToggle, onGranted }) {
   function onKeyDown(event) {
     if (event.target !== event.currentTarget) return
@@ -118,7 +144,7 @@ export function RiderRow({ gift, count, open, lit, onHover, onToggle, onGranted 
     >
       <GiftIcon id={gift.id} />
       <em>{gift.label}</em>
-      <b>{count}</b>
+      <CountPips count={count} />
       {open ? <p className="gift-tip">{gift.hint}</p> : null}
       {open ? <PassCode gift={gift} onGranted={onGranted} /> : null}
     </li>
