@@ -1117,6 +1117,14 @@
 .feature-banner.is-remix .feature-slide img {
   object-position: center 50%;
   filter: brightness(0.56);
+  transition: filter 0.22s ease;
+}
+
+/* The art comes up a little under the pointer — enough to say the whole
+   cover is a target without washing out the title sitting on top of it. */
+.feature-banner.is-remix .feature-slide:hover img,
+.feature-banner.is-remix .feature-slide:focus-visible img {
+  filter: brightness(0.72);
 }
 
 /* Play state reads at a glance from the corner mark. */
