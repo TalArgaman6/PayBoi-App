@@ -3178,7 +3178,10 @@
   font-size: 1em;
   display: inline-block;
   position: relative;
-  width: calc(var(--bowl) * 354 / 190);
+  /* The ampersand is a narrow glyph where the pb mark was a wide one — the
+     art box keeps the same 326-tall grid so the vertical alignment is
+     untouched, only the width comes in to match. */
+  width: calc(var(--bowl) * 176 / 190);
   height: var(--bowl);
   margin-inline: 0.1415em;
   vertical-align: var(--bowl-lift);

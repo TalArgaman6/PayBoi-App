@@ -202,7 +202,7 @@ function CollabName({ people }) {
         className="feed-feat"
         role="img"
         aria-label="feat."
-        style={{ '--mark': `url("${assetUrl('icons/pboi-mark.png')}")` }}
+        style={{ '--mark': `url("${assetUrl('icons/peacock-amp.png')}")` }}
       />{' '}
       {rest}
     </>
