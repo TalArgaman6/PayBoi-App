@@ -3534,12 +3534,12 @@
   }
 }
 
-/* The peacock mark in the screen headers. It's a tall portrait next to the
-   wordmark's landscape, so it's sized by height against the title and sits on
-   the baseline rather than being nudged up the way the wordmark was. */
+/* The peacock wordmark in the screen headers — sized by height against the
+   title and left on the baseline rather than nudged up the way the old mark
+   was. */
 .peacock-logo {
   display: block;
-  height: 38px;
+  height: 32px;
   width: auto;
   flex-shrink: 0;
   justify-self: end;
