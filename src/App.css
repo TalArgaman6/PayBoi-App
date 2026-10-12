@@ -3390,11 +3390,10 @@
 .pay-btn {
   /* The one gold button on the screen — it's the action everything else
      in the sheet is leading to. Hover goes deeper, not lighter, so pressing
-     it reads as the button taking the weight. Dark ink, since gold this
-     luminous won't hold white. */
+     it reads as the button taking the weight. */
   background: #d4a359;
-  color: var(--accent-ink);
-  -webkit-text-fill-color: var(--accent-ink);
+  color: #fff;
+  -webkit-text-fill-color: #fff;
   font-family: var(--font-ui);
   font-weight: 700;
   letter-spacing: 0.02em;
@@ -3406,8 +3405,8 @@
 .pay-btn:not(:disabled):hover,
 .pay-btn:not(:disabled):active {
   background: #b1813a;
-  color: var(--accent-ink);
-  -webkit-text-fill-color: var(--accent-ink);
+  color: #fff;
+  -webkit-text-fill-color: #fff;
 }
 
 .ghost-btn {
