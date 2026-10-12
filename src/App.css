@@ -2871,6 +2871,13 @@
   display: block;
 }
 
+/* The plume is a tall, narrow mark where the others are square, so it needs
+   a size up to carry the same weight on the row. */
+.feed-actions button svg.peck-mark {
+  width: 17px;
+  height: 17px;
+}
+
 /* Cast pecks take the live red, same as the other accent marks. */
 .feed-actions button.is-on {
   color: var(--live);

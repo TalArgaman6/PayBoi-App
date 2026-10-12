@@ -172,7 +172,7 @@ function FeedClip({ src, className }) {
  */
 function Peck({ on }) {
   return (
-    <svg viewBox="0 0 24 24" aria-hidden="true">
+    <svg className="peck-mark" viewBox="0 0 24 24" aria-hidden="true">
       {/* A peacock feather, upright: the plume is a teardrop with the eye cut
           out of it as a second subpath, so evenodd leaves a ring rather than
           needing a second colour to punch the hole. The quill curls off the
