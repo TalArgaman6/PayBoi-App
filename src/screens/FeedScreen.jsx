@@ -336,11 +336,40 @@ function WheelMark() {
  */
 function TicketRequestMark() {
   return (
-    <svg className="live-heart is-wheel" viewBox="0 0 24 24" aria-hidden="true">
+    <svg className="live-heart is-ticket" viewBox="0 0 24 24" aria-hidden="true">
       <path
         fill="currentColor"
         fillRule="evenodd"
         d="M3.4 6.2h17.2c.6 0 1.1.5 1.1 1.1v2.4a2.3 2.3 0 0 0 0 4.6v2.4c0 .6-.5 1.1-1.1 1.1H3.4c-.6 0-1.1-.5-1.1-1.1v-2.4a2.3 2.3 0 0 0 0-4.6V7.3c0-.6.5-1.1 1.1-1.1zm5.4 1.9a.7.7 0 0 0-.7.7v1.3a.7.7 0 0 0 1.4 0V8.8a.7.7 0 0 0-.7-.7zm0 3.9a.7.7 0 0 0-.7.7v1.3a.7.7 0 0 0 1.4 0v-1.3a.7.7 0 0 0-.7-.7zm0 3.9a.7.7 0 0 0-.7.7v1.3a.7.7 0 0 0 1.4 0v-1.3a.7.7 0 0 0-.7-.7z"
+      />
+    </svg>
+  )
+}
+
+/*
+ * An envelope at the weight of the upvote it stands in for: outline only, so
+ * the action row still reads as two quiet controls rather than one shouting.
+ */
+function EnvelopeMark() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <rect
+        x="2.8"
+        y="5.4"
+        width="18.4"
+        height="13.2"
+        rx="2.4"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.7"
+      />
+      <path
+        d="M3.6 7.4 12 13.1l8.4-5.7"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.7"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   )
@@ -372,15 +401,27 @@ function RequestKicker({ ids, label, mark }) {
   )
 }
 
-function RatingOptions({ options, picked, onVote, me, live = 4 }) {
-  const ranked = [...options].sort((left, right) => right.votes - left.votes)
-
+/*
+ * The rating's own kicker, lifted out of the options list so it can sit
+ * directly under the poster's name like a request card's does. Same markup,
+ * same <div> wrapper for the `.feed-card > p` specificity reason above.
+ */
+function RatingKicker({ live = 4 }) {
   return (
     <div>
       <p className="rate-kicker is-live">
         <LiveHeartMark />
         Live rating · {live} live
       </p>
+    </div>
+  )
+}
+
+function RatingOptions({ options, picked, onVote, me }) {
+  const ranked = [...options].sort((left, right) => right.votes - left.votes)
+
+  return (
+    <div>
       <ul className="party-rate">
         {ranked.map((entry) => {
           const party = PARTY_BY_ID[entry.id]
@@ -831,6 +872,7 @@ export function FeedScreen() {
                   mark={post.kind === 'ride' ? <WheelMark /> : <TicketRequestMark />}
                 />
               ) : null}
+              {post.kind === 'rating' ? <RatingKicker live={post.live ?? 4} /> : null}
               {post.track ? <p className="feed-track">{post.track}</p> : null}
               {post.caption ? <p>{post.caption}</p> : null}
               {REQUEST_KINDS.includes(post.kind) ? null : <NightChips ids={post.nights} />}
@@ -844,20 +886,33 @@ export function FeedScreen() {
                   options={post.options}
                   picked={mine[post.id]}
                   me={ME.name}
-                  live={post.live ?? 4}
                   onVote={(optionId) => vote(post.id, optionId)}
                 />
               ) : null}
               <div className="feed-actions">
-                <button
-                  type="button"
-                  className={liked.has(post.id) ? 'is-on' : ''}
-                  aria-label="Upvote"
-                  onClick={() => like(post.id)}
-                >
-                  <Upvote on={liked.has(post.id)} />
-                  {post.likes || 0}
-                </button>
+                {/* A request isn't something you agree with, it's something
+                    you answer — so the upvote gives way to a direct line to
+                    whoever posted it. */}
+                {REQUEST_KINDS.includes(post.kind) ? (
+                  <button
+                    type="button"
+                    aria-label={`Message ${post.user?.name || 'poster'}`}
+                    onClick={() => openUser(post.user?.id, post.id)}
+                  >
+                    <EnvelopeMark />
+                    PM
+                  </button>
+                ) : (
+                  <button
+                    type="button"
+                    className={liked.has(post.id) ? 'is-on' : ''}
+                    aria-label="Upvote"
+                    onClick={() => like(post.id)}
+                  >
+                    <Upvote on={liked.has(post.id)} />
+                    {post.likes || 0}
+                  </button>
+                )}
                 <button
                   type="button"
                   aria-label="Share"

@@ -2652,9 +2652,45 @@
   animation: live-pulse 1.6s ease-in-out infinite;
 }
 
-/* The wheel is a label, not a recording light — it holds still. */
+/* Neither request mark takes the heart's pulse — a request isn't going live,
+   it's waiting on someone. They get their own small loops instead. */
+
+/* The wheel turns, slowly and evenly, the way one held at speed does. */
 .live-heart.is-wheel {
-  animation: none;
+  animation: wheel-spin 6s linear infinite;
+  transform-origin: 50% 50%;
+}
+
+@keyframes wheel-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* The ticket rocks a few degrees either side, like one held between two
+   fingers. Shallow and slow on purpose: it should catch the eye once, not
+   keep tugging at it. */
+.live-heart.is-ticket {
+  animation: ticket-sway 2.8s ease-in-out infinite;
+  transform-origin: 50% 50%;
+}
+
+@keyframes ticket-sway {
+  0%,
+  100% {
+    transform: rotate(-7deg);
+  }
+
+  50% {
+    transform: rotate(7deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .live-heart.is-wheel,
+  .live-heart.is-ticket {
+    animation: none;
+  }
 }
 
 @keyframes live-pulse {
