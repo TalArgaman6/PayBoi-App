@@ -3200,8 +3200,9 @@
 
 .pay-btn {
   /* The one purple button on the screen — it's the action everything else
-     in the sheet is leading to. */
-  background: var(--live);
+     in the sheet is leading to. Hover goes deeper, not lighter, so pressing
+     it reads as the button taking the weight. */
+  background: #7949b4;
   color: #fff;
   -webkit-text-fill-color: #fff;
   font-family: var(--font-ui);
@@ -3214,7 +3215,7 @@
    doesn't promise that you can. */
 .pay-btn:not(:disabled):hover,
 .pay-btn:not(:disabled):active {
-  background: var(--live-lift);
+  background: #5e3a8c;
   color: #fff;
   -webkit-text-fill-color: #fff;
 }
