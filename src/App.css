@@ -3175,8 +3175,8 @@
      laid on top of the screen rather than as another full-width row. */
   /* Five pixels narrower than it was, split between the two sides so the
      sheet stays centred in the phone. */
-  left: 24.5px;
-  right: 24.5px;
+  left: 27px;
+  right: 27px;
   bottom: 84px;
   background: var(--sheet-raised);
   color: var(--ink);
