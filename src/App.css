@@ -3218,6 +3218,16 @@
 
 .ghost-btn {
   background: var(--wash);
+  transition: background 0.18s ease, color 0.18s ease;
+}
+
+/* Hovering the secondary button turns it into the primary's resting plate —
+   the two swap places under the pointer rather than both lighting up. */
+.ghost-btn:not(:disabled):hover,
+.ghost-btn:not(:disabled):active {
+  background: var(--btn);
+  color: var(--btn-ink);
+  -webkit-text-fill-color: var(--btn-ink);
 }
 
 .pm-draft {
