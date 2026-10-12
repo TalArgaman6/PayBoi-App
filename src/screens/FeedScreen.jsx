@@ -173,22 +173,25 @@ function FeedClip({ src, className }) {
 function Peck({ on }) {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true">
-      {/* A feather, laid on the diagonal: the vane is one closed curve and
-          the quill runs through it to the tip. Cast fills the vane; the
-          quill is drawn either way, so the weight never changes. */}
+      {/* A peacock feather, upright: the plume is a teardrop with the eye cut
+          out of it as a second subpath, so evenodd leaves a ring rather than
+          needing a second colour to punch the hole. The quill curls off the
+          bottom. Cast fills the plume; the quill is drawn either way, so the
+          weight never changes. */}
       <path
-        d="M19.8 3.6c.8 6.8-2.5 12.4-8.4 14.8-2.3.9-4.3 1.2-6 1 .2-1.8.7-3.7 1.8-5.7 2.9-5.4 8-9 12.6-10.1z"
+        d="M12 2.4c3.5 2.9 5.4 6.2 5.4 9.1 0 3.5-2.4 5.8-5.4 5.8s-5.4-2.3-5.4-5.8c0-2.9 1.9-6.2 5.4-9.1z
+           M12 8.3a2.7 2.7 0 1 0 0 5.4 2.7 2.7 0 1 0 0-5.4z"
+        fillRule="evenodd"
         fill={on ? 'currentColor' : 'none'}
         stroke="currentColor"
-        strokeWidth="1.7"
+        strokeWidth="1.6"
         strokeLinejoin="round"
-        strokeLinecap="round"
       />
       <path
-        d="M19.8 3.6 4.4 19.8"
+        d="M12 17.3c-.3 2-1.6 3.5-3.9 4.5"
         fill="none"
         stroke="currentColor"
-        strokeWidth="1.7"
+        strokeWidth="1.6"
         strokeLinecap="round"
       />
     </svg>
