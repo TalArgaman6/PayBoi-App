@@ -5,7 +5,6 @@ import { ItemRow } from '../components/ItemRow.jsx'
 import { RiderRow } from '../components/RiderRow.jsx'
 import { ScreenHeader } from '../components/ScreenHeader.jsx'
 import { WalletCard } from '../components/WalletCard.jsx'
-import { WalletSky } from '../components/WalletSky.jsx'
 import { PRICE_RANGES, inPriceRange } from '../lib/filters.js'
 import { assetUrl, formatPbs } from '../lib/format.js'
 import { passCounts, watchPasses } from '../lib/passes.js'
@@ -44,9 +43,14 @@ export function WalletScreen({ onSelect, openedPass = null }) {
 
   return (
     <section className="screen wallet-screen">
-      {/* Crystal wash parked for now — the screen runs on the flat app
-          background until we come back to it. */}
-      {false ? <WalletSky /> : null}
+      {/* A shot of cut glass behind the whole screen. It fades to black down
+          the bottom where the sheet sits, so the colour reads as a glow above
+          the card rather than as noise under the lists. */}
+      <div
+        className="wallet-crystal"
+        style={{ backgroundImage: `url("${assetUrl('photos/wallet-crystal.jpg')}")` }}
+        aria-hidden="true"
+      />
       <div className="wallet-top">
         <ScreenHeader title={wallet.name} />
         <div className="wallet-hero">

@@ -1635,6 +1635,36 @@
 }
 
 
+/* The cut-glass shot behind the wallet. Cover-cropped from the top so the
+   bright facets land behind the header and the card, and masked out towards
+   the foot so the sheet still sits on near-black. */
+.wallet-crystal {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-position: center top;
+  background-size: cover;
+  background-repeat: no-repeat;
+  /* Dimmed a step: it's a backdrop, and the card has to stay the brightest
+     thing on the screen. */
+  opacity: 0.78;
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 34%,
+    rgb(0 0 0 / 35%) 56%,
+    transparent 74%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 34%,
+    rgb(0 0 0 / 35%) 56%,
+    transparent 74%
+  );
+  pointer-events: none;
+}
+
 .wallet-sky {
   position: absolute;
   inset: 0;
