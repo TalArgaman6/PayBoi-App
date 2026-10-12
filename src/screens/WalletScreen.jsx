@@ -16,7 +16,14 @@ const SUGGESTION_FILTERS = [
   { id: 'shop', label: 'Drop' },
 ]
 
+/*
+ * Backdrops to choose between. Tapping the pboi mark in the header steps
+ * through them — a testing affordance while we settle on one, not a setting.
+ */
+const CRYSTALS = ['photos/wallet-crystal.jpg', 'photos/wallet-crystal-aurora.jpg']
+
 export function WalletScreen({ onSelect, openedPass = null }) {
+  const [skin, setSkin] = useState(0)
   const [kind, setKind] = useState('all')
   const [price, setPrice] = useState('all')
   const [openGift, setOpenGift] = useState(openedPass)
@@ -48,11 +55,14 @@ export function WalletScreen({ onSelect, openedPass = null }) {
           the card rather than as noise under the lists. */}
       <div
         className="wallet-crystal"
-        style={{ backgroundImage: `url("${assetUrl('photos/wallet-crystal.jpg')}")` }}
+        style={{ backgroundImage: `url("${assetUrl(CRYSTALS[skin])}")` }}
         aria-hidden="true"
       />
       <div className="wallet-top">
-        <ScreenHeader title={wallet.name} />
+        <ScreenHeader
+          title={wallet.name}
+          onLogo={() => setSkin((current) => (current + 1) % CRYSTALS.length)}
+        />
         <div className="wallet-hero">
           <WalletCard wallet={wallet} />
           <div className="wallet-profile" aria-hidden="true">

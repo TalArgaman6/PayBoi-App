@@ -3488,3 +3488,13 @@
     padding-bottom: 68px;
   }
 }
+
+/* The header mark when it's wired to do something: a bare button, no plate,
+   so it still reads as the logo and not as a control. */
+.header-logo-btn {
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  line-height: 0;
+}

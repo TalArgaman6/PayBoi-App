@@ -1,6 +1,6 @@
 import { PboiLogo } from './Logo.jsx'
 
-export function ScreenHeader({ title, kicker, pin = false }) {
+export function ScreenHeader({ title, kicker, pin = false, onLogo = null }) {
   return (
     <header className="screen-header">
       <div className="screen-header-copy">
@@ -12,7 +12,21 @@ export function ScreenHeader({ title, kicker, pin = false }) {
           </p>
         ) : null}
       </div>
-      <PboiLogo />
+      {/* The mark is decoration everywhere except where a screen hands it a
+          job — the wallet uses it to flick between backdrops while we're
+          still choosing one. */}
+      {onLogo ? (
+        <button
+          type="button"
+          className="header-logo-btn"
+          onClick={onLogo}
+          aria-label="Change backdrop"
+        >
+          <PboiLogo />
+        </button>
+      ) : (
+        <PboiLogo />
+      )}
     </header>
   )
 }
