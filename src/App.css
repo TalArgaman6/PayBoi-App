@@ -557,7 +557,9 @@
   align-items: center;
   gap: -2px;
   flex-shrink: 0;
-  color: var(--muted);
+  /* Tickets and bracelets carry the same purple as the feed's pb mark —
+     they're the thing being bought, not row furniture. */
+  color: var(--live);
 }
 
 .ride-mark {
@@ -584,6 +586,22 @@
 
 .ticket-mark.is-bracelet svg {
   transform: none;
+}
+
+/* A mask rather than an img, so the bracelet takes the row's colour. */
+.bracelet-mark {
+  width: 14px;
+  height: 14px;
+  display: block;
+  background-color: currentColor;
+  -webkit-mask-image: var(--icon);
+  mask-image: var(--icon);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
 }
 
 .item-sub,
@@ -3158,7 +3176,7 @@
 }
 
 .detail-head .ticket-mark {
-  color: var(--muted);
+  color: var(--live);
 }
 
 /* The when-and-where line stays on one row; it reads as a single fact, and

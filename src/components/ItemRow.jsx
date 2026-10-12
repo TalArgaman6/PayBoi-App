@@ -48,24 +48,18 @@ function TicketIcon() {
   )
 }
 
+/*
+ * The same art the Afters pass uses in the wallet, so a bracelet looks like
+ * one thing across the app. It's white on transparent, so it doubles as its
+ * own mask and paints in currentColor.
+ */
 function BraceletIcon() {
   return (
-    <svg viewBox="0 0 16 16" aria-hidden="true">
-      <path
-        d="M4.7 4.2a4.35 4.35 0 1 0 6.6 0"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.55"
-        strokeLinecap="round"
-      />
-      <path
-        d="M4.7 4.2h1.7M9.6 4.2h1.7"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.55"
-        strokeLinecap="round"
-      />
-    </svg>
+    <span
+      className="bracelet-mark"
+      style={{ '--icon': `url("${assetUrl('icons/afters-bracelet.png')}")` }}
+      aria-hidden="true"
+    />
   )
 }
 
