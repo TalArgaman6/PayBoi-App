@@ -3659,8 +3659,11 @@
      the fan leans away from the circle — it reads as worn, not balanced on
      top. The origin is the foot of the middle feather, which is what sits on
      the circle's edge. */
-  left: 6%;
-  transform: rotate(-28deg);
+  /* The foot of the middle feather lands on the circle's edge at its upper
+     left — 15% in from each side is the 45° point of a circle — and the fan
+     grows outwards from there. Nothing overlaps the photo. */
+  left: 11%;
+  transform: rotate(-32deg);
   transform-origin: 50% 100%;
   width: var(--crest-w);
   /* The art is 36 wide by 26 tall. */
@@ -3677,7 +3680,7 @@
 
 .wallet-profile::after {
   /* Its foot rests on the ring the portrait already carries. */
-  top: calc(var(--crest-w) * -26 / 36 + 10px);
+  top: calc(15% - var(--crest-w) * 26 / 36);
 }
 
 .seller-face {
@@ -3686,7 +3689,9 @@
 }
 
 .seller-face::after {
-  top: calc(var(--crest-w) * -26 / 36 + 6px);
+  /* The seller face is a photo plus a caption, so a percentage would measure
+     the wrong box — 6px is the 45° point of its 40px circle. */
+  top: calc(6px - var(--crest-w) * 26 / 36);
 }
 
 .feed-faces button {
@@ -3698,7 +3703,7 @@
 }
 
 .feed-faces button::after {
-  top: calc(var(--crest-w) * -26 / 36 + 4px);
+  top: calc(15% - var(--crest-w) * 26 / 36);
 }
 
 .feed-faces img,
