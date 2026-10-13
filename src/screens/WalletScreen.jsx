@@ -21,11 +21,13 @@ const SUGGESTION_FILTERS = [
  * through them — a testing affordance while we settle on one, not a setting.
  */
 const CRYSTALS = [
-  // The plume treatments, under test. The black noir plume leads.
+  // The plume treatments, under test. The black noir plume leads. The warm
+  // gold and the full-spectrum iridescent are out; two drawn plumes in the
+  // app's own blues are in their place.
   'photos/wallet-plume-noir.jpg',
-  'photos/wallet-plume.jpg',
+  'photos/wallet-plume-royal.jpg',
+  'photos/wallet-plume-teal.jpg',
   'photos/wallet-plume-dusk.jpg',
-  'photos/wallet-plume-gold.jpg',
   'photos/wallet-plume-ivory.jpg',
 ]
 
