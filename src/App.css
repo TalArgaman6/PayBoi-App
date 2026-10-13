@@ -3645,3 +3645,64 @@
 .item-row.is-pinned:hover {
   background: rgb(255 255 255 / 11%);
 }
+
+
+/* A three-feather peacock crest standing over every profile circle. One
+   shared background image, drawn as an SVG so it stays crisp at any size and
+   needs no asset; `--crest-w` is the only thing each avatar has to set. */
+.wallet-profile::after,
+.seller-face::after,
+.feed-faces button::after {
+  content: '';
+  position: absolute;
+  /* Off to the upper left rather than straight up, tipped anticlockwise so
+     the fan leans away from the circle — it reads as worn, not balanced on
+     top. The origin is the foot of the middle feather, which is what sits on
+     the circle's edge. */
+  left: 6%;
+  transform: rotate(-28deg);
+  transform-origin: 50% 100%;
+  width: var(--crest-w);
+  /* The art is 36 wide by 26 tall. */
+  height: calc(var(--crest-w) * 26 / 36);
+  background-image: url("data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 36 26%22><g fill=%22%23fff%22><path d=%22M18 26c-.5-4.2-.6-8.2-.2-12.1h1.2c.4 3.9.3 7.9-.2 12.1z%22/><ellipse cx=%2218%22 cy=%229.2%22 rx=%223.1%22 ry=%224.6%22/><path d=%22M14.4 26c-1.9-3.8-3.3-7.4-4.2-11l1.1-.4c1.5 3.6 2.6 7.3 3.4 11.4z%22/><ellipse cx=%228.6%22 cy=%2210.9%22 rx=%222.7%22 ry=%224%22 transform=%22rotate(-22 8.6 10.9)%22/><path d=%22M21.6 26c1.9-3.8 3.3-7.4 4.2-11l-1.1-.4c-1.5 3.6-2.6 7.3-3.4 11.4z%22/><ellipse cx=%2227.4%22 cy=%2210.9%22 rx=%222.7%22 ry=%224%22 transform=%22rotate(22 27.4 10.9)%22/></g></svg>");
+  background-size: contain;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
+.wallet-profile {
+  --crest-w: 34px;
+}
+
+.wallet-profile::after {
+  /* Its foot rests on the ring the portrait already carries. */
+  top: calc(var(--crest-w) * -26 / 36 + 10px);
+}
+
+.seller-face {
+  --crest-w: 20px;
+  position: relative;
+}
+
+.seller-face::after {
+  top: calc(var(--crest-w) * -26 / 36 + 6px);
+}
+
+.feed-faces button {
+  --crest-w: 15px;
+  position: relative;
+  /* The crest stands above the circle, so the button can no longer clip to
+     itself — the photo inside takes the rounding instead. */
+  overflow: visible;
+}
+
+.feed-faces button::after {
+  top: calc(var(--crest-w) * -26 / 36 + 4px);
+}
+
+.feed-faces img,
+.feed-user img,
+.feed-composer-face {
+  border-radius: 50%;
+}

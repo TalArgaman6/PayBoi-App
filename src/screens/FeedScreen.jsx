@@ -173,25 +173,29 @@ function FeedClip({ src, className }) {
 function Peck() {
   return (
     <svg className="peck-mark" viewBox="0 0 24 24" aria-hidden="true">
-      {/* A peacock feather, upright: the plume is a teardrop with the eye cut
-          out of it as a second subpath. Outline only, so the eye reads as an
-          eye; the quill curls off the bottom. */}
-      <path
-        d="M12 2.4c3.5 2.9 5.4 6.2 5.4 9.1 0 3.5-2.4 5.8-5.4 5.8s-5.4-2.3-5.4-5.8c0-2.9 1.9-6.2 5.4-9.1z
-           M12 8.3a2.7 2.7 0 1 0 0 5.4 2.7 2.7 0 1 0 0-5.4z"
-        fillRule="evenodd"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M12 17.3c-.3 2-1.6 3.5-3.9 4.5"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinecap="round"
-      />
+      {/* A peacock plume seen head on: a flame-shaped crown, the ring of the
+          eye punched out of it with a heart at its centre, and two sweeping
+          barbs curling up from the quill. It's drawn as solid shapes rather
+          than an outline, so the mark holds its weight at 17px. Casting a
+          peck doesn't fill anything — the button's colour is the whole
+          change, so the silhouette never shifts. */}
+      <g fill="currentColor">
+        {/* Crown and eye-ring in one path: the ring is a second subpath, so
+            evenodd cuts it straight out of the plume. */}
+        <path
+          fillRule="evenodd"
+          d="M12 1.1c1.1 1.9 2.1 3.3 3 4.3 2 2.2 3 4.4 3 6.6 0 3.6-2.7 6.3-6 6.3s-6-2.7-6-6.3c0-2.2 1-4.4 3-6.6.9-1 1.9-2.4 3-4.3z
+             M12 6.6a4.4 4.4 0 1 0 0 8.8 4.4 4.4 0 0 0 0-8.8z"
+        />
+        {/* The heart inside the eye. */}
+        <path d="M12 14.1c-1.9-1.3-2.9-2.3-2.9-3.4 0-.9.7-1.5 1.5-1.5.6 0 1.1.3 1.4.8.3-.5.8-.8 1.4-.8.8 0 1.5.6 1.5 1.5 0 1.1-1 2.1-2.9 3.4z" />
+        {/* The barbs: they sweep out from the quill and curl back up past the
+            widest point of the plume. */}
+        <path d="M11.4 22.4c-2.8-.6-4.8-1.8-6-3.5-1.2-1.7-1.7-3.9-1.5-6.6.9 2.6 1.9 4.5 3.1 5.8 1.2 1.3 2.7 2.4 4.4 3.2z" />
+        <path d="M12.6 22.4c2.8-.6 4.8-1.8 6-3.5 1.2-1.7 1.7-3.9 1.5-6.6-.9 2.6-1.9 4.5-3.1 5.8-1.2 1.3-2.7 2.4-4.4 3.2z" />
+        {/* The quill. */}
+        <path d="M11.6 17.8h.8V23h-.8z" />
+      </g>
     </svg>
   )
 }
