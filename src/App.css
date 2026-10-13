@@ -226,20 +226,20 @@
 
 .screen-header h1 {
   margin: 0;
-  /* A light classic serif, set in caps: it reads as engraved rather than
-     shouted, so it takes a larger size and a lighter weight than the
-     grotesque did, with the tracking opened up to match. */
-  font-family: var(--font-title);
-  font-size: 1.62rem;
-  font-weight: 300;
-  letter-spacing: 0.14em;
+  /* The nav tabs' style, scaled up: the same UI grotesque, the same semibold
+     caps and the same tight tracking, so the title at the top and the labels
+     at the bottom are plainly the same voice. */
+  font-family: var(--font-ui);
+  font-size: 1.42rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   line-height: 1;
   /* The wordmark's P stands well above its ck, and the title reads better
      against the lowercase: the ck starts 65 of the art's 240 units down, which
-     at the mark's 32px is about 8.7px, less the ~3px the serif's cap already
-     sits below its own line box. */
-  margin-top: 0.355rem;
+     at the mark's 32px is about 8.7px. The grotesque's cap sits nearly on its
+     own line box, so almost none of that is already spent. */
+  margin-top: 0.5rem;
   color: #fff;
   -webkit-text-fill-color: #fff;
 }
