@@ -3627,7 +3627,7 @@
   /* The wash is its own edge, so the list rule underneath would only double
      it — and the pair needs air between them to read as two plates. */
   border-bottom-color: transparent;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
   /* The plate reaches 5px closer to the screen than the plain rows do on each
      side, and the inner padding takes that 5px back — so the wash is the only
      thing that moves and the thumbnail and price column stay on the same two
