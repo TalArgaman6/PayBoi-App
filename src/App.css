@@ -2906,12 +2906,12 @@
   color: #fff;
 }
 
-/* The filter and sort pills take the full hover: the plate fills white and
-   the label flips to ink, so nothing is ever white on white. */
-.rate-picks button:hover,
-.feed-sort button:hover,
-.feed-mode button:hover,
-.filter-tabs button:hover {
+/* The tab rows — post modes, sort, filters — are left alone. They carry an
+   active state of their own, and a white plate on hover competed with it:
+   you couldn't tell the tab you were pointing at from the one you'd chosen.
+   Only the rating pills, which have no such state, take the white.
+*/
+.rate-picks button:hover {
   background: #fff;
   color: var(--accent-ink);
   -webkit-text-fill-color: var(--accent-ink);
