@@ -235,11 +235,19 @@
   letter-spacing: 0.1em;
   text-transform: uppercase;
   line-height: 1;
-  /* The wordmark's P stands well above its ck, and the title reads better
-     against the lowercase: the ck starts 65 of the art's 240 units down, which
-     at the mark's 32px is about 8.7px. The grotesque's cap sits nearly on its
-     own line box, so almost none of that is already spent. */
-  margin-top: 0.5rem;
+  /* Aligned to the top of the wordmark's "ck", not to its P. Two parts, so a
+     change of face only ever touches the second one:
+       --ck-drop  where the ck begins in the art — 65 of its 240 units, which
+                  at the mark's 32px is 8.67px. Fixed by the logo, not the font.
+       --cap-gap  the empty band a line box leaves above the cap, in em. With
+                  line-height 1 that is halfLeading + ascent - capHeight; for
+                  Outfit (1000 upm, 1000/250 asc/desc, 700 cap) it works out at
+                  -0.125 + 1 - 0.7 = 0.175em.
+     Subtracting the second from the first puts the painted cap exactly at the
+     ck's top. Swap the face, recompute --cap-gap, and the title stays put. */
+  --ck-drop: 8.67px;
+  --cap-gap: 0.175em;
+  margin-top: calc(var(--ck-drop) - var(--cap-gap));
   color: #fff;
   -webkit-text-fill-color: #fff;
 }
