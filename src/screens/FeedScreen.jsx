@@ -738,21 +738,27 @@ export function FeedScreen() {
     )
   }
 
+  /*
+   * The count used to be moved from inside the setLiked updater. Updaters have
+   * to be pure — React runs them twice in development to prove it — so every
+   * peck was counted twice. The two sets are separate calls now, and the
+   * direction is read off the current set rather than from inside it.
+   */
   function like(id) {
+    const on = liked.has(id)
     setLiked((current) => {
       const next = new Set(current)
-      const on = next.has(id)
       if (on) next.delete(id)
       else next.add(id)
-      setPosts((list) =>
-        list.map((post) =>
-          post.id === id
-            ? { ...post, likes: Math.max(0, (post.likes || 0) + (on ? -1 : 1)) }
-            : post,
-        ),
-      )
       return next
     })
+    setPosts((list) =>
+      list.map((post) =>
+        post.id === id
+          ? { ...post, likes: Math.max(0, (post.likes || 0) + (on ? -1 : 1)) }
+          : post,
+      ),
+    )
   }
 
   function onFile(event) {
