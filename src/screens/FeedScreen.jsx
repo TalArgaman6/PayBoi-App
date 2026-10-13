@@ -529,11 +529,11 @@ function PmSheet({ post, onClose }) {
           disabled={!draft.trim()}
           onClick={() => setSent(true)}
         >
-          SEND
+          Send
         </button>
       )}
       <button type="button" className="ghost-btn" onClick={onClose}>
-        GO BACK
+        Go Back
       </button>
     </aside>
   )

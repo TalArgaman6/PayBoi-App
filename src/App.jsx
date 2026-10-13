@@ -208,7 +208,7 @@ export default function App() {
                       disabled={!pmDraft.trim()}
                       onClick={() => setPmSent(true)}
                     >
-                      SEND
+                      Send
                     </button>
                   )}
                   <button
@@ -220,7 +220,7 @@ export default function App() {
                       setPmSent(false)
                     }}
                   >
-                    GO BACK
+                    Go Back
                   </button>
                 </>
               ) : (
@@ -228,7 +228,7 @@ export default function App() {
                   {/* The price is already in the head; the button only
                       has to say what pressing it does. */}
                   <button type="button" className="pay-btn">
-                    PAY NOW
+                    Pay Now
                   </button>
                   {selected.seller ? (
                     <button type="button" className="ghost-btn" onClick={() => setPmOpen(true)}>
@@ -236,7 +236,7 @@ export default function App() {
                     </button>
                   ) : null}
                   <button type="button" className="ghost-btn" onClick={closeDetail}>
-                    GO BACK
+                    Go Back
                   </button>
                 </>
               )}

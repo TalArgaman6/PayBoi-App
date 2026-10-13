@@ -226,13 +226,18 @@
 
 .screen-header h1 {
   margin: 0;
-  /* The wordmark's own face: the title is set in the same geometric sans the
-     mark's "ck" is drawn in, at the light weight and open tracking the
-     lettering uses, so the two read as one piece of type. */
-  font-family: var(--font-mark);
-  font-size: 1.5rem;
-  font-weight: 300;
-  letter-spacing: 0.1em;
+  /* The mark's "ck" is a high-contrast old-style serif, not a geometric sans:
+     thin hairlines against thick stems, bracketed serifs, a narrow round C.
+     Cormorant Garamond is that same species of letter, set at 400 rather than
+     300 now that the wordmark's own CK has been weighted up to match.
+     The tracking is measured off the art rather than chosen: the C ends at
+     195 of the mark's units and the K begins at 200, a 5-unit gap against a
+     122-unit cap height — about 0.03em once the cap is read as 0.7em. The
+     wordmark sets its letters tight, so the title does too. */
+  font-family: var(--font-title);
+  font-size: 1.62rem;
+  font-weight: 400;
+  letter-spacing: 0.03em;
   text-transform: uppercase;
   line-height: 1;
   /* Aligned to the top of the wordmark's "ck", not to its P. Two parts, so a
@@ -241,12 +246,12 @@
                   at the mark's 32px is 8.67px. Fixed by the logo, not the font.
        --cap-gap  the empty band a line box leaves above the cap, in em. With
                   line-height 1 that is halfLeading + ascent - capHeight; for
-                  Outfit (1000 upm, 1000/250 asc/desc, 700 cap) it works out at
-                  -0.125 + 1 - 0.7 = 0.175em.
+                  Cormorant Garamond, whose caps sit high in a tall line box,
+                  it comes out near 0.116em.
      Subtracting the second from the first puts the painted cap exactly at the
      ck's top. Swap the face, recompute --cap-gap, and the title stays put. */
   --ck-drop: 8.67px;
-  --cap-gap: 0.175em;
+  --cap-gap: 0.116em;
   margin-top: calc(var(--ck-drop) - var(--cap-gap));
   color: #fff;
   -webkit-text-fill-color: #fff;
@@ -523,8 +528,9 @@
   background: transparent;
   color: var(--muted);
   font-size: 0.62rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  /* Tracking pulled in: the caps needed the air, the sentence case does not. */
+  letter-spacing: 0.02em;
+  text-transform: capitalize;
   font-weight: 600;
   box-shadow: none;
 }
@@ -987,8 +993,9 @@
   color: var(--btn-ink);
   font-family: var(--font-ui);
   font-size: 0.68rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  /* Tracking pulled in: the caps needed the air, the sentence case does not. */
+  letter-spacing: 0.02em;
+  text-transform: capitalize;
   font-weight: 700;
   padding: 8px 14px;
   border-radius: 999px;
@@ -2754,8 +2761,9 @@
   color: var(--muted);
   font-size: calc(0.62rem - 1px);
   font-weight: 600;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+  /* Tracking pulled in: the caps needed the air, the sentence case does not. */
+  letter-spacing: 0.02em;
+  text-transform: capitalize;
   cursor: pointer;
 }
 
@@ -3129,8 +3137,9 @@
   font-family: var(--font-ui);
   font-size: 0.62rem;
   font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  /* Tracking pulled in: the caps needed the air, the sentence case does not. */
+  letter-spacing: 0.02em;
+  text-transform: capitalize;
   cursor: pointer;
 }
 
@@ -3723,7 +3732,9 @@
 }
 
 
-/* A three-feather peacock crest standing over every profile circle. One
+/* A three-feather peacock crest standing over every profile circle, drawn in
+   the app's secondary pewter so it reads as part of the chrome rather than as
+   a second white highlight beside the photo. One
    shared background image, drawn as an SVG so it stays crisp at any size and
    needs no asset; `--crest-w` is the only thing each avatar has to set. */
 .wallet-profile::after,
@@ -3745,7 +3756,7 @@
   width: var(--crest-w);
   /* The art is 36 wide by 26 tall. */
   height: calc(var(--crest-w) * 26 / 36);
-  background-image: url("data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 36 26%22><g fill=%22%23fff%22><path d=%22M18 26c-.5-4.2-.6-8.2-.2-12.1h1.2c.4 3.9.3 7.9-.2 12.1z%22/><g transform=%22translate(18 8.6)%22><path d=%22M0-6.2C1.7-4 3.4-2.4 3.4.3 3.4 3 1.9 4.8 0 4.8-1.9 4.8-3.4 3-3.4.3-3.4-2.4-1.7-4 0-6.2Z%22/></g><path d=%22M14.4 26c-1.9-3.8-3.3-7.4-4.2-11l1.1-.4c1.5 3.6 2.6 7.3 3.4 11.4z%22/><g transform=%22translate(8.6 10.3) rotate(-24)%22><path d=%22M0-6.2C1.7-4 3.4-2.4 3.4.3 3.4 3 1.9 4.8 0 4.8-1.9 4.8-3.4 3-3.4.3-3.4-2.4-1.7-4 0-6.2Z%22/></g><path d=%22M21.6 26c1.9-3.8 3.3-7.4 4.2-11l-1.1-.4c-1.5 3.6-2.6 7.3-3.4 11.4z%22/><g transform=%22translate(27.4 10.3) rotate(24)%22><path d=%22M0-6.2C1.7-4 3.4-2.4 3.4.3 3.4 3 1.9 4.8 0 4.8-1.9 4.8-3.4 3-3.4.3-3.4-2.4-1.7-4 0-6.2Z%22/></g></g></svg>");
+  background-image: url("data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 36 26%22><g fill=%22%23a7aebb%22><path d=%22M18 26c-.5-4.2-.6-8.2-.2-12.1h1.2c.4 3.9.3 7.9-.2 12.1z%22/><g transform=%22translate(18 8.6)%22><path d=%22M0-6.2C1.7-4 3.4-2.4 3.4.3 3.4 3 1.9 4.8 0 4.8-1.9 4.8-3.4 3-3.4.3-3.4-2.4-1.7-4 0-6.2Z%22/></g><path d=%22M14.4 26c-1.9-3.8-3.3-7.4-4.2-11l1.1-.4c1.5 3.6 2.6 7.3 3.4 11.4z%22/><g transform=%22translate(8.6 10.3) rotate(-24)%22><path d=%22M0-6.2C1.7-4 3.4-2.4 3.4.3 3.4 3 1.9 4.8 0 4.8-1.9 4.8-3.4 3-3.4.3-3.4-2.4-1.7-4 0-6.2Z%22/></g><path d=%22M21.6 26c1.9-3.8 3.3-7.4 4.2-11l-1.1-.4c-1.5 3.6-2.6 7.3-3.4 11.4z%22/><g transform=%22translate(27.4 10.3) rotate(24)%22><path d=%22M0-6.2C1.7-4 3.4-2.4 3.4.3 3.4 3 1.9 4.8 0 4.8-1.9 4.8-3.4 3-3.4.3-3.4-2.4-1.7-4 0-6.2Z%22/></g></g></svg>");
   background-size: contain;
   background-repeat: no-repeat;
   pointer-events: none;
