@@ -3684,7 +3684,7 @@
 }
 
 .seller-face {
-  --crest-w: 20px;
+  --crest-w: 16px;
   position: relative;
 }
 
@@ -3695,7 +3695,7 @@
 }
 
 .feed-faces button {
-  --crest-w: 15px;
+  --crest-w: 12px;
   position: relative;
   /* The crest stands above the circle, so the button can no longer clip to
      itself — the photo inside takes the rounding instead. */
