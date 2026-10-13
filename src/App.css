@@ -427,6 +427,16 @@
   background: var(--filter-accent, #a7aebb);
 }
 
+/* Half the 20px handle at each end — the distance a thumb's centre is held
+   back from the edge of the input. */
+.price-range-rail {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 10px;
+  right: 10px;
+}
+
 .price-range input[type='range'] {
   position: absolute;
   inset: 0;

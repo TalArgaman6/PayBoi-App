@@ -20,11 +20,16 @@ export function PriceRangeBar({ min, max, onChange, formatValue }) {
         {formatValue(min)} – {formatValue(max)}
       </p>
       <div className="price-range">
-        <div className="price-range-track" />
-        <div
-          className="price-range-fill"
-          style={{ left: `${left}%`, width: `${right - left}%` }}
-        />
+        {/* The rail is inset by half a handle at each end, so the line runs
+            between the two marks' centres rather than out past them — and the
+            fill's percentages are measured along that same travel. */}
+        <div className="price-range-rail">
+          <div className="price-range-track" />
+          <div
+            className="price-range-fill"
+            style={{ left: `${left}%`, width: `${right - left}%` }}
+          />
+        </div>
         <input
           type="range"
           min={PRICE_SLIDER.min}
