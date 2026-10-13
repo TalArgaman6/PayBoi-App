@@ -41,6 +41,9 @@ export function rankVars(balance, options = {}) {
     '--wallet-mid': rank.mid,
     '--wallet-lift': rank.lift,
     '--wallet-fallback': rank.fallback,
-    '--filter-accent': premium ? GOLD.lift : VIOLET.color,
+    /* The filter controls are chrome, not rank: the slider and the chips
+       take the app's secondary pewter whatever tier the wallet is on. The
+       rank still colours the card above them, which is where it belongs. */
+    '--filter-accent': '#a7aebb',
   }
 }
