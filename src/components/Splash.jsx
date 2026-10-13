@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { unlockMotion } from '../lib/tilt.js'
-import { PeacockLogo } from './Logo.jsx'
+import { CrestStack } from './Logo.jsx'
 
 const LINE = 'a new lgbt economy'
 
@@ -33,7 +33,7 @@ export function Splash({ onDone }) {
       }}
     >
       <span className="splash-mark" aria-hidden="true">
-        <PeacockLogo />
+        <CrestStack />
       </span>
       <p className="splash-line">
         <span className="splash-line-ghost" aria-hidden="true">

@@ -21,10 +21,12 @@ const SUGGESTION_FILTERS = [
  * through them — a testing affordance while we settle on one, not a setting.
  */
 const CRYSTALS = [
-  // Down to the two drawn plumes in the app's own blues. The photographic
-  // ones — noir, ivory, dusk, gold, iridescent — are all out.
+  // The same drawn plume in three grounds — the app's blues, black-on-gold and
+  // bone-on-gold. The iridescent one is out; it carried no gold line, so the
+  // card and the crest had nothing to pick up.
   'photos/wallet-plume-royal.jpg',
-  'photos/wallet-plume-teal.jpg',
+  'photos/wallet-plume-onyx.jpg',
+  'photos/wallet-plume-pearl.jpg',
 ]
 
 /*
@@ -69,10 +71,9 @@ export function WalletScreen({ onSelect, openedPass = null }) {
     <section
       className={`screen wallet-screen${
         /* A pale backdrop flips the header, the balance and the crest to ink,
-           or they disappear into the feathers. Nothing in the set is pale at
-           the moment — the ivory plume is gone — but the switch stays, and the
-           `is-light` rules with it, for whenever a light one comes back. */
-        CRYSTALS[skin].includes('ivory') ? ' is-light' : ''
+           or they disappear into the feathers. The pearl plume is the one in
+           the set that needs it. */
+        CRYSTALS[skin].includes('pearl') ? ' is-light' : ''
       }`}
     >
       {/* A shot of cut glass behind the whole screen. It fades to black down

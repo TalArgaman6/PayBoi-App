@@ -21,9 +21,84 @@ export function PboiLogo({ tinted = false }) {
 }
 
 // The peacock mark — white on transparent like the wordmark, so it can be
-// tinted the same way later. For now it only stands in the screen headers.
+// tinted the same way later. Kept for anywhere still pointing at the old art.
 export function PeacockLogo() {
   return (
     <img className="peacock-logo" src={assetUrl('peacock-logo.png')} alt="Peacock" />
+  )
+}
+
+/*
+ * The crest, three feathers leaning into a gale. Drawn once here and shared by
+ * both lockups rather than duplicated, so the lean only has to be tuned in one
+ * place. It inherits `fill` from the <g> each lockup wraps it in.
+ */
+function CrestFeathers() {
+  return (
+    <g transform="rotate(-18 18 26)">
+      <path d="M18 26c-.5-4.2-.6-8.2-.2-12.1h1.2c.4 3.9.3 7.9-.2 12.1z" />
+      <path d="M14.4 26c-1.9-3.8-3.3-7.4-4.2-11l1.1-.4c1.5 3.6 2.6 7.3 3.4 11.4z" />
+      <path d="M21.6 26c1.9-3.8 3.3-7.4 4.2-11l-1.1-.4c-1.5 3.6-2.6 7.3-3.4 11.4z" />
+      <g transform="translate(18 8.6) rotate(-15)">
+        <path d="M0-6.2C1.7-4 3.4-2.4 3.4.3 3.4 3 1.9 4.8 0 4.8-1.9 4.8-3.4 3-3.4.3-3.4-2.4-1.7-4 0-6.2Z" />
+      </g>
+      <g transform="translate(8.6 10.3) rotate(-40)">
+        <path d="M0-6.2C1.7-4 3.4-2.4 3.4.3 3.4 3 1.9 4.8 0 4.8-1.9 4.8-3.4 3-3.4.3-3.4-2.4-1.7-4 0-6.2Z" />
+      </g>
+      <g transform="translate(27.4 10.3) rotate(7)">
+        <path d="M0-6.2C1.7-4 3.4-2.4 3.4.3 3.4 3 1.9 4.8 0 4.8-1.9 4.8-3.4 3-3.4.3-3.4-2.4-1.7-4 0-6.2Z" />
+      </g>
+    </g>
+  )
+}
+
+/*
+ * Horizontal lockup — the mark tucked into the shoulder of the P. Written as
+ * inline SVG rather than loaded from public/brand/pck-crest-lockup.svg because
+ * a webfont never loads inside an SVG referenced as <img src>, and the wordmark
+ * has to be the same Cormorant Garamond as the screen titles beside it.
+ */
+export function CrestLockup({ className = 'header-lockup' }) {
+  return (
+    <svg className={className} viewBox="0 0 106 36" role="img" aria-label="PCK">
+      <g transform="translate(8 5)" fill="currentColor">
+        <CrestFeathers />
+      </g>
+      <text
+        x="40"
+        y="27"
+        fill="currentColor"
+        fontSize="30"
+        fontWeight="400"
+        letterSpacing="0.9"
+      >
+        PCK
+      </text>
+    </svg>
+  )
+}
+
+/*
+ * Vertical lockup — crest centred over the wordmark. Same construction and the
+ * same reason for being inline; the splash is the one place with room for it.
+ */
+export function CrestStack({ className = 'splash-lockup' }) {
+  return (
+    <svg className={className} viewBox="0 0 96 76" role="img" aria-label="PCK">
+      <g transform="translate(30 2)" fill="currentColor">
+        <CrestFeathers />
+      </g>
+      <text
+        x="48"
+        y="70"
+        fill="currentColor"
+        textAnchor="middle"
+        fontSize="36"
+        fontWeight="400"
+        letterSpacing="1.08"
+      >
+        PCK
+      </text>
+    </svg>
   )
 }

@@ -1,4 +1,4 @@
-import { PeacockLogo } from './Logo.jsx'
+import { CrestLockup } from './Logo.jsx'
 
 export function ScreenHeader({ title, kicker, pin = false, onLogo = null }) {
   return (
@@ -22,10 +22,10 @@ export function ScreenHeader({ title, kicker, pin = false, onLogo = null }) {
           onClick={onLogo}
           aria-label="Change backdrop"
         >
-          <PeacockLogo />
+          <CrestLockup />
         </button>
       ) : (
-        <PeacockLogo />
+        <CrestLockup />
       )}
     </header>
   )

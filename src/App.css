@@ -235,22 +235,29 @@
      122-unit cap height — about 0.03em once the cap is read as 0.7em. The
      wordmark sets its letters tight, so the title does too. */
   font-family: var(--font-title);
-  font-size: 1.62rem;
+  /* Sized off the lockup rather than chosen. The lockup sets PCK at 30 of its
+     36 viewBox units, so at the header's 28px the wordmark renders at 23.3px —
+     a 15.4px cap. 1.45rem of the same face gives a 15.3px cap, so the title and
+     the mark are two settings of one letterform at one height, which is what
+     makes them read as a pair rather than as a title and a logo. */
+  font-size: 1.45rem;
   font-weight: 400;
   letter-spacing: 0.03em;
   text-transform: uppercase;
   line-height: 1;
   /* Aligned to the top of the wordmark's "ck", not to its P. Two parts, so a
      change of face only ever touches the second one:
-       --ck-drop  where the ck begins in the art — 65 of its 240 units, which
-                  at the mark's 32px is 8.67px. Fixed by the logo, not the font.
+       --ck-drop  where the ck begins in the art. In the lockup the baseline is
+                  y=27 and the cap is 0.66 of the 30-unit face, so the cap top
+                  lands at y≈7.2 of 36 — a fifth of the way down. At the
+                  header's 28px that is 5.6px. Fixed by the logo, not the font.
        --cap-gap  the empty band a line box leaves above the cap, in em. With
                   line-height 1 that is halfLeading + ascent - capHeight; for
                   Cormorant Garamond, whose caps sit high in a tall line box,
                   it comes out near 0.116em.
      Subtracting the second from the first puts the painted cap exactly at the
      ck's top. Swap the face, recompute --cap-gap, and the title stays put. */
-  --ck-drop: 8.67px;
+  --ck-drop: 5.6px;
   --cap-gap: 0.116em;
   margin-top: calc(var(--ck-drop) - var(--cap-gap));
   color: #fff;
@@ -2622,6 +2629,17 @@
   height: 104px;
 }
 
+/* The vertical lockup on the loading screen. `.splash-mark` already centres it
+   in the grid cell; the wordmark is centred inside the art by text-anchor, so
+   the crest, the letters and the whole block all sit on one axis. */
+.splash-lockup {
+  display: block;
+  height: 132px;
+  width: auto;
+  color: #fff;
+  font-family: var(--font-title);
+}
+
 .splash-line {
   grid-area: 1 / 1;
   align-self: end;
@@ -3703,6 +3721,22 @@
   object-fit: contain;
 }
 
+/* The horizontal crest lockup, now the mark in every screen header. Its height
+   is the one number the title's alignment is derived from — see --ck-drop on
+   .screen-header h1 — so changing it here moves the title with it. It paints in
+   currentColor and sets its wordmark in the title face, which is why it is
+   inline SVG rather than a file: a webfont never loads inside an <img src>. */
+.header-lockup {
+  --lockup-h: 28px;
+  display: block;
+  height: var(--lockup-h);
+  width: auto;
+  flex-shrink: 0;
+  justify-self: end;
+  color: #fff;
+  font-family: var(--font-title);
+}
+
 /* The pale backdrop. Everything in the wallet header is white-on-dark by
    default, which vanishes against the ivory plume — so the title drops to ink
    and the peacock mark, being white art on transparent, is inverted to match.
@@ -3716,6 +3750,12 @@
 
 .wallet-screen.is-light .screen-header .peacock-logo {
   filter: invert(1);
+}
+
+/* The lockup is drawn in currentColor, so it flips with a colour rather than
+   the inversion the old flat PNG needed. */
+.wallet-screen.is-light .screen-header .header-lockup {
+  color: #11151d;
 }
 
 /* The card sits straight on the plume — it has no ground of its own — so the
