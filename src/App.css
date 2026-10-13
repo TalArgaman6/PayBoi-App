@@ -3780,3 +3780,24 @@
 .feed-card .feed-meta {
   margin-top: 9px;
 }
+
+/* The filter drawer is a list of settings, not a toolbar: the plates were
+   stacking up into a grid of grey boxes down the panel. Here a tab is just
+   its label — the chosen one is white, the rest are muted, and the pointer
+   brightens without laying anything down behind the text. */
+.drawer-body .filter-tabs button,
+.drawer-body .filter-tabs button.is-active,
+.drawer-body .filter-tabs button:hover {
+  background: transparent;
+  box-shadow: none;
+}
+
+.drawer-body .filter-tabs button.is-active {
+  color: #fff;
+  -webkit-text-fill-color: #fff;
+}
+
+.drawer-body .filter-tabs button:hover {
+  color: #fff;
+  -webkit-text-fill-color: #fff;
+}
