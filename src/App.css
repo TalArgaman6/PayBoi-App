@@ -3619,10 +3619,10 @@
   margin-bottom: 8px;
   /* Held in from the sides as well, so the plate floats on the list instead
      of running the full width the way the plain rows do. The inner padding
-     comes down by the same amount, which keeps the thumbnails and the price
-     column lined up with the rows below. */
+     stays as it is, so the price column keeps its breathing room inside the
+     plate rather than being pushed against the edge of it. */
   margin-inline: 8px;
-  padding-inline: 4px;
+  padding-inline: 12px;
 }
 
 .item-row.is-pinned:hover {
