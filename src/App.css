@@ -3743,3 +3743,10 @@
 .feed-faces {
   overflow: visible;
 }
+
+/* The names sit directly under the picture, and the crest above the first
+   avatar needs the room — so the meta row stands a little further off the
+   photo than the rest of the card's rhythm. */
+.feed-card .feed-meta {
+  margin-top: 5px;
+}
