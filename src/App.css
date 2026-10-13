@@ -3790,6 +3790,14 @@
 /* The pinned rows — the two headline events, the two priciest market drops.
    A sheer white wash and a hairline edge: enough to lift the pair off the list
    without turning them into cards of their own. */
+/* The earn badge is a flat #252a33 plate, which reads against the list's own
+   ground but all but vanishes once the pinned row lifts the ground to meet it.
+   On a pinned row it goes up with it, by about the same amount, so the badge
+   keeps the separation it has everywhere else. */
+.item-row.is-pinned .earn-badge {
+  background: #343b47;
+}
+
 .item-row.is-pinned {
   background: rgb(255 255 255 / 7%);
   box-shadow: inset 0 0 0 1px rgb(255 255 255 / 10%);
