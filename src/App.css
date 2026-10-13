@@ -405,7 +405,9 @@
 .price-range {
   position: relative;
   height: 28px;
-  margin: 4px 6px 8px;
+  /* Pulled out by half a handle on each side so the rail — not the plume
+     hanging off its end — lines up with the labels above it. */
+  margin: 4px -10px 8px;
 }
 
 .price-range-track,
