@@ -2640,56 +2640,6 @@
   font-family: var(--font-title);
 }
 
-.splash-line {
-  grid-area: 1 / 1;
-  align-self: end;
-  position: relative;
-  z-index: 1;
-  display: grid;
-  margin: 0 0 64px;
-  min-height: 1.2em;
-  font-family: Sora, system-ui, sans-serif;
-  font-size: 0.62rem;
-  font-weight: 200;
-  font-style: normal;
-  letter-spacing: 0.06em;
-  text-align: left;
-}
-
-.splash-line-ghost,
-.splash-line-live {
-  grid-area: 1 / 1;
-}
-
-.splash-line-ghost {
-  visibility: hidden;
-}
-
-.splash-line-live {
-  color: #fff;
-  -webkit-text-fill-color: #fff;
-}
-
-/* A blinking full stop rather than a caret bar — same pulse, softer mark. */
-.splash-line i {
-  display: inline-block;
-  width: 2.5px;
-  height: 2.5px;
-  margin-left: 0.42em;
-  border-radius: 50%;
-  /* The one accent on the splash — the full stop lands in gold rather
-     than inheriting the white of the line it closes. */
-  background: var(--live);
-  vertical-align: baseline;
-  animation: caret 1s step-end infinite;
-}
-
-@keyframes caret {
-  50% {
-    opacity: 0;
-  }
-}
-
 .feed-composer {
   display: grid;
   grid-template-columns: 40px 1fr;
