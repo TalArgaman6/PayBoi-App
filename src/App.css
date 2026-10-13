@@ -3083,6 +3083,11 @@
   gap: 8px;
   margin-right: -22px;
   padding-right: 22px;
+  /* The card clips — the slides depend on it — so the crest above the first
+     avatar needs room inside the clip box rather than outside it. The
+     negative margin takes the padding back, so nothing moves. */
+  margin-top: -12px;
+  padding-top: 12px;
   overflow: hidden;
 }
 
