@@ -2906,9 +2906,8 @@
   color: #fff;
 }
 
-/* Every pill on the feed takes the same hover: the plate fills white and the
-   label flips to ink, so nothing is ever white on white. */
-.feed-actions button:hover,
+/* The filter and sort pills take the full hover: the plate fills white and
+   the label flips to ink, so nothing is ever white on white. */
 .rate-picks button:hover,
 .feed-sort button:hover,
 .feed-mode button:hover,
@@ -2916,6 +2915,17 @@
   background: #fff;
   color: var(--accent-ink);
   -webkit-text-fill-color: var(--accent-ink);
+}
+
+/* The post actions are the exception. They're read as marks rather than as
+   buttons, and the peck is the loudest of them — filling the plate white
+   would shout over the post. Only the mark and its count brighten; the wash
+   underneath stays where it is, at rest, on hover and once cast. */
+.feed-actions button:hover,
+.party-rate button:hover {
+  background: var(--wash);
+  color: #fff;
+  -webkit-text-fill-color: #fff;
 }
 
 .feed-clip,
