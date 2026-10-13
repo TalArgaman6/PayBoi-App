@@ -555,10 +555,16 @@
   display: grid;
   grid-template-columns: 52px 1fr auto;
   gap: 12px;
-  align-items: center;
+  /* Baseline, not top: the price is set much smaller than the title, so making
+     their boxes start together left the price riding a few pixels high. Sitting
+     them on a shared baseline is what "aligned to the title" actually means. */
+  align-items: baseline;
   /* Side padding on every row, not just the pinned ones: the price column and
-     the ticket count were running into the edge of the list. */
-  padding: 11px 12px;
+     the ticket count were running into the edge of the list. Held in a
+     variable because the pinned plate has to measure its own overhang from
+     whatever this screen's rows happen to use. */
+  --row-pad: 12px;
+  padding: 11px var(--row-pad);
   border: 0;
   border-bottom: 1px solid var(--line);
   background: transparent;
@@ -567,6 +573,9 @@
 }
 
 .item-thumb {
+  /* The row aligns on the title's baseline; the picture has none, so it opts
+     out and keeps the centred position it has always had. */
+  align-self: center;
   width: 52px;
   height: 52px;
   border-radius: 12px;
@@ -689,7 +698,8 @@
   grid-template-columns: 58px 1fr auto;
   /* A little side room so the price column isn't against the edge of the
      list. This is the line the pinned plates align their content to. */
-  padding: 12px 5px;
+  --row-pad: 5px;
+  padding: 12px var(--row-pad);
 }
 
 .screen-events .item-thumb {
@@ -717,9 +727,15 @@
   line-height: 1.22;
 }
 
+/* Same geometry as the Events list, down to the side padding. It used to run
+   flush at 0, which left the pinned plates — whose overhang is measured off
+   --row-pad — indenting their content 15px while the plain rows below stayed
+   at the edge. Matching Events fixes the pair and makes the two lists read as
+   one component. */
 .screen-market .item-row {
   grid-template-columns: 58px 1fr auto;
-  padding: 12px 0;
+  --row-pad: 5px;
+  padding: 12px var(--row-pad);
 }
 
 .screen-market .item-thumb {
@@ -772,8 +788,14 @@
   white-space: nowrap;
 }
 
+/* The price column hangs from the top of the row rather than floating in the
+   middle of it: its first line meets the title on its left, and the earn badge
+   stacks down from there. The text column is the tallest, so its top is the
+   row's top and the two first lines land together. */
 .item-price {
   display: grid;
+  align-self: start;
+  align-content: start;
   justify-items: end;
   gap: 9px;
   flex-shrink: 0;
@@ -1488,8 +1510,11 @@
   display: block;
 }
 
+/* The slide you're on goes flat white, the way every other active mark in the
+   app does — the pewter sat too close to the dimmed dots beside it to read as
+   the chosen one. */
 .feature-dots button.is-on {
-  background: var(--live);
+  background: #fff;
   width: 14px;
   border-radius: 999px;
 }
@@ -2062,12 +2087,22 @@
   gap: 1px;
   font-family: var(--font-ui);
   font-size: 1.7rem;
-  letter-spacing: 0;
+  /* A hair of tracking on the figures. Set solid, the thousands comma gets
+     swallowed between the digits either side of it and 4,506 reads as one
+     five-digit run. */
+  letter-spacing: 0.015em;
   font-weight: 600;
-  font-variant-numeric: tabular-nums;
+  /* lining + tabular: every digit the same width and the same height, so the
+     number doesn't reflow as the balance changes. */
+  font-variant-numeric: lining-nums tabular-nums;
   color: #fff;
   -webkit-text-fill-color: #fff;
-  text-shadow: 0 1px 12px rgb(70 40 130 / 40%);
+  /* The balance sits straight on the feather photograph, which is dark but
+     busy. A tight shade under the glyphs holds their edges against it; the
+     wide violet glow stays for the colour. */
+  text-shadow:
+    0 1px 2px rgb(8 16 29 / 65%),
+    0 1px 12px rgb(70 40 130 / 40%);
 }
 
 .pay-card .token-amount {
@@ -2090,7 +2125,10 @@
   color: rgb(255 255 255 / 78%);
   font-size: 0.72rem;
   font-weight: 600;
+  letter-spacing: 0.015em;
+  font-variant-numeric: lining-nums tabular-nums;
   white-space: nowrap;
+  text-shadow: 0 1px 2px rgb(8 16 29 / 60%);
 }
 
 .wallet-sheet {
@@ -2149,15 +2187,19 @@
 }
 
 .wallet-screen .pay-card .token-balance {
-  font-size: 17px;
-  font-weight: 600;
+  font-size: 19px;
+  font-weight: 700;
 }
 
+/* The "pck" was pulled tight against the figure, so the two read as one word.
+   It gets real space on its right and drops to 500 — a unit label beside the
+   number rather than part of it. */
 .wallet-screen .pay-card .token-balance small {
-  font-size: 13px;
-  font-weight: 600;
-  margin-left: -1px;
-  margin-right: 1px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  margin-left: 0;
+  margin-right: 5px;
 }
 
 .wallet-screen .pay-card .fiat-balance {
@@ -3683,11 +3725,18 @@
 .wallet-screen.is-light .pay-card .token-amount {
   color: #11151d;
   -webkit-text-fill-color: #11151d;
+  /* The shade under the glyphs exists to lift white type off a dark photo.
+     Here the type is already ink on a pale one, so the same shade only smears
+     — a faint pale halo does the separating instead. */
+  text-shadow: 0 1px 2px rgb(255 255 255 / 55%);
 }
 
+/* Full ink, not 78% of it: held back it went grey against the pale plume and
+   read as disabled beside the pck figure. */
 .wallet-screen.is-light .pay-card .fiat-balance {
-  color: rgb(17 21 29 / 78%);
-  -webkit-text-fill-color: rgb(17 21 29 / 78%);
+  color: #11151d;
+  -webkit-text-fill-color: #11151d;
+  text-shadow: 0 1px 2px rgb(255 255 255 / 55%);
 }
 
 /* The portrait's double ring is white for the same reason the title was —
@@ -3698,8 +3747,9 @@
   outline: 1px solid rgb(17 21 29 / 62%);
 }
 
-/* The pinned events. A sheer white wash and a hairline edge — enough to lift
-   the pair off the list without turning them into cards of their own. */
+/* The pinned rows — the two headline events, the two priciest market drops.
+   A sheer white wash and a hairline edge: enough to lift the pair off the list
+   without turning them into cards of their own. */
 .item-row.is-pinned {
   background: rgb(255 255 255 / 7%);
   box-shadow: inset 0 0 0 1px rgb(255 255 255 / 10%);
@@ -3715,10 +3765,11 @@
      which ignores the margins. */
   margin-inline: -3px;
   /* The plate reaches 3px past the plain rows on each side and the padding
-     adds that 3px back on top of the row's own 5px — so the thumbnail and the
-     price column land exactly where they do in every row below, and the wash
-     simply sits 6px wider around them. */
-  padding-inline: 8px;
+     adds that 3px back on top of the row's own side padding — so the thumbnail
+     and the price column land exactly where they do in every row below, and
+     the wash simply sits 6px wider around them. Read off --row-pad rather than
+     hard-coded, so the same plate works on Market's wider rows as on Events'. */
+  padding-inline: calc(var(--row-pad) + 3px);
   width: auto;
 }
 
@@ -3766,10 +3817,27 @@
   --crest-w: 34px;
 }
 
+/* On the pale wallet the crest had nothing to stand against — pewter on ivory
+   is barely a shape. It goes to the app's ink there, the same move the header
+   title and the portrait's ring already make. */
+.wallet-screen.is-light .wallet-profile::after {
+  background-image: url("data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 36 26%22><g fill=%22%2311151d%22><path d=%22M18 26c-.5-4.2-.6-8.2-.2-12.1h1.2c.4 3.9.3 7.9-.2 12.1z%22/><g transform=%22translate(18 8.6)%22><path d=%22M0-6.2C1.7-4 3.4-2.4 3.4.3 3.4 3 1.9 4.8 0 4.8-1.9 4.8-3.4 3-3.4.3-3.4-2.4-1.7-4 0-6.2Z%22/></g><path d=%22M14.4 26c-1.9-3.8-3.3-7.4-4.2-11l1.1-.4c1.5 3.6 2.6 7.3 3.4 11.4z%22/><g transform=%22translate(8.6 10.3) rotate(-24)%22><path d=%22M0-6.2C1.7-4 3.4-2.4 3.4.3 3.4 3 1.9 4.8 0 4.8-1.9 4.8-3.4 3-3.4.3-3.4-2.4-1.7-4 0-6.2Z%22/></g><path d=%22M21.6 26c1.9-3.8 3.3-7.4 4.2-11l-1.1-.4c-1.5 3.6-2.6 7.3-3.4 11.4z%22/><g transform=%22translate(27.4 10.3) rotate(24)%22><path d=%22M0-6.2C1.7-4 3.4-2.4 3.4.3 3.4 3 1.9 4.8 0 4.8-1.9 4.8-3.4 3-3.4.3-3.4-2.4-1.7-4 0-6.2Z%22/></g></g></svg>");
+}
+
+
 .wallet-profile::after {
   /* Clear of the ring the portrait already carries. */
   top: calc(4% - var(--crest-w) * 26 / 36);
 }
+
+/* The wallet's own portrait is the one crest that goes white. It stands alone
+   over the plume at the top of the screen rather than in a list of faces, so
+   it can carry the full weight the small pewter ones can't. The pale wallet
+   keeps the ink version below — white on ivory would be nothing at all. */
+.wallet-profile::after {
+  background-image: url("data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 36 26%22><g fill=%22%23ffffff%22><path d=%22M18 26c-.5-4.2-.6-8.2-.2-12.1h1.2c.4 3.9.3 7.9-.2 12.1z%22/><g transform=%22translate(18 8.6)%22><path d=%22M0-6.2C1.7-4 3.4-2.4 3.4.3 3.4 3 1.9 4.8 0 4.8-1.9 4.8-3.4 3-3.4.3-3.4-2.4-1.7-4 0-6.2Z%22/></g><path d=%22M14.4 26c-1.9-3.8-3.3-7.4-4.2-11l1.1-.4c1.5 3.6 2.6 7.3 3.4 11.4z%22/><g transform=%22translate(8.6 10.3) rotate(-24)%22><path d=%22M0-6.2C1.7-4 3.4-2.4 3.4.3 3.4 3 1.9 4.8 0 4.8-1.9 4.8-3.4 3-3.4.3-3.4-2.4-1.7-4 0-6.2Z%22/></g><path d=%22M21.6 26c1.9-3.8 3.3-7.4 4.2-11l-1.1-.4c-1.5 3.6-2.6 7.3-3.4 11.4z%22/><g transform=%22translate(27.4 10.3) rotate(24)%22><path d=%22M0-6.2C1.7-4 3.4-2.4 3.4.3 3.4 3 1.9 4.8 0 4.8-1.9 4.8-3.4 3-3.4.3-3.4-2.4-1.7-4 0-6.2Z%22/></g></g></svg>");
+}
+
 
 .seller-face {
   --crest-w: 16px;

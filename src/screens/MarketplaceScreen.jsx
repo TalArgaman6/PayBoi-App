@@ -25,6 +25,19 @@ const MARKET_FILTERS = [{ id: 'drop', label: 'Drop' }, ...catalog.filters]
 
 const EVENTS = Object.fromEntries(events.items.map((item) => [item.id, item]))
 
+// The two priciest products in the Drop aisle ride at the top on their own
+// plates, the way the headline events do on the Events list. Derived from the
+// catalog rather than written down, so adding a bigger drop promotes itself.
+const TOP_DROPS = [...products.items]
+  .sort((a, b) => (b.pricePbs || 0) - (a.pricePbs || 0))
+  .slice(0, 2)
+  .map((item) => item.id)
+
+function dropRank(item) {
+  const at = TOP_DROPS.indexOf(item.id)
+  return at === -1 ? TOP_DROPS.length : at
+}
+
 function listingItem(item) {
   const event = EVENTS[item.eventId]
   const dated = {
@@ -55,7 +68,9 @@ export function MarketplaceScreen({ onSelect }) {
   )
   const items = useMemo(() => {
     if (drop) {
-      return products.items.filter((item) => matchesQuery(item, query))
+      return products.items
+        .filter((item) => matchesQuery(item, query))
+        .sort((a, b) => dropRank(a) - dropRank(b))
     }
     return [...mine, ...catalog.items]
       .map(listingItem)
@@ -111,6 +126,7 @@ export function MarketplaceScreen({ onSelect }) {
               key={item.id}
               item={item}
               meta={drop ? `${item.shop} · ${item.city}` : formatCost(item)}
+              pinned={drop && TOP_DROPS.includes(item.id)}
               onSelect={onSelect}
             />
           ))}

@@ -4,7 +4,7 @@ import { ItemThumb } from './components/ItemRow.jsx'
 import { RemixProvider } from './components/RemixPlayer.jsx'
 import { Splash } from './components/Splash.jsx'
 import wallet from './data/wallet.json'
-import { formatCost, formatEarn, formatPbs, formatTokenBalance, earnAmount, isEventItem } from './lib/format.js'
+import { formatCost, formatPbs, formatTokenBalance } from './lib/format.js'
 import { rankVars } from './lib/settings.js'
 import { consumeLocationRedeem } from './lib/passes.js'
 import { useDismissOnOutside } from './lib/dismiss.js'
@@ -168,9 +168,14 @@ export default function App() {
                       {selected.seller
                         ? `${formatCost(selected)} to ${pmName(selected.seller)} · fixed price`
                         : selected.pricePbs <= wallet.balance
-                          ? isEventItem(selected)
-                            ? `${formatCost(selected)} · earn ${formatEarn(earnAmount(selected))} · ${formatPbs(wallet.balance - selected.pricePbs)} left`
-                            : `${formatCost(selected)} · ${formatPbs(wallet.balance - selected.pricePbs)} left`
+                          ? /* Price and what's left after it — the two things
+                               you need before pressing Pay. The earn clause
+                               used to sit between them on events only, which
+                               pushed the line past the sheet and truncated it;
+                               the gain is already on the row you tapped and on
+                               the banner, so a third copy was costing the line
+                               its legibility. */
+                            `${formatCost(selected)} · ${formatPbs(wallet.balance - selected.pricePbs)} left`
                           : `This is ${formatPbs(selected.pricePbs - wallet.balance)} over your ${formatTokenBalance(wallet.balance)} pck.`}
                     </span>
                   )}
