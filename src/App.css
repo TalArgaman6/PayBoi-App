@@ -405,9 +405,10 @@
 .price-range {
   position: relative;
   height: 28px;
-  /* Pulled out by half a handle on each side so the rail — not the plume
-     hanging off its end — lines up with the labels above it. */
-  margin: 4px -10px 8px;
+  /* Flush with the rest of the drawer: the plumes' outer edges sit on the
+     content's left and right, which puts the rail between their centres a
+     half-handle in from each side. */
+  margin: 4px 0 8px;
 }
 
 .price-range-track,
