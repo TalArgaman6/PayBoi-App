@@ -3690,9 +3690,11 @@
 }
 
 .seller-face::after {
-  /* The seller face is a photo plus a caption, so a percentage would measure
-     the wrong box. */
-  top: calc(2px - var(--crest-w) * 26 / 36);
+  /* The seller face is a photo plus a caption and the photo is centred in a
+     wider column, so neither a percentage of the box nor its left edge finds
+     the circle — both axes are measured off the 40px photo instead. */
+  left: calc(50% - 22px);
+  top: calc(1px - var(--crest-w) * 26 / 36);
 }
 
 .feed-faces button {
