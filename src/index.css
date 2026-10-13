@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Figtree:wght@400;500;600&family=Inter:wght@400;600;700&family=Outfit:wght@200&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Quicksand:wght@400;500;600;700&family=Sora:wght@200&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Figtree:wght@400;500;600&family=Inter:wght@400;600;700&family=Outfit:wght@200;300;400;500&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Quicksand:wght@400;500;600;700&family=Sora:wght@200&display=swap');
 
 :root {
   font-family: Figtree, system-ui, sans-serif;
@@ -13,6 +13,10 @@
   /* Screen titles step away from the app's grotesque into a light classic
      serif — the headers set the tone, the cards beneath them carry the UI. */
   --font-title: "Cormorant Garamond", Didot, Georgia, serif;
+  /* The wordmark face. Outfit is the geometric sans the peacock mark's "ck"
+     is drawn in — even strokes, circular bowls, barely any contrast — so a
+     screen title set in it sits in the logo's own hand. */
+  --font-mark: Outfit, "Plus Jakarta Sans", system-ui, sans-serif;
   --font-ui: "Plus Jakarta Sans", system-ui, sans-serif;
   /* The app's secondary. A cool pewter that reads as metal next to the blue
      chrome, and goes to flat white wherever something is hovered or active —

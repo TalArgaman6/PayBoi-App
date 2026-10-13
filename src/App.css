@@ -226,13 +226,13 @@
 
 .screen-header h1 {
   margin: 0;
-  /* The nav tabs' style, scaled up: the same UI grotesque, the same semibold
-     caps and the same tight tracking, so the title at the top and the labels
-     at the bottom are plainly the same voice. */
-  font-family: var(--font-ui);
-  font-size: 1.42rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
+  /* The wordmark's own face: the title is set in the same geometric sans the
+     mark's "ck" is drawn in, at the light weight and open tracking the
+     lettering uses, so the two read as one piece of type. */
+  font-family: var(--font-mark);
+  font-size: 1.5rem;
+  font-weight: 300;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   line-height: 1;
   /* The wordmark's P stands well above its ck, and the title reads better
