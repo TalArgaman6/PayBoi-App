@@ -61,7 +61,12 @@ function CrestFeathers() {
 export function CrestLockup({ className = 'header-lockup' }) {
   return (
     <svg className={className} viewBox="0 0 106 36" role="img" aria-label="PCK">
-      <g transform="translate(8 5)" fill="currentColor">
+      {/* Sat on the wordmark's baseline, not floating over it. The crest is
+          drawn with its stems ending at y=26 and the gale rotation swings the
+          outermost one down to about y=32, so a y-offset of 0 brings that
+          lowest stem to the text's baseline at y=27 — the feathers stand on
+          the same line the letters do. */}
+      <g transform="translate(8 0)" fill="currentColor">
         <CrestFeathers />
       </g>
       <text
