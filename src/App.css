@@ -1090,10 +1090,17 @@
   display: block;
 }
 
+/*
+ * overflow clips at this box's padding edge, and the price handles hang half
+ * a plume past the rail. The body borrows the panel's 16px of side room as
+ * its own padding — the negative margin gives it straight back, so nothing
+ * moves — and the overhang then falls inside the clip instead of across it.
+ */
 .drawer-body {
   flex: 1;
   overflow: auto;
-  padding: 10px 0 16px;
+  margin: 0 -16px;
+  padding: 10px 16px 16px;
 }
 
 .drawer-done {
