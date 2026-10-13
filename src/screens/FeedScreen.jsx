@@ -566,7 +566,9 @@ function UserFeed({ posts, startId, userId, onClose }) {
     >
       <header className="user-feed-head">
         <div className="feed-user">
-          <img src={assetUrl(person.photo)} alt="" />
+          <span className="avatar-crest">
+            <img src={assetUrl(person.photo)} alt="" />
+          </span>
           <strong>{person.name}</strong>
         </div>
         <button type="button" className="drawer-text" onClick={onClose}>
@@ -818,7 +820,11 @@ export function FeedScreen() {
             publish()
           }}
         >
-          <img className="feed-composer-face" src={assetUrl(ME.photo)} alt="" />
+          {/* The wrapper is only there to hang the crest on — a bare <img>
+              has no pseudo-element to put it in. */}
+          <span className="avatar-crest">
+            <img className="feed-composer-face" src={assetUrl(ME.photo)} alt="" />
+          </span>
           <div
             className="feed-composer-body"
             onBlur={(event) => {

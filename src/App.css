@@ -3652,6 +3652,7 @@
    needs no asset; `--crest-w` is the only thing each avatar has to set. */
 .wallet-profile::after,
 .seller-face::after,
+.avatar-crest::after,
 .feed-faces button::after {
   content: '';
   position: absolute;
@@ -3710,4 +3711,28 @@
 .feed-user img,
 .feed-composer-face {
   border-radius: 50%;
+}
+
+
+/* A bare <img> can't carry a pseudo-element, so the composer's face and the
+   drawer header's face get a wrapper whose only job is to hold the crest. */
+.avatar-crest {
+  --crest-w: 15px;
+  position: relative;
+  display: inline-block;
+  line-height: 0;
+  /* Nothing here may clip: the crest grows past the top-left corner. */
+  overflow: visible;
+}
+
+.avatar-crest::after {
+  top: calc(1px - var(--crest-w) * 26 / 36);
+}
+
+/* The rows these sit in clip by default, which would shear the feathers. */
+.feed-composer,
+.feed-user,
+.user-feed-head,
+.feed-faces {
+  overflow: visible;
 }
