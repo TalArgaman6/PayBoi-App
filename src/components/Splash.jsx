@@ -26,7 +26,7 @@ export function Splash({ onDone }) {
     <button
       type="button"
       className="splash"
-      aria-label="Open pboi"
+      aria-label="Open Peacock"
       onClick={() => {
         unlockMotion()
         onDone()

@@ -18,8 +18,17 @@ import {
 } from '../lib/filters.js'
 import { PBS_PER_ILS, boughtLine, formatWhen, matchesQuery } from '../lib/format.js'
 
+// Order is otherwise the catalog's own, so the rank only has to lift these
+// two; everything else shares a rank and keeps its place.
+const PINNED = ['pboi-festival', 'forever-pride']
+
+function pinRank(item) {
+  const at = PINNED.indexOf(item.id)
+  return at === -1 ? PINNED.length : at
+}
+
 function formatFilterPrice(pbs) {
-  return `₪${Math.round(pbs / PBS_PER_ILS)} / ${pbs} pbs`
+  return `₪${Math.round(pbs / PBS_PER_ILS)} / ${pbs} pck`
 }
 
 export function EventsScreen({ onSelect, country = DEFAULT_COUNTRY }) {
@@ -43,6 +52,11 @@ export function EventsScreen({ onSelect, country = DEFAULT_COUNTRY }) {
     [country],
   )
 
+  /*
+   * Two events sit above the rest whatever the sort would otherwise do —
+   * the festival is ours and the pride weekend is the anchor of the year.
+   * They still obey the filters: pinning changes the order, not the set.
+   */
   const items = useMemo(
     () =>
       catalog.items.filter((item) => {
@@ -65,7 +79,7 @@ export function EventsScreen({ onSelect, country = DEFAULT_COUNTRY }) {
           inPbsSpan(item, priceMin, priceMax) &&
           matchesQuery(item, query)
         )
-      }),
+      }).sort((a, b) => pinRank(a) - pinRank(b)),
     [
       bracelet,
       country,

@@ -26,7 +26,7 @@ function pmName(seller) {
 
 export default function App() {
   const [booted, setBooted] = useState(Boolean(redeemedPassId))
-  const [tab, setTab] = useState(redeemedPassId ? 'wallet' : 'feed')
+  const [tab, setTab] = useState(redeemedPassId ? 'wallet' : 'events')
   const [selected, setSelected] = useState(null)
   const [pmOpen, setPmOpen] = useState(false)
   const [pmDraft, setPmDraft] = useState('')
@@ -171,7 +171,7 @@ export default function App() {
                           ? isEventItem(selected)
                             ? `${formatCost(selected)} · earn ${formatEarn(earnAmount(selected))} · ${formatPbs(wallet.balance - selected.pricePbs)} left`
                             : `${formatCost(selected)} · ${formatPbs(wallet.balance - selected.pricePbs)} left`
-                          : `This is ${formatPbs(selected.pricePbs - wallet.balance)} over your ${formatTokenBalance(wallet.balance)} pbs.`}
+                          : `This is ${formatPbs(selected.pricePbs - wallet.balance)} over your ${formatTokenBalance(wallet.balance)} pck.`}
                     </span>
                   )}
                 </div>

@@ -1,6 +1,6 @@
 {
-  "name": "pboi",
-  "short_name": "pboi",
+  "name": "Peacock",
+  "short_name": "Peacock",
   "description": "Anonymous LGBTQ wallet for tickets, products, and stacked tokens.",
   "start_url": "./",
   "scope": "./",

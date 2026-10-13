@@ -2,7 +2,7 @@ import { formatTokenBalance } from '../lib/format.js'
 
 export function WalletCard({ wallet }) {
   return (
-    <article className="pay-card" aria-label="pboi card">
+    <article className="pay-card" aria-label="Peacock card">
       <div className="pay-card-foot">
         <p className="token-balance">
           <small>{wallet.token}</small>

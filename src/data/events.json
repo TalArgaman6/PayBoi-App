@@ -122,7 +122,7 @@
   "items": [
     {
       "id": "pboi-festival",
-      "title": "pboi Yearly Festival",
+      "title": "Peacock Yearly Festival",
       "line": "pboi",
       "subtitle": "Our public week",
       "venue": "Live Park",
@@ -134,7 +134,7 @@
       "pricePbs": 960,
       "earnPbs": 40,
       "featured": true,
-      "kicker": "pboi 2026",
+      "kicker": "Peacock 2026",
       "banner": "photos/pboi-festival.jpg",
       "image": "photos/pboi-festival.jpg",
       "rides": 12,

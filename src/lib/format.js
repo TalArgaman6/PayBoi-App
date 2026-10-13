@@ -26,7 +26,7 @@ export function listingTitle(title) {
 export const PBS_PER_ILS = 3
 
 export function formatPbs(amount) {
-  return `${Number(amount).toLocaleString('en-US')} pbs`
+  return `${Number(amount).toLocaleString('en-US')} pck`
 }
 
 export function assetUrl(path) {
@@ -45,7 +45,7 @@ export function ilsAmount(item) {
 }
 
 export function formatCost(item) {
-  return `₪${ilsAmount(item)} / ${item?.pricePbs ?? 0} pbs`
+  return `₪${ilsAmount(item)} / ${item?.pricePbs ?? 0} pck`
 }
 
 export function formatFixedPrice(item) {

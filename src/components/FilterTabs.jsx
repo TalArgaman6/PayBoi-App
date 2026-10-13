@@ -1,9 +1,9 @@
 function TabLabel({ label }) {
-  const parts = String(label).split(/(pbs)/i)
+  const parts = String(label).split(/(pck)/i)
   return parts.map((part, index) =>
-    /^pbs$/i.test(part) ? (
+    /^pck$/i.test(part) ? (
       <span key={index} className="pbs-unit">
-        pbs
+        pck
       </span>
     ) : (
       part

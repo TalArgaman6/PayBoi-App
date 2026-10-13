@@ -28,7 +28,7 @@ export function FeaturedBanner({ items, onSelect, caption }) {
           <em>
             {caption
               ? caption(current)
-              : `${current.city} · ${formatCost(current)} · gain ${formatEarn(earnAmount(current))} pbs`}
+              : `${current.city} · ${formatCost(current)} · gain ${formatEarn(earnAmount(current))} pck`}
           </em>
         </div>
       </button>

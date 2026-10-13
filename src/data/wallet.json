@@ -3,7 +3,7 @@
   "name": "Tal Argaman",
   "nickname": "TAL",
   "photo": "photos/sellers/toulouse.jpg",
-  "token": "pbs",
+  "token": "pck",
   "balance": 4506,
   "fiat": 2163,
   "premium": false,
@@ -31,7 +31,7 @@
     {
       "id": "greenroom",
       "label": "VIP pass",
-      "hint": "Backstage / quiet booth access at pboi festival and circuit nights.",
+      "hint": "Backstage / quiet booth access at Peacock festival and circuit nights.",
       "color": "#e0a420",
       "metal": "gold",
       "count": 2,

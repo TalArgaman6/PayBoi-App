@@ -641,19 +641,19 @@ function matchesFilter(post, tag) {
 
 async function shareToInstagram(post) {
   const tags = (post.tags || []).map((tag) => formatTag(tag)).join(' ')
-  const text = [post.caption, tags, '#pboi'].filter(Boolean).join(' ')
+  const text = [post.caption, tags, '#peacock'].filter(Boolean).join(' ')
   try {
     if (post.image && navigator.share && navigator.canShare) {
       const response = await fetch(assetUrl(post.image))
       const blob = await response.blob()
       const file = new File([blob], 'pboi.jpg', { type: blob.type || 'image/jpeg' })
       if (navigator.canShare({ files: [file] })) {
-        await navigator.share({ text, title: 'pboi', files: [file] })
+        await navigator.share({ text, title: 'Peacock', files: [file] })
         return
       }
     }
     if (navigator.share) {
-      await navigator.share({ text, title: 'pboi' })
+      await navigator.share({ text, title: 'Peacock' })
       return
     }
   } catch (error) {

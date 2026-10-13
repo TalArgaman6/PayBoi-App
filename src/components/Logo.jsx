@@ -10,13 +10,13 @@ export function PboiLogo({ tinted = false }) {
         className="pboi-logo is-tinted"
         style={{ '--logo': `url("${assetUrl('pboi-logo.png')}")` }}
         role="img"
-        aria-label="pboi"
+        aria-label="Peacock"
       />
     )
   }
 
   return (
-    <img className="pboi-logo" src={assetUrl('pboi-logo.png')} alt="pboi" />
+    <img className="pboi-logo" src={assetUrl('pboi-logo.png')} alt="Peacock" />
   )
 }
 
@@ -24,6 +24,6 @@ export function PboiLogo({ tinted = false }) {
 // tinted the same way later. For now it only stands in the screen headers.
 export function PeacockLogo() {
   return (
-    <img className="peacock-logo" src={assetUrl('peacock-logo.png')} alt="pboi" />
+    <img className="peacock-logo" src={assetUrl('peacock-logo.png')} alt="Peacock" />
   )
 }
