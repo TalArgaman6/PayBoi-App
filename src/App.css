@@ -3617,16 +3617,10 @@
      it — and the pair needs air between them to read as two plates. */
   border-bottom-color: transparent;
   margin-bottom: 8px;
-  /* Held in from the sides as well, so the plate floats on the list instead
-     of running the full width the way the plain rows do. The inner padding
-     stays as it is, so the price column keeps its breathing room inside the
-     plate rather than being pushed against the edge of it. */
-  margin-inline: 8px;
-  padding-inline: 12px;
-  /* The base row is width:100%, which doesn't account for the margins — the
-     plate would overhang the right edge by the full 16px. Auto lets the grid
-     size it to what's left once both margins are taken. */
-  width: auto;
+  /* The plate runs the full width of the list, so its thumbnail and price
+     column sit on the same two lines as every row below it — the wash is the
+     only thing that marks it out. */
+  margin-inline: 0;
 }
 
 /* Air between the filters above and the first plate. */
