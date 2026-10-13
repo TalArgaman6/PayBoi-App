@@ -3737,6 +3737,15 @@
   font-family: var(--font-title);
 }
 
+/* The wallet header is the one place the crest is already on screen — it sits
+   over the portrait a few millimetres below. Two of them that close reads as a
+   repeat, so the header keeps the wordmark alone. Hidden rather than swapped
+   for a second component so the letters do not move: the viewBox is fixed and
+   the text is at its right edge, which is the edge the header aligns to. */
+.wallet-screen .header-lockup .lockup-crest {
+  display: none;
+}
+
 /* The pale backdrop. Everything in the wallet header is white-on-dark by
    default, which vanishes against the ivory plume — so the title drops to ink
    and the peacock mark, being white art on transparent, is inverted to match.

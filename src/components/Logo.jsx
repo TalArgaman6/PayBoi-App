@@ -66,7 +66,7 @@ export function CrestLockup({ className = 'header-lockup' }) {
           outermost one down to about y=32, so a y-offset of 0 brings that
           lowest stem to the text's baseline at y=27 — the feathers stand on
           the same line the letters do. */}
-      <g transform="translate(8 0)" fill="currentColor">
+      <g className="lockup-crest" transform="translate(8 0)" fill="currentColor">
         <CrestFeathers />
       </g>
       <text
