@@ -3628,12 +3628,12 @@
      thing that moves and the thumbnail and price column stay on the same two
      lines as every row below. width:auto because the base row is width:100%,
      which ignores the margins. */
-  margin-inline: -5px;
-  /* The plate reaches 5px past the plain rows on each side and the padding
-     adds that 5px back on top of the row's own 5px — so the thumbnail and the
+  margin-inline: -2px;
+  /* The plate reaches 2px past the plain rows on each side and the padding
+     adds that 2px back on top of the row's own 5px — so the thumbnail and the
      price column land exactly where they do in every row below, and the wash
-     simply sits 10px wider around them. */
-  padding-inline: 10px;
+     simply sits 4px wider around them. */
+  padding-inline: 7px;
   width: auto;
 }
 
