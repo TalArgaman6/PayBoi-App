@@ -3617,6 +3617,12 @@
      it — and the pair needs air between them to read as two plates. */
   border-bottom-color: transparent;
   margin-bottom: 8px;
+  /* Held in from the sides as well, so the plate floats on the list instead
+     of running the full width the way the plain rows do. The inner padding
+     comes down by the same amount, which keeps the thumbnails and the price
+     column lined up with the rows below. */
+  margin-inline: 8px;
+  padding-inline: 4px;
 }
 
 .item-row.is-pinned:hover {
