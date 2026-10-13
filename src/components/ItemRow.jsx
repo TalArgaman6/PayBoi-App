@@ -104,9 +104,15 @@ export function RideMark({ count }) {
   )
 }
 
-export function ItemRow({ item, meta, note, onSelect, showEarn = false }) {
+export function ItemRow({ item, meta, note, onSelect, showEarn = false, pinned = false }) {
   return (
-    <button type="button" className="item-row" onClick={() => onSelect?.(item)}>
+    <button
+      type="button"
+      /* Pinned rows carry a faint white wash so the two at the top read as a
+         held-up pair rather than as the first two of the list. */
+      className={`item-row${pinned ? ' is-pinned' : ''}`}
+      onClick={() => onSelect?.(item)}
+    >
       <ItemThumb thumb={item.thumb} title={item.title} image={item.image} />
       <div className="item-copy">
         <div className="item-title-row">

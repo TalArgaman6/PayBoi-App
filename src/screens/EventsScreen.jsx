@@ -199,6 +199,7 @@ export function EventsScreen({ onSelect, country = DEFAULT_COUNTRY }) {
               meta={`${formatWhen(item.date, item.time)} · ${item.venue}`}
               note={boughtLine(item)}
               showEarn
+              pinned={PINNED.includes(item.id)}
               onSelect={onSelect}
             />
           ))}
