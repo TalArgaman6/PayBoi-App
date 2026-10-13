@@ -52,12 +52,12 @@ export function CategoryCoin({ gifts, activeId, onPick }) {
           <stop offset="100%" stopColor="#ffffff" stopOpacity="0" />
         </linearGradient>
         <linearGradient id="gold-p" x1="0.2" y1="0" x2="0.8" y2="1">
-          <stop offset="0%" stopColor="#e4d39a" />
-          <stop offset="100%" stopColor="#d1b45f" />
+          <stop offset="0%" stopColor="#ced3db" />
+          <stop offset="100%" stopColor="#a7aebb" />
         </linearGradient>
         <linearGradient id="gold-metal" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#ddc582" />
-          <stop offset="100%" stopColor="#d1b45f" />
+          <stop offset="0%" stopColor="#c3c9d3" />
+          <stop offset="100%" stopColor="#a7aebb" />
         </linearGradient>
         <linearGradient id="silver-metal" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stopColor="#bcc1c7" />

@@ -416,7 +416,7 @@
 }
 
 .price-range-fill {
-  background: var(--filter-accent, #d4a359);
+  background: var(--filter-accent, #a7aebb);
 }
 
 .price-range input[type='range'] {
@@ -441,7 +441,7 @@
   margin-top: -7px;
   border-radius: 50%;
   background: #f4f6fb;
-  border: 1px solid var(--filter-accent, #d4a359);
+  border: 1px solid var(--filter-accent, #a7aebb);
   box-shadow: 0 1px 2px rgb(31 28 26 / 10%);
   pointer-events: auto;
   cursor: grab;
@@ -458,7 +458,7 @@
   height: 16px;
   border-radius: 50%;
   background: #f4f6fb;
-  border: 1px solid var(--filter-accent, #d4a359);
+  border: 1px solid var(--filter-accent, #a7aebb);
   box-shadow: 0 1px 2px rgb(31 28 26 / 10%);
   pointer-events: auto;
   cursor: grab;
@@ -739,9 +739,9 @@
   min-width: 44px;
   padding: 3px 5px 4px;
   border-radius: 6px;
-  /* The plate is the accent taken right down — a warm shadow of the gold it
-     carries, the way it used to be a shadow of the amethyst. */
-  background: #322412;
+  /* The plate is the accent taken right down — a cool shadow of the pewter
+     it carries, the way it used to be a shadow of the gold. */
+  background: #252a33;
   color: var(--live);
   font-family: var(--font-ui);
   font-size: 0.66rem;
@@ -1355,8 +1355,8 @@
 .remix-ig,
 .remix-ig:link,
 .remix-ig:visited {
-  color: var(--live-lift);
-  -webkit-text-fill-color: var(--live-lift);
+  color: var(--live);
+  -webkit-text-fill-color: var(--live);
 }
 
 .remix-ig:hover,
@@ -1400,13 +1400,13 @@
   line-height: 1.3;
 }
 
-/* Gold at rest like every other link in the drawer; white on hover, so the
+/* Pewter at rest like every other link in the drawer; white on hover, so the
    line you're pointing at is the one that steps forward. */
 .remix-set,
 .remix-set:link,
 .remix-set:visited {
-  color: var(--live-lift);
-  -webkit-text-fill-color: var(--live-lift);
+  color: var(--live);
+  -webkit-text-fill-color: var(--live);
 }
 
 .remix-set:hover,
@@ -2888,9 +2888,23 @@
   height: 17px;
 }
 
-/* Cast pecks take the live red, same as the other accent marks. */
-.feed-actions button.is-on {
-  color: var(--live);
+/* An icon you've already acted on is the one state on the row that should
+   read as finished, so it goes to flat white rather than the pewter. */
+.feed-actions button.is-on,
+.party-rate button.is-on {
+  color: #fff;
+}
+
+/* Every pill on the feed takes the same hover: the plate fills white and the
+   label flips to ink, so nothing is ever white on white. */
+.feed-actions button:hover,
+.rate-picks button:hover,
+.feed-sort button:hover,
+.feed-mode button:hover,
+.filter-tabs button:hover {
+  background: #fff;
+  color: var(--accent-ink);
+  -webkit-text-fill-color: var(--accent-ink);
 }
 
 .feed-clip,
@@ -3011,10 +3025,6 @@
   width: 14px;
   height: 14px;
   display: block;
-}
-
-.party-rate button.is-on {
-  color: var(--live);
 }
 
 .feed-tools {
@@ -3423,25 +3433,24 @@
 }
 
 .pay-btn {
-  /* The one gold button on the screen — it's the action everything else
-     in the sheet is leading to. It rests in the deeper gold and brightens
-     under the pointer. */
-  background: #b1813a;
-  color: #fff;
-  -webkit-text-fill-color: #fff;
+  /* The one filled button on the screen — it's the action everything else
+     in the sheet is leading to. It rests in the pewter and goes to white
+     under the pointer; either way the label is ink, never white on white. */
+  background: #a7aebb;
+  color: var(--accent-ink);
+  -webkit-text-fill-color: var(--accent-ink);
   font-family: var(--font-ui);
   font-weight: 700;
   letter-spacing: 0.02em;
 }
 
-/* The confirming button lights up on hover — the same gold with the light
-   put back into it. :not(:disabled) so a button you can't press doesn't
-   promise that you can. */
+/* The confirming button goes to flat white on hover. :not(:disabled) so a
+   button you can't press doesn't promise that you can. */
 .pay-btn:not(:disabled):hover,
 .pay-btn:not(:disabled):active {
-  background: #d4a359;
-  color: #fff;
-  -webkit-text-fill-color: #fff;
+  background: #fff;
+  color: var(--accent-ink);
+  -webkit-text-fill-color: var(--accent-ink);
 }
 
 .ghost-btn {
@@ -3451,13 +3460,13 @@
   transition: background 0.18s ease, color 0.18s ease;
 }
 
-/* Hovering the secondary button turns it into the primary's resting plate —
-   the two swap places under the pointer rather than both lighting up. */
+/* Every button in the app answers the pointer the same way: the plate goes
+   flat white and the label goes ink. */
 .ghost-btn:not(:disabled):hover,
 .ghost-btn:not(:disabled):active {
-  background: var(--btn);
-  color: var(--btn-ink);
-  -webkit-text-fill-color: var(--btn-ink);
+  background: #fff;
+  color: var(--accent-ink);
+  -webkit-text-fill-color: var(--accent-ink);
 }
 
 .pm-draft {

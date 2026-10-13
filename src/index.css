@@ -14,19 +14,22 @@
      serif — the headers set the tone, the cards beneath them carry the UI. */
   --font-title: "Cormorant Garamond", Didot, Georgia, serif;
   --font-ui: "Plus Jakarta Sans", system-ui, sans-serif;
-  --accent: #d1b45f;
-  --accent-ink: #1c1a18;
-  --gold: #d1b45f;
+  /* The app's secondary. A cool pewter that reads as metal next to the blue
+     chrome, and goes to flat white wherever something is hovered or active —
+     anything that takes the white gets dark text, never white on white. */
+  --accent: #a7aebb;
+  --accent-ink: #11151d;
+  --gold: #a7aebb;
   --sky: #8ec8ea;
   --rose: #e2b08a;
   /* Shared accent: the co-post glyph, the kickers, the earn badges, cast
-     pecks and the active slide dot. The peacock palette's luminous gold —
-     warm enough to carry against the blue-grey sheet, deep enough that a
-     solid mask like the co-post glyph doesn't glare. */
-  --live: #d4a359;
+     pecks and the active slide dot. The pewter is light enough to carry
+     against the blue-grey sheet and cool enough that a solid mask like the
+     co-post glyph reads as metal rather than as a highlight. */
+  --live: #a7aebb;
   /* Hover for accent links. index.css resets a:hover to inherit, which would
-     drop them to white — this is the same gold lifted a couple of steps. */
-  --live-lift: #e8c489;
+     drop them to white anyway — here that drop is the point. */
+  --live-lift: #fff;
   --ink: #fff;
   --chrome: #101218;
   --sheet: #16181f;

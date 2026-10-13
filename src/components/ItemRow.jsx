@@ -17,7 +17,7 @@ export function ItemThumb({ thumb, title, image }) {
     <div
       className="item-thumb"
       style={{
-        background: `linear-gradient(145deg, ${thumb?.from || '#4a4548'}, ${thumb?.to || '#d1b45f'})`,
+        background: `linear-gradient(145deg, ${thumb?.from || '#4a4548'}, ${thumb?.to || '#a7aebb'})`,
       }}
       aria-hidden="true"
     >
