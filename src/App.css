@@ -639,7 +639,9 @@
 
 .screen-events .item-row {
   grid-template-columns: 58px 1fr auto;
-  padding: 12px 0;
+  /* A little side room so the price column isn't against the edge of the
+     list. This is the line the pinned plates align their content to. */
+  padding: 12px 5px;
 }
 
 .screen-events .item-thumb {
@@ -3627,7 +3629,11 @@
      lines as every row below. width:auto because the base row is width:100%,
      which ignores the margins. */
   margin-inline: -5px;
-  padding-inline: 17px;
+  /* The plate reaches 5px past the plain rows on each side and the padding
+     adds that 5px back on top of the row's own 5px — so the thumbnail and the
+     price column land exactly where they do in every row below, and the wash
+     simply sits 10px wider around them. */
+  padding-inline: 10px;
   width: auto;
 }
 
