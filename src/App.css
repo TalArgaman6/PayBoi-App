@@ -2050,11 +2050,14 @@
   overscroll-behavior-x: none;
   scrollbar-width: none;
   -ms-overflow-style: none;
+  /* The same deep blue the splash settles into (#08101d), so the sheet reads
+     as the app's own ground over the plume rather than as a violet cast. The
+     alphas are unchanged — only the hue moves. */
   background: linear-gradient(
     180deg,
-    rgb(8 6 18 / 34%) 0%,
-    rgb(8 6 18 / 46%) 42%,
-    rgb(8 6 18 / 62%) 100%
+    rgb(8 16 29 / 34%) 0%,
+    rgb(8 16 29 / 46%) 42%,
+    rgb(8 16 29 / 62%) 100%
   );
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
