@@ -3617,13 +3617,13 @@
      it — and the pair needs air between them to read as two plates. */
   border-bottom-color: transparent;
   margin-bottom: 8px;
-  /* The plate is held in from the sides so it reads as a plate, but the inner
-     padding comes down by the same 8px — so the thumbnail and the price column
-     still land on the same two lines as every row below, and only the wash
-     moves. width:auto because the base row is width:100%, which would ignore
-     the margins and push the plate off the right edge. */
-  margin-inline: 8px;
-  padding-inline: 4px;
+  /* The plate reaches 5px closer to the screen than the plain rows do on each
+     side, and the inner padding takes that 5px back — so the wash is the only
+     thing that moves and the thumbnail and price column stay on the same two
+     lines as every row below. width:auto because the base row is width:100%,
+     which ignores the margins. */
+  margin-inline: -5px;
+  padding-inline: 17px;
   width: auto;
 }
 
