@@ -74,7 +74,7 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  padding: calc(36px + env(safe-area-inset-top, 0px)) 22px 14px;
+  padding: calc(26px + env(safe-area-inset-top, 0px)) 22px 14px;
   position: relative;
   z-index: 3;
 }
@@ -84,7 +84,7 @@
   grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: start;
   min-height: 0;
-  padding: calc(36px + env(safe-area-inset-top, 0px)) 22px 12px;
+  padding: calc(26px + env(safe-area-inset-top, 0px)) 22px 12px;
 }
 
 .screen-feed .screen-header,
@@ -235,7 +235,11 @@
   letter-spacing: 0.14em;
   text-transform: uppercase;
   line-height: 1;
-  margin-top: -0.087rem;
+  /* The wordmark's P stands well above its ck, and the title reads better
+     against the lowercase: the ck starts 65 of the art's 240 units down, which
+     at the mark's 32px is about 8.7px, less the ~3px the serif's cap already
+     sits below its own line box. */
+  margin-top: 0.355rem;
   color: #fff;
   -webkit-text-fill-color: #fff;
 }
@@ -3493,12 +3497,12 @@
   }
 
   .screen-header {
-    padding-top: calc(56px + env(safe-area-inset-top, 0px));
+    padding-top: calc(46px + env(safe-area-inset-top, 0px));
   }
 
   .screen-header.has-remix {
     min-height: 0;
-    padding-top: calc(56px + env(safe-area-inset-top, 0px));
+    padding-top: calc(46px + env(safe-area-inset-top, 0px));
     padding-bottom: 12px;
   }
 
