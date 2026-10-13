@@ -3623,6 +3623,15 @@
      plate rather than being pushed against the edge of it. */
   margin-inline: 8px;
   padding-inline: 12px;
+  /* The base row is width:100%, which doesn't account for the margins — the
+     plate would overhang the right edge by the full 16px. Auto lets the grid
+     size it to what's left once both margins are taken. */
+  width: auto;
+}
+
+/* Air between the filters above and the first plate. */
+.item-row.is-pinned:first-child {
+  margin-top: 10px;
 }
 
 .item-row.is-pinned:hover {
