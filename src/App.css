@@ -3617,10 +3617,14 @@
      it — and the pair needs air between them to read as two plates. */
   border-bottom-color: transparent;
   margin-bottom: 8px;
-  /* The plate runs the full width of the list, so its thumbnail and price
-     column sit on the same two lines as every row below it — the wash is the
-     only thing that marks it out. */
-  margin-inline: 0;
+  /* The plate is held in from the sides so it reads as a plate, but the inner
+     padding comes down by the same 8px — so the thumbnail and the price column
+     still land on the same two lines as every row below, and only the wash
+     moves. width:auto because the base row is width:100%, which would ignore
+     the margins and push the plate off the right edge. */
+  margin-inline: 8px;
+  padding-inline: 4px;
+  width: auto;
 }
 
 /* Air between the filters above and the first plate. */
