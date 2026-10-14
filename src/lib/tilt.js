@@ -160,7 +160,6 @@ export function useWalletTilt(ref, ready = true) {
     let y = 0
     let raf = 0
     let live = true
-    let sensorLive = false
     let warmup = 4
     const armAt = performance.now() + 400
 
@@ -206,7 +205,6 @@ export function useWalletTilt(ref, ready = true) {
     }
 
     function onReading(reading) {
-      sensorLive = true
       if (reading.kind === 'motion') {
         apply(-reading.x / 6, (-reading.y - 4) / 6)
         return
@@ -214,29 +212,19 @@ export function useWalletTilt(ref, ready = true) {
       fromTilt(reading.gamma, reading.beta)
     }
 
-    function onMouse(event) {
-      if (event.pointerType === 'touch' || sensorLive) return
-      const box = node.getBoundingClientRect()
-      apply(
-        ((event.clientX - box.left) / box.width - 0.5) * 2,
-        ((event.clientY - box.top) / box.height - 0.5) * 2,
-      )
-    }
+    /*
+     * The pointer no longer drives any of this. Dragging across the screen
+     * used to swing the backdrop as if the mouse were gravity, which on a
+     * phone meant a scroll could move the light; the device's own tilt is the
+     * only input now, and with no sensor the backdrop simply rests centred.
+     */
 
-    function onLeave() {
-      if (sensorLive) return
-      apply(0, 0)
-    }
-
-    // Two parts. `level` is how much movement there is: it rises the instant
-    // the light starts travelling and falls away over a few frames once it
-    // stops. `phase` is a pulse that only advances while there is movement,
-    // and raising its cosine to the fourth power turns a smooth wave into
-    // brief spikes with dark gaps between them. Multiplied together, the
-    // crystal flashes over and over for as long as the finger or the device
-    // keeps moving, then goes quiet when it settles.
+    // How much the device is moving right now: it rises the instant the light
+    // starts travelling and falls away over a few frames once it stops. It
+    // used to be multiplied by a pulse that kept beating on its own, so the
+    // glass flashed whether or not anything had happened. The level is the
+    // whole of it now — held still, it settles to zero and stays there.
     let level = 0
-    let phase = 0
 
     function tick() {
       const dx = (targetX - x) * 0.28
@@ -248,29 +236,20 @@ export function useWalletTilt(ref, ready = true) {
       // Ease up to the peak rather than snapping to it, and fall away slowly,
       // so the light swells instead of striking.
       level += (speed - level) * (speed > level ? 0.22 : 0.07)
-      // A slower pulse, and a squared cosine rather than a fourth power: the
-      // bright part is broad and the gaps between beats are shallow, so it
-      // breathes across the facets instead of strobing.
-      if (level > 0.015) phase += 0.075 + level * 0.09
-      const beat = ((1 + Math.cos(phase)) / 2) ** 2
 
-      paint(node, x, y, level * beat)
+      paint(node, x, y, level)
       if (live) raf = window.requestAnimationFrame(tick)
     }
 
     const unsubscribe = subscribeTilt(onReading)
     if (!needsMotionPrompt()) bindSensors('orient')
 
-    node.addEventListener('pointermove', onMouse)
-    node.addEventListener('pointerleave', onLeave)
     raf = window.requestAnimationFrame(tick)
 
     return () => {
       live = false
       window.cancelAnimationFrame(raf)
       unsubscribe()
-      node.removeEventListener('pointermove', onMouse)
-      node.removeEventListener('pointerleave', onLeave)
     }
   }, [ref, ready])
 }

@@ -31,6 +31,13 @@ const CRYSTALS = [
 ]
 
 /*
+ * Which of the four is up, as a word the stylesheet can read. Two of them —
+ * the silver-outlined blue and the bone — are pale where the furniture sits,
+ * so the header goes ink on those; see `.wallet-screen[data-skin]` in App.css.
+ */
+const SKIN_NAMES = ['ink', 'silver', 'jet', 'chalk']
+
+/*
  * The screen unmounts when you leave the tab, so the choice has to live
  * outside the component or every trip to the feed would reset it. A module
  * variable is enough — it should survive moving around the app, not a reload.
@@ -75,7 +82,7 @@ export function WalletScreen({ onSelect, openedPass = null }) {
    * as two themes.
    */
   return (
-    <section className="screen wallet-screen">
+    <section className="screen wallet-screen" data-skin={SKIN_NAMES[skin]}>
       {/* A shot of cut glass behind the whole screen. It fades to black down
           the bottom where the sheet sits, so the colour reads as a glow above
           the card rather than as noise under the lists. */}

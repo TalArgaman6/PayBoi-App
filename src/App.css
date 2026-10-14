@@ -1746,11 +1746,13 @@
   /* Dimmed a step: it's a backdrop, and the card has to stay the brightest
      thing on the screen. */
   opacity: 0.78;
-  /* Lit is the resting state. The glass glows on its own and breathes on a
-     slow loop; `--tilt-rush` — painted every frame by useWalletTilt as the
-     device turns — only adds on top of that, so moving the phone makes an
-     already-bright thing flare rather than switching the light on. */
-  animation: crystal-shine 13s ease-in-out infinite;
+  /* Nothing runs on a clock. Held level, the glass sits at its resting
+     brightness and stays there; every change in it comes from the device
+     turning, through --tilt-x / --tilt-y / --tilt-rush. */
+  filter:
+    brightness(calc(1.06 + var(--tilt-rush, 0) * 0.5))
+    saturate(calc(1.08 + var(--tilt-rush, 0) * 0.45))
+    hue-rotate(calc(var(--tilt-x, 0) * 10deg));
   /* And the crop slides a little against the tilt, so the light looks like
      it's raking across a surface rather than fading up in place. */
   background-position: calc(50% + var(--tilt-x, 0) * 4%) calc(0% + var(--tilt-y, 0) * 2%);
@@ -1791,52 +1793,19 @@
     transparent 64%
   );
   mix-blend-mode: screen;
-  /* The band travels on its own clock; the tilt term inside the keyframes
-     shoves it further along, so turning the phone pushes the highlight
-     ahead of where the loop would have put it. */
-  animation: crystal-sweep 11s ease-in-out infinite;
-}
-
-@keyframes crystal-shine {
-  0%,
-  100% {
-    filter:
-      brightness(calc(1 + var(--tilt-rush, 0) * 0.45))
-      saturate(calc(1.02 + var(--tilt-rush, 0) * 0.4))
-      hue-rotate(calc(var(--tilt-x, 0) * 10deg));
-  }
-
-  45% {
-    filter:
-      brightness(calc(1.24 + var(--tilt-rush, 0) * 0.45))
-      saturate(calc(1.26 + var(--tilt-rush, 0) * 0.4))
-      hue-rotate(calc(6deg + var(--tilt-x, 0) * 10deg));
-  }
-}
-
-@keyframes crystal-sweep {
-  0% {
-    transform: translate3d(calc(-40% + var(--tilt-x, 0) * 30%), calc(var(--tilt-y, 0) * 10%), 0);
-    opacity: calc(0.45 + var(--tilt-rush, 0) * 0.55);
-  }
-
-  50% {
-    transform: translate3d(calc(40% + var(--tilt-x, 0) * 30%), calc(var(--tilt-y, 0) * 10%), 0);
-    opacity: calc(0.9 + var(--tilt-rush, 0) * 0.1);
-  }
-
-  100% {
-    transform: translate3d(calc(-40% + var(--tilt-x, 0) * 30%), calc(var(--tilt-y, 0) * 10%), 0);
-    opacity: calc(0.45 + var(--tilt-rush, 0) * 0.55);
-  }
+  /* No loop. Where the band sits is the tilt and nothing else: held level it
+     rests dead centre of the screen, and it travels only as far as the device
+     is turned. 60% of the half-width either way carries it clear off both
+     edges at full tilt, which is the whole range the band ever needed. */
+  transform: translate3d(
+    calc(var(--tilt-x, 0) * 60%),
+    calc(var(--tilt-y, 0) * 18%),
+    0
+  );
+  opacity: calc(0.55 + var(--tilt-rush, 0) * 0.45);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .wallet-crystal,
-  .wallet-crystal::after {
-    animation: none;
-  }
-
   .wallet-crystal::after {
     transform: none;
     opacity: 0.6;
@@ -3865,6 +3834,59 @@
   background-image: url("data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 36 26%22><g fill=%22%23ffffff%22><path d=%22M18 26c-.5-4.2-.6-8.2-.2-12.1h1.2c.4 3.9.3 7.9-.2 12.1z%22/><g transform=%22translate(18 8.6)%22><path d=%22M0-6.2C1.7-4 3.4-2.4 3.4.3 3.4 3 1.9 4.8 0 4.8-1.9 4.8-3.4 3-3.4.3-3.4-2.4-1.7-4 0-6.2Z%22/></g><path d=%22M14.4 26c-1.9-3.8-3.3-7.4-4.2-11l1.1-.4c1.5 3.6 2.6 7.3 3.4 11.4z%22/><g transform=%22translate(8.6 10.3) rotate(-24)%22><path d=%22M0-6.2C1.7-4 3.4-2.4 3.4.3 3.4 3 1.9 4.8 0 4.8-1.9 4.8-3.4 3-3.4.3-3.4-2.4-1.7-4 0-6.2Z%22/></g><path d=%22M21.6 26c1.9-3.8 3.3-7.4 4.2-11l-1.1-.4c-1.5 3.6-2.6 7.3-3.4 11.4z%22/><g transform=%22translate(27.4 10.3) rotate(24)%22><path d=%22M0-6.2C1.7-4 3.4-2.4 3.4.3 3.4 3 1.9 4.8 0 4.8-1.9 4.8-3.4 3-3.4.3-3.4-2.4-1.7-4 0-6.2Z%22/></g></g></svg>");
 }
 
+
+/*
+ * The bone ground. White furniture on near-white feathers all but disappears,
+ * so on that one the whole header lockup goes ink instead: the name, the
+ * wordmark, the crest over the portrait, the ring around it and both
+ * balances. The shade flips with the ink, a soft white lift rather than a
+ * dark one, because a black shadow under black type only thickens it. The
+ * silver-outlined blue was in here too, but its ground is deep enough that
+ * white reads on it and the outlines are what the eye follows.
+ */
+.wallet-screen[data-skin='chalk'] .wallet-top {
+  --plume-shade: 0 1px 2px rgb(255 255 255 / 55%);
+  --plume-glow: 0 1px 10px rgb(255 255 255 / 45%);
+}
+
+.wallet-screen[data-skin='chalk'] .screen-header h1,
+.wallet-screen[data-skin='chalk'] .screen-header p {
+  color: #0b0d11;
+  -webkit-text-fill-color: #0b0d11;
+  text-shadow: var(--plume-shade), var(--plume-glow);
+}
+
+.wallet-screen[data-skin='chalk'] .header-lockup {
+  color: #0b0d11;
+}
+
+.wallet-screen[data-skin='chalk'] .wallet-top .header-lockup,
+.wallet-screen[data-skin='chalk'] .wallet-profile {
+  filter:
+    drop-shadow(0 1px 2px rgb(255 255 255 / 55%))
+    drop-shadow(0 1px 10px rgb(255 255 255 / 45%));
+}
+
+.wallet-screen[data-skin='chalk'] .pay-card .token-balance {
+  color: #0b0d11;
+  -webkit-text-fill-color: #0b0d11;
+}
+
+.wallet-screen[data-skin='chalk'] .pay-card .token-balance small,
+.wallet-screen[data-skin='chalk'] .pay-card .fiat-balance {
+  color: rgb(11 13 17 / 82%);
+  -webkit-text-fill-color: rgb(11 13 17 / 82%);
+}
+
+/* The ring and its offset outline, inked to match. */
+.wallet-screen[data-skin='chalk'] .wallet-profile img {
+  box-shadow: 0 0 0 1px rgb(11 13 17 / 88%);
+  outline: 1px solid rgb(11 13 17 / 72%);
+}
+
+.wallet-screen[data-skin='chalk'] .wallet-profile::after {
+  background-image: url("data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 36 26%22><g fill=%22%230b0d11%22><path d=%22M18 26c-.5-4.2-.6-8.2-.2-12.1h1.2c.4 3.9.3 7.9-.2 12.1z%22/><g transform=%22translate(18 8.6)%22><path d=%22M0-6.2C1.7-4 3.4-2.4 3.4.3 3.4 3 1.9 4.8 0 4.8-1.9 4.8-3.4 3-3.4.3-3.4-2.4-1.7-4 0-6.2Z%22/></g><path d=%22M14.4 26c-1.9-3.8-3.3-7.4-4.2-11l1.1-.4c1.5 3.6 2.6 7.3 3.4 11.4z%22/><g transform=%22translate(8.6 10.3) rotate(-24)%22><path d=%22M0-6.2C1.7-4 3.4-2.4 3.4.3 3.4 3 1.9 4.8 0 4.8-1.9 4.8-3.4 3-3.4.3-3.4-2.4-1.7-4 0-6.2Z%22/></g><path d=%22M21.6 26c1.9-3.8 3.3-7.4 4.2-11l-1.1-.4c-1.5 3.6-2.6 7.3-3.4 11.4z%22/><g transform=%22translate(27.4 10.3) rotate(24)%22><path d=%22M0-6.2C1.7-4 3.4-2.4 3.4.3 3.4 3 1.9 4.8 0 4.8-1.9 4.8-3.4 3-3.4.3-3.4-2.4-1.7-4 0-6.2Z%22/></g></g></svg>");
+}
 
 .seller-face {
   --crest-w: 16px;
