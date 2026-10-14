@@ -391,6 +391,31 @@ function EnvelopeMark() {
 }
 
 /*
+ * The night a request is about, named in a word. The full title runs too long
+ * beside the name — "Looking for a ride · Gaze @ Haoman 17" wraps the row where
+ * "Looking for a ride · Gaze" does not. Parties go by their line, which is the
+ * name people use for them anyway; a venue night with no line falls back to
+ * the head of its own title, cut at the @ and held to two words.
+ */
+const LINE_NAMES = {
+  forever: 'Forever',
+  shirazi: 'FFF',
+  gaze: 'Gaze',
+  drek: 'Drek',
+  crush: 'Crush',
+  beef: 'Beef',
+  arisa: 'Arisa',
+  pboi: 'PCK',
+  offer: 'Offer',
+}
+
+function lineName(party) {
+  if (!party) return ''
+  if (party.line) return LINE_NAMES[party.line] || party.line
+  return party.title.split('@')[0].trim().split(/\s+/).slice(0, 2).join(' ')
+}
+
+/*
  * The one line a request card leads with: a mark, what the post is asking
  * for, and the night it's about. Rides and ticket requests share it, and it
  * is built like the rating kicker — which is what the hashtags underneath
@@ -400,35 +425,40 @@ function RequestKicker({ ids, label, mark }) {
   const party = PARTY_BY_ID[ids?.[0]]
 
   /*
-   * Wrapped in a div on purpose: `.feed-card > p` sets the caption's larger
-   * size and outranks `.rate-kicker`, so a bare <p> here would come out
-   * bigger than the identical line on a rating card. The rating kicker is
-   * nested the same way, inside RatingOptions.
+   * A bare <p> now that it rides in the meta row beside the name. It used to
+   * need a wrapping div, because `.feed-card > p` sets the caption's larger
+   * size and outranks `.rate-kicker`; inside the row it is no longer a direct
+   * child of the card, so the rule never reaches it.
    */
   return (
-    <div>
-      <p className="rate-kicker is-live">
-        {mark}
-        {label}
-        {party ? ` · ${party.title}` : ''}
-      </p>
-    </div>
+    <p className="rate-kicker is-live feed-kicker">
+      {mark}
+      {label}
+      {party ? ` · ${lineName(party)}` : ''}
+    </p>
   )
 }
 
 /*
- * The rating's own kicker, lifted out of the options list so it can sit
- * directly under the poster's name like a request card's does. Same markup,
- * same <div> wrapper for the `.feed-card > p` specificity reason above.
+ * The rating's own kicker, lifted out of the options list so it can sit under
+ * the poster's name like a request card's does. Same markup, and bare for the
+ * same reason as above.
+ *
+ * It counted how many people were on the post; it counts the votes cast now.
+ * Who is watching is the poster's business, how many have answered is the
+ * reader's — and the number moves as they vote, which "4 live" never did.
  */
-function RatingKicker({ live = 4 }) {
+function RatingKicker({ options }) {
+  const votes = (options || []).reduce(
+    (total, option) => total + (option.votes || 0),
+    0,
+  )
+
   return (
-    <div>
-      <p className="rate-kicker is-live">
-        <LiveHeartMark />
-        Live rating · {live} live
-      </p>
-    </div>
+    <p className="rate-kicker is-live feed-kicker">
+      <LiveHeartMark />
+      Live rating · {votes} voted
+    </p>
   )
 }
 
@@ -539,23 +569,21 @@ function PmSheet({ post, onClose }) {
   )
 }
 
+/*
+ * The one post you tapped, opened large. It used to be the poster's whole
+ * run of posts on a horizontal swipe, numbered 1 / n — which turned a single
+ * shot into a deck and made a post feel like an album it isn't. A post is one
+ * photo or one clip, here as in the feed, so the drawer shows that one.
+ */
 function UserFeed({ posts, startId, userId, onClose }) {
-  const scroller = useRef(null)
   const panel = useRef(null)
   useDismissOnOutside(panel, true, onClose)
   const media = posts.filter((post) => post.image || post.video)
+  const shown = media.find((post) => post.id === startId) || media[0]
   const person =
-    media.flatMap(peopleOn).find((item) => item.id === userId) || media[0]?.user
+    media.flatMap(peopleOn).find((item) => item.id === userId) || shown?.user
 
-  useEffect(() => {
-    const root = scroller.current
-    const node = root?.querySelector(`[data-post="${startId}"]`)
-    if (root && node) {
-      root.scrollLeft = node.offsetLeft
-    }
-  }, [startId])
-
-  if (!person) return null
+  if (!person || !shown) return null
 
   return (
     <aside
@@ -575,28 +603,20 @@ function UserFeed({ posts, startId, userId, onClose }) {
           Close
         </button>
       </header>
-      <div className="user-feed-track" ref={scroller}>
-        {media.map((post, index) => (
-          <article
-            key={post.id}
-            className={`user-feed-slide${post.frame === 'faces' ? ' is-faces' : ''}`}
-            data-post={post.id}
-          >
-            {post.video ? (
-              <FeedClip src={assetUrl(post.video)} />
-            ) : (
-              <img src={assetUrl(post.image)} alt="" />
-            )}
-            <div className="user-feed-copy">
-              <span>
-                {index + 1} / {media.length}
-              </span>
-              <p>{post.caption}</p>
-            </div>
-          </article>
-        ))}
+      <div className="user-feed-track">
+        <article
+          className={`user-feed-slide${shown.frame === 'faces' ? ' is-faces' : ''}`}
+        >
+          {shown.video ? (
+            <FeedClip src={assetUrl(shown.video)} />
+          ) : (
+            <img src={assetUrl(shown.image)} alt="" />
+          )}
+          <div className="user-feed-copy">
+            <p>{shown.caption}</p>
+          </div>
+        </article>
       </div>
-      <p className="user-feed-hint">Swipe for {person.name}'s posts</p>
     </aside>
   )
 }
@@ -960,18 +980,30 @@ export function FeedScreen() {
                 <FeedPeople post={post} onOpen={openUser} />
                 <span>{post.when}</span>
               </div>
-              {/* On a request, the kicker sits directly under the name —
-                  you read what is being asked for before the detail. */}
+              {/* Back under the name. Beside it the line competed with the
+                  person for the top of the card; under it, it reads as what
+                  that person is asking for. `.feed-kicker` carries the gap,
+                  which the meta row's own spacing used to swallow. */}
               {REQUEST_KINDS.includes(post.kind) ? (
                 <RequestKicker
                   ids={post.nights}
-                  label={kindLabel(post.kind)}
+                  label={
+                    post.kind === 'ride'
+                      ? 'Looking for a ride'
+                      : 'Looking for a ticket'
+                  }
                   mark={post.kind === 'ride' ? <WheelMark /> : <TicketRequestMark />}
                 />
               ) : null}
-              {post.kind === 'rating' ? <RatingKicker live={post.live ?? 4} /> : null}
+              {post.kind === 'rating' ? <RatingKicker options={post.options} /> : null}
               {post.track ? <p className="feed-track">{post.track}</p> : null}
-              {post.caption ? <p>{post.caption}</p> : null}
+              {/* A request says what it wants in its kicker — the night, and
+                  which of the two things is being asked for. The free line
+                  under it only ever restated that, so a request card is the
+                  kicker and the answer button, nothing between. */}
+              {post.caption && !REQUEST_KINDS.includes(post.kind) && post.kind !== 'rating' ? (
+                <p>{post.caption}</p>
+              ) : null}
               {REQUEST_KINDS.includes(post.kind) ? null : <NightChips ids={post.nights} />}
               {post.tags?.length && post.kind !== 'rating' && !REQUEST_KINDS.includes(post.kind) ? (
                 <p className="feed-tags">

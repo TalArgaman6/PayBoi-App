@@ -17,7 +17,7 @@
       "hint": "Walk in at partner clubs. No queue, no guest-list texting.",
       "color": "#2e5cf2",
       "metal": "silver",
-      "count": 3,
+      "count": 2,
       "worth": 5
     },
     {
@@ -34,7 +34,7 @@
       "hint": "Backstage / quiet booth access at Peacock festival and circuit nights.",
       "color": "#e0a420",
       "metal": "gold",
-      "count": 5,
+      "count": 2,
       "worth": 6
     },
     {
@@ -50,7 +50,7 @@
       "label": "First pour",
       "hint": "Opening drink on the house at bars in the Night Index.",
       "color": "#d62632",
-      "count": 6,
+      "count": 3,
       "worth": 1
     },
     {
@@ -58,7 +58,7 @@
       "label": "Cab home",
       "hint": "A prepaid ride back. Safe, anonymous, no card at 6am.",
       "color": "#18c4d6",
-      "count": 4,
+      "count": 1,
       "worth": 1
     },
     {
@@ -66,7 +66,7 @@
       "label": "Scooter / bike credits",
       "hint": "A scooter or bike when you don't want a cab. Credit is already on the app.",
       "color": "#34cc62",
-      "count": 6,
+      "count": 4,
       "worth": 2
     }
   ]

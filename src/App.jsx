@@ -35,6 +35,12 @@ export default function App() {
   const detail = useRef(null)
   // Where the press that opened the sheet landed, in phone coordinates.
   const anchor = useRef(null)
+  // The top the sheet was placed at when it opened, and the item it opened
+  // for. Steps taken inside the sheet — the PM composer, then its sent state —
+  // are the same sheet, so they stay at the place it opened in rather than
+  // being re-anchored to the button that was pressed inside it.
+  const placed = useRef(null)
+  const placedFor = useRef(null)
   const [sheetTop, setSheetTop] = useState(null)
   useWalletTilt(phone, booted)
   useDismissOnOutside(detail, Boolean(selected), closeDetail)
@@ -76,14 +82,15 @@ export default function App() {
    */
   useLayoutEffect(() => {
     if (!selected) {
+      placed.current = null
+      placedFor.current = null
       setSheetTop(null)
       return
     }
 
     const node = detail.current
     const frame = phone.current
-    const from = anchor.current
-    if (!node || !frame || !from) {
+    if (!node || !frame) {
       setSheetTop(null)
       return
     }
@@ -95,10 +102,35 @@ export default function App() {
     // Clear of the tab bar at the bottom.
     const BOTTOM_EDGE = 84
 
-    let top = from.bottom + GAP
+    // A new sheet anchors to the row that opened it. A sheet that is already
+    // up — the PM composer taking over its body — keeps the top it was given,
+    // because the last press was the PM button inside it and anchoring to that
+    // would drop the sheet a step down the screen every time.
+    if (placedFor.current !== selected.id) {
+      const from = anchor.current
+      if (!from) {
+        placed.current = null
+        placedFor.current = null
+        setSheetTop(null)
+        return
+      }
+      let open = from.bottom + GAP
+      if (open + height > limit - BOTTOM_EDGE) {
+        // No room below: try above the row before falling back to pinned.
+        open = Math.min(from.top - GAP - height, limit - BOTTOM_EDGE - height)
+      }
+      placed.current = open
+      placedFor.current = selected.id
+    } else if (placed.current === null) {
+      return
+    }
+
+    // Clamped off the remembered top rather than off the last one, so a step
+    // that grows the sheet past the tab bar is pulled up for as long as it is
+    // tall and then falls back to where it started.
+    let top = placed.current
     if (top + height > limit - BOTTOM_EDGE) {
-      // No room below: try above the row before falling back to pinned.
-      top = Math.min(from.top - GAP - height, limit - BOTTOM_EDGE - height)
+      top = limit - BOTTOM_EDGE - height
     }
     setSheetTop(Math.max(TOP_EDGE, top))
   }, [selected?.id, pmOpen, pmSent])

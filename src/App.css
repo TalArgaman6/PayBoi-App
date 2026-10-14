@@ -1780,8 +1780,11 @@
   content: '';
   position: absolute;
   inset: -20% -60%;
+  /* Upright. The band used to lean 14° off vertical, which read as a diagonal
+     wipe across the glass; at 90° it is a straight column of light and the
+     travel left-to-right is all the movement there is. */
   background: linear-gradient(
-    104deg,
+    90deg,
     transparent 36%,
     rgb(255 255 255 / 22%) 48%,
     rgb(190 230 255 / 30%) 52%,
@@ -2035,6 +2038,32 @@
   position: relative;
 }
 
+/*
+ * Everything standing on the plume carries the balance's shade: a tight dark
+ * edge to hold the shape against the photograph, and the wide violet glow for
+ * colour. The balance set it; the name, the wordmark and the portrait were the
+ * only things up there without it, and on the pale grounds they floated.
+ * Written once as a pair of variables so the four places stay in step.
+ */
+.wallet-top {
+  --plume-shade: 0 1px 2px rgb(8 16 29 / 65%);
+  --plume-glow: 0 1px 12px rgb(70 40 130 / 40%);
+}
+
+.wallet-top .screen-header h1 {
+  text-shadow: var(--plume-shade), var(--plume-glow);
+}
+
+/* The wordmark and the portrait are drawn things, not type, so the same two
+   shades go on as filters. drop-shadow follows the alpha, which is what keeps
+   the shade on the letterforms and on the circle rather than on their boxes. */
+.wallet-top .header-lockup,
+.wallet-profile {
+  filter:
+    drop-shadow(0 1px 2px rgb(8 16 29 / 65%))
+    drop-shadow(0 1px 12px rgb(70 40 130 / 40%));
+}
+
 .wallet-profile {
   position: absolute;
   right: 16px;
@@ -2103,9 +2132,7 @@
   /* The balance sits straight on the feather photograph, which is dark but
      busy. A tight shade under the glyphs holds their edges against it; the
      wide violet glow stays for the colour. */
-  text-shadow:
-    0 1px 2px rgb(8 16 29 / 65%),
-    0 1px 12px rgb(70 40 130 / 40%);
+  text-shadow: var(--plume-shade), var(--plume-glow);
 }
 
 .pay-card .token-amount {
@@ -2131,7 +2158,7 @@
   letter-spacing: 0.015em;
   font-variant-numeric: lining-nums tabular-nums;
   white-space: nowrap;
-  text-shadow: 0 1px 2px rgb(8 16 29 / 60%);
+  text-shadow: var(--plume-shade), var(--plume-glow);
 }
 
 .wallet-sheet {
@@ -2856,20 +2883,34 @@
 }
 
 
+/*
+ * The kicker's own pewter — the app's secondary, the same as every other
+ * quiet line. The green was tried while the kicker rode the name's line and
+ * read as a status on it; back under the name it is a label, and the label
+ * colour is the one the rest of the chrome uses. Set as a variable so the
+ * mark that leads the line takes the same colour as the words.
+ */
 .rate-kicker {
+  --kicker-ink: #a7aebb;
   margin: 0;
   font-family: var(--font-ui);
   font-size: 0.62rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--live);
+  color: var(--kicker-ink);
 }
 
 .rate-kicker.is-live {
   display: flex;
   align-items: center;
   gap: 6px;
-  color: var(--live);
+  color: var(--kicker-ink);
+}
+
+/* The marks inherit rather than reaching for --live, so the line is one
+   colour whichever of the three it is. */
+.rate-kicker .live-heart {
+  color: inherit;
 }
 
 /* Same red as every other accent mark; the pulse below is what makes it
@@ -2945,11 +2986,15 @@
   }
 }
 
+/* The set or track a post is about. Not bold: the caption below it carries
+   the post's voice at the larger size, and a heavier line above it made the
+   card read as a headline and a standfirst rather than as one person
+   talking. */
 .feed-track {
   margin: 0;
   font-family: var(--font-ui);
   font-size: 0.78rem;
-  font-weight: 600;
+  font-weight: 400;
 }
 
 .feed-card > p.feed-tags,
@@ -3084,10 +3129,13 @@
   border-radius: 999px;
 }
 
+/* Tucked up under its kicker. The card's gap, this list's own top padding and
+   the first row's padding stacked into about twenty pixels, which read as a
+   break between two things rather than as a heading over its list. */
 .party-rate {
   list-style: none;
-  padding: 4px 0 0;
-  margin: 0;
+  padding: 0;
+  margin: -3px 0 0;
 }
 
 .party-rate li {
@@ -3270,6 +3318,23 @@
   gap: 8px;
 }
 
+/* The kicker sits under the name again, and a little further under it than
+   the card's own 8px gap: the name above is a row of 36px faces, so the
+   kicker wants clearing the picture's foot, not the text's. */
+.feed-kicker {
+  margin-top: 12px;
+  /* A step under the name rather than level with it. Set at the name's own
+     size the uppercase line out-measured it — caps are wider than lowercase at
+     the same point size — so it read as the headline and the person as the
+     byline. Smaller, it sits under the name as a label on it. */
+  font-size: 0.74rem;
+  font-weight: 600;
+  /* Pulled in from the 0.12em the small kickers use. Tracking that wide is
+     what makes a tiny uppercase line legible; at the name's size it only
+     spreads the words out. */
+  letter-spacing: 0.07em;
+}
+
 .feed-user {
   display: inline-flex;
   align-items: center;
@@ -3408,22 +3473,16 @@
   color: #f6f3ef;
 }
 
+/* One post, so no sideways scroll and no snap points — the deck the drawer
+   used to be is gone, and what is left is a single item filling the panel. */
 .user-feed-track {
   flex: 1;
   min-height: 0;
   display: flex;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: none;
-}
-
-.user-feed-track::-webkit-scrollbar {
-  display: none;
 }
 
 .user-feed-slide {
-  flex: 0 0 100%;
-  scroll-snap-align: start;
+  flex: 1;
   display: grid;
   align-content: start;
   gap: 12px;
@@ -3435,26 +3494,10 @@
   border-radius: 18px;
 }
 
-.user-feed-copy span {
-  display: block;
-  font-size: 0.62rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 6px;
-}
-
 .user-feed-copy p {
   margin: 0;
   font-size: 0.92rem;
   line-height: 1.4;
-}
-
-.user-feed-hint {
-  margin: 0;
-  padding: 0 16px 24px;
-  font-size: 0.68rem;
-  color: var(--muted);
 }
 
 .detail-sheet {

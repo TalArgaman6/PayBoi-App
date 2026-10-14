@@ -5,11 +5,11 @@ import { assetUrl } from '../lib/format.js'
 import { nextPassToken, passUrl, redeemPass, remainingCount } from '../lib/passes.js'
 
 /*
- * How many passes deep the stack is allowed to look. Past four the slivers
+ * How many passes deep the stack is allowed to look. Past five the slivers
  * stop reading as separate cards and start reading as a fat edge, so a
- * thicker holding is drawn as four and the count beside it does the talking.
+ * thicker holding is drawn as five and the count beside it does the talking.
  */
-const STACK_MAX = 4
+const STACK_MAX = 5
 
 function following() {
   const people = new Map()
