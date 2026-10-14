@@ -21,14 +21,11 @@ const SUGGESTION_FILTERS = [
  * through them — a testing affordance while we settle on one, not a setting.
  */
 const CRYSTALS = [
-  // The same drawn plume in seven grounds: the app's blues with the gold line,
-  // then the same blues outlined in ink and in silver, then black and bone
-  // with the gold line, then those two without it.
-  'photos/wallet-plume-royal.jpg',
+  // The same drawn plume in four grounds: the app's blues outlined in ink and
+  // in silver, then black and bone. The three that carried the gold line are
+  // gone.
   'photos/wallet-plume-ink.jpg',
   'photos/wallet-plume-silver.jpg',
-  'photos/wallet-plume-onyx.jpg',
-  'photos/wallet-plume-pearl.jpg',
   'photos/wallet-plume-jet.jpg',
   'photos/wallet-plume-chalk.jpg',
 ]

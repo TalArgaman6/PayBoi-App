@@ -3694,36 +3694,6 @@
   line-height: 0;
 }
 
-/* The pearl backdrop arrives at almost full white, so the shared glow pushes
-   it past the point where the facets read. It sits halfway between the full
-   treatment and the held-back one — the swing, the band and the tilt lift
-   are each about midway. */
-.wallet-crystal.is-pearl {
-  opacity: 0.69;
-  animation-name: crystal-shine-pearl;
-}
-
-.wallet-crystal.is-pearl::after {
-  opacity: 0.55;
-}
-
-@keyframes crystal-shine-pearl {
-  0%,
-  100% {
-    filter:
-      brightness(calc(0.91 + var(--tilt-rush, 0) * 0.3))
-      saturate(calc(1.01 + var(--tilt-rush, 0) * 0.3))
-      hue-rotate(calc(var(--tilt-x, 0) * 10deg));
-  }
-
-  45% {
-    filter:
-      brightness(calc(1.09 + var(--tilt-rush, 0) * 0.3))
-      saturate(calc(1.19 + var(--tilt-rush, 0) * 0.3))
-      hue-rotate(calc(6deg + var(--tilt-x, 0) * 10deg));
-  }
-}
-
 /* The peacock wordmark in the screen headers — sized by height against the
    title and left on the baseline rather than nudged up the way the old mark
    was. */
