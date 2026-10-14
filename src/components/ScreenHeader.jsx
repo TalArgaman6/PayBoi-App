@@ -1,10 +1,31 @@
 import { CrestLockup } from './Logo.jsx'
 
-export function ScreenHeader({ title, kicker, pin = false, onLogo = null }) {
+export function ScreenHeader({
+  title,
+  kicker,
+  pin = false,
+  onLogo = null,
+  onTitle = null,
+}) {
   return (
     <header className="screen-header">
       <div className="screen-header-copy">
-        <h1>{title}</h1>
+        {/* The two ends of the header are the two directions through the
+            backdrops — the name steps back, the mark steps on. Wrapped in a
+            button rather than given a click handler so it is reachable from
+            the keyboard and announces itself. */}
+        {onTitle ? (
+          <button
+            type="button"
+            className="header-title-btn"
+            onClick={onTitle}
+            aria-label="Previous backdrop"
+          >
+            <h1>{title}</h1>
+          </button>
+        ) : (
+          <h1>{title}</h1>
+        )}
         {kicker ? (
           <p>
             {pin ? <LocationPin /> : null}

@@ -21,12 +21,13 @@ const SUGGESTION_FILTERS = [
  * through them — a testing affordance while we settle on one, not a setting.
  */
 const CRYSTALS = [
-  // The same drawn plume in three grounds — the app's blues, black-on-gold and
-  // bone-on-gold. The iridescent one is out; it carried no gold line, so the
-  // card and the crest had nothing to pick up.
+  // The same drawn plume in five grounds: the app's blues, then black and bone
+  // with the gold line, then the same two without it.
   'photos/wallet-plume-royal.jpg',
   'photos/wallet-plume-onyx.jpg',
   'photos/wallet-plume-pearl.jpg',
+  'photos/wallet-plume-jet.jpg',
+  'photos/wallet-plume-chalk.jpg',
 ]
 
 /*
@@ -67,15 +68,14 @@ export function WalletScreen({ onSelect, openedPass = null }) {
       (kind === 'all' || item.kind === kind) && inPriceRange(item, price),
   )
 
+  /*
+   * Everything over the plume stays white, whatever the plume. The pale
+   * grounds used to flip the header, the balance and the crest to ink; one
+   * set of furniture across all five backdrops reads as the app rather than
+   * as two themes.
+   */
   return (
-    <section
-      className={`screen wallet-screen${
-        /* A pale backdrop flips the header, the balance and the crest to ink,
-           or they disappear into the feathers. The pearl plume is the one in
-           the set that needs it. */
-        CRYSTALS[skin].includes('pearl') ? ' is-light' : ''
-      }`}
-    >
+    <section className="screen wallet-screen">
       {/* A shot of cut glass behind the whole screen. It fades to black down
           the bottom where the sheet sits, so the colour reads as a glow above
           the card rather than as noise under the lists. */}
@@ -87,6 +87,7 @@ export function WalletScreen({ onSelect, openedPass = null }) {
       <div className="wallet-top">
         <ScreenHeader
           title={wallet.name}
+          onTitle={() => setSkin((skin - 1 + CRYSTALS.length) % CRYSTALS.length)}
           onLogo={() => setSkin((skin + 1) % CRYSTALS.length)}
         />
         <div className="wallet-hero">

@@ -89,13 +89,17 @@ export function CrestLockup({ className = 'header-lockup' }) {
  */
 export function CrestStack({ className = 'splash-lockup' }) {
   return (
-    <svg className={className} viewBox="0 0 96 76" role="img" aria-label="PCK">
+    <svg className={className} viewBox="0 0 96 69" role="img" aria-label="PCK">
       <g transform="translate(30 2)" fill="currentColor">
         <CrestFeathers />
       </g>
+      {/* The gale swings the lowest stem to about y=34 and the cap of a 36-unit
+          Cormorant sits 23.8 above its baseline, so a baseline of 63 leaves
+          roughly five units of air between the feathers and the letters. The
+          viewBox ends just under the baseline to match. */}
       <text
         x="48"
-        y="70"
+        y="63"
         fill="currentColor"
         textAnchor="middle"
         fontSize="36"

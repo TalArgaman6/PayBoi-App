@@ -2,7 +2,14 @@ import { useEffect, useMemo, useState } from 'react'
 import QRCode from 'qrcode'
 import catalog from '../data/feed.json'
 import { assetUrl } from '../lib/format.js'
-import { nextPassToken, passUrl, redeemPass } from '../lib/passes.js'
+import { nextPassToken, passUrl, redeemPass, remainingCount } from '../lib/passes.js'
+
+/*
+ * How many passes deep the stack is allowed to look. Past four the slivers
+ * stop reading as separate cards and start reading as a fat edge, so a
+ * thicker holding is drawn as four and the count beside it does the talking.
+ */
+const STACK_MAX = 4
 
 function following() {
   const people = new Map()
@@ -17,9 +24,13 @@ function following() {
 
 export function PassCode({ gift, onGranted }) {
   const token = nextPassToken(gift)
+  // One card per pass still in hand, minus the one on top.
+  const behind = Math.min(Math.max(remainingCount(gift) - 1, 0), STACK_MAX)
   const people = useMemo(following, [])
   const [markup, setMarkup] = useState('')
+  const [ghost, setGhost] = useState('')
   const [qrInset, setQrInset] = useState('0px')
+  const [qrInk, setQrInk] = useState('108px')
   const [picking, setPicking] = useState(false)
   const [query, setQuery] = useState('')
   const [pending, setPending] = useState(null)
@@ -30,16 +41,31 @@ export function PassCode({ gift, onGranted }) {
   useEffect(() => {
     if (!token) return undefined
     let cancel = false
-    QRCode.toString(passUrl(token), {
+    const options = {
       type: 'svg',
-      margin: 1,
       errorCorrectionLevel: 'M',
       color: { dark: '#ffffff', light: '#00000000' },
-    }).then((svg) => {
+    }
+    /*
+     * Two renders of the one code. The live card keeps its one-module quiet
+     * zone, which is what a scanner wants. The copies behind it are drawn
+     * without one, because all that ever shows of them is a single pixel off
+     * their left edge — and with a quiet zone that pixel is blank.
+     */
+    Promise.all([
+      QRCode.toString(passUrl(token), { ...options, margin: 1 }),
+      QRCode.toString(passUrl(token), { ...options, margin: 0 }),
+    ]).then(([svg, bare]) => {
       if (cancel) return
+      // viewBox units are modules, quiet zone included, across the 108px the
+      // card leaves inside its 6px padding.
       const modules = Number(/viewBox="0 0 (\d+)/.exec(svg)?.[1] || 0)
-      setQrInset(modules ? `calc(6px + (120px - 12px) / ${modules})` : '0px')
+      if (modules) {
+        setQrInset(`calc(6px + (120px - 12px) / ${modules})`)
+        setQrInk(`calc((120px - 12px) * ${(modules - 2) / modules})`)
+      }
       setMarkup(svg)
+      setGhost(bare)
     })
     return () => {
       cancel = true
@@ -65,17 +91,34 @@ export function PassCode({ gift, onGranted }) {
   return (
     <div
       className="gift-pass"
-      style={{ '--qr-inset': qrInset }}
+      style={{ '--qr-inset': qrInset, '--qr-ink': qrInk }}
       onClick={(event) => event.stopPropagation()}
       onKeyDown={(event) => event.stopPropagation()}
     >
       <div className="gift-pass-side">
-        <div
-          className="gift-pass-code"
-          role="img"
-          aria-label={`${gift.label} pass`}
-          dangerouslySetInnerHTML={{ __html: markup }}
-        />
+        {/* The deck. Each pass behind the live one is the same code shifted a
+            pixel further left, so a holding of four reads as four without
+            needing a number. Each copy is clipped to the single pixel it is
+            meant to show — the code is white on nothing, so an unclipped one
+            underneath would shine through the top card's gaps and muddy its
+            modules. Drawn before it in the DOM so it covers them. */}
+        <div className="gift-pass-deck" style={{ '--deck': behind }}>
+          {Array.from({ length: behind }, (_, index) => (
+            <div
+              key={index}
+              className="gift-pass-ghost"
+              style={{ '--depth': index + 1 }}
+              aria-hidden="true"
+              dangerouslySetInnerHTML={{ __html: ghost }}
+            />
+          ))}
+          <div
+            className="gift-pass-code"
+            role="img"
+            aria-label={`${gift.label} pass`}
+            dangerouslySetInnerHTML={{ __html: markup }}
+          />
+        </div>
         <button
           type="button"
           className="gift-grant"

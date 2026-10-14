@@ -442,14 +442,14 @@
   background: var(--filter-accent, #a7aebb);
 }
 
-/* Half the 20px handle at each end — the distance a thumb's centre is held
+/* Half the 14px handle at each end — the distance a thumb's centre is held
    back from the edge of the input. */
 .price-range-rail {
   position: absolute;
   top: 0;
   bottom: 0;
-  left: 10px;
-  right: 10px;
+  left: 7px;
+  right: 7px;
 }
 
 .price-range input[type='range'] {
@@ -468,25 +468,20 @@
 }
 
 /*
- * The handles are the peck plume rather than plain dots — the same mark the
- * feed uses, so the thing you drag is recognisably the app's. A thumb can't
- * take currentColor from a data URI, so the two states are two images: the
- * pewter one at rest, the white one while you have hold of it.
+ * Plain dots. The plume was tried here and read as clutter at thumb size — a
+ * drag handle wants to be a shape you can aim at, not a picture. Pewter at
+ * rest, white while you have hold of it, which is now a colour swap rather
+ * than a second image.
  */
-.price-range {
-  --range-mark: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g fill='%23a7aebb'><path fill-rule='evenodd' d='M12 1.1c1.1 1.9 2.1 3.3 3 4.3 2 2.2 3 4.4 3 6.6 0 3.6-2.7 6.3-6 6.3s-6-2.7-6-6.3c0-2.2 1-4.4 3-6.6.9-1 1.9-2.4 3-4.3zM12 6.6a4.4 4.4 0 1 0 0 8.8 4.4 4.4 0 0 0 0-8.8z'/><path d='M12 14.1c-1.9-1.3-2.9-2.3-2.9-3.4 0-.9.7-1.5 1.5-1.5.6 0 1.1.3 1.4.8.3-.5.8-.8 1.4-.8.8 0 1.5.6 1.5 1.5 0 1.1-1 2.1-2.9 3.4z'/><path d='M11.4 22.4c-2.8-.6-4.8-1.8-6-3.5-1.2-1.7-1.7-3.9-1.5-6.6.9 2.6 1.9 4.5 3.1 5.8 1.2 1.3 2.7 2.4 4.4 3.2z'/><path d='M12.6 22.4c2.8-.6 4.8-1.8 6-3.5 1.2-1.7 1.7-3.9 1.5-6.6-.9 2.6-1.9 4.5-3.1 5.8-1.2 1.3-2.7 2.4-4.4 3.2z'/><path d='M11.6 17.8h.8V23h-.8z'/></g></svg>");
-  --range-mark-lit: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g fill='%23ffffff'><path fill-rule='evenodd' d='M12 1.1c1.1 1.9 2.1 3.3 3 4.3 2 2.2 3 4.4 3 6.6 0 3.6-2.7 6.3-6 6.3s-6-2.7-6-6.3c0-2.2 1-4.4 3-6.6.9-1 1.9-2.4 3-4.3zM12 6.6a4.4 4.4 0 1 0 0 8.8 4.4 4.4 0 0 0 0-8.8z'/><path d='M12 14.1c-1.9-1.3-2.9-2.3-2.9-3.4 0-.9.7-1.5 1.5-1.5.6 0 1.1.3 1.4.8.3-.5.8-.8 1.4-.8.8 0 1.5.6 1.5 1.5 0 1.1-1 2.1-2.9 3.4z'/><path d='M11.4 22.4c-2.8-.6-4.8-1.8-6-3.5-1.2-1.7-1.7-3.9-1.5-6.6.9 2.6 1.9 4.5 3.1 5.8 1.2 1.3 2.7 2.4 4.4 3.2z'/><path d='M12.6 22.4c2.8-.6 4.8-1.8 6-3.5 1.2-1.7 1.7-3.9 1.5-6.6-.9 2.6-1.9 4.5-3.1 5.8-1.2 1.3-2.7 2.4-4.4 3.2z'/><path d='M11.6 17.8h.8V23h-.8z'/></g></svg>");
-}
-
 .price-range input[type='range']::-webkit-slider-thumb {
   appearance: none;
-  /* The plume is tall and narrow where the dot was round, so the box grows
-     and the negative margin re-centres it on the 2px track. */
-  width: 20px;
-  height: 20px;
-  margin-top: -9px;
+  /* 14px round, pulled up by (14 - 2) / 2 so it sits centred on the 2px track. */
+  width: 14px;
+  height: 14px;
+  margin-top: -6px;
   border: 0;
-  background: var(--range-mark) center / contain no-repeat;
+  border-radius: 50%;
+  background: var(--filter-accent, #a7aebb);
   pointer-events: auto;
   cursor: grab;
 }
@@ -494,7 +489,7 @@
 .price-range input[type='range']:hover::-webkit-slider-thumb,
 .price-range input[type='range']:active::-webkit-slider-thumb,
 .price-range input[type='range']:focus-visible::-webkit-slider-thumb {
-  background-image: var(--range-mark-lit);
+  background: #fff;
 }
 
 .price-range input[type='range']::-moz-range-track {
@@ -504,10 +499,11 @@
 }
 
 .price-range input[type='range']::-moz-range-thumb {
-  width: 20px;
-  height: 20px;
+  width: 14px;
+  height: 14px;
   border: 0;
-  background: var(--range-mark) center / contain no-repeat;
+  border-radius: 50%;
+  background: var(--filter-accent, #a7aebb);
   pointer-events: auto;
   cursor: grab;
 }
@@ -515,7 +511,7 @@
 .price-range input[type='range']:hover::-moz-range-thumb,
 .price-range input[type='range']:active::-moz-range-thumb,
 .price-range input[type='range']:focus-visible::-moz-range-thumb {
-  background-image: var(--range-mark-lit);
+  background: #fff;
 }
 
 .filter-tabs button,
@@ -2552,12 +2548,52 @@
   -webkit-text-fill-color: #12141c;
 }
 
+/* The deck grows leftwards out of the live card, so it claims the slivers as
+   width rather than overhanging whatever sits beside it. */
+.gift-pass-deck {
+  /* --step is how far apart the cards sit, --sliver how much of each one
+     shows. The difference between the two is the dark gap that separates one
+     sliver from the next; at a pixel each and no gap the whole pile read as a
+     single soft edge on the code rather than as cards. */
+  --step: 4px;
+  --sliver: 2px;
+  position: relative;
+  /* Pulled left by the dead band the code carries — 6px of card padding and a
+     quiet module — so the first painted pixel of the stack, not the edge of
+     its box, lands on the line the label and the hint start from. */
+  margin-left: calc(0px - var(--qr-inset, 0px));
+  width: calc(120px + var(--deck, 0) * var(--step));
+  height: 120px;
+  padding-left: calc(var(--deck, 0) * var(--step));
+}
+
 .gift-pass-code {
   width: 120px;
   height: 120px;
   padding: 6px;
   border-radius: 12px;
   background: transparent;
+}
+
+/* A pass further down the pile. Sized and placed to the live card's printed
+   square rather than to its box — the box carries 6px of padding and the code
+   inside it a quiet module more, and a hairline cut off the left of that is
+   nothing at all. --qr-inset is where the ink starts, --qr-ink how wide it
+   runs; both come off the rendered code, which is why they are set in JS. */
+.gift-pass-ghost {
+  position: absolute;
+  top: var(--qr-inset, 0px);
+  left: calc(var(--qr-inset, 0px) + (var(--deck, 0) - var(--depth)) * var(--step));
+  width: var(--qr-ink, 108px);
+  height: var(--qr-ink, 108px);
+  opacity: 0.35;
+  clip-path: inset(0 calc(100% - var(--sliver)) 0 0);
+}
+
+.gift-pass-ghost svg {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 .gift-pass-code svg {
@@ -2572,10 +2608,6 @@
   margin: 0;
   color: rgb(255 255 255 / 78%);
   font-size: 0.68rem;
-}
-
-.gift-pass small {
-  margin-left: var(--qr-inset, 0px);
 }
 
 .gift-pass-note {
@@ -2601,6 +2633,12 @@
   grid-area: 1 / 1;
   display: grid;
   place-items: center;
+  /* Off dead centre by a twentieth of the screen. A mark sitting exactly in
+     the middle of a tall frame reads as low, because the eye puts the optical
+     centre above the geometric one. Percentages here resolve against the
+     splash's own height, which is the phone's. */
+  position: relative;
+  top: -5%;
 }
 
 /* Recolorable variant: the white logo art is used as a mask, so the box
@@ -3621,6 +3659,20 @@
 
 /* The header mark when it's wired to do something: a bare button, no plate,
    so it still reads as the logo and not as a control. */
+/* The name doubles as the back-step through the backdrops. Stripped to
+   nothing so the title looks exactly as it does on every other screen — the
+   button is a hit area, not a control. */
+.header-title-btn {
+  display: block;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
 .header-logo-btn {
   padding: 0;
   border: 0;
@@ -3694,56 +3746,6 @@
    the text is at its right edge, which is the edge the header aligns to. */
 .wallet-screen .header-lockup .lockup-crest {
   display: none;
-}
-
-/* The pale backdrop. Everything in the wallet header is white-on-dark by
-   default, which vanishes against the ivory plume — so the title drops to ink
-   and the peacock mark, being white art on transparent, is inverted to match.
-   Only the header flips: the card and the sheet below it keep their own
-   grounds and stay as they are. */
-.wallet-screen.is-light .screen-header h1,
-.wallet-screen.is-light .screen-header p {
-  color: #11151d;
-  -webkit-text-fill-color: #11151d;
-}
-
-.wallet-screen.is-light .screen-header .peacock-logo {
-  filter: invert(1);
-}
-
-/* The lockup is drawn in currentColor, so it flips with a colour rather than
-   the inversion the old flat PNG needed. */
-.wallet-screen.is-light .screen-header .header-lockup {
-  color: #11151d;
-}
-
-/* The card sits straight on the plume — it has no ground of its own — so the
-   balance follows the header to ink over the pale backdrop. */
-.wallet-screen.is-light .pay-card .token-balance,
-.wallet-screen.is-light .pay-card .token-balance small,
-.wallet-screen.is-light .pay-card .token-amount {
-  color: #11151d;
-  -webkit-text-fill-color: #11151d;
-  /* The shade under the glyphs exists to lift white type off a dark photo.
-     Here the type is already ink on a pale one, so the same shade only smears
-     — a faint pale halo does the separating instead. */
-  text-shadow: 0 1px 2px rgb(255 255 255 / 55%);
-}
-
-/* Full ink, not 78% of it: held back it went grey against the pale plume and
-   read as disabled beside the pck figure. */
-.wallet-screen.is-light .pay-card .fiat-balance {
-  color: #11151d;
-  -webkit-text-fill-color: #11151d;
-  text-shadow: 0 1px 2px rgb(255 255 255 / 55%);
-}
-
-/* The portrait's double ring is white for the same reason the title was —
-   it reads as a cut-out against the dark plume and as nothing at all against
-   the ivory one. */
-.wallet-screen.is-light .wallet-profile img {
-  box-shadow: 0 0 0 1px rgb(17 21 29 / 85%);
-  outline: 1px solid rgb(17 21 29 / 62%);
 }
 
 /* The pinned rows — the two headline events, the two priciest market drops.
@@ -3823,14 +3825,6 @@
 .wallet-profile {
   --crest-w: 34px;
 }
-
-/* On the pale wallet the crest had nothing to stand against — pewter on ivory
-   is barely a shape. It goes to the app's ink there, the same move the header
-   title and the portrait's ring already make. */
-.wallet-screen.is-light .wallet-profile::after {
-  background-image: url("data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 36 26%22><g fill=%22%2311151d%22><path d=%22M18 26c-.5-4.2-.6-8.2-.2-12.1h1.2c.4 3.9.3 7.9-.2 12.1z%22/><g transform=%22translate(18 8.6)%22><path d=%22M0-6.2C1.7-4 3.4-2.4 3.4.3 3.4 3 1.9 4.8 0 4.8-1.9 4.8-3.4 3-3.4.3-3.4-2.4-1.7-4 0-6.2Z%22/></g><path d=%22M14.4 26c-1.9-3.8-3.3-7.4-4.2-11l1.1-.4c1.5 3.6 2.6 7.3 3.4 11.4z%22/><g transform=%22translate(8.6 10.3) rotate(-24)%22><path d=%22M0-6.2C1.7-4 3.4-2.4 3.4.3 3.4 3 1.9 4.8 0 4.8-1.9 4.8-3.4 3-3.4.3-3.4-2.4-1.7-4 0-6.2Z%22/></g><path d=%22M21.6 26c1.9-3.8 3.3-7.4 4.2-11l-1.1-.4c-1.5 3.6-2.6 7.3-3.4 11.4z%22/><g transform=%22translate(27.4 10.3) rotate(24)%22><path d=%22M0-6.2C1.7-4 3.4-2.4 3.4.3 3.4 3 1.9 4.8 0 4.8-1.9 4.8-3.4 3-3.4.3-3.4-2.4-1.7-4 0-6.2Z%22/></g></g></svg>");
-}
-
 
 .wallet-profile::after {
   /* Clear of the ring the portrait already carries. */
