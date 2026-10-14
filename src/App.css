@@ -2124,7 +2124,11 @@
 .pay-card .fiat-balance {
   position: relative;
   margin: 0;
-  color: rgb(255 255 255 / 78%);
+  /* Solid. Held at 78% the shekel figure read as a disclaimer under the pck
+     balance rather than as the other half of what you have; it is a smaller
+     line than the token count and that is difference enough. */
+  color: #fff;
+  -webkit-text-fill-color: #fff;
   font-size: 0.72rem;
   font-weight: 600;
   letter-spacing: 0.015em;
@@ -3875,10 +3879,14 @@
   -webkit-text-fill-color: #0b0d11;
 }
 
+/* The whole balance line solid, the "pck" label included. On the dark grounds
+   the label is held back a step because it is a unit and not a number; on the
+   bone, ink at 82% went grey against near-white and read as disabled rather
+   than as quiet. */
 .wallet-screen[data-skin='chalk'] .pay-card .token-balance small,
 .wallet-screen[data-skin='chalk'] .pay-card .fiat-balance {
-  color: rgb(11 13 17 / 82%);
-  -webkit-text-fill-color: rgb(11 13 17 / 82%);
+  color: #0b0d11;
+  -webkit-text-fill-color: #0b0d11;
 }
 
 /* The ring and its offset outline, inked to match. */
