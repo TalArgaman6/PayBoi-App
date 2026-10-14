@@ -190,7 +190,7 @@
         "name": "Refael Haim",
         "photo": "photos/sellers/sam.jpg"
       },
-      "caption": "Florentin → Haoman, 23:20. Two seats.",
+      "caption": "Florentin area → GAZE, 23:20. Two seats.",
       "when": "1h",
       "tags": [
         "ride",
@@ -210,6 +210,7 @@
         "photo": "photos/sellers/sam.jpg"
       },
       "video": "videos/look-wm-marcos-pinto.mp4",
+      "frame": "bottom",
       "caption": "Prom queen has arrived.",
       "when": "18m",
       "tags": [
@@ -390,7 +391,7 @@
         "name": "Shay Geva",
         "photo": "photos/sellers/ido.jpg"
       },
-      "caption": "North TLV → Forever, after 00:30.",
+      "caption": "North TLV area → Forever, after 00:30.",
       "when": "4h",
       "tags": [
         "ride",

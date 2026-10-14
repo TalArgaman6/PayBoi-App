@@ -6,10 +6,12 @@ import { Splash } from './components/Splash.jsx'
 import wallet from './data/wallet.json'
 import { formatCost, formatPbs, formatTokenBalance } from './lib/format.js'
 import { rankVars } from './lib/settings.js'
+import { spendOver, useBalance } from './lib/balance.js'
 import { consumeLocationRedeem } from './lib/passes.js'
 import { useDismissOnOutside } from './lib/dismiss.js'
 import { useWalletTilt } from './lib/tilt.js'
 import { EventsScreen } from './screens/EventsScreen.jsx'
+import { CrestLoader } from './components/CrestLoader.jsx'
 import { FeedScreen } from './screens/FeedScreen.jsx'
 import { MarketplaceScreen } from './screens/MarketplaceScreen.jsx'
 import { ShopScreen } from './screens/ShopScreen.jsx'
@@ -17,6 +19,36 @@ import { WalletScreen } from './screens/WalletScreen.jsx'
 import './App.css'
 
 const redeemedPassId = consumeLocationRedeem(wallet.gifts)
+
+/*
+ * The bars on the back of a paid sheet. Not a real symbology — nothing here
+ * is scanned — but the widths have to look like one, so they come out of the
+ * item's own id rather than out of Math.random: the same purchase always
+ * draws the same code, which is what a receipt does.
+ */
+function barsFor(id) {
+  let seed = 0
+  for (const ch of String(id)) seed = (seed * 31 + ch.charCodeAt(0)) % 100000
+  const bars = []
+  let x = 0
+  while (x < 236) {
+    seed = (seed * 1103515245 + 12345) % 2147483648
+    const width = 1 + (seed >> 16) % 4
+    seed = (seed * 1103515245 + 12345) % 2147483648
+    const gap = 1 + (seed >> 16) % 3
+    if (x + width > 236) break
+    bars.push({ x, width })
+    x += width + gap
+  }
+  return bars
+}
+
+function codeFor(id) {
+  let seed = 7
+  for (const ch of String(id)) seed = (seed * 131 + ch.charCodeAt(0)) % 1000000007
+  const digits = String(seed).padStart(12, '0').slice(-12)
+  return `${digits.slice(0, 4)} ${digits.slice(4, 8)} ${digits.slice(8)}`
+}
 
 function pmName(seller) {
   const first = String(seller?.name || '').trim().split(/\s+/)[0]
@@ -31,6 +63,11 @@ export default function App() {
   const [pmOpen, setPmOpen] = useState(false)
   const [pmDraft, setPmDraft] = useState('')
   const [pmSent, setPmSent] = useState(false)
+  // Paid: the sheet turns over and its other side is the code — or, when the
+  // seller is a person rather than the app, the wait for them to accept.
+  const [paid, setPaid] = useState(false)
+  const [approved, setApproved] = useState(false)
+  const balance = useBalance()
   const phone = useRef(null)
   const detail = useRef(null)
   // Where the press that opened the sheet landed, in phone coordinates.
@@ -49,7 +86,32 @@ export default function App() {
     setPmOpen(false)
     setPmDraft('')
     setPmSent(false)
+    setPaid(false)
+    setApproved(false)
   }, [selected?.id])
+
+  /*
+   * Which purchases wait instead of turning over to a code — five seconds
+   * on the crest, then it clears, the sheet closes and the balance counts
+   * itself down on the card. The charge happens on the approval rather than
+   * on the press: nothing is taken while the deal could still fall through.
+   * A deal with a person waits, and so does anything bought from the wallet —
+   * a top-up is money moving between balances, not a ticket being issued, so
+   * what it owes you is the new figure on the card rather than a code.
+   */
+  const waits = Boolean(selected?.seller) || tab === 'wallet'
+
+  useEffect(() => {
+    if (!paid || !waits || approved) return undefined
+    const price = selected.pricePbs
+    const timer = window.setTimeout(() => {
+      setApproved(true)
+      setSelected(null)
+      setTab('wallet')
+      spendOver(price)
+    }, 5000)
+    return () => window.clearTimeout(timer)
+  }, [paid, approved, waits, selected?.id])
 
   /*
    * Every press inside the phone records the row it hit. Doing it here rather
@@ -133,7 +195,7 @@ export default function App() {
       top = limit - BOTTOM_EDGE - height
     }
     setSheetTop(Math.max(TOP_EDGE, top))
-  }, [selected?.id, pmOpen, pmSent])
+  }, [selected?.id, pmOpen, pmSent, paid])
 
   function closeDetail() {
     setSelected(null)
@@ -155,7 +217,7 @@ export default function App() {
         className="phone"
         data-tab={tab}
         ref={phone}
-        style={rankVars(wallet.balance, { premium: wallet.premium })}
+        style={rankVars(balance, { premium: wallet.premium })}
       >
         <RemixProvider>
           {tab === 'events' ? <EventsScreen onSelect={setSelected} /> : null}
@@ -163,7 +225,10 @@ export default function App() {
           {tab === 'marketplace' ? (
             <MarketplaceScreen onSelect={setSelected} />
           ) : null}
-          {tab === 'feed' ? <FeedScreen /> : null}
+          {/* Selling into a request pays out, and a payout belongs on the
+              card — so the feed can send the viewer there once a deal
+              clears, the same way a purchase does. */}
+          {tab === 'feed' ? <FeedScreen onPaid={() => setTab('wallet')} /> : null}
           {tab === 'wallet' ? (
             <WalletScreen onSelect={setSelected} openedPass={redeemedPassId} />
           ) : null}
@@ -171,7 +236,7 @@ export default function App() {
           {selected ? (
             <aside
               ref={detail}
-              className="detail-sheet"
+              className={`detail-sheet${paid ? ' is-paid' : ''}`}
               role="dialog"
               aria-label={selected.title}
               style={
@@ -180,6 +245,12 @@ export default function App() {
                   : { top: `${sheetTop}px`, bottom: 'auto' }
               }
             >
+              {/* The whole sheet turns over on Pay Now, top edge away, and the
+                  code is simply its other side — same card, same ground, so
+                  nothing opens on top of anything. The two faces are stacked
+                  in one grid cell, which is what keeps the sheet one height
+                  through the turn rather than snapping as it goes. */}
+              <div className="detail-face is-front">
               <div className="detail-handle" />
               <div className="detail-head">
                 <ItemThumb
@@ -199,7 +270,7 @@ export default function App() {
                     <span className="detail-pay">
                       {selected.seller
                         ? `${formatCost(selected)} to ${pmName(selected.seller)} · fixed price`
-                        : selected.pricePbs <= wallet.balance
+                        : selected.pricePbs <= balance
                           ? /* Price and what's left after it — the two things
                                you need before pressing Pay. The earn clause
                                used to sit between them on events only, which
@@ -207,8 +278,8 @@ export default function App() {
                                the gain is already on the row you tapped and on
                                the banner, so a third copy was costing the line
                                its legibility. */
-                            `${formatCost(selected)} · ${formatPbs(wallet.balance - selected.pricePbs)} left`
-                          : `This is ${formatPbs(selected.pricePbs - wallet.balance)} over your ${formatTokenBalance(wallet.balance)} pck.`}
+                            `${formatCost(selected)} · ${formatPbs(balance - selected.pricePbs)} left`
+                          : `This is ${formatPbs(selected.pricePbs - balance)} over your ${formatTokenBalance(balance)} pck.`}
                     </span>
                   )}
                 </div>
@@ -257,6 +328,8 @@ export default function App() {
                       setPmSent(false)
                     }}
                   >
+                    {/* This one steps back to the sheet it came from rather
+                        than closing anything, so it says so. */}
                     Go Back
                   </button>
                 </>
@@ -264,7 +337,12 @@ export default function App() {
                 <>
                   {/* The price is already in the head; the button only
                       has to say what pressing it does. */}
-                  <button type="button" className="pay-btn">
+                  <button
+                    type="button"
+                    className="pay-btn"
+                    onClick={() => setPaid(true)}
+                    disabled={selected.pricePbs > balance}
+                  >
                     Pay Now
                   </button>
                   {selected.seller ? (
@@ -273,10 +351,50 @@ export default function App() {
                     </button>
                   ) : null}
                   <button type="button" className="ghost-btn" onClick={closeDetail}>
-                    Go Back
+                    Cancel
                   </button>
                 </>
               )}
+              </div>
+              <div
+                className={`detail-face is-back${waits ? ' is-wait' : ''}`}
+                aria-hidden={!paid}
+              >
+                <div className="detail-handle" />
+                <p className="code-title">{selected.title}</p>
+                {/* A deal that waits never shows anything else: the moment it
+                    clears, the sheet closes and the wallet takes over. Only a
+                    ticket issued by the app turns over to a code. */}
+                {waits ? (
+                  <div className="deal-wait">
+                    <CrestLoader />
+                    <span>
+                      {selected.seller
+                        ? `Waiting on ${pmName(selected.seller)} to accept`
+                        : 'Clearing your payment'}
+                    </span>
+                  </div>
+                ) : (
+                <div className="code-plate">
+                  <svg viewBox="0 0 236 68" aria-hidden="true">
+                    {barsFor(selected.id).map((bar) => (
+                      <rect
+                        key={bar.x}
+                        x={bar.x}
+                        y="0"
+                        width={bar.width}
+                        height="68"
+                        fill="#fff"
+                      />
+                    ))}
+                  </svg>
+                  <span>{codeFor(selected.id)}</span>
+                </div>
+                )}
+                <button type="button" className="ghost-btn" onClick={closeDetail}>
+                  Cancel
+                </button>
+              </div>
             </aside>
           ) : null}
         </RemixProvider>

@@ -2986,6 +2986,25 @@
   gap: 8px;
 }
 
+/* A request card has no caption under its kicker, so the PM button lands
+   immediately beneath the line and the two read as one stacked block. It
+   gets the air the caption would have given it. */
+.feed-actions.is-request {
+  margin-top: 10px;
+}
+
+/* The chair that stands for "seats" on an offer line. Set to the line's own
+   size and nudged onto the baseline, so the figure and the mark read as one
+   token rather than as type with a picture after it. */
+.seat-mark {
+  width: 0.92em;
+  height: 0.92em;
+  margin-left: 3px;
+  /* A head and shoulders fills its box top to bottom, where the chair sat in
+     the middle of one — so it rides a touch smaller and higher. */
+  vertical-align: -0.1em;
+}
+
 .feed-actions button {
   display: inline-flex;
   align-items: center;
@@ -3527,7 +3546,201 @@
     0 0 30px rgb(255 255 255 / 7%),
     0 14px 40px rgb(0 0 0 / 38%);
   display: grid;
+  /* The two faces share one cell, so the sheet is as tall as the taller of
+     them and the turn doesn't change its size. */
+  grid-template-areas: 'face';
+  /* Turned about its own top edge, with the perspective written into the
+     transform rather than onto the phone — putting it on the phone would
+     have swept every other transformed thing inside it into the same 3D
+     space, the tilting wallet card included. */
+  transform-style: preserve-3d;
+  transition: transform 0.55s cubic-bezier(0.4, 0.05, 0.2, 1);
+}
+
+.detail-sheet.is-paid {
+  transform: perspective(1100px) rotateX(180deg);
+}
+
+.detail-face {
+  grid-area: face;
+  display: grid;
   gap: 12px;
+  align-content: start;
+  /* Each side is only drawn while it faces the reader. */
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/*
+ * Both faces share one cell and the sheet takes the taller of them, so the
+ * shorter one used to sit packed at the top with its buttons stranded in the
+ * middle of the card. Each face now gives its slack to the row under the
+ * handle — the head on the front, the code on the back — which leaves the
+ * buttons on the floor of the sheet on either side of the turn.
+ */
+.detail-face.is-front {
+  align-content: stretch;
+  grid-template-rows: auto 1fr;
+}
+
+.detail-face.is-back {
+  align-content: stretch;
+  grid-template-rows: auto auto 1fr auto;
+}
+
+.detail-face.is-back .code-plate {
+  align-self: center;
+}
+
+/* The head now owns a row taller than itself, so it has to say where in that
+   room it sits: the thumb and the lines beside it stay at the top of it, the
+   way they did before the row grew. */
+.detail-face.is-front .detail-head {
+  align-content: start;
+  align-items: start;
+}
+
+.detail-face.is-front .detail-head > * {
+  align-self: start;
+}
+
+/* The back is pre-turned, so the sheet's own 180° brings it upright. */
+.detail-face.is-back {
+  transform: rotateX(180deg);
+}
+
+/*
+ * The wait has far less on it than the side it turned from, and the sheet
+ * keeps the taller face's height — so left packed to the top it sat in a
+ * half-empty card. The crest takes the slack instead: it centres in whatever
+ * room is going and the button drops to the foot, where every other sheet
+ * puts it.
+ */
+.detail-face.is-back.is-wait {
+  align-content: stretch;
+  grid-template-rows: auto auto 1fr auto;
+}
+
+.detail-face.is-back.is-wait .deal-wait {
+  align-content: center;
+}
+
+/* The selling end of the same wait. The PM sheet isn't a flipping card, so it
+   takes the rule directly: the crest in the middle of the room the message
+   field left behind, Cancel at the foot. */
+.pm-sheet.is-wait {
+  grid-template-rows: auto auto 1fr auto;
+}
+
+.pm-sheet.is-wait .deal-wait {
+  align-content: center;
+}
+
+.detail-face.is-back .code-title {
+  margin: 0;
+  font-family: var(--font-ui);
+  /* The name of the thing being bought is the heading of this side, not a
+     caption on it — it was set smaller than the line underneath it. */
+  font-size: 1.05rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* The bars sit straight on the sheet's own ground — no white plate behind
+   them. A paid sheet reads as the same card turned over, and a panel of a
+   different colour would read as a ticket laid on top of it. */
+.code-plate {
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  padding: 4px 0 2px;
+}
+
+.code-plate svg {
+  width: 100%;
+  max-width: 236px;
+  height: 68px;
+  display: block;
+}
+
+.code-plate span {
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  color: rgb(255 255 255 / 78%);
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+/* The wait on a person. The crest at the size of the sheet's own thumbnail,
+   and one line saying who is being waited on — nothing to press, because
+   there is nothing the buyer can do but wait. */
+.deal-wait {
+  display: grid;
+  justify-items: center;
+  gap: 16px;
+  padding: 10px 0 6px;
+  text-align: center;
+}
+
+.crest-loader {
+  /* Big enough to be the thing on the card rather than a marker beside the
+     line of text — it is the only thing happening while the seller decides. */
+  width: 78px;
+  height: calc(78px * 34 / 39);
+  color: #fff;
+  display: block;
+}
+
+/* Each feather lights in turn and the other two stay dim, so the mark reads
+   as three dots thinking rather than as a logo fading in and out. */
+.crest-dot {
+  animation: crest-think 1.35s ease-in-out infinite;
+}
+
+.crest-dot:nth-child(2) {
+  animation-delay: 0.18s;
+}
+
+.crest-dot:nth-child(3) {
+  animation-delay: 0.36s;
+}
+
+@keyframes crest-think {
+  0%,
+  65%,
+  100% {
+    opacity: 0.22;
+  }
+
+  30% {
+    opacity: 1;
+  }
+}
+
+.deal-wait span {
+  font-family: var(--font-ui);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: rgb(255 255 255 / 86%);
+}
+
+.code-note {
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  font-style: normal;
+  color: rgb(255 255 255 / 60%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .detail-sheet {
+    transition: none;
+  }
+
+  .crest-dot {
+    animation: none;
+    opacity: 0.7;
+  }
 }
 
 .detail-handle {
@@ -3584,12 +3797,19 @@
 
 /* The third line in the head. Same size as the subtitle above it, full
    white because it's the number you're deciding on. */
+.detail-head .detail-pay,
 .detail-pay {
   display: block;
   margin-top: 2px;
   color: #fff;
   -webkit-text-fill-color: #fff;
   white-space: normal;
+  /* It inherits the one-row treatment from .detail-head span, which clips
+     and ellipsises. This line is allowed to wrap, so it has to undo both —
+     left hidden, a second row would simply be cut off. */
+  overflow: visible;
+  text-overflow: clip;
+  overflow-wrap: anywhere;
 }
 
 /* The pay line and the sell blurb carry real information, so on the lifted
@@ -3672,6 +3892,86 @@
 
 .pm-draft::placeholder {
   color: var(--muted);
+}
+
+/*
+ * Answering a request is a column of four or five things, and the sheet it
+ * borrows was built for two. It gets its own rhythm here: a gap between the
+ * rows, a deeper foot, a field taller than three lines and air under the box
+ * so the buttons don't sit on its edge.
+ */
+.pm-sheet {
+  gap: 14px;
+  padding: 14px 16px 20px;
+}
+
+/* A field with its label gone keeps no room for it, and the gap that sat
+   between the two closes with it. */
+/* Picking how many places to take. A clicker: the count sits on the sheet
+   and each tap takes one more place, round to one again at the top. The
+   button underneath reprices as it goes, so the consequence is always in
+   view and there is nothing to confirm. */
+.seat-pick {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  justify-self: start;
+  padding: 6px 11px;
+  border: 0;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 12%);
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* What the tap is bounded by, said quietly beside the count. */
+.seat-pick em {
+  margin-left: 4px;
+  font-style: normal;
+  font-weight: 500;
+  color: rgb(255 255 255 / 55%);
+}
+
+.pm-sheet .sell-field.is-bare {
+  gap: 0;
+  margin-bottom: 0;
+}
+
+.pm-sheet .sell-field {
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.pm-sheet .pm-draft {
+  min-height: 104px;
+}
+
+/* The figure while it walks down after a deal. Nothing moves but the digits —
+   the glow is only there to say the number is live, and it goes out the
+   moment it lands. */
+/* The figure is a button now — a tap tops the wallet up — but it must not
+   look like one. Everything a button brings with it is stripped off and the
+   number inherits the line it was already set in. */
+.token-top-up {
+  appearance: none;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  background: none;
+  font: inherit;
+  letter-spacing: inherit;
+  font-variant-numeric: inherit;
+  color: inherit;
+  -webkit-text-fill-color: inherit;
+  text-shadow: inherit;
+  cursor: pointer;
+}
+
+.token-balance.is-counting .token-amount {
+  text-shadow: 0 0 18px rgb(255 255 255 / 45%);
 }
 
 .pay-btn:disabled {

@@ -8,6 +8,8 @@ import { ScreenHeader } from '../components/ScreenHeader.jsx'
 import { ALT_EVENT_TYPES } from '../lib/filters.js'
 import { assetUrl, shortName } from '../lib/format.js'
 import { useDismissOnOutside } from '../lib/dismiss.js'
+import { CrestLoader } from '../components/CrestLoader.jsx'
+import { earnOver } from '../lib/balance.js'
 
 const ME = {
   id: 'tal',
@@ -502,15 +504,133 @@ function RatingOptions({ options, picked, onVote, me }) {
 }
 
 /*
+ * What a ride pays. One number for every ride in the app rather than a
+ * haggle: the rider posts, whoever takes it is owed the same twenty, and the
+ * fare moves the moment the ride is taken. Fixed price is the whole point —
+ * it is what lets someone accept a stranger's ride without negotiating at
+ * one in the morning.
+ */
+const RIDE_FARE = 20
+
+/*
+ * A rider, as a mark. A ride's caption ends by spelling out how many places it
+ * has — "Two seats." — which on the offer line is three words for a number.
+ * The figure and this head and shoulders say it in the width of two
+ * characters, and a person reads as a place to sit more plainly than a chair.
+ */
+function SeatMark() {
+  return (
+    <svg className="seat-mark" viewBox="0 0 24 24" aria-hidden="true">
+      <path
+        fill="currentColor"
+        d="M12 2.6c2.6 0 4.6 2.2 4.6 5s-2 5-4.6 5-4.6-2.2-4.6-5 2-5 4.6-5zM12 14.1c4.5 0 8.1 3.3 8.1 7.3H3.9c0-4 3.6-7.3 8.1-7.3z"
+      />
+    </svg>
+  )
+}
+
+/*
+ * How many seats a ride caption ends with, and the caption without it. The
+ * count is written as a word in the posts, so the handful that occur are
+ * mapped rather than parsed.
+ */
+const SEAT_WORDS = {
+  one: 1,
+  two: 2,
+  three: 3,
+  four: 4,
+  five: 5,
+  six: 6,
+}
+
+/*
+ * Where the ride goes, and when it goes. A caption states the route and then
+ * the hour — "Florentin → Haoman, 23:20" — and on the sheet those are two
+ * facts, not one sentence: the route is the headline and the clock belongs
+ * with the seats and the fare on a line of numbers underneath it.
+ */
+function splitWhen(text) {
+  const found = String(text || '').match(/^(.*?),\s*([^,]*\d{1,2}:\d{2}[^,]*)$/)
+  if (!found) return { where: text, when: '' }
+  return { where: found[1].trim(), when: found[2].trim() }
+}
+
+function splitSeats(caption) {
+  const text = String(caption || '')
+  const found = text.match(/\s*([A-Za-z]+|\d+)\s+seats?\.?\s*$/)
+  if (!found) return { text, seats: 0 }
+  const word = found[1].toLowerCase()
+  const seats = SEAT_WORDS[word] || Number(word) || 0
+  if (!seats) return { text, seats: 0 }
+  return { text: text.slice(0, found.index).replace(/[.,\s]+$/, ''), seats }
+}
+
+/*
+ * The ask, stripped to the thing itself. A request is written as a sentence —
+ * "Need 1 Forever TLV at door price." — and on the sheet that answers it the
+ * asking and the pricing are both said better by the button underneath, so
+ * the opening verb and the trailing price clause come off and what's left is
+ * "1 Forever TLV".
+ */
+function askLine(caption) {
+  return String(caption || '')
+    .replace(/^(need|looking for|after|want|wanted|searching for)\s+/i, '')
+    .replace(/\s*(at|for)\s+(door|face|original|the original)\s+price\.?$/i, '')
+    .replace(/\.$/, '')
+    .trim()
+}
+
+/*
  * Answering a request. The same sheet the marketplace uses to message a
  * seller — a labelled field and the two familiar buttons — so a PM looks like
- * one thing wherever it starts from.
+ * one thing wherever it starts from. On the two requests that are offers of
+ * work rather than conversation, a ride and a ticket, the filled button is
+ * the deal itself and the message is the quiet alternative beside it.
  */
-function PmSheet({ post, onClose }) {
+function PmSheet({ post, onClose, onPaid }) {
   const [draft, setDraft] = useState('')
   const [sent, setSent] = useState(false)
+  // 'pending' while the other side decides, 'done' once they have.
+  const [deal, setDeal] = useState(null)
+  // How many of the ride's places this offer takes. One by default: a driver
+  // answering a request is far likelier to have room for one than to fill
+  // the car, and the extras are a tap away.
+  const [seats, setSeats] = useState(1)
   const sheet = useRef(null)
   useDismissOnOutside(sheet, Boolean(post), onClose)
+
+  const isRide = post?.kind === 'ride'
+  const isTicket = post?.kind === 'ticket'
+  // What the ticket is worth: the night's own face price, never a number the
+  // seller picks. A request asks for a ticket at door price and that is what
+  // answering it offers — there is nothing here to haggle over.
+  const party = isTicket ? PARTY_BY_ID[post.nights?.[0]] : null
+  const fee = isRide ? RIDE_FARE : party?.pricePbs || 0
+  const offers = isRide || Boolean(fee)
+  // Rides say their seat count in words at the end of the caption; on the
+  // offer line it reads as a figure and a chair instead.
+  const seated = isRide ? splitSeats(post?.caption) : { text: post?.caption, seats: 0 }
+  const ask = { ...seated, ...splitWhen(seated.text) }
+  // The fare is per person, so a ride with room for two pays twice over. The
+  // picked count is held back to what the ride actually has.
+  const taken = isRide ? Math.min(seats, ask.seats || 1) : 1
+  const total = fee * taken
+
+  /*
+   * The other side takes five seconds to say yes — the same wait a buyer
+   * sits through on the detail sheet, seen from the selling end. The money
+   * only arrives on the acceptance, and it arrives on the wallet: the sheet
+   * closes and the card counts itself up.
+   */
+  useEffect(() => {
+    if (deal !== 'pending') return undefined
+    const timer = window.setTimeout(() => {
+      setDeal('done')
+      earnOver(total)
+      onPaid?.()
+    }, 5000)
+    return () => window.clearTimeout(timer)
+  }, [deal, total])
 
   if (!post) return null
 
@@ -519,7 +639,7 @@ function PmSheet({ post, onClose }) {
   return (
     <aside
       ref={sheet}
-      className="detail-sheet"
+      className={`detail-sheet pm-sheet${deal === 'pending' ? ' is-wait' : ''}`}
       role="dialog"
       aria-label={`Message ${name}`}
     >
@@ -530,29 +650,102 @@ function PmSheet({ post, onClose }) {
         </div>
         <div>
           <strong>{name}</strong>
-          <span>{kindLabel(post.kind)}</span>
-          <span className="detail-pay">{post.caption}</span>
+          {/* An offer is one line: what is being asked for and what it pays.
+              The kind was already in the kicker that opened this, the price
+              clause in the caption is what the number replaces, and "from
+              {name}" said the name a second time under the name itself. */}
+          {offers ? (
+            <>
+              <span className="detail-pay">{askLine(ask.where)}</span>
+              {/* The clock, the seats and the fare are all counts, so they
+                  share a row of their own under the route. */}
+              <span className="detail-pay">
+                {ask.when ? `${ask.when} · ` : ''}
+                {ask.seats ? (
+                  <>
+                    {ask.seats}
+                    <SeatMark />
+                    {' · '}
+                  </>
+                ) : null}
+                {/* Fixed, and said so: the fare is the app's number rather
+                    than something the two of them settle in the notes. */}
+                {fee} pck fixed
+              </span>
+            </>
+          ) : (
+            <>
+              <span>{kindLabel(post.kind)}</span>
+              <span className="detail-pay">{post.caption}</span>
+            </>
+          )}
         </div>
       </div>
-      {sent ? (
+      {deal ? (
+        <div className="deal-wait">
+          <CrestLoader />
+          <span>
+            {deal === 'pending'
+              ? `Waiting on ${name} to accept`
+              : `${name} accepted · ${total} pck paid to you`}
+          </span>
+        </div>
+      ) : sent ? (
         <p>Sent to {name}.</p>
       ) : (
-        <label className="sell-field">
-          <span className="sell-field-row">
-            Message
-            <em className="sell-ratio">to {name}</em>
-          </span>
+        <>
+        {/* How many places to take. One button rather than a row of them:
+            a ride has two or three seats, so tapping through the counts and
+            round to the start again is quicker than aiming at one of several
+            pills, and it leaves a single object on the line. */}
+        {isRide && ask.seats > 1 ? (
+          <button
+            type="button"
+            className="seat-pick"
+            aria-label={`${taken} of ${ask.seats} seats · tap to change`}
+            onClick={() => setSeats(taken >= ask.seats ? 1 : taken + 1)}
+          >
+            {taken}
+            <SeatMark />
+            <em>of {ask.seats}</em>
+          </button>
+        ) : null}
+        <label className={`sell-field${offers ? ' is-bare' : ''}`}>
+          {/* An offer sheet's field needs no name: the placeholder already
+              says what goes in it, and the word only pushed the button down. */}
+          {offers ? null : (
+            <span className="sell-field-row">
+              Message
+              <em className="sell-ratio">to {name}</em>
+            </span>
+          )}
           <textarea
             className="pm-draft"
             rows={3}
-            placeholder={`Reply to ${name}`}
+            placeholder={
+              offers ? `Add a note to ${name}` : `Reply to ${name}`
+            }
             value={draft}
             autoFocus
             onChange={(event) => setDraft(event.target.value)}
           />
         </label>
+        </>
       )}
-      {sent ? null : (
+      {/* An offer sheet has one button, and it carries the note with it —
+          the price is fixed, so there is nothing to send separately from
+          the offer itself. */}
+      {deal || sent ? null : offers ? (
+        <button
+          type="button"
+          className="pay-btn"
+          onClick={() => setDeal('pending')}
+        >
+          {isRide
+            ? `Take the ride · ${total} pck`
+            : `Offer ticket · ${total} pck`}
+        </button>
+      ) : (
         <button
           type="button"
           className="pay-btn"
@@ -563,7 +756,7 @@ function PmSheet({ post, onClose }) {
         </button>
       )}
       <button type="button" className="ghost-btn" onClick={onClose}>
-        Go Back
+        Cancel
       </button>
     </aside>
   )
@@ -688,9 +881,11 @@ async function shareToInstagram(post) {
   window.open('https://www.instagram.com/', '_blank', 'noopener,noreferrer')
 }
 
-export function FeedScreen() {
+export function FeedScreen({ onPaid }) {
   const [posts, setPosts] = useState(catalog.posts)
-  const [mode, setMode] = useState('watchme')
+  // Live is what the feed opens on: it's the first tab and the one that is
+  // about tonight rather than about a look.
+  const [mode, setMode] = useState('live')
   const [tag, setTag] = useState('all')
   const [sort, setSort] = useState('new')
   const [caption, setCaption] = useState('')
@@ -1030,7 +1225,9 @@ export function FeedScreen() {
                   action, so a second peck and a share underneath it only
                   compete with it. */}
               {post.kind === 'rating' ? null : (
-              <div className="feed-actions">
+              <div
+                className={`feed-actions${REQUEST_KINDS.includes(post.kind) ? ' is-request' : ''}`}
+              >
                 {/* A request isn't something you agree with, it's something
                     you answer — so the peck gives way to a direct line to
                     whoever posted it. */}
@@ -1081,7 +1278,12 @@ export function FeedScreen() {
       ) : null}
       {/* Keyed on the post so a second request opens a clean draft rather
           than inheriting the last one's half-written message. */}
-      <PmSheet key={pm?.id} post={pm} onClose={() => setPm(null)} />
+      <PmSheet
+        key={pm?.id}
+        post={pm}
+        onClose={() => setPm(null)}
+        onPaid={onPaid}
+      />
     </section>
   )
 }
