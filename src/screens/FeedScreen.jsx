@@ -166,35 +166,35 @@ function FeedClip({ src, className }) {
 }
 
 /*
- * A peck, not a like. The mark never fills — casting only turns it gold,
+ * A peck, not a like. The mark never fills — casting only turns it white,
  * which the button's own colour does, so the shape and its weight are the
  * same either way and the count beside it never shifts.
+ *
+ * The crest itself: the same three feathers that stand over every profile
+ * circle and sit in the header lockup, drawn here at the same proportions so
+ * the app only ever has the one mark. The single plume it replaces read as a
+ * shape of its own beside the brand's.
  */
 function Peck() {
   return (
-    <svg className="peck-mark" viewBox="0 0 24 24" aria-hidden="true">
-      {/* A peacock plume seen head on: a flame-shaped crown, the ring of the
-          eye punched out of it with a heart at its centre, and two sweeping
-          barbs curling up from the quill. It's drawn as solid shapes rather
-          than an outline, so the mark holds its weight at 17px. Casting a
-          peck doesn't fill anything — the button's colour is the whole
-          change, so the silhouette never shifts. */}
-      <g fill="currentColor">
-        {/* Crown and eye-ring in one path: the ring is a second subpath, so
-            evenodd cuts it straight out of the plume. */}
-        <path
-          fillRule="evenodd"
-          d="M12 1.1c1.1 1.9 2.1 3.3 3 4.3 2 2.2 3 4.4 3 6.6 0 3.6-2.7 6.3-6 6.3s-6-2.7-6-6.3c0-2.2 1-4.4 3-6.6.9-1 1.9-2.4 3-4.3z
-             M12 6.6a4.4 4.4 0 1 0 0 8.8 4.4 4.4 0 0 0 0-8.8z"
-        />
-        {/* The heart inside the eye. */}
-        <path d="M12 14.1c-1.9-1.3-2.9-2.3-2.9-3.4 0-.9.7-1.5 1.5-1.5.6 0 1.1.3 1.4.8.3-.5.8-.8 1.4-.8.8 0 1.5.6 1.5 1.5 0 1.1-1 2.1-2.9 3.4z" />
-        {/* The barbs: they sweep out from the quill and curl back up past the
-            widest point of the plume. */}
-        <path d="M11.4 22.4c-2.8-.6-4.8-1.8-6-3.5-1.2-1.7-1.7-3.9-1.5-6.6.9 2.6 1.9 4.5 3.1 5.8 1.2 1.3 2.7 2.4 4.4 3.2z" />
-        <path d="M12.6 22.4c2.8-.6 4.8-1.8 6-3.5 1.2-1.7 1.7-3.9 1.5-6.6-.9 2.6-1.9 4.5-3.1 5.8-1.2 1.3-2.7 2.4-4.4 3.2z" />
-        {/* The quill. */}
-        <path d="M11.6 17.8h.8V23h-.8z" />
+    /* The lockup's crest exactly: the same three feathers at the same lean,
+       -18° about the foot of the middle quill, and the same splayed eyes.
+       The viewBox is the leaning art's bounds, not the upright 36 x 26 box,
+       so the top-right feather and the bottom-left stem both clear it. */
+    <svg className="peck-mark" viewBox="-5 -2 39 34" aria-hidden="true">
+      <g fill="currentColor" transform="rotate(-18 18 26)">
+        <path d="M18 26c-.5-4.2-.6-8.2-.2-12.1h1.2c.4 3.9.3 7.9-.2 12.1z" />
+        <path d="M14.4 26c-1.9-3.8-3.3-7.4-4.2-11l1.1-.4c1.5 3.6 2.6 7.3 3.4 11.4z" />
+        <path d="M21.6 26c1.9-3.8 3.3-7.4 4.2-11l-1.1-.4c-1.5 3.6-2.6 7.3-3.4 11.4z" />
+        <g transform="translate(18 8.6) rotate(-15)">
+          <path d="M0-6.2C1.7-4 3.4-2.4 3.4.3 3.4 3 1.9 4.8 0 4.8-1.9 4.8-3.4 3-3.4.3-3.4-2.4-1.7-4 0-6.2Z" />
+        </g>
+        <g transform="translate(8.6 10.3) rotate(-40)">
+          <path d="M0-6.2C1.7-4 3.4-2.4 3.4.3 3.4 3 1.9 4.8 0 4.8-1.9 4.8-3.4 3-3.4.3-3.4-2.4-1.7-4 0-6.2Z" />
+        </g>
+        <g transform="translate(27.4 10.3) rotate(7)">
+          <path d="M0-6.2C1.7-4 3.4-2.4 3.4.3 3.4 3 1.9 4.8 0 4.8-1.9 4.8-3.4 3-3.4.3-3.4-2.4-1.7-4 0-6.2Z" />
+        </g>
       </g>
     </svg>
   )

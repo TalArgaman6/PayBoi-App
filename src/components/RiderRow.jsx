@@ -98,27 +98,24 @@ function GiftIcon({ id }) {
 }
 
 /*
- * How many you're holding, counted rather than written. At these numbers a
- * row of tallies is quicker to read than a digit, and it makes a thin row
- * feel like a thing you own a few of. Past six it goes back to a number —
- * nobody counts seven bars at a glance.
+ * How many of the category you are holding, as a bar that runs further the
+ * more you have. The length is the count itself, not a share of it — one is
+ * a stub, ten fills the cell — so two rows can be compared by their ends
+ * without reading either number.
  */
-const PIP_MAX = 6
+const CHARGE_FULL = 10
 
-function CountPips({ count }) {
-  const n = Math.max(0, Number(count) || 0)
-
-  if (n > PIP_MAX) {
-    return <b className="gift-count is-many">{n}</b>
-  }
+function ChargeBar({ count }) {
+  const held = Math.max(0, Number(count) || 0)
+  const run = Math.min(held, CHARGE_FULL) / CHARGE_FULL
 
   return (
-    <b className="gift-count" aria-label={`${n} left`}>
-      {n === 0 ? (
-        <i className="is-spent" />
-      ) : (
-        Array.from({ length: n }, (_, i) => <i key={i} />)
-      )}
+    <b
+      className={`gift-charge${held === 0 ? ' is-spent' : ''}`}
+      style={{ '--charge': run }}
+      aria-label={`${held} left`}
+    >
+      <i />
     </b>
   )
 }
@@ -144,7 +141,7 @@ export function RiderRow({ gift, count, open, lit, onHover, onToggle, onGranted 
     >
       <GiftIcon id={gift.id} />
       <em>{gift.label}</em>
-      <CountPips count={count} />
+      <ChargeBar count={count} />
       {open ? <p className="gift-tip">{gift.hint}</p> : null}
       {open ? <PassCode gift={gift} onGranted={onGranted} /> : null}
     </li>

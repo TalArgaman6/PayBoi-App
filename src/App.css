@@ -2272,7 +2272,10 @@
 
 .gift-room li {
   display: grid;
-  grid-template-columns: 34px 1fr auto;
+  /* Mark, label, charge. The charge takes a column of its own rather than
+     sizing to its content, so a tenth of it is a tenth of the row and the
+     bars can be read against each other and against the full width. */
+  grid-template-columns: 34px minmax(0, 1fr) minmax(0, 1fr);
   gap: 10px;
   align-items: center;
   padding: 8px 0;
@@ -2334,54 +2337,50 @@
 
 /* The count as tallies. Right-aligned so the last pip lands on the same
    edge in every row and the group lengths can be compared down the column. */
-.gift-count {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  flex-wrap: wrap;
-  gap: 4px;
-  min-width: 1.4rem;
-  min-height: 12px;
+/* One cell per category, run out to however many of it you hold. No tube
+   around it — the bar is the whole mark, and a border at this height only
+   doubled its edge. The track behind stays as the faintest ground so a row
+   with nothing left still has a right edge instead of trailing off. */
+.gift-charge {
+  position: relative;
+  width: 100%;
+  /* The label's own line box, in its own em, so the bar is exactly as tall as
+     the text beside it and follows it if the row's type ever changes size.
+     The grid centres it; align-self says so rather than leaving it to the
+     default, which stretches a block to the full row. */
+  height: 1.25em;
+  align-self: center;
+  border-radius: 99px;
+  background: rgb(255 255 255 / 7%);
 }
 
-/* Same height, radius and gold as the earn badge on a listing, so a pass
-   you're holding and a pass you'd earn look like the same currency. */
-.gift-count i {
-  /* Exactly the earn badge's footprint: its 44px min-width and the height its
-     padding and type add up to. */
-  width: 26px;
-  height: 9px;
-  flex-shrink: 0;
-  border-radius: 3px;
-  /* A cool silver at rest; the pointer takes it up to white. */
+/* The charge. --charge is the count against the ten that fills the cell, so
+   the bar's end is the number. */
+.gift-charge i {
+  position: absolute;
+  /* Pinned to the right end, so the bar grows back towards the label rather
+     than away from it — the row's edge is the one thing that holds still. */
+  inset: 0 0 0 auto;
+  display: block;
+  width: calc(100% * var(--charge, 0));
+  /* A single unit should still be a lozenge rather than a sliver, so the fill
+     never gets narrower than it is tall. */
+  min-width: 1.25em;
+  border-radius: 99px;
   background: #a7aebb;
-  transition: background 0.18s ease, box-shadow 0.18s ease;
+  transition: width 0.28s ease, background 0.18s ease;
 }
 
-/* Nothing left: one hollow slot, so the row still has a right edge instead
-   of trailing off into the rule. */
-.gift-count i.is-spent {
-  background: transparent;
-  box-shadow: inset 0 0 0 1px rgb(167 174 187 / 70%);
+/* Spent: the ground alone. */
+.gift-charge.is-spent i {
+  display: none;
 }
 
-/* The open or hovered row lifts the silver to white. */
-.gift-room li.is-open .gift-count i,
-.gift-room li.is-lit .gift-count i {
+/* The open or hovered row lifts the bar to white, the way the pips used to
+   light. */
+.gift-room li.is-open .gift-charge i,
+.gift-room li.is-lit .gift-charge i {
   background: #fff;
-}
-
-.gift-room li.is-open .gift-count i.is-spent,
-.gift-room li.is-lit .gift-count i.is-spent {
-  background: transparent;
-  box-shadow: inset 0 0 0 1px #fff;
-}
-
-/* Too many to tally — back to a digit. */
-.gift-count.is-many {
-  font-family: var(--font-ui);
-  font-weight: 600;
-  text-align: right;
 }
 
 .gift-tip {
@@ -2969,10 +2968,13 @@
 .feed-actions button {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  /* The plate hugs the mark now — just enough room above and below it to
-     keep the pill a pill. */
-  height: 25px;
+  /* The marks that carry a number already centre themselves in a box wider
+     than they are, so they bring their own air — a gap on top of it read as
+     a space between two separate things rather than one control. */
+  gap: 2px;
+  /* The plate hugs the mark now — a hair above and below the 15px mark, just
+     enough for the radius to still round rather than meet. */
+  height: 19px;
   padding: 0 10px;
   border: 0;
   border-radius: 999px;
@@ -2991,9 +2993,20 @@
 
 /* The plume is a tall, narrow mark where the others are square, so it needs
    a size up to carry the same weight on the row. */
+/* The plume is taller than it is wide, so it is sized by height and left to
+   take whatever width that gives it — forced into a square it would either
+   shrink to nothing beside the other marks or stretch. */
 .feed-actions button svg.peck-mark {
-  width: 17px;
-  height: 17px;
+  /* The leaning crest's own 39:34, so the three feathers keep their fan and
+     their lean. Sized by width, because the spread is what it is read by. */
+  width: 16px;
+  height: calc(16px * 34 / 39);
+  /* Both the crest and the digits centred on the same line. The art's own
+     mass is even top to bottom, so no nudge is needed on top of it. */
+  align-self: center;
+  /* A hair of air on the right only — the crest's left feather already leans
+     out past the quills, so the gap it brings is all on that side. */
+  margin-right: 1px;
 }
 
 /* An icon you've already acted on is the one state on the row that should

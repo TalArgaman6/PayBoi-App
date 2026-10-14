@@ -34,7 +34,7 @@
       "hint": "Backstage / quiet booth access at Peacock festival and circuit nights.",
       "color": "#e0a420",
       "metal": "gold",
-      "count": 2,
+      "count": 5,
       "worth": 6
     },
     {
@@ -42,7 +42,7 @@
       "label": "Afters pass",
       "hint": "Sunrise rooms after the main. Wristband is transferable.",
       "color": "#702ad6",
-      "count": 2,
+      "count": 3,
       "worth": 2
     },
     {
@@ -50,7 +50,7 @@
       "label": "First pour",
       "hint": "Opening drink on the house at bars in the Night Index.",
       "color": "#d62632",
-      "count": 1,
+      "count": 6,
       "worth": 1
     },
     {
@@ -66,7 +66,7 @@
       "label": "Scooter / bike credits",
       "hint": "A scooter or bike when you don't want a cab. Credit is already on the app.",
       "color": "#34cc62",
-      "count": 2,
+      "count": 6,
       "worth": 2
     }
   ]
