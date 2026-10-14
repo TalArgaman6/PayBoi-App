@@ -74,7 +74,7 @@ export function CrestLockup({ className = 'header-lockup' }) {
         y="27"
         fill="currentColor"
         fontSize="30"
-        fontWeight="400"
+        fontWeight="600"
         letterSpacing="0.9"
       >
         PCK
@@ -103,7 +103,7 @@ export function CrestStack({ className = 'splash-lockup' }) {
         fill="currentColor"
         textAnchor="middle"
         fontSize="36"
-        fontWeight="400"
+        fontWeight="600"
         letterSpacing="1.08"
       >
         PCK

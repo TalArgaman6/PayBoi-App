@@ -228,8 +228,8 @@
   margin: 0;
   /* The mark's "ck" is a high-contrast old-style serif, not a geometric sans:
      thin hairlines against thick stems, bracketed serifs, a narrow round C.
-     Cormorant Garamond is that same species of letter, set at 400 rather than
-     300 now that the wordmark's own CK has been weighted up to match.
+     Cormorant Garamond is that same species of letter, set at the wordmark's
+     own weight so the two read as one letterform at two sizes.
      The tracking is measured off the art rather than chosen: the C ends at
      195 of the mark's units and the K begins at 200, a 5-unit gap against a
      122-unit cap height — about 0.03em once the cap is read as 0.7em. The
@@ -241,7 +241,10 @@
      the mark are two settings of one letterform at one height, which is what
      makes them read as a pair rather than as a title and a logo. */
   font-size: 1.45rem;
-  font-weight: 400;
+  /* 600, the weight the wallet header was lifted to. The thin setting held on
+     the app's flat grounds but not over a photograph, and one weight across
+     every screen is what keeps the title and the wordmark a pair. */
+  font-weight: 600;
   letter-spacing: 0.03em;
   text-transform: uppercase;
   line-height: 1;
