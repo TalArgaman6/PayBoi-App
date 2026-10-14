@@ -421,7 +421,7 @@ function lineName(party) {
  * is built like the rating kicker — which is what the hashtags underneath
  * used to say, only quieter.
  */
-function RequestKicker({ ids, label, mark }) {
+function RequestKicker({ ids, label, mark, tone }) {
   const party = PARTY_BY_ID[ids?.[0]]
 
   /*
@@ -431,7 +431,7 @@ function RequestKicker({ ids, label, mark }) {
    * child of the card, so the rule never reaches it.
    */
   return (
-    <p className="rate-kicker is-live feed-kicker">
+    <p className={`rate-kicker is-live feed-kicker is-${tone}`}>
       {mark}
       {label}
       {party ? ` · ${lineName(party)}` : ''}
@@ -455,9 +455,9 @@ function RatingKicker({ options }) {
   )
 
   return (
-    <p className="rate-kicker is-live feed-kicker">
+    <p className="rate-kicker is-live feed-kicker is-battle">
       <LiveHeartMark />
-      Live rating · {votes} voted
+      Live battle · {votes} voted
     </p>
   )
 }
@@ -605,7 +605,7 @@ function UserFeed({ posts, startId, userId, onClose }) {
       </header>
       <div className="user-feed-track">
         <article
-          className={`user-feed-slide${shown.frame === 'faces' ? ' is-faces' : ''}`}
+          className={`user-feed-slide${shown.frame === 'faces' ? ' is-faces' : ''}${shown.frame === 'bottom' ? ' is-bottom' : ''}`}
         >
           {shown.video ? (
             <FeedClip src={assetUrl(shown.video)} />
@@ -960,9 +960,16 @@ export function FeedScreen() {
           {visible.map((post) => (
             <article key={post.id} className={`feed-card is-${cardTone(post)}`}>
               {post.video ? (
-                <div className="feed-photo is-clip">
+                <div
+                  className={`feed-photo is-clip${post.frame === 'bottom' ? ' is-bottom' : ''}`}
+                >
                   <FeedClip className="feed-clip" src={assetUrl(post.video)} />
-                  <i>Live</i>
+                  {/* The badge goes by what the post is, not by whether it
+                      moves. Most clips were live posts when this was written,
+                      so the two were the same thing; now that look and
+                      featured posts carry clips too, a "Live" stamp on a look
+                      would be claiming something the post isn't. */}
+                  {isLivePost(post) ? <i>Live</i> : null}
                 </div>
               ) : post.image ? (
                 <div
@@ -993,6 +1000,7 @@ export function FeedScreen() {
                       : 'Looking for a ticket'
                   }
                   mark={post.kind === 'ride' ? <WheelMark /> : <TicketRequestMark />}
+                  tone={post.kind === 'ride' ? 'ride' : 'ticket'}
                 />
               ) : null}
               {post.kind === 'rating' ? <RatingKicker options={post.options} /> : null}

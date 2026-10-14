@@ -3281,6 +3281,16 @@
   display: block;
 }
 
+/* Framed on the foot of the shot. A clip of a floor or a stage has its
+   subject along the bottom edge and sky or ceiling above it, so the default
+   crop at 32% down holds the empty half and loses the thing being filmed. */
+.feed-photo.is-bottom .feed-clip,
+.user-feed-slide.is-bottom video,
+.feed-photo.is-bottom img,
+.user-feed-slide.is-bottom img {
+  object-position: center bottom;
+}
+
 .feed-photo.is-faces img,
 .user-feed-slide.is-faces img {
   height: 240px;
@@ -3292,6 +3302,27 @@
   align-items: center;
   justify-content: space-between;
   gap: 8px;
+}
+
+/*
+ * One colour per kind, so the line says what it is before it is read: the
+ * ticket ask in the app's ice blue, the ride ask in green, and the battle in
+ * gold because it is the one of the three that is a contest rather than a
+ * request. The mark inherits, so icon and words always agree.
+ */
+.feed-kicker.is-ticket {
+  --kicker-ink: #74c7e0;
+}
+
+.feed-kicker.is-ride {
+  --kicker-ink: #5fc28a;
+}
+
+/* The battle's purple, not gold. A vote between nights is the one kicker that
+   isn't a favour being asked for, and the app's violet is what the wallet's
+   own glow is lit with. */
+.feed-kicker.is-battle {
+  --kicker-ink: #a435c9;
 }
 
 /* The kicker sits under the name again, and a little further under it than
