@@ -50,15 +50,18 @@ const SKIN_NAMES = ['ink', 'silver', 'jet', 'chalk', 'gold']
  */
 const SKIN_STEPS = [
   { from: 10000, skin: 4 },
-  { from: 5000, skin: 3 },
-  { from: 2000, skin: 2 },
+  { from: 8000, skin: 3 },
+  { from: 5000, skin: 2 },
+  { from: 2000, skin: 1 },
 ]
 
 /*
- * The silver-outlined blue is off the ladder — four grounds earned, and that
- * one left over. Tapping the name or the mark still steps through all five so
- * it can be looked at, and the balance takes the screen back the moment the
- * figure moves.
+ * All five are on the ladder now: the silver-outlined blue was the one left
+ * over, and it is the first thing a balance earns — close enough to the ink
+ * it starts on that the change reads as the same card getting richer rather
+ * than a different card. Tapping the name or the mark still steps through all
+ * five by hand, and the balance takes the screen back the moment the figure
+ * moves.
  */
 
 function skinForBalance(balance) {
