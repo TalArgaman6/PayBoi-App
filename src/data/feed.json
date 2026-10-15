@@ -78,6 +78,39 @@
       ]
     },
     {
+      "id": "sam-rate-1",
+      "kind": "rating",
+      "user": {
+        "id": "itay",
+        "name": "Itay Aharoni",
+        "photo": "photos/sellers/kipi.jpg"
+      },
+      "caption": "Drek or Crush this week?",
+      "when": "2h",
+      "tags": [
+        "ask",
+        "drek"
+      ],
+      "likes": 11,
+      "live": 3,
+      "options": [
+        {
+          "id": "dreck-wed",
+          "votes": 19,
+          "upvoters": [
+            "Gal Weizman"
+          ]
+        },
+        {
+          "id": "crush-line",
+          "votes": 11,
+          "upvoters": [
+            "Tal Deri"
+          ]
+        }
+      ]
+    },
+    {
       "id": "tal-pride-sunrise-1",
       "kind": "featured",
       "user": {
@@ -154,6 +187,25 @@
       ]
     },
     {
+      "id": "ido-ride-1",
+      "kind": "ride",
+      "user": {
+        "id": "refael",
+        "name": "Refael Haim",
+        "photo": "photos/sellers/sam.jpg"
+      },
+      "caption": "Florentin area → GAZE, 23:20. Two seats.",
+      "when": "1h",
+      "tags": [
+        "ride",
+        "gaze"
+      ],
+      "nights": [
+        "gaze-haoman"
+      ],
+      "likes": 6
+    },
+    {
       "id": "maya-1",
       "kind": "featured",
       "user": {
@@ -181,25 +233,6 @@
           "photo": "photos/sellers/toulouse.jpg"
         }
       ]
-    },
-    {
-      "id": "ido-ride-1",
-      "kind": "ride",
-      "user": {
-        "id": "refael",
-        "name": "Refael Haim",
-        "photo": "photos/sellers/sam.jpg"
-      },
-      "caption": "Florentin area → GAZE, 23:20. Two seats.",
-      "when": "1h",
-      "tags": [
-        "ride",
-        "gaze"
-      ],
-      "nights": [
-        "gaze-haoman"
-      ],
-      "likes": 6
     },
     {
       "id": "drag-room-1",
@@ -256,6 +289,25 @@
       "likes": 21
     },
     {
+      "id": "noa-ticket-1",
+      "kind": "ticket",
+      "user": {
+        "id": "shani",
+        "name": "Shani Amsalem",
+        "photo": "photos/sellers/maya.jpg"
+      },
+      "caption": "Looking for Gaze + drinks pack.",
+      "when": "9h",
+      "tags": [
+        "ticket",
+        "gaze"
+      ],
+      "nights": [
+        "gaze-haoman"
+      ],
+      "likes": 3
+    },
+    {
       "id": "alex-1",
       "kind": "live",
       "user": {
@@ -272,63 +324,6 @@
         "gaze"
       ],
       "likes": 61
-    },
-    {
-      "id": "noa-look-1",
-      "kind": "alternative",
-      "user": {
-        "id": "gal",
-        "name": "Gal Weizman",
-        "photo": "photos/sellers/guli.jpg"
-      },
-      "image": "photos/rainbow-street.jpg",
-      "caption": "Pre-drinks looks. Shenkin 21:00.",
-      "when": "1h",
-      "tags": [
-        "alternative",
-        "crush"
-      ],
-      "likes": 42,
-      "with": [
-        {
-          "id": "itay",
-          "name": "Itay Aharoni",
-          "photo": "photos/sellers/kipi.jpg"
-        }
-      ]
-    },
-    {
-      "id": "sam-rate-1",
-      "kind": "rating",
-      "user": {
-        "id": "itay",
-        "name": "Itay Aharoni",
-        "photo": "photos/sellers/kipi.jpg"
-      },
-      "caption": "Drek or Crush this week?",
-      "when": "2h",
-      "tags": [
-        "ask",
-        "drek"
-      ],
-      "likes": 11,
-      "live": 3,
-      "options": [
-        {
-          "id": "dreck-wed",
-          "votes": 19,
-          "upvoters": [
-            "Gal Weizman"
-          ]
-        },
-        {
-          "id": "crush-line",
-          "votes": 11,
-          "upvoters": [
-            "Tal Deri"
-          ]
-        }
-      ]
     },
     {
       "id": "sam-ticket-1",
@@ -383,6 +378,30 @@
       ]
     },
     {
+      "id": "noa-look-1",
+      "kind": "alternative",
+      "user": {
+        "id": "gal",
+        "name": "Gal Weizman",
+        "photo": "photos/sellers/guli.jpg"
+      },
+      "image": "photos/rainbow-street.jpg",
+      "caption": "Pre-drinks looks. Shenkin 21:00.",
+      "when": "1h",
+      "tags": [
+        "alternative",
+        "crush"
+      ],
+      "likes": 42,
+      "with": [
+        {
+          "id": "itay",
+          "name": "Itay Aharoni",
+          "photo": "photos/sellers/kipi.jpg"
+        }
+      ]
+    },
+    {
       "id": "maya-ride-1",
       "kind": "ride",
       "user": {
@@ -417,25 +436,6 @@
         "party"
       ],
       "likes": 27
-    },
-    {
-      "id": "noa-ticket-1",
-      "kind": "ticket",
-      "user": {
-        "id": "shani",
-        "name": "Shani Amsalem",
-        "photo": "photos/sellers/maya.jpg"
-      },
-      "caption": "Looking for Gaze + drinks pack.",
-      "when": "9h",
-      "tags": [
-        "ticket",
-        "gaze"
-      ],
-      "nights": [
-        "gaze-haoman"
-      ],
-      "likes": 3
     },
     {
       "id": "noa-2",
