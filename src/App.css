@@ -3820,11 +3820,63 @@
   padding: 4px 0 2px;
 }
 
+.code-bars {
+  position: relative;
+  width: 100%;
+  max-width: 236px;
+}
+
 .code-plate svg {
   width: 100%;
   max-width: 236px;
   height: 68px;
   display: block;
+}
+
+/* A read code is a spent code: the bars go down to a ghost of themselves so
+   the eye doesn't keep offering it to the reader. */
+.code-plate.is-used svg,
+.code-plate.is-spent svg {
+  opacity: 0.3;
+  transition: opacity 320ms ease;
+}
+
+/*
+ * The reader's line. One hairline of red that crosses the bars, blinking as
+ * it goes — the two together are what a scan looks like from the outside, and
+ * neither alone reads as one. It sits over the bars rather than in them, so
+ * it crosses whatever code the item happens to carry.
+ */
+.code-laser {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -2%;
+  width: 3px;
+  border-radius: 2px;
+  background: #ff2d2d;
+  box-shadow:
+    0 0 6px 2px rgb(255 45 45 / 85%),
+    0 0 18px 6px rgb(255 45 45 / 45%);
+  animation:
+    laser-sweep 1.5s cubic-bezier(0.45, 0, 0.55, 1) forwards,
+    laser-flash 160ms steps(1, end) infinite;
+}
+
+@keyframes laser-sweep {
+  from {
+    left: -2%;
+  }
+
+  to {
+    left: calc(100% + 2px);
+  }
+}
+
+@keyframes laser-flash {
+  50% {
+    opacity: 0.45;
+  }
 }
 
 .code-plate span {

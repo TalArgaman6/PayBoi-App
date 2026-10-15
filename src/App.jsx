@@ -67,6 +67,10 @@ export default function App() {
   // seller is a person rather than the app, the wait for them to accept.
   const [paid, setPaid] = useState(false)
   const [approved, setApproved] = useState(false)
+  // A code on the back of the sheet is a code someone scans. Idle while it
+  // waits to be read, running while the reader's line crosses it, used once
+  // it has been.
+  const [scan, setScan] = useState('idle')
   const balance = useBalance()
   const phone = useRef(null)
   const detail = useRef(null)
@@ -88,6 +92,7 @@ export default function App() {
     setPmSent(false)
     setPaid(false)
     setApproved(false)
+    setScan('idle')
   }, [selected?.id])
 
   /*
@@ -102,7 +107,11 @@ export default function App() {
   const waits = Boolean(selected?.seller) || tab === 'wallet'
 
   useEffect(() => {
-    if (!paid || !waits || approved) return undefined
+    // Nothing selected means nothing to clear. The guard matters because
+    // `waits` is read off the tab as well as the item: sending the buyer to
+    // the wallet turns it true for one render in which the sheet has already
+    // let go of its item, and this ran on the hole that left.
+    if (!paid || !waits || approved || !selected) return undefined
     const price = selected.pricePbs
     const timer = window.setTimeout(() => {
       setApproved(true)
@@ -112,6 +121,27 @@ export default function App() {
     }, 5000)
     return () => window.clearTimeout(timer)
   }, [paid, approved, waits, selected?.id])
+
+  /*
+   * The other kind of purchase: a code the app issued, which is spent by
+   * being read. It sits on the back of the sheet for five seconds — long
+   * enough to have been held up to a reader — then the reader's line crosses
+   * it, and on the far side of that pass the code is used and the price is
+   * off the card. The charge lands with the scan, not with the press, for the
+   * same reason the waiting kind charges on approval.
+   */
+  useEffect(() => {
+    if (!paid || waits || scan !== 'idle') return undefined
+    const timer = window.setTimeout(() => setScan('running'), 5000)
+    return () => window.clearTimeout(timer)
+  }, [paid, waits, scan, selected?.id])
+
+  useEffect(() => {
+    if (scan !== 'running') return undefined
+    const timer = window.setTimeout(() => setScan('used'), 1500)
+    return () => window.clearTimeout(timer)
+  }, [scan, selected?.id])
+
 
   /*
    * Every press inside the phone records the row it hit. Doing it here rather
@@ -198,7 +228,21 @@ export default function App() {
   }, [selected?.id, pmOpen, pmSent, paid])
 
   function closeDetail() {
+    /*
+     * A read code is paid for, but the figure it is paid out of isn't on
+     * screen while the sheet is over it. So the charge waits here, on the way
+     * out: the card is what the buyer lands back on, and the count down the
+     * digits is the first thing they see there.
+     */
+    if (scan === 'used' && selected) spendOver(selected.pricePbs)
     setSelected(null)
+  }
+
+  // Done on a read code: the sheet goes away, the card comes up, and the
+  // charge counts itself off in front of the buyer.
+  function finishScan() {
+    closeDetail()
+    setTab('wallet')
   }
 
   if (!booted) {
@@ -377,24 +421,43 @@ export default function App() {
                     </span>
                   </div>
                 ) : (
-                <div className="code-plate">
-                  <svg viewBox="0 0 236 68" aria-hidden="true">
-                    {barsFor(selected.id).map((bar) => (
-                      <rect
-                        key={bar.x}
-                        x={bar.x}
-                        y="0"
-                        width={bar.width}
-                        height="68"
-                        fill="#fff"
-                      />
-                    ))}
-                  </svg>
-                  <span>{codeFor(selected.id)}</span>
+                <div className={`code-plate is-${scan}`}>
+                  <div className="code-bars">
+                    <svg viewBox="0 0 236 68" aria-hidden="true">
+                      {barsFor(selected.id).map((bar) => (
+                        <rect
+                          key={bar.x}
+                          x={bar.x}
+                          y="0"
+                          width={bar.width}
+                          height="68"
+                          fill="#fff"
+                        />
+                      ))}
+                    </svg>
+                    {/* The reader's line. Only ever drawn while it is crossing
+                        — there is nothing on a code that has not been read
+                        yet, and nothing left to read on one that has. */}
+                    {scan === 'running' ? (
+                      <div className="code-laser" aria-hidden="true" />
+                    ) : null}
+                  </div>
+                  <span>
+                    {scan === 'idle' || scan === 'running'
+                      ? codeFor(selected.id)
+                      : 'Scanned · paid'}
+                  </span>
                 </div>
                 )}
-                <button type="button" className="ghost-btn" onClick={closeDetail}>
-                  Cancel
+                {/* Before the read there is still something to back out of;
+                    after it the money has moved and the only thing left to do
+                    is put the sheet away. */}
+                <button
+                  type="button"
+                  className="ghost-btn"
+                  onClick={!waits && scan === 'used' ? finishScan : closeDetail}
+                >
+                  {!waits && scan === 'used' ? 'Done' : 'Cancel'}
                 </button>
               </div>
             </aside>
