@@ -324,11 +324,15 @@ function deadlineFor(post) {
 }
 
 function formatLeft(ms) {
+  // "Closed" is already the whole story; the others are a figure, and a figure
+  // beside an hourglass still wants saying what it is.
   if (ms <= 0) return 'Closed'
   const minutes = Math.floor(ms / MINUTE_MS)
   const hours = Math.floor(minutes / 60)
-  if (hours >= 1) return `${hours}h ${String(minutes % 60).padStart(2, '0')}m`
-  return `${Math.max(1, minutes)}m`
+  if (hours >= 1) {
+    return `${hours}h ${String(minutes % 60).padStart(2, '0')}m left`
+  }
+  return `${Math.max(1, minutes)}m left`
 }
 
 /*

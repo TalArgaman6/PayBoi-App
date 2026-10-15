@@ -2911,45 +2911,19 @@
   animation: live-pulse 1.6s ease-in-out infinite;
 }
 
-/* Neither request mark takes the heart's pulse — a request isn't going live,
-   it's waiting on someone. They get their own small loops instead. */
-
-/* The wheel turns, slowly and evenly, the way one held at speed does. */
-.live-heart.is-wheel {
-  animation: wheel-spin 6s linear infinite;
-  transform-origin: 50% 50%;
-}
-
-@keyframes wheel-spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-/* The ticket rocks a few degrees either side, like one held between two
-   fingers. Shallow and slow on purpose: it should catch the eye once, not
-   keep tugging at it. */
-.live-heart.is-ticket {
-  animation: ticket-sway 2.8s ease-in-out infinite;
-  transform-origin: 50% 50%;
-}
-
-@keyframes ticket-sway {
-  0%,
-  100% {
-    transform: rotate(-7deg);
-  }
-
-  50% {
-    transform: rotate(7deg);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .live-heart.is-wheel,
-  .live-heart.is-ticket {
-    animation: none;
-  }
+/*
+ * The request marks hold still. The spinning wheel and the swaying ticket
+ * were each the only motion on their line; now the whole kicker breathes and
+ * the mark breathes with it, so a second loop inside the first was two
+ * animations arguing over one small shape.
+ */
+.live-heart.is-wheel,
+.live-heart.is-ticket,
+/* The battle's mark is the live heart itself, so it carried the recording
+   light's beat under the kicker's pulse. On a battle line the pulse is the
+   beat. */
+.feed-kicker.is-battle .live-heart {
+  animation: none;
 }
 
 @keyframes live-pulse {
@@ -3506,6 +3480,47 @@
    own glow is lit with. */
 .feed-kicker.is-battle {
   --kicker-ink: #a435c9;
+}
+
+/*
+ * And all three breathe, on the heart's beat. The ask is the whole point of
+ * these three cards and it sits in a line of quiet chrome, so it takes the
+ * live mark's dip — the words and the mark together, since the line is one
+ * thing. The marks keep their own turn and sway on top of it: an animation on
+ * the child owns only the child's transform, so the wheel still spins inside
+ * a line that is dipping.
+ */
+.feed-kicker.is-ticket,
+.feed-kicker.is-ride,
+.feed-kicker.is-battle {
+  animation: kicker-pulse 2s ease-in-out infinite;
+  transform-origin: 0 50%;
+}
+
+/*
+ * The heart's beat, softened and flattened to a flash. A card can carry a
+ * recording light dipping to a third of itself; a line of words doing the
+ * same reads as a fault. And a line that shrinks as well as fades is a line
+ * that moves, which a kicker above a caption shouldn't — so this is the fade
+ * alone, half down and back, on a slow beat.
+ */
+@keyframes kicker-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .feed-kicker.is-ticket,
+  .feed-kicker.is-ride,
+  .feed-kicker.is-battle {
+    animation: none;
+  }
 }
 
 /* The kicker sits under the name again, and a little further under it than
