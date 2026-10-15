@@ -1,4 +1,40 @@
 const USED_KEY = 'pboi.passes.used'
+/*
+ * Passes earned since the wallet opened. wallet.json says how many of each
+ * perk a night out came with, and that figure never changes — so anything
+ * picked up after the fact is counted here and added to it. Kept apart from
+ * the spent list because the two answer different questions: that one is
+ * which codes have been read, this one is how many there were to read.
+ */
+const EXTRA_KEY = 'pboi.passes.extra'
+
+function readExtra() {
+  try {
+    const raw = JSON.parse(localStorage.getItem(EXTRA_KEY) || '{}')
+    return raw && typeof raw === 'object' ? raw : {}
+  } catch {
+    return {}
+  }
+}
+
+function extraFor(giftId) {
+  const held = readExtra()[giftId]
+  return Number.isFinite(held) && held > 0 ? Math.floor(held) : 0
+}
+
+// How many of this perk exist at all: what the night came with, plus what has
+// been added since.
+function heldCount(gift) {
+  return gift.count + extraFor(gift.id)
+}
+
+export function addPass(gift) {
+  const extra = readExtra()
+  extra[gift.id] = extraFor(gift.id) + 1
+  localStorage.setItem(EXTRA_KEY, JSON.stringify(extra))
+  window.dispatchEvent(new Event('pboi-passes'))
+  return heldCount(gift)
+}
 
 function readUsed() {
   try {
@@ -20,7 +56,7 @@ function tokenFor(giftId, index) {
 
 export function remainingCount(gift, used = readUsed()) {
   const spent = used.filter((token) => token.startsWith(`${gift.id}.`)).length
-  return Math.max(0, gift.count - spent)
+  return Math.max(0, heldCount(gift) - spent)
 }
 
 export function passCounts(gifts, used = readUsed()) {
@@ -35,7 +71,8 @@ export function passCounts(gifts, used = readUsed()) {
  */
 export function remainingTokens(gift, used = readUsed()) {
   const tokens = []
-  for (let index = 1; index <= gift.count; index += 1) {
+  const held = heldCount(gift)
+  for (let index = 1; index <= held; index += 1) {
     const token = tokenFor(gift.id, index)
     if (!used.includes(token)) tokens.push(token)
   }
@@ -43,7 +80,8 @@ export function remainingTokens(gift, used = readUsed()) {
 }
 
 export function nextPassToken(gift, used = readUsed()) {
-  for (let index = 1; index <= gift.count; index += 1) {
+  const held = heldCount(gift)
+  for (let index = 1; index <= held; index += 1) {
     const token = tokenFor(gift.id, index)
     if (!used.includes(token)) return token
   }
@@ -62,7 +100,7 @@ export function redeemPass(token, gifts) {
   const id = match[1]
   const index = Number(match[2])
   const gift = gifts.find((item) => item.id === id)
-  if (!gift || index < 1 || index > gift.count) return null
+  if (!gift || index < 1 || index > heldCount(gift)) return null
   const key = tokenFor(id, index)
   const used = readUsed()
   if (!used.includes(key)) {

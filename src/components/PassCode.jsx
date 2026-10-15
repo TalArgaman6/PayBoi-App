@@ -30,24 +30,55 @@ function following() {
 
 export function PassCode({ gift, onGranted }) {
   const token = nextPassToken(gift)
+  // How many of the perk are in hand right now. Read on every render, because
+  // it moves under this card from two directions — a read spends one, and
+  // pressing the row's mark adds one.
+  const held = remainingCount(gift)
   // One card per pass still in hand, minus the one on top.
-  const behind = Math.min(Math.max(remainingCount(gift) - 1, 0), STACK_MAX)
+  const behind = Math.min(Math.max(held - 1, 0), STACK_MAX)
   const people = useMemo(following, [])
   const [markup, setMarkup] = useState('')
+  /*
+   * Which pass the drawn code belongs to. Rendering a QR is a promise, so for
+   * a frame or two after the holding changes the element still holds the
+   * previous pass's markup — and a spent code that has just faded out would
+   * come back at full strength for exactly that long. The card shows nothing
+   * until the ink matches the pass.
+   */
+  const [drawn, setDrawn] = useState(null)
   const [ghosts, setGhosts] = useState([])
   const [qrInset, setQrInset] = useState('0px')
   const [qrInk, setQrInk] = useState('108px')
   const [picking, setPicking] = useState(false)
   const [query, setQuery] = useState('')
   const [pending, setPending] = useState(null)
+  // The popup on its way out. Confirming used to take it off the screen in a
+  // frame, which read as the card being snatched away; it fades instead, and
+  // only leaves the tree once the fade is over.
+  const [leaving, setLeaving] = useState(false)
+  /*
+   * A pass being read. Idle until the line under the code is pressed, waiting
+   * while the reader finds it — two seconds of nothing, which is what the
+   * door feels like — then running while the beam walks down the card, then
+   * done. The pass is spent at the end of the walk rather than on the press:
+   * nothing is used up until the code has actually been read.
+   */
+  const [scan, setScan] = useState('idle')
   const shown = people.filter((person) =>
     person.name.toLowerCase().includes(query.trim().toLowerCase()),
   )
 
   // The codes under the top one, one per pass still in hand.
+  /*
+   * Keyed on the holding as well as the top card. Coming by another pass does
+   * not change which code is on top, so on `token` alone this never ran again
+   * and the deck behind it kept the length it had — the new sliver had a slot
+   * in the pile and no code to draw in it. The count is the thing that
+   * changed, so the count is what it watches.
+   */
   const under = useMemo(
     () => remainingTokens(gift).slice(1, STACK_MAX + 1),
-    [gift, token],
+    [gift, token, held],
   )
 
   useEffect(() => {
@@ -82,11 +113,55 @@ export function PassCode({ gift, onGranted }) {
       }
       setMarkup(svg)
       setGhosts(bare)
+      setDrawn(token)
     })
     return () => {
       cancel = true
     }
   }, [token, under])
+
+  useEffect(() => {
+    if (scan !== 'waiting' && scan !== 'running') return undefined
+    const timer = window.setTimeout(
+      () => setScan(scan === 'waiting' ? 'running' : 'done'),
+      scan === 'waiting' ? 2000 : 1500,
+    )
+    return () => window.clearTimeout(timer)
+  }, [scan])
+
+  /*
+   * The read is what spends it, so the count beside the deck drops as the
+   * beam leaves the bottom of the code rather than as it arrives at the top.
+   * The spent code goes with it: it fades off the card, and only once it has
+   * gone is the pass actually marked used, which is what brings the next one
+   * up. Redeeming any earlier would swap the markup mid-fade and the code
+   * fading out would be the new one.
+   */
+  // The pause after a grant is confirmed: the popup is already gone and the
+  // code is still standing, for a second, before it goes the way a read sends
+  // it.
+  useEffect(() => {
+    if (scan !== 'handing') return undefined
+    const timer = window.setTimeout(() => setScan('done'), 1000)
+    return () => window.clearTimeout(timer)
+  }, [scan])
+
+  useEffect(() => {
+    if (scan !== 'done' || !token) return undefined
+    const timer = window.setTimeout(() => {
+      redeemPass(token, [gift])
+      setScan('fresh')
+    }, 520)
+    return () => window.clearTimeout(timer)
+  }, [scan])
+
+  // The next pass, arriving. A beat on its own state so it can come up rather
+  // than appear, after which the card is idle and ready to be read again.
+  useEffect(() => {
+    if (scan !== 'fresh') return undefined
+    const timer = window.setTimeout(() => setScan('idle'), 420)
+    return () => window.clearTimeout(timer)
+  }, [scan])
 
   function closePick() {
     setPicking(false)
@@ -94,11 +169,30 @@ export function PassCode({ gift, onGranted }) {
     setPending(null)
   }
 
+  /*
+   * Giving one away is the same loss as using one, so it looks the same: the
+   * popup goes, the code on the card fades off it and the next pass is
+   * standing underneath. The pass is spent at the end of that, by the same
+   * run of states a read goes through — handing the row straight back to the
+   * wallet, the way this used to, meant the only thing you saw was the row
+   * closing. The row stays open and shows you what left it.
+   */
   function confirmGrant() {
-    if (!pending || !token || !redeemPass(token, [gift])) return
-    closePick()
-    onGranted?.()
+    if (!pending || !token) return
+    setLeaving(true)
+    // A beat with the popup gone and the card still whole, so the handover
+    // reads as a consequence of the confirm rather than as part of it.
+    setScan('handing')
   }
+
+  useEffect(() => {
+    if (!leaving) return undefined
+    const timer = window.setTimeout(() => {
+      setLeaving(false)
+      closePick()
+    }, 420)
+    return () => window.clearTimeout(timer)
+  }, [leaving])
 
   if (!token) {
     return <p className="gift-pass-note">None left</p>
@@ -118,22 +212,37 @@ export function PassCode({ gift, onGranted }) {
             meant to show — the code is white on nothing, so an unclipped one
             underneath would shine through the top card's gaps and muddy its
             modules. Drawn before it in the DOM so it covers them. */}
-        <div className="gift-pass-deck" style={{ '--deck': behind }}>
+        {/*
+          * `is-blank` is the deck saying its live code is not drawn yet — the
+          * next pass's square stays open underneath for exactly as long as
+          * that is true, so there is never a frame with no code on the card
+          * and never a frame with two different ones on it.
+          */}
+        <div
+          className={`gift-pass-deck is-${scan}${drawn === token ? '' : ' is-blank'}`}
+          style={{ '--deck': behind }}
+        >
           {ghosts.slice(0, behind).map((svg, index) => (
             <div
               key={under[index] || index}
-              className="gift-pass-ghost"
+              className={`gift-pass-ghost${index === 0 ? ' is-next' : ''}`}
               style={{ '--depth': index + 1 }}
               aria-hidden="true"
               dangerouslySetInnerHTML={{ __html: svg }}
             />
           ))}
           <div
-            className="gift-pass-code"
+            className={`gift-pass-code${drawn === token ? '' : ' is-blank'}`}
             role="img"
             aria-label={`${gift.label} pass`}
             dangerouslySetInnerHTML={{ __html: markup }}
           />
+          {/* The reader's line, drawn only while it is crossing — there is
+              nothing to see on a code that has not been read yet, and
+              nothing left to read on one that has. */}
+          {scan === 'running' ? (
+            <div className="pass-laser" aria-hidden="true" />
+          ) : null}
         </div>
         <button
           type="button"
@@ -152,11 +261,20 @@ export function PassCode({ gift, onGranted }) {
       {/* Which pass this is of the holding, rather than "one" — the deck
           beside it already says there are several, and this says how many
           and that the code on top is the first of them. */}
-      <small>
-        Scan to use 1 / {remainingCount(gift)}
-      </small>
+      <button
+        type="button"
+        className="gift-pass-scan"
+        disabled={scan !== 'idle' && scan !== 'fresh'}
+        onClick={() => setScan('waiting')}
+      >
+        Scan to use 1 / {held}
+      </button>
       {picking ? (
-        <div className="gift-pop" role="presentation" onClick={closePick}>
+        <div
+          className={`gift-pop${leaving ? ' is-leaving' : ''}`}
+          role="presentation"
+          onClick={leaving ? undefined : closePick}
+        >
           <div
             className="gift-pop-card"
             role="dialog"

@@ -1,4 +1,5 @@
 import { assetUrl } from '../lib/format.js'
+import { addPass } from '../lib/passes.js'
 import { PassCode } from './PassCode.jsx'
 
 const GIFT_MASKS = {
@@ -139,7 +140,21 @@ export function RiderRow({ gift, count, open, lit, onHover, onToggle, onGranted 
       onClick={onToggle}
       onKeyDown={onKeyDown}
     >
-      <GiftIcon id={gift.id} />
+      {/* The mark is a way of coming by another one. A night hands these out
+          as it goes — a second drink, one more ride — so pressing the perk's
+          own icon adds one to the holding without opening the row, and the
+          bar beside it runs a step further. */}
+      <button
+        type="button"
+        className="gift-add"
+        aria-label={`Add one ${gift.label}`}
+        onClick={(event) => {
+          event.stopPropagation()
+          addPass(gift)
+        }}
+      >
+        <GiftIcon id={gift.id} />
+      </button>
       <em>{gift.label}</em>
       <ChargeBar count={count} />
       {open ? <p className="gift-tip">{gift.hint}</p> : null}

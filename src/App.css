@@ -2442,6 +2442,33 @@
 
 /* Every mark sits in the same square box so the column reads evenly; masks
    use `contain`, so a wide source (the bracelet) just fills less of it. */
+/*
+ * The mark, as a button. It takes the cell the icon used to sit in and
+ * nothing else — no chrome, no padding of its own — so the row looks exactly
+ * as it did and the only tell is the hand. A short squeeze on the press is
+ * the whole of the feedback; the bar beside it running a step further is the
+ * real answer.
+ */
+.gift-add {
+  justify-self: center;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+  transition: transform 140ms ease;
+}
+
+.gift-add:active {
+  transform: scale(0.82);
+}
+
+.gift-add .gift-icon {
+  justify-self: auto;
+}
+
 .gift-icon {
   width: 14px;
   height: 14px;
@@ -2590,11 +2617,33 @@
   background: rgb(8 6 18 / 46%);
 }
 
+/* Confirmed. The scrim and the card go together, unhurried — the card settles
+   back a touch as it fades so it reads as leaving rather than as being
+   switched off. */
+.gift-pop.is-leaving {
+  pointer-events: none;
+  animation: gift-pop-go 420ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.gift-pop.is-leaving .gift-pop-card {
+  animation: gift-pop-card-go 420ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes gift-pop-go {
+  to { opacity: 0; }
+}
+
+@keyframes gift-pop-card-go {
+  to { opacity: 0; transform: scale(0.96); }
+}
+
 .gift-pop-card {
   width: min(260px, 100%);
   padding: 10px 12px 0;
   border-radius: 16px;
-  background: rgb(22 24 31 / 94%);
+  /* The app's own raised surface rather than a grey of its own: this card
+     stands over the wallet and should read as the same material as it. */
+  background: var(--sheet-raised);
 }
 
 .gift-pop-search {
@@ -2716,6 +2765,13 @@
   width: calc(120px + var(--deck, 0) * var(--step));
   height: 120px;
   padding-left: calc(var(--deck, 0) * var(--step));
+  /* The box closes up gently as the pile loses a card. The padding does not:
+     it is what the live code stands on, and easing it meant the incoming
+     code appeared a step to the right — where the old one had been — and
+     then slid left into place, while the open square underneath it was
+     already standing at the final spot. The code lands where it belongs and
+     only the outline eases. */
+  transition: width 420ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .gift-pass-code {
@@ -2755,10 +2811,115 @@
 }
 
 .gift-pass small,
+.gift-pass-scan,
 .gift-pass-note {
   margin: 0;
   color: rgb(255 255 255 / 78%);
   font-size: 0.68rem;
+}
+
+/*
+ * The line under the code is the thing you press to be read. It is still
+ * written as a caption rather than as a button — a door reader is not a
+ * form — so it carries no chrome at all, only the hand.
+ */
+.gift-pass-scan {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  -webkit-text-fill-color: rgb(255 255 255 / 78%);
+  /* The line is written once and never re-wrapped. It sits under a code that
+     is itself changing width as the deck thins, and a count going from 3 to 2
+     is a narrower string — left to lay itself out again it clipped on the
+     frame it changed. Nowrap keeps it on one line whatever the room, and
+     lining figures keep every digit the same width, so the only thing that
+     changes when a pass is spent is the digit itself. */
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+.gift-pass-scan:disabled {
+  cursor: default;
+}
+
+/* Read and gone. The code the beam has just crossed is spent, so it leaves
+   the card — and the one underneath it, which is the next pass, is simply
+   what is there once it has. */
+.gift-pass-deck.is-done .gift-pass-code {
+  animation: pass-spent 520ms ease forwards;
+}
+
+@keyframes pass-spent {
+  to {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gift-pass-deck.is-done .gift-pass-code {
+    animation: none;
+    opacity: 0;
+  }
+}
+
+/*
+ * The pass underneath, in full, the instant the beam leaves the code above
+ * it. The next pass is already on the card — it is the first sliver of the
+ * deck — so there is nothing to draw and nothing to wait for: the hairline it
+ * is clipped to simply opens out to the whole square at the printed strength,
+ * and it sits exactly where the live code will stand once the deck closes up.
+ * The spent code then fades off it. What was showing through the fade before
+ * was that one unopened pixel, which is why the next code looked cut: it was
+ * cut, and it stayed cut until the handover had finished.
+ */
+/* Ink that belongs to a pass already spent is not shown at all. */
+.gift-pass-code.is-blank {
+  opacity: 0;
+}
+
+.gift-pass-deck.is-done .gift-pass-ghost.is-next,
+.gift-pass-deck.is-blank .gift-pass-ghost.is-next {
+  clip-path: none;
+  opacity: 0.7;
+}
+
+/* The reader's line. Down the card rather than across it: a square code is
+   read in both directions, and a vertical sweep is the one that reads as
+   something being looked at rather than as a barcode being swiped. */
+.pass-laser {
+  position: absolute;
+  left: 0;
+  right: calc(0px - var(--qr-inset, 0px));
+  top: -2%;
+  height: 3px;
+  border-radius: 2px;
+  background: #ff2d2d;
+  box-shadow:
+    0 0 6px 2px rgb(255 45 45 / 85%),
+    0 0 18px 6px rgb(255 45 45 / 45%);
+  animation:
+    pass-sweep 1.5s cubic-bezier(0.45, 0, 0.55, 1) forwards,
+    laser-flash 160ms steps(1, end) infinite;
+}
+
+@keyframes pass-sweep {
+  from {
+    top: -2%;
+  }
+
+  to {
+    top: calc(100% + 3px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pass-laser {
+    animation: none;
+    top: 50%;
+  }
 }
 
 .gift-pass-note {
