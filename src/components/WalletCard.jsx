@@ -8,9 +8,10 @@ import {
 } from '../lib/balance.js'
 
 /*
- * What a tap on the figure adds. The balance is the one number on the card,
- * so pressing it is the shortest possible top-up — no sheet, no amount to
- * pick, just a thousand more rolling up the way a spend rolls down.
+ * What a tap on either figure moves. The balance is the one number on the
+ * card, so pressing it is the shortest possible top-up — no sheet, no amount
+ * to pick, just a thousand rolling up the way a spend rolls down, and the
+ * shekel line beside it takes the same thousand back.
  */
 const TOP_UP = 1000
 
@@ -36,15 +37,15 @@ export function WalletCard({ wallet }) {
             >
               {formatTokenBalance(balance)}
             </button>
-            {/* And what a tap on the shekel line does: empties it. The pair
-                is a till, so one end fills it and the other clears it out —
-                which is how an empty wallet gets looked at without editing
-                the json. */}
+            {/* And what a tap on the shekel line does: takes the same
+                thousand back off. The pair is a till with one step in each
+                direction, so any balance on the ladder can be walked to
+                without editing the json. */}
             <button
               type="button"
               className="fiat-balance token-top-up"
-              onClick={() => spendOver(balance)}
-              aria-label="Empty the wallet"
+              onClick={() => spendOver(TOP_UP)}
+              aria-label={`Take ${TOP_UP} ${wallet.token} off`}
             >
               ₪{getFiat().toLocaleString('en-US')}
             </button>
