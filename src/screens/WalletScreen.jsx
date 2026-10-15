@@ -9,6 +9,7 @@ import { PRICE_RANGES, inPriceRange } from '../lib/filters.js'
 import { assetUrl, formatPbs } from '../lib/format.js'
 import { passCounts, watchPasses } from '../lib/passes.js'
 import { kindLabel, suggestionsForBalance } from '../lib/suggestions.js'
+import { useBalance } from '../lib/balance.js'
 
 const SUGGESTION_FILTERS = [
   { id: 'all', label: 'All' },
@@ -17,8 +18,11 @@ const SUGGESTION_FILTERS = [
 ]
 
 /*
- * Backdrops to choose between. Tapping the pboi mark in the header steps
- * through them — a testing affordance while we settle on one, not a setting.
+ * Backdrops, earned. The four grounds are a ladder rather than a palette: the
+ * ink plume is where everyone starts, and the balance on the card decides
+ * which one is behind it. Nothing announces the change — the screen is simply
+ * richer the next time it comes up, which is the point of a card that shows
+ * what you are worth.
  */
 const CRYSTALS = [
   // The same drawn plume in four grounds: the app's blues outlined in ink and
@@ -28,6 +32,9 @@ const CRYSTALS = [
   'photos/wallet-plume-silver.jpg',
   'photos/wallet-plume-jet.jpg',
   'photos/wallet-plume-chalk.jpg',
+  // The top of the ladder: the plume in gold, which nothing but a five-figure
+  // balance reaches.
+  'photos/wallet-plume-gold.jpg',
 ]
 
 /*
@@ -35,22 +42,46 @@ const CRYSTALS = [
  * the silver-outlined blue and the bone — are pale where the furniture sits,
  * so the header goes ink on those; see `.wallet-screen[data-skin]` in App.css.
  */
-const SKIN_NAMES = ['ink', 'silver', 'jet', 'chalk']
+const SKIN_NAMES = ['ink', 'silver', 'jet', 'chalk', 'gold']
 
 /*
- * The screen unmounts when you leave the tab, so the choice has to live
- * outside the component or every trip to the feed would reset it. A module
- * variable is enough — it should survive moving around the app, not a reload.
+ * Where each ground starts, read from the top down so the richest threshold a
+ * balance clears is the one that takes it.
  */
-let lastSkin = 0
+const SKIN_STEPS = [
+  { from: 10000, skin: 4 },
+  { from: 5000, skin: 3 },
+  { from: 2000, skin: 2 },
+]
+
+/*
+ * The silver-outlined blue is off the ladder — four grounds earned, and that
+ * one left over. Tapping the name or the mark still steps through all five so
+ * it can be looked at, and the balance takes the screen back the moment the
+ * figure moves.
+ */
+
+function skinForBalance(balance) {
+  const step = SKIN_STEPS.find((entry) => balance > entry.from)
+  return step ? step.skin : 0
+}
 
 export function WalletScreen({ onSelect, openedPass = null }) {
-  const [skin, setSkinState] = useState(lastSkin)
+  // Live, so a deal that lands while the card is up carries the backdrop with
+  // it rather than waiting for the next visit.
+  const balance = useBalance()
+  const earned = skinForBalance(balance)
+  // null while the balance is in charge, which is all of the time until
+  // someone taps the header to look at the others.
+  const [picked, setPicked] = useState(null)
+  const skin = picked === null ? earned : picked
 
-  function setSkin(next) {
-    lastSkin = next
-    setSkinState(next)
+  function step(by) {
+    setPicked((skin + by + CRYSTALS.length) % CRYSTALS.length)
   }
+
+  // A deal resets the screen to the ground it has actually earned.
+  useEffect(() => setPicked(null), [earned])
   const [kind, setKind] = useState('all')
   const [price, setPrice] = useState('all')
   const [openGift, setOpenGift] = useState(openedPass)
@@ -92,10 +123,13 @@ export function WalletScreen({ onSelect, openedPass = null }) {
         aria-hidden="true"
       />
       <div className="wallet-top">
+        {/* The balance picks the ground; the name and the mark still step
+            through all five by hand, the spare one included, so any of them
+            can be put up for a look. */}
         <ScreenHeader
           title={wallet.name}
-          onTitle={() => setSkin((skin - 1 + CRYSTALS.length) % CRYSTALS.length)}
-          onLogo={() => setSkin((skin + 1) % CRYSTALS.length)}
+          onTitle={() => step(-1)}
+          onLogo={() => step(1)}
         />
         <div className="wallet-hero">
           <WalletCard wallet={wallet} />

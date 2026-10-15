@@ -9,10 +9,6 @@
       "label": "Live"
     },
     {
-      "id": "watchme",
-      "label": "WM"
-    },
-    {
       "id": "featured",
       "label": "Featured"
     },
@@ -21,8 +17,12 @@
       "label": "Alt"
     },
     {
+      "id": "watchme",
+      "label": "WM"
+    },
+    {
       "id": "ask",
-      "label": "Battle"
+      "label": "Beatdown"
     },
     {
       "id": "ticket",

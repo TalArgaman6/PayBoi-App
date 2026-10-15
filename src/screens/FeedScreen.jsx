@@ -30,15 +30,16 @@ const ALT_EVENTS = events.items.filter(
 )
 
 const MODES = [
+  // One order, shared with the filter row below the composer: what is
+  // happening now, then what is on, then the two kinds of look, then the
+  // things people ask each other for.
   { id: 'live', label: 'Live' },
   { id: 'featured', label: 'Featured' },
-  { id: 'watchme', label: 'WM', title: 'Watch me' },
-  { id: 'ticket', label: 'Ticket' },
-  // A poll between nights is a contest between them, not a ballot — the tab
-  // says what the post actually is.
-  { id: 'ask', label: 'Battle' },
-  { id: 'ride', label: 'Ride' },
   { id: 'alternative', label: 'Alt' },
+  { id: 'watchme', label: 'WM', title: 'Watch me' },
+  { id: 'ask', label: 'Beatdown' },
+  { id: 'ticket', label: 'Ticket' },
+  { id: 'ride', label: 'Ride' },
 ]
 
 const PLACEHOLDERS = {
@@ -565,7 +566,7 @@ function RatingKicker({ options }) {
   return (
     <p className="rate-kicker is-live feed-kicker is-battle">
       <LiveHeartMark />
-      Live battle · {votes} voted
+      Beatdown · {votes} voted
     </p>
   )
 }
