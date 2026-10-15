@@ -103,8 +103,17 @@ export default function App() {
    * A deal with a person waits, and so does anything bought from the wallet —
    * a top-up is money moving between balances, not a ticket being issued, so
    * what it owes you is the new figure on the card rather than a code.
+   *
+   * Events and drops wait too, now. Buying a night out or a piece off the
+   * drop is a card payment that has to go off and clear somewhere, and
+   * showing a barcode the instant the button is pressed skipped the only
+   * part of it that feels like paying. So the sheet turns over to the crest
+   * and the wait, the way a deal with a person does, and what comes back is
+   * the new figure on the card. Which is every purchase in the app now — the
+   * code face is left standing for the moment rather than torn out, because
+   * a scannable pass is a thing this app will want again.
    */
-  const waits = Boolean(selected?.seller) || tab === 'wallet'
+  const waits = true
 
   useEffect(() => {
     // Nothing selected means nothing to clear. The guard matters because
@@ -417,7 +426,7 @@ export default function App() {
                     <span>
                       {selected.seller
                         ? `Waiting on ${pmName(selected.seller)} to accept`
-                        : 'Clearing your payment'}
+                        : 'Confirming your payment'}
                     </span>
                   </div>
                 ) : (

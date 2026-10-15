@@ -1777,11 +1777,150 @@
   pointer-events: none;
 }
 
+/*
+ * A ground arriving over the one it replaces, a feather at a time. The five
+ * grounds are the same plume in different metals, so changing one into
+ * another is not a picture dissolving into another picture — it is the same
+ * fan, feather by feather, taking a new colour. Each feather is one copy of
+ * the arriving ground masked to a soft disc over that feather's eye and stem,
+ * and each fades up on its own delay over its own stretch, with the ground
+ * between them coming last. The outgoing picture lies underneath the whole
+ * time, so a feather that hasn't turned yet is still showing its old metal
+ * rather than a hole.
+ *
+ * The vertical fade is kept as a second mask layer and the two are
+ * intersected: an arriving feather honours the same horizon as everything
+ * else on the screen.
+ */
+.wallet-crystal.is-feather {
+  -webkit-mask-image:
+    linear-gradient(
+      to bottom,
+      #000 0%,
+      #000 34%,
+      rgb(0 0 0 / 35%) 56%,
+      transparent 74%
+    ),
+    radial-gradient(
+      circle var(--feather-r) at var(--feather-x) var(--feather-y),
+      #000 35%,
+      rgb(0 0 0 / 0) 100%
+    );
+  mask-image:
+    linear-gradient(
+      to bottom,
+      #000 0%,
+      #000 34%,
+      rgb(0 0 0 / 35%) 56%,
+      transparent 74%
+    ),
+    radial-gradient(
+      circle var(--feather-r) at var(--feather-x) var(--feather-y),
+      #000 35%,
+      rgb(0 0 0 / 0) 100%
+    );
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
+  opacity: 0;
+  animation-name: feather-turn;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  /* Both ends, not just the far one. A feather spends up to 1.7s waiting out
+     its delay, and with `forwards` the animation does not touch it until it
+     starts — so it sat at whatever the cascade said, which inside the group
+     is 1. Every feather was fully up before its own fade began and there was
+     no turn left to watch. `both` holds it at the first keyframe through the
+     delay, which is where it belongs. */
+  animation-fill-mode: both;
+}
+
+@keyframes feather-turn {
+  to {
+    /* Opaque. The dimming is the group's job now, not each layer's. */
+    opacity: 1;
+  }
+}
+
+/* No turning for anyone who asked for less: the new ground is simply there. */
+@media (prefers-reduced-motion: reduce) {
+  .wallet-crystal.is-feather {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+/*
+ * A turn, composited once.
+ *
+ * The seventeen layers of a change — the outgoing ground and the sixteen
+ * arriving feathers — are seventeen copies of a backdrop that is meant to be
+ * seen at 78%. Stacked, their alphas compound: where feathers overlap, and
+ * especially once the last one covers the whole frame on top of the other
+ * fifteen, the stack reaches nearly full strength and the plume sits paler
+ * and flatter than it does at rest. That is the overlay, and it lasts from
+ * the end of the turn until the layers are torn down three seconds in, which
+ * is why it reads as something arriving late.
+ *
+ * So the dimming comes off the layers and goes on the group. Inside it every
+ * copy is opaque and simply covers what it lands on — no compounding is
+ * possible — and the whole stack is let down to 78% exactly once, which is
+ * where the single resting layer sits. The turn itself is untouched: same
+ * sixteen feathers, same masks, same delays and durations.
+ */
+.wallet-turn {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.78;
+}
+
+.wallet-turn .wallet-crystal {
+  opacity: 1;
+}
+
+/* Except the arriving feathers, which start from nothing however they are
+   composited — the fade in is the whole point of them. */
+.wallet-turn .wallet-crystal.is-feather {
+  opacity: 0;
+}
+
+/*
+ * And the raking band the same way. It is painted by every `.wallet-crystal`
+ * and it is screen-blended, so seventeen of them over one strip of backdrop
+ * is seventeen times the light. None of the copies in a turn carries it.
+ */
+.wallet-turn .wallet-crystal::after {
+  content: none;
+}
+
+/* The group carries it instead, so there is exactly one band whether the
+   screen is mid-turn or at rest. Without this the band vanished for the
+   three seconds of a change and came back when the layers were torn down,
+   which is a haze arriving out of nowhere several seconds after the
+   backdrop settled — the overlay, from the other side. */
+.wallet-turn {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 34%,
+    rgb(0 0 0 / 35%) 56%,
+    transparent 74%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 34%,
+    rgb(0 0 0 / 35%) 56%,
+    transparent 74%
+  );
+}
+
 /* The band of light that rakes across the facets. It doesn't run on a clock
    any more: where it sits is the tilt, and how strong it is is the rush, so
    the highlight tracks the hand holding the phone. Screen-blended, because a
    highlight on glass only ever adds — it never darkens what it crosses. */
-.wallet-crystal::after {
+.wallet-crystal::after,
+.wallet-turn::after {
   content: '';
   position: absolute;
   inset: -20% -60%;
@@ -1809,7 +1948,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .wallet-crystal::after {
+  .wallet-crystal::after,
+  .wallet-turn::after {
     transform: none;
     opacity: 0.6;
   }
@@ -3760,15 +3900,29 @@
 }
 
 /*
- * Both faces share one cell and the sheet takes the taller of them, so the
- * shorter one used to sit packed at the top with its buttons stranded in the
- * middle of the card. Each face now gives its slack to the row under the
- * handle — the head on the front, the code on the back — which leaves the
- * buttons on the floor of the sheet on either side of the turn.
+ * Both faces share one cell, and the sheet used to stand as tall as the
+ * taller of them whichever way it was facing. The back is the taller one —
+ * it carries the code plate — so the front was left with a hand's width of
+ * nothing between the title and the buttons, paying the height of a face
+ * nobody was looking at. Only the face in view sizes the sheet now: the one
+ * behind is lifted out of the flow and stretched over the same room, so it
+ * is still drawn through the turn but no longer sets the height. The sheet
+ * changes size as it turns, which is the right thing — it is turning into a
+ * different card.
  */
+.detail-face {
+  position: absolute;
+  inset: 12px 16px 16px;
+}
+
+.detail-sheet:not(.is-paid) .detail-face.is-front,
+.detail-sheet.is-paid .detail-face.is-back {
+  position: relative;
+  inset: auto;
+}
+
 .detail-face.is-front {
-  align-content: stretch;
-  grid-template-rows: auto 1fr;
+  align-content: start;
 }
 
 .detail-face.is-back {

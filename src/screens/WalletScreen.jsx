@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import wallet from '../data/wallet.json'
 import { FilterTabs } from '../components/FilterTabs.jsx'
 import { ItemRow } from '../components/ItemRow.jsx'
@@ -64,12 +64,63 @@ const SKIN_STEPS = [
  * moves.
  */
 
+/*
+ * Where the feathers are. The five grounds are the same drawn plume in
+ * different metals — the same fan, the same eyes, feather for feather — so a
+ * single set of positions read off the picture serves all of them. Each entry
+ * is the centre of one feather's eye in percentages of the backdrop, the
+ * radius of the soft disc that covers that feather and its stem, and when in
+ * the change it takes its new colour and how long it takes doing it. The
+ * times are deliberately uneven: feathers that lit together read as a wipe.
+ */
+const FEATHERS = [
+  { x: 36, y: 9, r: 15, at: 0, over: 760 },
+  { x: 57, y: 6, r: 14, at: 180, over: 900 },
+  { x: 19, y: 13, r: 14, at: 420, over: 700 },
+  { x: 75, y: 12, r: 15, at: 260, over: 980 },
+  { x: 45, y: 19, r: 13, at: 620, over: 820 },
+  { x: 65, y: 21, r: 14, at: 500, over: 740 },
+  { x: 10, y: 25, r: 13, at: 840, over: 900 },
+  { x: 86, y: 24, r: 14, at: 700, over: 860 },
+  { x: 53, y: 30, r: 15, at: 980, over: 820 },
+  { x: 28, y: 31, r: 14, at: 1140, over: 760 },
+  { x: 72, y: 34, r: 14, at: 1060, over: 940 },
+  { x: 15, y: 40, r: 14, at: 1320, over: 880 },
+  { x: 44, y: 42, r: 14, at: 1260, over: 800 },
+  { x: 62, y: 45, r: 14, at: 1440, over: 900 },
+  { x: 30, y: 49, r: 15, at: 1560, over: 860 },
+  /* And the ground itself — everything between and behind the feathers, last
+     and slowest, so the fan has finished turning before the air around it
+     catches up. */
+  { x: 50, y: 34, r: 120, at: 1700, over: 1100 },
+]
+
 function skinForBalance(balance) {
   const step = SKIN_STEPS.find((entry) => balance > entry.from)
   return step ? step.skin : 0
 }
 
+/*
+ * The grounds, fetched the moment the card is first up. A ladder is only
+ * convincing if the next rung is already there when the balance reaches it —
+ * and the feather turn mounts sixteen copies of the arriving ground at once,
+ * which is sixteen blank discs if the browser is still downloading it. One
+ * pass at mount puts all five in cache and the change costs nothing after.
+ */
+let fetched = false
+
+function preloadCrystals() {
+  if (fetched || typeof window === 'undefined') return
+  fetched = true
+  for (const path of CRYSTALS) {
+    const image = new window.Image()
+    image.decoding = 'async'
+    image.src = assetUrl(path)
+  }
+}
+
 export function WalletScreen({ onSelect, openedPass = null }) {
+  useEffect(preloadCrystals, [])
   // Live, so a deal that lands while the card is up carries the backdrop with
   // it rather than waiting for the next visit.
   const balance = useBalance()
@@ -85,6 +136,29 @@ export function WalletScreen({ onSelect, openedPass = null }) {
 
   // A deal resets the screen to the ground it has actually earned.
   useEffect(() => setPicked(null), [earned])
+  /*
+   * How a ground gives way to the next. The five are the same drawn plume in
+   * different metals, feather for feather, so the honest way to change one
+   * into another is not to dissolve the whole picture but to let the new
+   * metal run round the fan — the outgoing ground stays underneath and the
+   * incoming one is revealed by a soft wedge sweeping from the plume's own
+   * centre, which lands feather by feather because that is how the feathers
+   * are arranged. Each sits under the wedge's leading edge for a different
+   * stretch of the sweep, so they take their colour at their own moment.
+   */
+  const [under, setUnder] = useState(null)
+  const [sweep, setSweep] = useState(0)
+  const was = useRef(skin)
+
+  useEffect(() => {
+    if (was.current === skin) return undefined
+    setUnder(was.current)
+    setSweep((turn) => turn + 1)
+    was.current = skin
+    const timer = window.setTimeout(() => setUnder(null), 3000)
+    return () => window.clearTimeout(timer)
+  }, [skin])
+
   const [kind, setKind] = useState('all')
   const [price, setPrice] = useState('all')
   const [openGift, setOpenGift] = useState(openedPass)
@@ -120,11 +194,40 @@ export function WalletScreen({ onSelect, openedPass = null }) {
       {/* A shot of cut glass behind the whole screen. It fades to black down
           the bottom where the sheet sits, so the colour reads as a glow above
           the card rather than as noise under the lists. */}
-      <div
-        className="wallet-crystal"
-        style={{ backgroundImage: `url("${assetUrl(CRYSTALS[skin])}")` }}
-        aria-hidden="true"
-      />
+      {under === null ? (
+        <div
+          className="wallet-crystal"
+          style={{ backgroundImage: `url("${assetUrl(CRYSTALS[skin])}")` }}
+          aria-hidden="true"
+        />
+      ) : (
+        /* Every layer of a turn in one group — the group is what carries the
+           dimming, so the stack cannot compound. See `.wallet-turn`. */
+        <div className="wallet-turn" aria-hidden="true">
+        <div
+          className="wallet-crystal"
+          style={{ backgroundImage: `url("${assetUrl(CRYSTALS[under])}")` }}
+          aria-hidden="true"
+        />
+        {/* One copy of the arriving ground per feather, each showing only its
+            own feather and each coming up on its own clock. */}
+        {FEATHERS.map((feather, index) => (
+          <div
+            key={`${sweep}-${index}`}
+            className="wallet-crystal is-feather"
+            style={{
+              backgroundImage: `url("${assetUrl(CRYSTALS[skin])}")`,
+              '--feather-x': `${feather.x}%`,
+              '--feather-y': `${feather.y}%`,
+              '--feather-r': `${feather.r}%`,
+              animationDelay: `${feather.at}ms`,
+              animationDuration: `${feather.over}ms`,
+            }}
+            aria-hidden="true"
+          />
+        ))}
+        </div>
+      )}
       <div className="wallet-top">
         {/* The balance picks the ground; the name and the mark still step
             through all five by hand, the spare one included, so any of them
