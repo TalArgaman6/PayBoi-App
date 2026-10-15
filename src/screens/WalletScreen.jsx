@@ -131,8 +131,8 @@ export function WalletScreen({ onSelect, openedPass = null }) {
             can be put up for a look. */}
         <ScreenHeader
           title={wallet.name}
-          onTitle={() => step(-1)}
-          onLogo={() => step(1)}
+          onTitle={() => step(1)}
+          onLogo={() => step(-1)}
         />
         <div className="wallet-hero">
           <WalletCard wallet={wallet} />
