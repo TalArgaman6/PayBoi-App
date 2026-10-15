@@ -1313,7 +1313,6 @@ export function FeedScreen({ onPaid }) {
                       tone={post.kind === 'ride' ? 'ride' : 'ticket'}
                     />
                   )}
-                  <Countdown post={post} />
                 </div>
               ) : (
                 <div className="feed-meta">
@@ -1355,6 +1354,9 @@ export function FeedScreen({ onPaid }) {
               {post.kind === 'rating' ? (
                 <div className="feed-actions is-request is-battle">
                   <FeedPeople post={post} onOpen={openUser} />
+                  {/* The same foot row a request has, minus the button: whose
+                      battle it is, and how long is left to settle it. */}
+                  <Countdown post={post} />
                 </div>
               ) : (
               <div
@@ -1363,6 +1365,17 @@ export function FeedScreen({ onPaid }) {
                 {/* A request isn't something you agree with, it's something
                     you answer — so the peck gives way to a direct line to
                     whoever posted it. */}
+                {/* Whose request it is comes first — the person, then the
+                    way to answer them, which is the order the rest of the
+                    feed reads in. */}
+                {REQUEST_KINDS.includes(post.kind) ? (
+                  <FeedPeople post={post} onOpen={openUser} />
+                ) : null}
+                {/* The clock reads with the name — how long this person has
+                    left — and the button to answer them closes the row. */}
+                {REQUEST_KINDS.includes(post.kind) ? (
+                  <Countdown post={post} />
+                ) : null}
                 {REQUEST_KINDS.includes(post.kind) ? (
                   <button
                     type="button"
@@ -1372,11 +1385,6 @@ export function FeedScreen({ onPaid }) {
                     <EnvelopeMark />
                     PM
                   </button>
-                ) : null}
-                {/* Whose request it is, standing next to the way to answer
-                    it. */}
-                {REQUEST_KINDS.includes(post.kind) ? (
-                  <FeedPeople post={post} onOpen={openUser} />
                 ) : (
                   <button
                     type="button"
