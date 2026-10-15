@@ -34,7 +34,9 @@ const MODES = [
   { id: 'featured', label: 'Featured' },
   { id: 'watchme', label: 'WM', title: 'Watch me' },
   { id: 'ticket', label: 'Ticket' },
-  { id: 'ask', label: 'Vote' },
+  // A poll between nights is a contest between them, not a ballot — the tab
+  // says what the post actually is.
+  { id: 'ask', label: 'Battle' },
   { id: 'ride', label: 'Ride' },
   { id: 'alternative', label: 'Alt' },
 ]
@@ -265,6 +267,110 @@ function FeedPeople({ post, onOpen }) {
 }
 
 // Cards that lead with a kicker line instead of a top label and hashtags.
+/*
+ * What a post has left rather than how old it is. Three kinds of post are
+ * really appointments: a battle closes a day after it opens, a ride leaves at
+ * the hour it names, and a ticket request is only any use until the doors.
+ * For those the meta line counts down to the moment instead of counting up
+ * from the posting, because the hour of posting tells the reader nothing they
+ * can act on.
+ */
+const COUNTDOWN_KINDS = ['rating', 'ask', 'ride', 'ticket']
+
+const MINUTE_MS = 60000
+const DAY_MS = 86400000
+
+// A battle is open for a day.
+const BATTLE_MS = DAY_MS
+
+/*
+ * When the session opened. The posts carry their age as a phrase — "2h" — so
+ * the moment each was written is reckoned back from here once, rather than
+ * from the current instant: reckoned live, "a day after it was posted" would
+ * stay exactly a day away forever.
+ */
+const OPENED_AT = Date.now()
+
+function agedMs(when) {
+  const found = String(when || '').match(/^(\d+)\s*([mhd])$/)
+  if (!found) return 0
+  const unit = { m: MINUTE_MS, h: 60 * MINUTE_MS, d: DAY_MS }[found[2]]
+  return Number(found[1]) * unit
+}
+
+/*
+ * The next time the clock reads a given hour — today if it is still to come,
+ * tomorrow if it has already gone. Nightlife hours are written without a date
+ * and a ride at 23:20 means tonight, so the hour alone is enough to count to.
+ */
+function nextClock(text, from) {
+  const found = String(text || '').match(/(\d{1,2}):(\d{2})/)
+  if (!found) return 0
+  const at = new Date(from)
+  at.setHours(Number(found[1]), Number(found[2]), 0, 0)
+  if (at.getTime() <= from) at.setTime(at.getTime() + DAY_MS)
+  return at.getTime()
+}
+
+function deadlineFor(post) {
+  if (post.kind === 'rating' || post.kind === 'ask') {
+    return OPENED_AT - agedMs(post.when) + BATTLE_MS
+  }
+  // A ride leaves at the hour in its own caption; a ticket is wanted up to
+  // the moment the night it is for opens its doors.
+  if (post.kind === 'ride') return nextClock(post.caption, OPENED_AT)
+  return nextClock(PARTY_BY_ID[post.nights?.[0]]?.time, OPENED_AT)
+}
+
+function formatLeft(ms) {
+  if (ms <= 0) return 'Closed'
+  const minutes = Math.floor(ms / MINUTE_MS)
+  const hours = Math.floor(minutes / 60)
+  if (hours >= 1) return `${hours}h ${String(minutes % 60).padStart(2, '0')}m`
+  return `${Math.max(1, minutes)}m`
+}
+
+/*
+ * An hourglass, as a mark. The meta line carries one figure whether it counts
+ * up or down, and nothing in "13h 16m" says which — the glass beside it does,
+ * in the width of a character.
+ */
+function GlassMark() {
+  return (
+    <svg className="glass-mark" viewBox="4.6 2.1 14.8 20.4" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
+      <path
+        fill="currentColor"
+        d="M5 2.4h14v2.1h-1.1c0 3-1.3 5.6-3.4 7.5 2.1 1.9 3.4 4.5 3.4 7.5H19v2.1H5v-2.1h1.1c0-3 1.3-5.6 3.4-7.5C7.4 10.1 6.1 7.5 6.1 4.5H5zM8.2 4.5c0 2.6 1.2 4.8 3 6.2v2.6c-1.8 1.4-3 3.6-3 6.2h7.6c0-2.6-1.2-4.8-3-6.2v-2.6c1.8-1.4 3-3.6 3-6.2z"
+      />
+      {/* The sand: a heap run down into the lower bulb. */}
+      <path
+        fill="currentColor"
+        d="M9.1 17.9c.5-1.3 1.5-2.3 2.9-2.9 1.4.6 2.4 1.6 2.9 2.9zM11.6 6.9h.8v4h-.8z"
+      />
+    </svg>
+  )
+}
+
+/*
+ * The figure, ticking. Half a minute between reads: the smallest thing shown
+ * is a minute, so anything finer would redraw the feed for nothing.
+ */
+function Countdown({ post }) {
+  const [now, setNow] = useState(() => Date.now())
+
+  useEffect(() => {
+    const timer = window.setInterval(() => setNow(Date.now()), 30 * 1000)
+    return () => window.clearInterval(timer)
+  }, [])
+
+  return (
+    <span className="feed-left">
+      <GlassMark />
+      {formatLeft(deadlineFor(post) - now)}
+    </span>
+  )
+}
+
 const REQUEST_KINDS = ['ride', 'ticket']
 
 function kindLabel(kind) {
@@ -1178,27 +1284,47 @@ export function FeedScreen({ onPaid }) {
                    the night, the way a rating does. */
                 <p className="rate-kicker">{kindLabel(post.kind)}</p>
               ) : null}
-              <div className="feed-meta">
-                <FeedPeople post={post} onOpen={openUser} />
-                <span>{post.when}</span>
-              </div>
-              {/* Back under the name. Beside it the line competed with the
-                  person for the top of the card; under it, it reads as what
-                  that person is asking for. `.feed-kicker` carries the gap,
-                  which the meta row's own spacing used to swallow. */}
-              {REQUEST_KINDS.includes(post.kind) ? (
-                <RequestKicker
-                  ids={post.nights}
-                  label={
-                    post.kind === 'ride'
-                      ? 'Looking for a ride'
-                      : 'Looking for a ticket'
-                  }
-                  mark={post.kind === 'ride' ? <WheelMark /> : <TicketRequestMark />}
-                  tone={post.kind === 'ride' ? 'ride' : 'ticket'}
-                />
-              ) : null}
-              {post.kind === 'rating' ? <RatingKicker options={post.options} /> : null}
+              {/* A request leads with the ask, not with the asker. What it
+                  wants and how long is left are the two things a reader
+                  decides on, so they take the top line between them and the
+                  person moves down beside the button that answers them. */}
+              {REQUEST_KINDS.includes(post.kind) || post.kind === 'rating' ? (
+                <div className="feed-meta is-request">
+                  {/* A battle's own line counts the votes where a request's
+                      names the night, but both are the headline of the card
+                      and both sit opposite what time is left. */}
+                  {post.kind === 'rating' ? (
+                    <RatingKicker options={post.options} />
+                  ) : (
+                    <RequestKicker
+                      ids={post.nights}
+                      label={
+                        post.kind === 'ride'
+                          ? 'Looking for a ride'
+                          : 'Looking for a ticket'
+                      }
+                      mark={
+                        post.kind === 'ride' ? (
+                          <WheelMark />
+                        ) : (
+                          <TicketRequestMark />
+                        )
+                      }
+                      tone={post.kind === 'ride' ? 'ride' : 'ticket'}
+                    />
+                  )}
+                  <Countdown post={post} />
+                </div>
+              ) : (
+                <div className="feed-meta">
+                  <FeedPeople post={post} onOpen={openUser} />
+                  {COUNTDOWN_KINDS.includes(post.kind) ? (
+                    <Countdown post={post} />
+                  ) : (
+                    <span>{post.when}</span>
+                  )}
+                </div>
+              )}
               {post.track ? <p className="feed-track">{post.track}</p> : null}
               {/* A request says what it wants in its kicker — the night, and
                   which of the two things is being asked for. The free line
@@ -1223,8 +1349,14 @@ export function FeedScreen({ onPaid }) {
               ) : null}
               {/* A rating card already is the vote — the row of options is the
                   action, so a second peck and a share underneath it only
-                  compete with it. */}
-              {post.kind === 'rating' ? null : (
+                  compete with it. Whose battle it is still goes at the foot,
+                  under the thing being decided, the way a request's asker
+                  sits under the ask. */}
+              {post.kind === 'rating' ? (
+                <div className="feed-actions is-request is-battle">
+                  <FeedPeople post={post} onOpen={openUser} />
+                </div>
+              ) : (
               <div
                 className={`feed-actions${REQUEST_KINDS.includes(post.kind) ? ' is-request' : ''}`}
               >
@@ -1240,6 +1372,11 @@ export function FeedScreen({ onPaid }) {
                     <EnvelopeMark />
                     PM
                   </button>
+                ) : null}
+                {/* Whose request it is, standing next to the way to answer
+                    it. */}
+                {REQUEST_KINDS.includes(post.kind) ? (
+                  <FeedPeople post={post} onOpen={openUser} />
                 ) : (
                   <button
                     type="button"

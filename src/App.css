@@ -2989,13 +2989,92 @@
 /* A request card has no caption under its kicker, so the PM button lands
    immediately beneath the line and the two read as one stacked block. It
    gets the air the caption would have given it. */
-.feed-actions.is-request {
+/* A request's top line: the ask on the left, what's left of it on the right,
+   both hung from the top of the row so the countdown lines up with the first
+   line of the kicker rather than floating in the middle of a wrapped one. */
+.feed-meta.is-request {
+  align-items: flex-start;
+}
+
+/* The kicker set its own step down from the name it used to sit under. In the
+   top line there is nothing above it to step away from. */
+.feed-meta.is-request .feed-kicker {
+  margin-top: 0;
+}
+
+/* The countdown reads with the kicker's first line. */
+.feed-meta.is-request .feed-left {
+  line-height: 1.2;
+}
+
+/* The person in the actions row is not one of its controls. `.feed-actions
+   button` is (0,2,1) and outranked `.feed-user-copy`, so the name came out
+   wearing the PM button's plate and the face came out its size — both are put
+   back to the way they read at the top of every other card. */
+.feed-actions.is-request .feed-user button {
+  height: auto;
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
+  color: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+.feed-actions.is-request .feed-user button:hover {
+  background: transparent;
+}
+
+.feed-actions.is-request .feed-user {
+  /* A name sits off the button by the gap a name wants, not the 10px the
+     controls keep between each other. */
+  margin-left: 2px;
+}
+
+/* A battle's foot holds only the person who opened it — there is no button
+   beside them, so the row is just the name standing under the options. */
+.feed-actions.is-request.is-battle {
   margin-top: 10px;
+}
+
+.feed-actions.is-request {
+  /* The person now rides in this row, so it needs the air a name wants
+     rather than the air a button wants. */
+  margin-top: 8px;
+  gap: 10px;
 }
 
 /* The chair that stands for "seats" on an offer line. Set to the line's own
    size and nudged onto the baseline, so the figure and the mark read as one
    token rather than as type with a picture after it. */
+/* The glass that marks a figure as time remaining rather than time passed.
+   Set in the line beside the count, a touch under the type size so it reads
+   as punctuation on the number. */
+.feed-left {
+  /* Plain inline text, not a flex row. A flex item's baseline is worked out
+     from its own content and an svg has none, so the glass was being set by
+     whichever edge the browser fell back on; as an inline box it simply sits
+     on the line the way a letter does. */
+  white-space: nowrap;
+}
+
+.glass-mark {
+  /* As tall as the figure beside it, less two pixels: the box is cropped to
+     the glass itself, so the height is drawn glass rather than mostly air. */
+  /* Whole pixels, not a calc on the em. The meta line is 0.78rem, so "1em
+     less two pixels" came out fractional and each card rounded it wherever it
+     happened to land — which is why the glass sat a hair high on some posts
+     and not others. Fixed at eleven by eight, every one of them is laid down
+     identically. */
+  display: inline-block;
+  height: 11px;
+  width: 8px;
+  margin-right: 4px;
+  /* Its foot on the baseline, where the figures' feet are. */
+  vertical-align: baseline;
+  opacity: 0.8;
+}
+
 .seat-mark {
   width: 0.92em;
   height: 0.92em;
