@@ -2650,6 +2650,15 @@
      splash's own height, which is the phone's. */
   position: relative;
   top: -5%;
+  /* Held back until the wordmark's own face is in — see Splash.jsx. A mark
+     that fades in is a mark; one that redraws itself in a second typeface is
+     a glitch. */
+  opacity: 0;
+  transition: opacity 260ms ease;
+}
+
+.splash-mark.is-lettered {
+  opacity: 1;
 }
 
 /* Recolorable variant: the white logo art is used as a mask, so the box

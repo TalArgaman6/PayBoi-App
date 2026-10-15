@@ -132,9 +132,9 @@
       "id": "alex-2",
       "kind": "live",
       "user": {
-        "id": "mor",
-        "name": "Mor Cohen",
-        "photo": "photos/sellers/noa.jpg"
+        "id": "omer",
+        "name": "Omer Salomon",
+        "photo": "photos/sellers/omer.jpg"
       },
       "video": "videos/forever-offer-nissim-hangar11.mp4",
       "frame": "bottom",
@@ -150,9 +150,9 @@
       "id": "maya-rate-1",
       "kind": "rating",
       "user": {
-        "id": "shay",
-        "name": "Shay Geva",
-        "photo": "photos/sellers/ido.jpg"
+        "id": "omri",
+        "name": "Omri Klayman",
+        "photo": "photos/sellers/omri.jpg"
       },
       "caption": "Help me pick tonight.",
       "when": "48m",
@@ -174,14 +174,14 @@
           "id": "gaze-haoman",
           "votes": 24,
           "upvoters": [
-            "Shani Amsalem"
+            "Adi Gill"
           ]
         },
         {
           "id": "fff-shirazi",
           "votes": 12,
           "upvoters": [
-            "Mor Cohen"
+            "Omer Salomon"
           ]
         }
       ]
@@ -190,9 +190,9 @@
       "id": "ido-ride-1",
       "kind": "ride",
       "user": {
-        "id": "refael",
-        "name": "Refael Haim",
-        "photo": "photos/sellers/sam.jpg"
+        "id": "daniel",
+        "name": "Daniel Vigder",
+        "photo": "photos/sellers/daniel.jpg"
       },
       "caption": "Florentin area → GAZE, 23:20. Two seats.",
       "when": "1h",
@@ -209,9 +209,9 @@
       "id": "maya-1",
       "kind": "featured",
       "user": {
-        "id": "shani",
-        "name": "Shani Amsalem",
-        "photo": "photos/sellers/maya.jpg"
+        "id": "adi",
+        "name": "Adi Gill",
+        "photo": "photos/sellers/adi.jpg"
       },
       "image": "photos/pool-party.jpg",
       "caption": "Crew looks before Gordon.",
@@ -238,9 +238,9 @@
       "id": "drag-room-1",
       "kind": "watchme",
       "user": {
-        "id": "refael",
-        "name": "Refael Haim",
-        "photo": "photos/sellers/sam.jpg"
+        "id": "daniel",
+        "name": "Daniel Vigder",
+        "photo": "photos/sellers/daniel.jpg"
       },
       "video": "videos/look-wm-marcos-pinto.mp4",
       "caption": "Prom queen has arrived.",
@@ -272,9 +272,9 @@
       "id": "ido-1",
       "kind": "alternative",
       "user": {
-        "id": "sahar",
-        "name": "Sahar Liam",
-        "photo": "photos/sellers/jordan.jpg"
+        "id": "naveh",
+        "name": "Naveh Negbie",
+        "photo": "photos/sellers/naveh.jpg"
       },
       "image": "photos/volleyball.jpg",
       "caption": "Sunday nets at Gordon.",
@@ -292,9 +292,9 @@
       "id": "noa-ticket-1",
       "kind": "ticket",
       "user": {
-        "id": "shani",
-        "name": "Shani Amsalem",
-        "photo": "photos/sellers/maya.jpg"
+        "id": "adi",
+        "name": "Adi Gill",
+        "photo": "photos/sellers/adi.jpg"
       },
       "caption": "Looking for Gaze + drinks pack.",
       "when": "9h",
@@ -311,9 +311,9 @@
       "id": "alex-1",
       "kind": "live",
       "user": {
-        "id": "sahar",
-        "name": "Sahar Liam",
-        "photo": "photos/sellers/jordan.jpg"
+        "id": "sharon",
+        "name": "Sharon Shemesh",
+        "photo": "photos/sellers/sharon.jpg"
       },
       "video": "videos/mistermiss-pride-week.mp4",
       "frame": "bottom",
@@ -405,9 +405,9 @@
       "id": "maya-ride-1",
       "kind": "ride",
       "user": {
-        "id": "shay",
-        "name": "Shay Geva",
-        "photo": "photos/sellers/ido.jpg"
+        "id": "omri",
+        "name": "Omri Klayman",
+        "photo": "photos/sellers/omri.jpg"
       },
       "caption": "North TLV area → Forever, after 00:30.",
       "when": "4h",
@@ -424,9 +424,9 @@
       "id": "jordan-1",
       "kind": "alternative",
       "user": {
-        "id": "refael",
-        "name": "Refael Haim",
-        "photo": "photos/sellers/sam.jpg"
+        "id": "nitzan",
+        "name": "Nitzan Kastel",
+        "photo": "photos/sellers/nitzan.jpg"
       },
       "image": "photos/drag-stage.jpg",
       "caption": "Callas karaoke fit.",
