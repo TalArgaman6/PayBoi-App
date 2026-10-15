@@ -2123,6 +2123,15 @@
 
 .pay-card .fiat-balance {
   position: relative;
+  /* It is a button now — a tap empties the wallet — so it carries the same
+     chrome-stripping the pck figure does and stays a line of type. */
+  display: block;
+  appearance: none;
+  border: 0;
+  padding: 0;
+  background: none;
+  text-align: inherit;
+  cursor: pointer;
   margin: 0;
   /* Solid. Held at 78% the shekel figure read as a disclaimer under the pck
      balance rather than as the other half of what you have; it is a smaller

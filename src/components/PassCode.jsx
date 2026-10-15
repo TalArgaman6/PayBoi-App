@@ -2,7 +2,13 @@ import { useEffect, useMemo, useState } from 'react'
 import QRCode from 'qrcode'
 import catalog from '../data/feed.json'
 import { assetUrl } from '../lib/format.js'
-import { nextPassToken, passUrl, redeemPass, remainingCount } from '../lib/passes.js'
+import {
+  nextPassToken,
+  passUrl,
+  redeemPass,
+  remainingCount,
+  remainingTokens,
+} from '../lib/passes.js'
 
 /*
  * How many passes deep the stack is allowed to look. Past five the slivers
@@ -28,7 +34,7 @@ export function PassCode({ gift, onGranted }) {
   const behind = Math.min(Math.max(remainingCount(gift) - 1, 0), STACK_MAX)
   const people = useMemo(following, [])
   const [markup, setMarkup] = useState('')
-  const [ghost, setGhost] = useState('')
+  const [ghosts, setGhosts] = useState([])
   const [qrInset, setQrInset] = useState('0px')
   const [qrInk, setQrInk] = useState('108px')
   const [picking, setPicking] = useState(false)
@@ -36,6 +42,12 @@ export function PassCode({ gift, onGranted }) {
   const [pending, setPending] = useState(null)
   const shown = people.filter((person) =>
     person.name.toLowerCase().includes(query.trim().toLowerCase()),
+  )
+
+  // The codes under the top one, one per pass still in hand.
+  const under = useMemo(
+    () => remainingTokens(gift).slice(1, STACK_MAX + 1),
+    [gift, token],
   )
 
   useEffect(() => {
@@ -47,15 +59,19 @@ export function PassCode({ gift, onGranted }) {
       color: { dark: '#ffffff', light: '#00000000' },
     }
     /*
-     * Two renders of the one code. The live card keeps its one-module quiet
-     * zone, which is what a scanner wants. The copies behind it are drawn
+     * The live card and the deck behind it. The live one keeps its one-module
+     * quiet zone, which is what a scanner wants. The ones behind are drawn
      * without one, because all that ever shows of them is a single pixel off
-     * their left edge — and with a quiet zone that pixel is blank.
+     * their left edge — and with a quiet zone that pixel is blank. Each is its
+     * own pass, so each is its own code: the slivers differ down the stack the
+     * way the passes do.
      */
     Promise.all([
       QRCode.toString(passUrl(token), { ...options, margin: 1 }),
-      QRCode.toString(passUrl(token), { ...options, margin: 0 }),
-    ]).then(([svg, bare]) => {
+      ...under.map((next) =>
+        QRCode.toString(passUrl(next), { ...options, margin: 0 }),
+      ),
+    ]).then(([svg, ...bare]) => {
       if (cancel) return
       // viewBox units are modules, quiet zone included, across the 108px the
       // card leaves inside its 6px padding.
@@ -65,12 +81,12 @@ export function PassCode({ gift, onGranted }) {
         setQrInk(`calc((120px - 12px) * ${(modules - 2) / modules})`)
       }
       setMarkup(svg)
-      setGhost(bare)
+      setGhosts(bare)
     })
     return () => {
       cancel = true
     }
-  }, [token])
+  }, [token, under])
 
   function closePick() {
     setPicking(false)
@@ -103,13 +119,13 @@ export function PassCode({ gift, onGranted }) {
             underneath would shine through the top card's gaps and muddy its
             modules. Drawn before it in the DOM so it covers them. */}
         <div className="gift-pass-deck" style={{ '--deck': behind }}>
-          {Array.from({ length: behind }, (_, index) => (
+          {ghosts.slice(0, behind).map((svg, index) => (
             <div
-              key={index}
+              key={under[index] || index}
               className="gift-pass-ghost"
               style={{ '--depth': index + 1 }}
               aria-hidden="true"
-              dangerouslySetInnerHTML={{ __html: ghost }}
+              dangerouslySetInnerHTML={{ __html: svg }}
             />
           ))}
           <div
@@ -133,7 +149,12 @@ export function PassCode({ gift, onGranted }) {
           </svg>
         </button>
       </div>
-      <small>Scan to use one</small>
+      {/* Which pass this is of the holding, rather than "one" — the deck
+          beside it already says there are several, and this says how many
+          and that the code on top is the first of them. */}
+      <small>
+        Scan to use 1 / {remainingCount(gift)}
+      </small>
       {picking ? (
         <div className="gift-pop" role="presentation" onClick={closePick}>
           <div

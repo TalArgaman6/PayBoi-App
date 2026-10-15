@@ -27,6 +27,21 @@ export function passCounts(gifts, used = readUsed()) {
   return Object.fromEntries(gifts.map((gift) => [gift.id, remainingCount(gift, used)]))
 }
 
+/*
+ * Every pass still in hand, in order. The top of the deck is the first of
+ * them; the rest are what the stack behind it is made of, and each one is a
+ * different code — the slivers down the left edge are real passes, so they
+ * ought not to be five copies of the same picture.
+ */
+export function remainingTokens(gift, used = readUsed()) {
+  const tokens = []
+  for (let index = 1; index <= gift.count; index += 1) {
+    const token = tokenFor(gift.id, index)
+    if (!used.includes(token)) tokens.push(token)
+  }
+  return tokens
+}
+
 export function nextPassToken(gift, used = readUsed()) {
   for (let index = 1; index <= gift.count; index += 1) {
     const token = tokenFor(gift.id, index)

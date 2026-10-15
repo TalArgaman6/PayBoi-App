@@ -336,14 +336,16 @@ export default function App() {
               ) : (
                 <>
                   {/* The price is already in the head; the button only
-                      has to say what pressing it does. */}
+                      has to say what pressing it does — and when the card
+                      can't cover it, what pressing it does is nothing, so it
+                      says what the reader needs instead of a dead "Pay Now". */}
                   <button
                     type="button"
                     className="pay-btn"
                     onClick={() => setPaid(true)}
                     disabled={selected.pricePbs > balance}
                   >
-                    Pay Now
+                    {selected.pricePbs > balance ? 'Get Funds' : 'Pay Now'}
                   </button>
                   {selected.seller ? (
                     <button type="button" className="ghost-btn" onClick={() => setPmOpen(true)}>

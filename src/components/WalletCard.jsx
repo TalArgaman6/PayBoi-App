@@ -1,5 +1,11 @@
 import { formatTokenBalance } from '../lib/format.js'
-import { useBalance, useCounting, earnOver, getFiat } from '../lib/balance.js'
+import {
+  useBalance,
+  useCounting,
+  earnOver,
+  spendOver,
+  getFiat,
+} from '../lib/balance.js'
 
 /*
  * What a tap on the figure adds. The balance is the one number on the card,
@@ -30,9 +36,18 @@ export function WalletCard({ wallet }) {
             >
               {formatTokenBalance(balance)}
             </button>
-            <span className="fiat-balance">
+            {/* And what a tap on the shekel line does: empties it. The pair
+                is a till, so one end fills it and the other clears it out —
+                which is how an empty wallet gets looked at without editing
+                the json. */}
+            <button
+              type="button"
+              className="fiat-balance token-top-up"
+              onClick={() => spendOver(balance)}
+              aria-label="Empty the wallet"
+            >
               ₪{getFiat().toLocaleString('en-US')}
-            </span>
+            </button>
           </span>
         </p>
       </div>
