@@ -53,33 +53,23 @@ function CrestFeathers() {
 }
 
 /*
- * Horizontal lockup — the mark tucked into the shoulder of the P. Written as
- * inline SVG rather than loaded from public/brand/pck-crest-lockup.svg because
- * a webfont never loads inside an SVG referenced as <img src>, and the wordmark
- * has to be the same Cormorant Garamond as the screen titles beside it.
+ * Horizontal lockup. The drawn mark rather than type set to resemble it — the
+ * wordmark used to be a <text> in Cormorant inside an inline SVG, which is
+ * why it could not be loaded from a file at all (a webfont never loads inside
+ * an <img>). With the art itself there is no face to match.
+ *
+ * The source goes through assetUrl rather than a CSS background: the app is
+ * served from a sub-path on Pages, and a url() in the stylesheet resolves
+ * against the stylesheet, not the site — which is how the mark came to be
+ * missing from every header.
  */
-export function CrestLockup({ className = 'header-lockup' }) {
+export function CrestLockup({ className = 'header-lockup', bare = false }) {
   return (
-    <svg className={className} viewBox="0 0 106 36" role="img" aria-label="PCK">
-      {/* Sat on the wordmark's baseline, not floating over it. The crest is
-          drawn with its stems ending at y=26 and the gale rotation swings the
-          outermost one down to about y=32, so a y-offset of 0 brings that
-          lowest stem to the text's baseline at y=27 — the feathers stand on
-          the same line the letters do. */}
-      <g className="lockup-crest" transform="translate(8 0)" fill="currentColor">
-        <CrestFeathers />
-      </g>
-      <text
-        x="40"
-        y="27"
-        fill="currentColor"
-        fontSize="30"
-        fontWeight="600"
-        letterSpacing="0.9"
-      >
-        PCK
-      </text>
-    </svg>
+    <img
+      className={className}
+      src={assetUrl(bare ? 'brand/pck-header-letters.png' : 'brand/pck-header.png')}
+      alt="PCK"
+    />
   )
 }
 

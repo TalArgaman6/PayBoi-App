@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { unlockMotion } from '../lib/tilt.js'
-import { CrestStack } from './Logo.jsx'
+import { assetUrl } from '../lib/format.js'
 
 export function Splash({ onDone }) {
   /*
@@ -14,27 +14,12 @@ export function Splash({ onDone }) {
   }, [onDone])
 
   /*
-   * The wordmark is set in Cormorant, which arrives over the network with
-   * `display=swap` — so the lockup drew itself in Didot first and jumped when
-   * the real face landed. It waits here instead, and fades in once the fonts
-   * are in. The timer is the floor under it: a face that never loads must not
-   * cost the mark its whole appearance.
+   * The lockup used to be drawn — a crest in SVG over a wordmark set in
+   * Cormorant — which meant waiting for the face to arrive before it could be
+   * shown, or watching it redraw itself in Didot. It is the icon's own
+   * artwork now, so there is nothing to wait for: an image either is there or
+   * is being decoded, and either way it never changes shape.
    */
-  const [lettered, setLettered] = useState(false)
-
-  useEffect(() => {
-    let live = true
-    const settle = () => {
-      if (live) setLettered(true)
-    }
-    const floor = window.setTimeout(settle, 600)
-    document.fonts?.ready.then(settle)
-    return () => {
-      live = false
-      window.clearTimeout(floor)
-    }
-  }, [])
-
   return (
     <button
       type="button"
@@ -45,11 +30,8 @@ export function Splash({ onDone }) {
         onDone()
       }}
     >
-      <span
-        className={`splash-mark${lettered ? ' is-lettered' : ''}`}
-        aria-hidden="true"
-      >
-        <CrestStack />
+      <span className="splash-mark" aria-hidden="true">
+        <img src={assetUrl('brand/pck-lockup.png')} alt="" decoding="async" />
       </span>
     </button>
   )

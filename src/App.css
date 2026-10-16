@@ -3004,15 +3004,31 @@
      splash's own height, which is the phone's. */
   position: relative;
   top: -5%;
-  /* Held back until the wordmark's own face is in — see Splash.jsx. A mark
-     that fades in is a mark; one that redraws itself in a second typeface is
-     a glitch. */
-  opacity: 0;
-  transition: opacity 260ms ease;
+  /* It arrives rather than appears — a tenth of a second of nothing first, so
+     the fade reads as the app opening and not as a slow image. */
+  animation: splash-mark-in 420ms ease 100ms both;
+  /* Sized off the frame rather than in pixels, so the mark holds the same
+     share of the screen on every phone — the span is a grid item in the
+     splash, so the percentage resolves against the splash's own width. */
+  width: 24%;
+  max-width: 100px;
 }
 
-.splash-mark.is-lettered {
-  opacity: 1;
+.splash-mark img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+@keyframes splash-mark-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 /* Recolorable variant: the white logo art is used as a mask, so the box
@@ -4677,6 +4693,12 @@
    .screen-header h1 — so changing it here moves the title with it. It paints in
    currentColor and sets its wordmark in the title face, which is why it is
    inline SVG rather than a file: a webfont never loads inside an <img src>. */
+/*
+ * The mark, drawn rather than set. The art is built on the box the inline
+ * lockup used — 106 by 36, the letters' cap at 15.4 of the 28 the header
+ * gives it, standing on a baseline at 27 — so every number the header was
+ * already aligned to still holds, and the title beside it has not moved.
+ */
 .header-lockup {
   --lockup-h: 28px;
   display: block;
@@ -4684,8 +4706,6 @@
   width: auto;
   flex-shrink: 0;
   justify-self: end;
-  color: #fff;
-  font-family: var(--font-title);
 }
 
 /* The wallet header is the one place the crest is already on screen — it sits
@@ -4693,9 +4713,10 @@
    repeat, so the header keeps the wordmark alone. Hidden rather than swapped
    for a second component so the letters do not move: the viewBox is fixed and
    the text is at its right edge, which is the edge the header aligns to. */
-.wallet-screen .header-lockup .lockup-crest {
-  display: none;
-}
+/* On the wallet the feathers are already overhead, on the crest above the
+   portrait — a second set in the corner is the same mark twice. The letters
+   stand alone there, on the same baseline and at the same cap height, which
+   is the `bareMark` the wallet's header asks for. */
 
 /* The pinned rows — the two headline events, the two priciest market drops.
    A sheer white wash and a hairline edge: enough to lift the pair off the list
@@ -4810,13 +4831,20 @@
   text-shadow: var(--plume-shade), var(--plume-glow);
 }
 
-.wallet-screen[data-skin='chalk'] .header-lockup {
-  color: #0b0d11;
-}
-
-.wallet-screen[data-skin='chalk'] .wallet-top .header-lockup,
 .wallet-screen[data-skin='chalk'] .wallet-profile {
   filter:
+    drop-shadow(0 1px 2px rgb(255 255 255 / 55%))
+    drop-shadow(0 1px 10px rgb(255 255 255 / 45%));
+}
+
+/* The mark is artwork now, so going ink on the bone ground is a filter rather
+   than a colour — brightness(0) takes the whole drawing to black and leaves
+   its alpha alone, which is what keeps the shade on the letterforms. The lift
+   under it has to ride in the same chain; a second `filter` would replace
+   this one rather than add to it. */
+.wallet-screen[data-skin='chalk'] .header-lockup {
+  filter:
+    brightness(0)
     drop-shadow(0 1px 2px rgb(255 255 255 / 55%))
     drop-shadow(0 1px 10px rgb(255 255 255 / 45%));
 }
@@ -4950,7 +4978,7 @@
   /* The app's own raised surface under a blur, the way the sheets are — the
      strip is a piece of this app on top of this app, not a system chrome
      borrowed from somewhere else. */
-  background: rgb(31 44 57 / 92%);
+  background: rgb(31 44 57 / 70%);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   box-shadow:
@@ -5004,13 +5032,10 @@
 /* Money leaving is stated, money arriving is good news. The only colour on
    the strip is on the arrow, so the figure itself stays plain white and the
    two directions are still told apart at a glance. */
-.pay-notice.is-in .pay-notice-mark {
-  color: #7ee0a8;
-  background: rgb(126 224 168 / 16%);
-}
-
-.pay-notice.is-out .pay-notice-mark {
-  color: rgb(255 255 255 / 82%);
+/* Both directions in white. The arrow says which way the money went; a green
+   one said it twice and was the only colour anywhere on the strip. */
+.pay-notice .pay-notice-mark {
+  color: #fff;
 }
 
 .pay-notice-copy {

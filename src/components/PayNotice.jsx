@@ -62,16 +62,18 @@ export function PayNotice() {
       <span className="pay-notice-mark" aria-hidden="true">
         <svg viewBox="0 0 16 16">
           {/* An arrow out of the wallet or into it — one glyph turned over,
-              so the two read as a pair rather than as two icons. */}
+              so the two read as a pair rather than as two icons. Money
+              coming in points up and money going out points down, the way a
+              transfer list reads — they were the wrong way round. */}
           <path
-            d={out ? 'M8 13V3' : 'M8 3v10'}
+            d={out ? 'M8 3v10' : 'M8 13V3'}
             fill="none"
             stroke="currentColor"
             strokeWidth="1.6"
             strokeLinecap="round"
           />
           <path
-            d={out ? 'M4.4 6.6 8 3l3.6 3.6' : 'M4.4 9.4 8 13l3.6-3.6'}
+            d={out ? 'M4.4 9.4 8 13l3.6-3.6' : 'M4.4 6.6 8 3l3.6 3.6'}
             fill="none"
             stroke="currentColor"
             strokeWidth="1.6"
