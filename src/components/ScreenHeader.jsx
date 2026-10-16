@@ -4,9 +4,6 @@ export function ScreenHeader({
   title,
   kicker,
   pin = false,
-  // The wallet wears the crest over its portrait already, so its header takes
-  // the letters alone.
-  bareMark = false,
   onLogo = null,
   onTitle = null,
 }) {
@@ -46,10 +43,10 @@ export function ScreenHeader({
           onClick={onLogo}
           aria-label="Change backdrop"
         >
-          <CrestLockup bare={bareMark} />
+          <CrestLockup />
         </button>
       ) : (
-        <CrestLockup bare={bareMark} />
+        <CrestLockup />
       )}
     </header>
   )

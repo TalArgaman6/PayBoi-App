@@ -4803,16 +4803,6 @@
   justify-self: end;
 }
 
-/* The wallet header is the one place the crest is already on screen — it sits
-   over the portrait a few millimetres below. Two of them that close reads as a
-   repeat, so the header keeps the wordmark alone. Hidden rather than swapped
-   for a second component so the letters do not move: the viewBox is fixed and
-   the text is at its right edge, which is the edge the header aligns to. */
-/* On the wallet the feathers are already overhead, on the crest above the
-   portrait — a second set in the corner is the same mark twice. The letters
-   stand alone there, on the same baseline and at the same cap height, which
-   is the `bareMark` the wallet's header asks for. */
-
 /* The pinned rows — the two headline events, the two priciest market drops.
    A sheer white wash and a hairline edge: enough to lift the pair off the list
    without turning them into cards of their own. */

@@ -234,7 +234,6 @@ export function WalletScreen({ onSelect, openedPass = null }) {
             can be put up for a look. */}
         <ScreenHeader
           title={wallet.name}
-          bareMark
           onTitle={() => step(1)}
           onLogo={() => step(-1)}
         />
