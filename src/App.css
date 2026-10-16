@@ -2591,6 +2591,18 @@
   gap: 16px;
 }
 
+/* The line under the code and the hand-off mark, on one baseline. The mark is
+   nudged down by its own optical slack so its feet sit on the text's, not its
+   box's. */
+.gift-pass-foot {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  /* The code's own quiet zone reads as part of the gap, so flush under it the
+     line sat closer than it looked in the markup. */
+  margin-top: 8px;
+}
+
 .gift-grant {
   width: 28px;
   padding: 0;
@@ -2602,9 +2614,27 @@
   cursor: pointer;
 }
 
+/* The word between the two things you can do with the pass. It belongs to the
+   line, so it takes the line's weight rather than the text colour's full
+   strength. */
+.gift-pass-or {
+  color: rgb(255 255 255 / 56%);
+  font-size: 0.68rem;
+  line-height: 1;
+}
+
+.gift-pass-foot .gift-grant {
+  width: auto;
+  align-self: flex-end;
+  /* The glyph's box is taller than its ink, so sat flush it floats above the
+     line it is next to. */
+  margin-bottom: -2px;
+}
+
 .gift-grant svg {
   width: 26px;
   height: 20px;
+  display: block;
 }
 
 .gift-pop {

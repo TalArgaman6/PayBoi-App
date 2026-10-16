@@ -244,6 +244,20 @@ export function PassCode({ gift, onGranted }) {
             <div className="pass-laser" aria-hidden="true" />
           ) : null}
         </div>
+      </div>
+      {/* The foot: how many are in hand and where to send one. The hand-off
+          mark sits beside the line rather than beside the code, so the two
+          things you can do with a pass read as one row under it. */}
+      <div className="gift-pass-foot">
+        <button
+          type="button"
+          className="gift-pass-scan"
+          disabled={scan !== 'idle' && scan !== 'fresh'}
+          onClick={() => setScan('waiting')}
+        >
+          Scan to use 1 / {held}
+        </button>
+        <span className="gift-pass-or" aria-hidden="true">or</span>
         <button
           type="button"
           className="gift-grant"
@@ -258,17 +272,6 @@ export function PassCode({ gift, onGranted }) {
           </svg>
         </button>
       </div>
-      {/* Which pass this is of the holding, rather than "one" — the deck
-          beside it already says there are several, and this says how many
-          and that the code on top is the first of them. */}
-      <button
-        type="button"
-        className="gift-pass-scan"
-        disabled={scan !== 'idle' && scan !== 'fresh'}
-        onClick={() => setScan('waiting')}
-      >
-        Scan to use 1 / {held}
-      </button>
       {picking ? (
         <div
           className={`gift-pop${leaving ? ' is-leaving' : ''}`}
