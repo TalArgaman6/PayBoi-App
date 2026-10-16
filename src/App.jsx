@@ -12,7 +12,7 @@ import { consumeLocationRedeem } from './lib/passes.js'
 import { useDismissOnOutside } from './lib/dismiss.js'
 import { useWalletTilt } from './lib/tilt.js'
 import { EventsScreen } from './screens/EventsScreen.jsx'
-import { CrestLoader } from './components/CrestLoader.jsx'
+import { Spinner } from './components/Spinner.jsx'
 import { FeedScreen } from './screens/FeedScreen.jsx'
 import { MarketplaceScreen } from './screens/MarketplaceScreen.jsx'
 import { ShopScreen } from './screens/ShopScreen.jsx'
@@ -428,7 +428,7 @@ export default function App() {
                     ticket issued by the app turns over to a code. */}
                 {waits ? (
                   <div className="deal-wait">
-                    <CrestLoader />
+                    <Spinner />
                     <span>
                       {selected.seller
                         ? `Waiting on ${pmName(selected.seller)} to accept`

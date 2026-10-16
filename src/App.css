@@ -1089,7 +1089,9 @@
   right: 0;
   bottom: 0;
   width: min(84%, 300px);
-  background: var(--sheet-raised);
+  background: var(--sheet-over);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   color: var(--ink);
   padding: 22px 16px 18px;
   display: flex;
@@ -2696,7 +2698,9 @@
   border-radius: 16px;
   /* The app's own raised surface rather than a grey of its own: this card
      stands over the wallet and should read as the same material as it. */
-  background: var(--sheet-raised);
+  background: var(--sheet-over);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
 }
 
 .gift-pop-search {
@@ -3548,22 +3552,22 @@
   display: block;
 }
 
-/* The plume is a tall, narrow mark where the others are square, so it needs
-   a size up to carry the same weight on the row. */
-/* The plume is taller than it is wide, so it is sized by height and left to
-   take whatever width that gives it — forced into a square it would either
+/* One feather, upright: taller than it is wide, so it is sized by height and
+   takes whatever width that gives it. Forced into a square it would either
    shrink to nothing beside the other marks or stretch. */
 .feed-actions button svg.peck-mark {
-  /* The leaning crest's own 39:34, so the three feathers keep their fan and
-     their lean. Sized by width, because the spread is what it is read by. */
-  width: var(--i-md);
-  height: calc(var(--i-md) * 34 / 39);
-  /* Both the crest and the digits centred on the same line. The art's own
-     mass is even top to bottom, so no nudge is needed on top of it. */
+  /* A step under the row's icons. The feather is the tallest mark on the row
+     and the only one with nothing beside it to the eye but a number, so at
+     the full step it stood a little over the digits' cap rather than on it. */
+  height: calc(var(--i-md) - 4px);
+  width: calc((var(--i-md) - 4px) * 7.8 / 12);
   align-self: center;
-  /* A hair of air on the right only — the crest's left feather already leans
-     out past the quills, so the gap it brings is all on that side. */
   margin-right: 1px;
+  /* A pixel up off the centre line. The digits beside it have no descenders,
+     so their mass sits higher than their box does and a mark centred on the
+     box reads low against them. */
+  position: relative;
+  top: -1px;
 }
 
 /* An icon you've already acted on is the one state on the row that should
@@ -4039,7 +4043,12 @@
   position: absolute;
   inset: 0;
   z-index: 12;
-  background: #1c1a18;
+  /* The one panel still on a solid ground of its own — and a warm near-black
+     at that, where everything else in the app is the cold blue. On the shared
+     overlay surface it matches the drawer beside it. */
+  background: var(--sheet-over);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   color: #f6f3ef;
   display: flex;
   flex-direction: column;
@@ -4093,7 +4102,12 @@
   left: 27px;
   right: 27px;
   bottom: 84px;
-  background: var(--sheet-raised);
+  /* Translucent, but no blur behind it. The sheet is a card that turns over —
+     it carries `transform-style: preserve-3d` and two faces, one of them
+     pre-rotated — and a backdrop-filter forces the element to flatten its
+     3D children. The back face then came up mirrored and upside down. The
+     70% stands on its own; the blur is what cost it. */
+  background: var(--sheet-over);
   color: var(--ink);
   border-radius: 22px;
   padding: 12px 16px 16px;
@@ -4307,38 +4321,52 @@
   text-align: center;
 }
 
-.crest-loader {
-  /* Big enough to be the thing on the card rather than a marker beside the
-     line of text — it is the only thing happening while the seller decides. */
-  width: 78px;
-  height: calc(78px * 34 / 39);
+/* Big enough to be the thing on the card rather than a marker beside the line
+   of text — it is the only thing happening while the payment clears. */
+.spinner {
+  width: 108px;
+  height: 108px;
   color: #fff;
   display: block;
 }
 
-/* Each feather lights in turn and the other two stay dim, so the mark reads
-   as three dots thinking rather than as a logo fading in and out. */
-.crest-dot {
-  animation: crest-think 1.35s ease-in-out infinite;
+/*
+ * Three speeds and two directions. One layer turning is a logo being spun;
+ * layers that pass each other read as a mechanism working, which is the whole
+ * job of a spinner. They all turn about the viewBox's own middle, so the
+ * origin has to be said once — a transform-box of fill-box would give each
+ * group its own bounding box and throw the rings off centre.
+ */
+.spinner-fan,
+.spinner-beads {
+  transform-origin: 60px 60px;
 }
 
-.crest-dot:nth-child(2) {
-  animation-delay: 0.18s;
+.spinner-fan {
+  animation: spinner-turn 5.2s linear infinite;
 }
 
-.crest-dot:nth-child(3) {
-  animation-delay: 0.36s;
+/* Against the fan, so the two never sit still relative to each other. */
+.spinner-beads {
+  opacity: 0.5;
+  animation: spinner-turn 7s linear infinite reverse;
 }
 
-@keyframes crest-think {
-  0%,
-  65%,
-  100% {
-    opacity: 0.22;
+@keyframes spinner-turn {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+/* A turning thing is the one animation that cannot be stilled without losing
+   its meaning, so when motion is unwelcome it slows rather than stops. */
+@media (prefers-reduced-motion: reduce) {
+  .spinner-fan {
+    animation-duration: 14s;
   }
 
-  30% {
-    opacity: 1;
+  .spinner-beads {
+    animation-duration: 18s;
   }
 }
 
@@ -4361,10 +4389,6 @@
     transition: none;
   }
 
-  .crest-dot {
-    animation: none;
-    opacity: 0.7;
-  }
 }
 
 .detail-handle {
@@ -4966,19 +4990,24 @@
  */
 .pay-notice {
   position: absolute;
-  top: 10px;
+  /* Clear of the status bar. Installed to the home screen the app runs under
+     the clock, the battery and the camera cutout, and at a flat 10px the
+     strip's own figures were sitting behind them — so it starts below
+     whatever the device says it is keeping for itself, the way the screen
+     headers already do. */
+  top: calc(30px + env(safe-area-inset-top, 0px));
   left: 10px;
   right: 10px;
   z-index: 60;
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 10px 14px;
+  padding: 12px 14px;
   border-radius: 14px;
   /* The app's own raised surface under a blur, the way the sheets are — the
      strip is a piece of this app on top of this app, not a system chrome
      borrowed from somewhere else. */
-  background: rgb(31 44 57 / 70%);
+  background: var(--sheet-over);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   box-shadow:

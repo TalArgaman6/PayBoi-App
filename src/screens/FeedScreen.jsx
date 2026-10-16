@@ -8,7 +8,7 @@ import { ScreenHeader } from '../components/ScreenHeader.jsx'
 import { ALT_EVENT_TYPES } from '../lib/filters.js'
 import { assetUrl, shortName } from '../lib/format.js'
 import { useDismissOnOutside } from '../lib/dismiss.js'
-import { CrestLoader } from '../components/CrestLoader.jsx'
+import { Spinner } from '../components/Spinner.jsx'
 import { earnOver } from '../lib/balance.js'
 
 const ME = {
@@ -182,36 +182,36 @@ function FeedClip({ src, className }) {
 }
 
 /*
- * A peck, not a like. The mark never fills — casting only turns it white,
- * which the button's own colour does, so the shape and its weight are the
- * same either way and the count beside it never shifts.
+ * The peck. One feather of the crest rather than all three — at the size an
+ * action row gives it, three were a smudge, and the single eye is the thing
+ * that reads. The two states are one drawing: the same outline, with the
+ * inside either open or carrying its eye.
  *
- * The crest itself: the same three feathers that stand over every profile
- * circle and sit in the header lockup, drawn here at the same proportions so
- * the app only ever has the one mark. The single plume it replaces read as a
- * shape of its own beside the brand's.
+ * Both are cut rather than stacked. Under evenodd a second subpath running
+ * inside the first opens a hole in it, so what shows through the eye is the
+ * card behind — which is why the unpecked one is a rim and not a grey disc,
+ * and why the pecked one's eye stays dark on every ground the feed puts it
+ * on.
  */
-function Peck() {
+const PLUME = 'M0-6.2C1.7-4 3.4-2.4 3.4.3 3.4 3 1.9 4.8 0 4.8-1.9 4.8-3.4 3-3.4.3-3.4-2.4-1.7-4 0-6.2Z'
+// Open: a wide hole that leaves the outline as a thick rim.
+const HOLLOW = 'M0 .7m-2.45 0a2.45 2.45 0 1 0 4.9 0a2.45 2.45 0 1 0-4.9 0Z'
+// Pecked: the eye's ring, and the pupil filled back in inside it.
+const IRIS = 'M0 .7m-2.45 0a2.45 2.45 0 1 0 4.9 0a2.45 2.45 0 1 0-4.9 0Z'
+const PUPIL = 'M0 1.15m-1.35 0a1.35 1.35 0 1 0 2.7 0a1.35 1.35 0 1 0-2.7 0Z'
+
+function Peck({ on = false }) {
   return (
-    /* The lockup's crest exactly: the same three feathers at the same lean,
-       -18° about the foot of the middle quill, and the same splayed eyes.
-       The viewBox is the leaning art's bounds, not the upright 36 x 26 box,
-       so the top-right feather and the bottom-left stem both clear it. */
-    <svg className="peck-mark" viewBox="-5 -2 39 34" aria-hidden="true">
-      <g fill="currentColor" transform="rotate(-18 18 26)">
-        <path d="M18 26c-.5-4.2-.6-8.2-.2-12.1h1.2c.4 3.9.3 7.9-.2 12.1z" />
-        <path d="M14.4 26c-1.9-3.8-3.3-7.4-4.2-11l1.1-.4c1.5 3.6 2.6 7.3 3.4 11.4z" />
-        <path d="M21.6 26c1.9-3.8 3.3-7.4 4.2-11l-1.1-.4c-1.5 3.6-2.6 7.3-3.4 11.4z" />
-        <g transform="translate(18 8.6) rotate(-15)">
-          <path d="M0-6.2C1.7-4 3.4-2.4 3.4.3 3.4 3 1.9 4.8 0 4.8-1.9 4.8-3.4 3-3.4.3-3.4-2.4-1.7-4 0-6.2Z" />
-        </g>
-        <g transform="translate(8.6 10.3) rotate(-40)">
-          <path d="M0-6.2C1.7-4 3.4-2.4 3.4.3 3.4 3 1.9 4.8 0 4.8-1.9 4.8-3.4 3-3.4.3-3.4-2.4-1.7-4 0-6.2Z" />
-        </g>
-        <g transform="translate(27.4 10.3) rotate(7)">
-          <path d="M0-6.2C1.7-4 3.4-2.4 3.4.3 3.4 3 1.9 4.8 0 4.8-1.9 4.8-3.4 3-3.4.3-3.4-2.4-1.7-4 0-6.2Z" />
-        </g>
-      </g>
+    <svg
+      className={`peck-mark${on ? ' is-on' : ''}`}
+      viewBox="-3.9 -6.7 7.8 12"
+      aria-hidden="true"
+    >
+      <path
+        fill="currentColor"
+        fillRule="evenodd"
+        d={on ? `${PLUME}${IRIS}${PUPIL}` : `${PLUME}${HOLLOW}`}
+      />
     </svg>
   )
 }
@@ -805,7 +805,7 @@ function PmSheet({ post, onClose, onPaid }) {
       </div>
       {deal ? (
         <div className="deal-wait">
-          <CrestLoader />
+          <Spinner />
           <span>
             {deal === 'pending'
               ? `Waiting on ${name} to accept`
@@ -1451,7 +1451,7 @@ export function FeedScreen({ onPaid }) {
                     aria-label="Peck"
                     onClick={() => like(post.id)}
                   >
-                    <Peck />
+                    <Peck on={liked.has(post.id)} />
                     {post.likes || 0}
                   </button>
                 )}

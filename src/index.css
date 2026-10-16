@@ -69,6 +69,19 @@
      the phone's gradient — so they read as the chrome coming forward rather
      than as another card on the feed. */
   --sheet-raised: #1f2c39;
+  /*
+   * The same surface, let through. Anything laid over the app — a sheet, a
+   * drawer, a confirm — sits here, with a blur behind it, so the screen it
+   * covers is still there underneath rather than replaced. Solid, a popup
+   * reads as a new page; held back, it reads as a layer.
+   *
+   * The number has to be well under what it sounds like. Over the app's own
+   * near-black, 90% is a difference of a few levels of grey and the panel
+   * still reads as opaque — there is nothing bright enough behind it for the
+   * last tenth to show. Three-quarters is where the ground starts coming
+   * through as something you can see rather than measure.
+   */
+  --sheet-over: rgb(31 44 57 / 75%);
   --muted: #8b90a0;
   --kicker: #ececec;
   --btn: #2a2d38;

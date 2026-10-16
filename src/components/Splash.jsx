@@ -4,12 +4,12 @@ import { assetUrl } from '../lib/format.js'
 
 export function Splash({ onDone }) {
   /*
-   * The hold used to be 4.2s because the line typed itself out over most of
-   * it. With the line gone there is nothing to wait for, so the mark shows
-   * just long enough to register and the app opens behind it.
+   * Three seconds. Long enough for the mark to be looked at rather than
+   * glimpsed — at 1.8s it was gone before anyone had read it. A tap still
+   * skips the rest of the hold, so nobody who has seen it is kept waiting.
    */
   useEffect(() => {
-    const doneTimer = window.setTimeout(onDone, 1800)
+    const doneTimer = window.setTimeout(onDone, 3000)
     return () => window.clearTimeout(doneTimer)
   }, [onDone])
 
