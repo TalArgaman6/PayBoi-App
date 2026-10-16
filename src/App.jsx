@@ -427,13 +427,16 @@ export default function App() {
                     clears, the sheet closes and the wallet takes over. Only a
                     ticket issued by the app turns over to a code. */}
                 {waits ? (
-                  <div className="deal-wait">
+                  /* Waiting on a person is worth naming — you want to know
+                     who. Waiting on a payment is not: the turning feather
+                     already says the only thing the line said, and a caption
+                     under it that reads "confirming your payment" on a sheet
+                     that is plainly confirming a payment is furniture. */
+                  <div className={`deal-wait${selected.seller ? '' : ' is-bare'}`}>
                     <Spinner />
-                    <span>
-                      {selected.seller
-                        ? `Waiting on ${pmName(selected.seller)} to accept`
-                        : 'Confirming your payment'}
-                    </span>
+                    {selected.seller ? (
+                      <span>Waiting on {pmName(selected.seller)} to accept</span>
+                    ) : null}
                   </div>
                 ) : (
                 <div className={`code-plate is-${scan}`}>

@@ -1089,9 +1089,15 @@
   right: 0;
   bottom: 0;
   width: min(84%, 300px);
-  background: var(--sheet-over);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  /* The side panels — the filter and the set's notes — take their own value
+     rather than the shared one. They cover a whole screen edge to edge, so a
+     little more of what is behind them shows than a sheet laid in the middle
+     needs to let through. */
+  background: rgb(31 44 57 / 85%);
+  /* Enough to settle the list behind it without erasing it: a panel reads as
+     translucent only while you can still make out what it is over. */
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
   color: var(--ink);
   padding: 22px 16px 18px;
   display: flex;
@@ -3552,22 +3558,44 @@
   display: block;
 }
 
-/* One feather, upright: taller than it is wide, so it is sized by height and
-   takes whatever width that gives it. Forced into a square it would either
-   shrink to nothing beside the other marks or stretch. */
-.feed-actions button svg.peck-mark {
-  /* A step under the row's icons. The feather is the tallest mark on the row
-     and the only one with nothing beside it to the eye but a number, so at
-     the full step it stood a little over the digits' cap rather than on it. */
-  height: calc(var(--i-md) - 4px);
-  width: calc((var(--i-md) - 4px) * 7.8 / 12);
+/*
+ * One feather, upright. Taller than it is wide, so it is sized by height and
+ * takes whatever width the art's own 163:240 gives it — forced into a square
+ * it would either shrink to nothing beside the other marks or stretch.
+ *
+ * Painted as a mask: the box is filled with currentColor and the drawing cuts
+ * the shape out of it. That is what lets the row's own colour reach it —
+ * pewter at rest, white under `.is-on` — from one file, with no second
+ * artwork for the pecked state.
+ */
+.feed-actions button .peck-mark {
+  /* The feather carries more height than the row's other marks and reads
+     taller still for being narrow, so it comes down a step from them. */
+  height: calc(var(--i-md) - 5px);
+  width: calc((var(--i-md) - 5px) * 195 / 240);
   align-self: center;
   margin-right: 1px;
-  /* A pixel up off the centre line. The digits beside it have no descenders,
-     so their mass sits higher than their box does and a mark centred on the
-     box reads low against them. */
+  display: block;
+  flex-shrink: 0;
+  background-color: currentColor;
+  -webkit-mask-image: var(--icon);
+  mask-image: var(--icon);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  /*
+   * Half a pixel of lift. The digits are the only other thing in the button,
+   * so moving the mark up by half is the same as taking the number down by
+   * half — and it can be done on the one element that already has a
+   * position, without wrapping a text node to shift it. Subpixel, so it
+   * lands as a touch of antialiasing rather than a jump; on a 2x or 3x
+   * screen it is a real pixel.
+   */
   position: relative;
-  top: -1px;
+  top: -0.5px;
 }
 
 /* An icon you've already acted on is the one state on the row that should
@@ -4202,9 +4230,12 @@
  * room is going and the button drops to the foot, where every other sheet
  * puts it.
  */
+/* Sized by what is in it. The stretching row was there to push a caption to
+   the middle of the face; with the caption gone it only held the sheet open
+   at a height nothing was using. */
 .detail-face.is-back.is-wait {
-  align-content: stretch;
-  grid-template-rows: auto auto 1fr auto;
+  align-content: start;
+  grid-template-rows: auto auto auto auto;
 }
 
 .detail-face.is-back.is-wait .deal-wait {
@@ -4321,52 +4352,89 @@
   text-align: center;
 }
 
+/* The spinner on its own. With the line gone, the sheet has a title, a mark
+   and a button in it and nothing else — so it is sized for those three and
+   not held open at the height it had when there was a caption to fit. */
+.deal-wait.is-bare {
+  gap: 0;
+  padding: 10px 0 12px;
+}
+
 /* Big enough to be the thing on the card rather than a marker beside the line
    of text — it is the only thing happening while the payment clears. */
 .spinner {
-  width: 108px;
-  height: 108px;
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
   color: #fff;
-  display: block;
 }
 
 /*
- * Three speeds and two directions. One layer turning is a logo being spun;
- * layers that pass each other read as a mechanism working, which is the whole
- * job of a spinner. They all turn about the viewBox's own middle, so the
- * origin has to be said once — a transform-box of fill-box would give each
- * group its own bounding box and throw the rings off centre.
+ * The eye, breathing. Scale and opacity together: scale alone reads as a
+ * zoom, opacity alone as a blink, and the two on one easing read as
+ * something alive waiting. The ring behind it goes the other way, so the
+ * pair never arrive at the same moment and the mark never looks still.
  */
-.spinner-fan,
-.spinner-beads {
-  transform-origin: 60px 60px;
+.spinner-eye {
+  grid-area: 1 / 1;
+  width: calc(64px * 195 / 240);
+  height: 64px;
+  background-color: currentColor;
+  -webkit-mask-image: var(--icon);
+  mask-image: var(--icon);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  animation: spinner-breathe 1.6s cubic-bezier(0.45, 0, 0.55, 1) infinite;
 }
 
-.spinner-fan {
-  animation: spinner-turn 5.2s linear infinite;
+/* A ring opening out of it and fading, the way a tap spreads — one more
+   thing moving, and nothing in it finer than a hairline circle. */
+.spinner::after {
+  content: '';
+  grid-area: 1 / 1;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: 1.5px solid currentColor;
+  animation: spinner-ripple 1.6s cubic-bezier(0.2, 0.6, 0.3, 1) infinite;
 }
 
-/* Against the fan, so the two never sit still relative to each other. */
-.spinner-beads {
-  opacity: 0.5;
-  animation: spinner-turn 7s linear infinite reverse;
-}
+@keyframes spinner-breathe {
+  0%,
+  100% {
+    transform: scale(0.84);
+    opacity: 0.55;
+  }
 
-@keyframes spinner-turn {
-  to {
-    transform: rotate(1turn);
+  45% {
+    transform: scale(1);
+    opacity: 1;
   }
 }
 
-/* A turning thing is the one animation that cannot be stilled without losing
-   its meaning, so when motion is unwelcome it slows rather than stops. */
+@keyframes spinner-ripple {
+  0% {
+    transform: scale(0.58);
+    opacity: 0.45;
+  }
+
+  70%,
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+/* Waiting still has to look like waiting, so it slows rather than stops. */
 @media (prefers-reduced-motion: reduce) {
-  .spinner-fan {
-    animation-duration: 14s;
-  }
-
-  .spinner-beads {
-    animation-duration: 18s;
+  .spinner-eye,
+  .spinner::after {
+    animation-duration: 4.5s;
   }
 }
 
@@ -4998,7 +5066,7 @@
      strip's own figures were sitting behind them — so it starts below
      whatever the device says it is keeping for itself, the way the screen
      headers already do. */
-  top: calc(30px + env(safe-area-inset-top, 0px));
+  top: calc(20px + env(safe-area-inset-top, 0px));
   left: 10px;
   right: 10px;
   z-index: 60;
@@ -5010,9 +5078,15 @@
   /* The app's own raised surface under a blur, the way the sheets are — the
      strip is a piece of this app on top of this app, not a system chrome
      borrowed from somewhere else. */
-  background: var(--sheet-over);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  /* Its own value rather than the shared one. The strip is the only overlay
+     that lands on the wallet's plume, and that ground is worth seeing more
+     of than a sheet over a list of rows is. */
+  background: rgb(31 44 57 / 80%);
+  /* Light. At 12px the plume behind it was blurred past recognition, so the
+     strip read as a solid slab even at 92% — what tells you a panel is
+     translucent is seeing something you recognise through it. */
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
   box-shadow:
     0 1px 0 0 rgb(255 255 255 / 8%) inset,
     0 10px 28px rgb(0 0 0 / 38%);
@@ -5027,13 +5101,19 @@
   animation: pay-notice-out 420ms cubic-bezier(0.4, 0, 1, 1) forwards;
 }
 
+/*
+ * It comes in on movement alone. It used to fade up as well, and with
+ * `both` holding the last frame the element then sat at `opacity: 1` for the
+ * rest of its life — which is correct, but it meant the strip's own
+ * translucency was being carried by an animation rather than by the rule
+ * that sets it. Nothing touches opacity on the way in now, so the only thing
+ * deciding how much shows through is the background colour.
+ */
 @keyframes pay-notice-in {
   from {
-    opacity: 0;
     transform: translateY(-120%);
   }
   to {
-    opacity: 1;
     transform: translateY(0);
   }
 }

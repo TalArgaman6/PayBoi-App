@@ -182,37 +182,23 @@ function FeedClip({ src, className }) {
 }
 
 /*
- * The peck. One feather of the crest rather than all three — at the size an
- * action row gives it, three were a smudge, and the single eye is the thing
- * that reads. The two states are one drawing: the same outline, with the
- * inside either open or carrying its eye.
+ * The peck. The drawn feather, used as a mask rather than as a picture: only
+ * its alpha is read and the colour comes from the button, so the one file
+ * serves both states — pewter at rest, white once pecked — and follows any
+ * colour the row is ever given.
  *
- * Both are cut rather than stacked. Under evenodd a second subpath running
- * inside the first opens a hole in it, so what shows through the eye is the
- * card behind — which is why the unpecked one is a rim and not a grey disc,
- * and why the pecked one's eye stays dark on every ground the feed puts it
- * on.
+ * The eye only — outline, ring and heart. The fan of barbs around it came off
+ * with the artwork: at the size an action row gives this, a hundred hairlines
+ * are a smudge with a shape in the middle of it, and the shape is the part
+ * anyone reads.
  */
-const PLUME = 'M0-6.2C1.7-4 3.4-2.4 3.4.3 3.4 3 1.9 4.8 0 4.8-1.9 4.8-3.4 3-3.4.3-3.4-2.4-1.7-4 0-6.2Z'
-// Open: a wide hole that leaves the outline as a thick rim.
-const HOLLOW = 'M0 .7m-2.45 0a2.45 2.45 0 1 0 4.9 0a2.45 2.45 0 1 0-4.9 0Z'
-// Pecked: the eye's ring, and the pupil filled back in inside it.
-const IRIS = 'M0 .7m-2.45 0a2.45 2.45 0 1 0 4.9 0a2.45 2.45 0 1 0-4.9 0Z'
-const PUPIL = 'M0 1.15m-1.35 0a1.35 1.35 0 1 0 2.7 0a1.35 1.35 0 1 0-2.7 0Z'
-
-function Peck({ on = false }) {
+function Peck() {
   return (
-    <svg
-      className={`peck-mark${on ? ' is-on' : ''}`}
-      viewBox="-3.9 -6.7 7.8 12"
+    <span
+      className="peck-mark"
+      style={{ '--icon': `url("${assetUrl('brand/peck-feather.png')}")` }}
       aria-hidden="true"
-    >
-      <path
-        fill="currentColor"
-        fillRule="evenodd"
-        d={on ? `${PLUME}${IRIS}${PUPIL}` : `${PLUME}${HOLLOW}`}
-      />
-    </svg>
+    />
   )
 }
 
@@ -1451,7 +1437,7 @@ export function FeedScreen({ onPaid }) {
                     aria-label="Peck"
                     onClick={() => like(post.id)}
                   >
-                    <Peck on={liked.has(post.id)} />
+                    <Peck />
                     {post.likes || 0}
                   </button>
                 )}
