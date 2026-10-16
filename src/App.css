@@ -152,7 +152,7 @@
 
 .remix-copy strong {
   font-family: var(--font-ui);
-  font-size: 0.72rem;
+  font-size: var(--t-md);
   font-weight: 600;
   letter-spacing: 0.01em;
   line-height: 1.05;
@@ -160,7 +160,7 @@
 
 .remix-copy em {
   font-family: var(--font-ui);
-  font-size: 0.5rem;
+  font-size: var(--t-xs);
   font-weight: 500;
   font-style: normal;
   letter-spacing: 0.02em;
@@ -184,7 +184,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   font-family: var(--font-ui);
-  font-size: 0.62rem;
+  font-size: var(--t-xs);
   font-weight: 600;
   letter-spacing: 0.01em;
   line-height: 16px;
@@ -206,8 +206,8 @@
 }
 
 .remix-now-line svg {
-  width: 16px;
-  height: 16px;
+  width: var(--i-md);
+  height: var(--i-md);
   display: block;
 }
 
@@ -240,7 +240,7 @@
      a 15.4px cap. 1.45rem of the same face gives a 15.3px cap, so the title and
      the mark are two settings of one letterform at one height, which is what
      makes them read as a pair rather than as a title and a logo. */
-  font-size: 1.45rem;
+  font-size: var(--t-5xl);
   /* 600, the weight the wallet header was lifted to. The thin setting held on
      the app's flat grounds but not over a photograph, and one weight across
      every screen is what keeps the title and the wordmark a pair. */
@@ -273,7 +273,7 @@
   align-items: center;
   gap: 4px;
   font-family: Figtree, system-ui, sans-serif;
-  font-size: 0.75rem;
+  font-size: var(--t-md);
   font-weight: 600;
   letter-spacing: normal;
   font-style: normal;
@@ -315,7 +315,7 @@
   font-family: var(--font-ui);
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  font-size: 0.78rem;
+  font-size: var(--t-lg);
   color: var(--muted);
   font-weight: 600;
 }
@@ -335,7 +335,7 @@
   background: transparent;
   width: 100%;
   outline: none;
-  font-size: 0.78rem;
+  font-size: var(--t-lg);
   color: var(--ink);
 }
 
@@ -357,7 +357,7 @@
 
 .filter-label {
   margin: 0;
-  font-size: 0.62rem;
+  font-size: var(--t-xs);
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: #fff;
@@ -366,7 +366,7 @@
 
 .filter-note {
   margin: 0;
-  font-size: 0.52rem;
+  font-size: var(--t-xs);
   line-height: 1.35;
   color: var(--muted);
   font-weight: 400;
@@ -395,14 +395,14 @@
 
 .filter-tabs.is-sm button {
   padding: 4px 8px;
-  font-size: 0.56rem;
+  font-size: var(--t-xs);
   letter-spacing: 0.04em;
 }
 
 .currency-lock {
   margin: 0;
   font-family: var(--font-ui);
-  font-size: 0.86rem;
+  font-size: var(--t-xl);
   font-weight: 600;
   color: var(--ink);
 }
@@ -410,7 +410,7 @@
 .price-range-readout {
   margin: 0;
   font-family: Inter, system-ui, sans-serif;
-  font-size: 0.68rem;
+  font-size: var(--t-sm);
   font-weight: 400;
   letter-spacing: 0;
   font-variant-numeric: tabular-nums;
@@ -533,7 +533,7 @@
   border-radius: 999px;
   background: transparent;
   color: var(--muted);
-  font-size: 0.62rem;
+  font-size: var(--t-xs);
   /* Tracking pulled in: the caps needed the air, the sentence case does not. */
   letter-spacing: 0.02em;
   text-transform: capitalize;
@@ -608,7 +608,7 @@
 
 .item-copy strong {
   font-family: var(--font-ui);
-  font-size: 0.9rem;
+  font-size: var(--t-2xl);
   font-weight: 600;
   line-height: 1.2;
   min-width: 0;
@@ -642,15 +642,15 @@
   gap: 3px;
   flex-shrink: 0;
   color: var(--muted);
-  font-size: 0.62rem;
+  font-size: var(--t-xs);
   font-weight: 500;
   letter-spacing: 0.01em;
 }
 
 .ride-mark svg,
 .ticket-mark svg {
-  width: 13px;
-  height: 13px;
+  width: var(--i-sm);
+  height: var(--i-sm);
   display: block;
 }
 
@@ -665,8 +665,8 @@
 /* A mask rather than an img, so the bracelet takes the row's colour. The
    tilt matches the one the Afters pass uses in the wallet. */
 .bracelet-mark {
-  width: 14px;
-  height: 14px;
+  width: var(--i-sm);
+  height: var(--i-sm);
   display: block;
   transform: rotate(-14deg);
   background-color: currentColor;
@@ -685,11 +685,11 @@
 .item-bought,
 .empty {
   color: var(--muted);
-  font-size: 0.72rem;
+  font-size: var(--t-md);
 }
 
 .item-bought {
-  font-size: 0.6rem;
+  font-size: var(--t-xs);
   font-weight: 500;
   letter-spacing: 0.01em;
 }
@@ -723,7 +723,7 @@
 
 .screen-events .item-sub,
 .screen-events .item-meta {
-  font-size: 0.7rem;
+  font-size: var(--t-sm);
   font-weight: 400;
   letter-spacing: 0;
   line-height: 1.22;
@@ -759,7 +759,7 @@
 
 .screen-market .item-sub,
 .screen-market .item-meta {
-  font-size: 0.7rem;
+  font-size: var(--t-sm);
   font-weight: 400;
   letter-spacing: 0;
   line-height: 1.22;
@@ -770,7 +770,7 @@
   padding: 6px 8px;
   border-radius: 8px;
   font-family: var(--font-ui);
-  font-size: 0.78rem;
+  font-size: var(--t-lg);
   font-weight: 600;
   letter-spacing: 0.03em;
   text-align: center;
@@ -786,7 +786,7 @@
   color: #fff;
   -webkit-text-fill-color: #fff;
   font-family: var(--font-ui);
-  font-size: 0.62rem;
+  font-size: var(--t-xs);
   font-weight: 500;
   letter-spacing: 0;
   line-height: 1.2;
@@ -820,7 +820,7 @@
   background: #252a33;
   color: var(--live);
   font-family: var(--font-ui);
-  font-size: 0.66rem;
+  font-size: var(--t-sm);
   font-weight: 600;
   letter-spacing: 0.02em;
 }
@@ -861,13 +861,24 @@
   justify-content: center;
   gap: 3px;
   font-style: normal;
-  font-size: 0.52rem;
+  font-size: var(--t-xs);
   font-weight: 500;
   line-height: 1.15;
   color: var(--muted);
   max-width: 78px;
   text-align: center;
   white-space: normal;
+}
+
+/*
+ * The row aligns its columns on their baselines, which is right for the
+ * picture and the copy — the title sits on the same line as the thumbnail's
+ * first. The seller is a portrait with a name under it, not a line of text,
+ * so a baseline to share is the wrong thing to ask of it: it hung high, with
+ * all the slack below. It centres on the row instead.
+ */
+.item-row > .seller-face {
+  align-self: center;
 }
 
 .seller-face-row {
@@ -889,7 +900,7 @@
   display: grid;
   gap: 6px;
   margin: 0;
-  font-size: 0.62rem;
+  font-size: var(--t-xs);
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--muted);
@@ -928,7 +939,7 @@
   padding: 0;
   background: none;
   color: var(--ink);
-  font-size: 1.1rem;
+  font-size: var(--t-3xl);
   line-height: 1;
   cursor: pointer;
 }
@@ -942,7 +953,7 @@
 .sell-stepper strong {
   text-align: center;
   font-family: var(--font-ui);
-  font-size: 0.78rem;
+  font-size: var(--t-lg);
   font-weight: 600;
   letter-spacing: 0;
   text-transform: none;
@@ -957,7 +968,7 @@
   background: var(--wash);
   color: var(--ink);
   font-family: var(--font-ui);
-  font-size: 0.78rem;
+  font-size: var(--t-lg);
   letter-spacing: 0;
   text-transform: none;
 }
@@ -973,7 +984,7 @@
 .list-toolbar .count-line {
   margin: 0;
   white-space: nowrap;
-  font-size: 0.66rem;
+  font-size: var(--t-sm);
 }
 
 .count-place {
@@ -1007,8 +1018,8 @@
 }
 
 .filter-reset svg {
-  width: 16px;
-  height: 16px;
+  width: var(--i-md);
+  height: var(--i-md);
   display: block;
 }
 
@@ -1020,7 +1031,7 @@
   background: var(--btn);
   color: var(--btn-ink);
   font-family: var(--font-ui);
-  font-size: 0.68rem;
+  font-size: var(--t-sm);
   /* Tracking pulled in: the caps needed the air, the sentence case does not. */
   letter-spacing: 0.02em;
   text-transform: capitalize;
@@ -1041,7 +1052,7 @@
   color: var(--btn-ink);
   display: grid;
   place-items: center;
-  font-size: 0.62rem;
+  font-size: var(--t-xs);
 }
 
 .active-filters {
@@ -1052,7 +1063,7 @@
 }
 
 .active-filters span {
-  font-size: 0.68rem;
+  font-size: var(--t-sm);
   padding: 4px 8px;
   border-radius: 999px;
   background: var(--wash);
@@ -1095,7 +1106,7 @@
 .drawer-head h2 {
   margin: 0;
   font-family: var(--font-display);
-  font-size: 1.15rem;
+  font-size: var(--t-4xl);
   font-weight: 700;
   letter-spacing: 0.04em;
 }
@@ -1104,7 +1115,7 @@
   border: 0;
   background: transparent;
   color: var(--muted);
-  font-size: 0.78rem;
+  font-size: var(--t-lg);
   cursor: pointer;
 }
 
@@ -1121,8 +1132,8 @@
 }
 
 .drawer-x svg {
-  width: 16px;
-  height: 16px;
+  width: var(--i-md);
+  height: var(--i-md);
   display: block;
 }
 
@@ -1189,7 +1200,7 @@
 }
 
 .feature-copy span {
-  font-size: 0.62rem;
+  font-size: var(--t-xs);
   letter-spacing: 0.16em;
   text-transform: uppercase;
   /* Off-white, not the accent: on the header slides the kicker sits over
@@ -1200,13 +1211,13 @@
 
 .feature-copy strong {
   font-family: var(--font-display);
-  font-size: 1.14rem;
+  font-size: var(--t-4xl);
   font-weight: 600;
 }
 
 .feature-copy em {
   font-style: normal;
-  font-size: 0.75rem;
+  font-size: var(--t-md);
   color: #ddd6cc;
 }
 
@@ -1268,8 +1279,8 @@
 }
 
 .remix-badge svg {
-  width: 14px;
-  height: 14px;
+  width: var(--i-sm);
+  height: var(--i-sm);
   display: block;
 }
 
@@ -1354,8 +1365,8 @@
 }
 
 .remix-mute svg {
-  width: 15px;
-  height: 15px;
+  width: var(--i-md);
+  height: var(--i-md);
   display: block;
 }
 
@@ -1392,7 +1403,7 @@
 
 .remix-role {
   font-family: var(--font-ui);
-  font-size: 0.6rem;
+  font-size: var(--t-xs);
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -1401,14 +1412,14 @@
 
 .remix-card-head strong {
   font-family: var(--font-display);
-  font-size: 1rem;
+  font-size: var(--t-3xl);
   font-weight: 700;
   line-height: 1.2;
 }
 
 .remix-card p {
   margin: 10px 0 0;
-  font-size: 0.82rem;
+  font-size: var(--t-lg);
   line-height: 1.55;
   color: var(--btn-ink);
 }
@@ -1429,7 +1440,7 @@
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  font-size: 0.74rem;
+  font-size: var(--t-md);
   font-weight: 500;
 }
 
@@ -1467,7 +1478,7 @@
   /* The label needs air on both sides or it sticks to the rule above it and
      crowds the first set below. */
   margin-bottom: 4px;
-  font-size: 0.62rem;
+  font-size: var(--t-xs);
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -1479,7 +1490,7 @@
   display: flex;
   align-items: center;
   gap: 7px;
-  font-size: 0.74rem;
+  font-size: var(--t-md);
   font-weight: 400;
   line-height: 1.3;
 }
@@ -1503,15 +1514,15 @@
 }
 
 .remix-set svg {
-  width: 15px;
-  height: 15px;
+  width: var(--i-md);
+  height: var(--i-md);
   flex-shrink: 0;
   display: block;
 }
 
 .remix-ig svg {
-  width: 13px;
-  height: 13px;
+  width: var(--i-sm);
+  height: var(--i-sm);
   flex-shrink: 0;
   display: block;
 }
@@ -1540,7 +1551,7 @@
 
 .bottom-nav button {
   color: var(--muted);
-  font-size: 0.62rem;
+  font-size: var(--t-xs);
   letter-spacing: 0.04em;
   text-transform: uppercase;
   font-weight: 600;
@@ -1549,7 +1560,7 @@
 
 .bottom-nav button.is-active {
   color: var(--ink);
-  font-size: 0.7rem;
+  font-size: var(--t-sm);
 }
 
 .wallet-screen .screen-header h1,
@@ -2230,7 +2241,7 @@
   align-items: baseline;
   gap: 1px;
   font-family: var(--font-ui);
-  font-size: 1.7rem;
+  font-size: var(--t-6xl);
   /* A hair of tracking on the figures. Set solid, the thousands comma gets
      swallowed between the digits either side of it and 4,506 reads as one
      five-digit run. */
@@ -2254,7 +2265,7 @@
 }
 
 .pay-card .token-balance small {
-  font-size: 0.72rem;
+  font-size: var(--t-md);
   font-weight: 600;
   letter-spacing: 0.04em;
   text-transform: none;
@@ -2278,7 +2289,7 @@
      line than the token count and that is difference enough. */
   color: #fff;
   -webkit-text-fill-color: #fff;
-  font-size: 0.72rem;
+  font-size: var(--t-md);
   font-weight: 600;
   letter-spacing: 0.015em;
   font-variant-numeric: lining-nums tabular-nums;
@@ -2338,11 +2349,11 @@
 .wallet-screen .filter-tabs button.is-active {
   background: transparent;
   font-weight: 800;
-  font-size: 0.7rem;
+  font-size: var(--t-sm);
 }
 
 .wallet-screen .pay-card .token-balance {
-  font-size: 19px;
+  font-size: var(--t-4xl);
   font-weight: 700;
 }
 
@@ -2350,7 +2361,7 @@
    It gets real space on its right and drops to 500 — a unit label beside the
    number rather than part of it. */
 .wallet-screen .pay-card .token-balance small {
-  font-size: 12px;
+  font-size: var(--t-md);
   font-weight: 500;
   letter-spacing: 0.06em;
   margin-left: 0;
@@ -2358,7 +2369,7 @@
 }
 
 .wallet-screen .pay-card .fiat-balance {
-  font-size: 0.72rem;
+  font-size: var(--t-md);
   font-weight: 600;
   color: rgb(255 255 255 / 95%);
   -webkit-text-fill-color: rgb(255 255 255 / 95%);
@@ -2393,7 +2404,7 @@
 .coin-caption {
   margin: 8px 0 0;
   font-family: var(--font-ui);
-  font-size: 0.72rem;
+  font-size: var(--t-md);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: #fff;
@@ -2409,7 +2420,7 @@
   font-family: var(--font-ui);
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  font-size: 0.72rem;
+  font-size: var(--t-md);
   color: var(--muted);
 }
 
@@ -2432,7 +2443,7 @@
   align-items: center;
   padding: 8px 0;
   border-bottom: 1px solid rgb(255 255 255 / 50%);
-  font-size: 0.82rem;
+  font-size: var(--t-lg);
   cursor: pointer;
 }
 
@@ -2469,19 +2480,22 @@
   justify-self: auto;
 }
 
+/* The perk marks stand alone in their own column with no label beside them,
+   so they take the standalone step rather than the inline one — at 14px they
+   were sized for sitting in a line of text, which is not what they do. */
 .gift-icon {
-  width: 14px;
-  height: 14px;
+  width: var(--i-lg);
+  height: var(--i-lg);
   justify-self: center;
   display: block;
   color: #fff;
 }
 
 /* The key runs on a diagonal, so it eats less of its box than the upright
-   marks do. A little extra width evens it out optically. */
+   marks do. A little extra evens it out optically. */
 .gift-icon.is-key {
-  width: 16px;
-  height: 16px;
+  width: calc(var(--i-lg) + 2px);
+  height: calc(var(--i-lg) + 2px);
 }
 
 /* Tilt the bracelet onto roughly the same diagonal as the key. */
@@ -2501,13 +2515,19 @@
   mask-size: contain;
 }
 
+/* A 34×16 box: it takes the small step as its height and the width that
+   ratio asks for, rather than a width picked on its own. */
 .gift-icon.is-word {
-  width: 34px;
+  width: calc(var(--i-lg) * 34 / 16);
 }
 
+/* The scooter is a long, low drawing — set to the step's height it spans half
+   again as wide as the upright marks and reads bigger than all of them. Two
+   pixels off the height, its ratio kept. */
 .gift-icon.is-wide {
-  width: 21px;
-  height: 13px;
+  --wide: calc(var(--i-lg) - 2px);
+  width: calc(var(--wide) * 21 / 13);
+  height: var(--wide);
 }
 
 .gift-room em {
@@ -2569,7 +2589,7 @@
   border-radius: 0;
   background: transparent;
   color: var(--ink);
-  font-size: 0.75rem;
+  font-size: var(--t-md);
   line-height: 1.4;
 }
 
@@ -2619,7 +2639,7 @@
    strength. */
 .gift-pass-or {
   color: rgb(255 255 255 / 56%);
-  font-size: 0.68rem;
+  font-size: var(--t-sm);
   line-height: 1;
 }
 
@@ -2631,9 +2651,12 @@
   margin-bottom: -2px;
 }
 
+/* The glyph is a 20×16 box drawn at 26×20 — 4% wide. Not visible as
+   distortion; visible as the one mark whose strokes sat heavier than the
+   ones beside it. */
 .gift-grant svg {
-  width: 26px;
-  height: 20px;
+  width: calc(var(--i-lg) * 20 / 16);
+  height: var(--i-lg);
   display: block;
 }
 
@@ -2687,7 +2710,7 @@
   background: rgb(255 255 255 / 10%);
   color: #fff;
   font: inherit;
-  font-size: 0.78rem;
+  font-size: var(--t-lg);
 }
 
 .gift-pop-search::placeholder {
@@ -2715,7 +2738,7 @@
   background: transparent;
   color: #fff;
   font: inherit;
-  font-size: 0.78rem;
+  font-size: var(--t-lg);
   text-align: left;
   cursor: pointer;
 }
@@ -2749,7 +2772,7 @@
 
 .gift-pop-confirm p {
   margin: 0;
-  font-size: 0.84rem;
+  font-size: var(--t-xl);
   line-height: 1.35;
 }
 
@@ -2768,7 +2791,7 @@
   color: #fff;
   -webkit-text-fill-color: #fff;
   font: inherit;
-  font-size: 0.78rem;
+  font-size: var(--t-lg);
   cursor: pointer;
 }
 
@@ -2845,7 +2868,7 @@
 .gift-pass-note {
   margin: 0;
   color: rgb(255 255 255 / 78%);
-  font-size: 0.68rem;
+  font-size: var(--t-sm);
 }
 
 /*
@@ -3060,7 +3083,7 @@
   height: 40px;
   padding: 0 12px;
   outline: none;
-  font-size: 0.78rem;
+  font-size: var(--t-lg);
   color: var(--ink);
 }
 
@@ -3095,7 +3118,7 @@
   height: 32px;
   border-radius: 999px;
   padding: 0 12px;
-  font-size: 0.72rem;
+  font-size: var(--t-md);
   font-weight: 600;
 }
 
@@ -3110,8 +3133,8 @@
 }
 
 .feed-photo-btn svg {
-  width: 16px;
-  height: 16px;
+  width: var(--i-md);
+  height: var(--i-md);
   display: block;
 }
 
@@ -3137,7 +3160,7 @@
 
 .screen-feed .filter-tabs button {
   flex: 0 0 auto;
-  font-size: calc(0.62rem - 1px);
+  font-size: var(--t-xs);
   padding: 5px 6px;
 }
 
@@ -3158,7 +3181,7 @@
   border-radius: 999px;
   background: transparent;
   color: var(--muted);
-  font-size: calc(0.62rem - 1px);
+  font-size: var(--t-xs);
   font-weight: 600;
   /* Tracking pulled in: the caps needed the air, the sentence case does not. */
   letter-spacing: 0.02em;
@@ -3184,7 +3207,7 @@
   border-radius: 999px;
   background: var(--wash);
   color: var(--muted);
-  font-size: 0.68rem;
+  font-size: var(--t-sm);
   font-weight: 600;
   cursor: pointer;
 }
@@ -3201,7 +3224,7 @@
   border-radius: 999px;
   background: var(--wash);
   color: var(--muted);
-  font-size: 0.68rem;
+  font-size: var(--t-sm);
   font-weight: 600;
   display: inline-flex;
   align-items: center;
@@ -3219,7 +3242,7 @@
   --kicker-ink: #a7aebb;
   margin: 0;
   font-family: var(--font-ui);
-  font-size: 0.62rem;
+  font-size: var(--t-xs);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--kicker-ink);
@@ -3292,7 +3315,7 @@
 .feed-track {
   margin: 0;
   font-family: var(--font-ui);
-  font-size: 0.78rem;
+  font-size: var(--t-lg);
   font-weight: 400;
 }
 
@@ -3300,7 +3323,7 @@
 .feed-auto-tags {
   margin: 0;
   color: #fff;
-  font-size: 0.74rem;
+  font-size: var(--t-md);
 }
 
 .feed-actions {
@@ -3372,7 +3395,7 @@
    has to carry the size too for the two to measure the same. */
 .feed-actions.is-request .feed-user,
 .feed-actions.is-request .feed-user strong {
-  font-size: 0.68rem;
+  font-size: var(--t-sm);
   font-weight: 600;
   /* The name's own leading was taller than the type and sat it low against
      the button's label; stripped to the glyphs, the two words line up. */
@@ -3407,7 +3430,7 @@
   position: relative;
   top: 1px;
   color: var(--muted);
-  font-size: 0.68rem;
+  font-size: var(--t-sm);
   font-weight: 600;
   line-height: 1;
 }
@@ -3498,14 +3521,14 @@
   border-radius: 999px;
   background: var(--wash);
   color: var(--muted);
-  font-size: 0.68rem;
+  font-size: var(--t-sm);
   font-weight: 600;
   cursor: pointer;
 }
 
 .feed-actions button svg {
-  width: 14px;
-  height: 14px;
+  width: var(--i-sm);
+  height: var(--i-sm);
   display: block;
 }
 
@@ -3517,8 +3540,8 @@
 .feed-actions button svg.peck-mark {
   /* The leaning crest's own 39:34, so the three feathers keep their fan and
      their lean. Sized by width, because the spread is what it is read by. */
-  width: 16px;
-  height: calc(16px * 34 / 39);
+  width: var(--i-md);
+  height: calc(var(--i-md) * 34 / 39);
   /* Both the crest and the digits centred on the same line. The art's own
      mass is even top to bottom, so no nudge is needed on top of it. */
   align-self: center;
@@ -3593,7 +3616,7 @@
   left: 10px;
   bottom: 10px;
   font-style: normal;
-  font-size: 0.62rem;
+  font-size: var(--t-xs);
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: #fff;
@@ -3639,14 +3662,14 @@
   align-items: baseline;
   gap: 6px;
   font-family: var(--font-ui);
-  font-size: 0.82rem;
+  font-size: var(--t-lg);
   font-weight: 600;
   min-width: 0;
 }
 
 .party-rate strong b {
   flex: none;
-  font-size: 0.68rem;
+  font-size: var(--t-sm);
   font-weight: 500;
   letter-spacing: 0;
   text-transform: none;
@@ -3655,7 +3678,7 @@
 
 .party-rate span {
   color: var(--muted);
-  font-size: 0.68rem;
+  font-size: var(--t-sm);
 }
 
 .party-rate button {
@@ -3668,14 +3691,14 @@
   background: transparent;
   color: var(--muted);
   font-family: var(--font-ui);
-  font-size: 0.68rem;
+  font-size: var(--t-sm);
   font-weight: 600;
   cursor: pointer;
 }
 
 .party-rate button svg {
-  width: 14px;
-  height: 14px;
+  width: var(--i-sm);
+  height: var(--i-sm);
   display: block;
 }
 
@@ -3717,7 +3740,7 @@
   background: transparent;
   color: var(--muted);
   font-family: var(--font-ui);
-  font-size: 0.62rem;
+  font-size: var(--t-xs);
   font-weight: 600;
   /* Tracking pulled in: the caps needed the air, the sentence case does not. */
   letter-spacing: 0.02em;
@@ -3872,7 +3895,7 @@
      size the uppercase line out-measured it — caps are wider than lowercase at
      the same point size — so it read as the headline and the person as the
      byline. Smaller, it sits under the name as a label on it. */
-  font-size: 0.74rem;
+  font-size: var(--t-md);
   font-weight: 600;
   /* Pulled in from the 0.12em the small kickers use. Tracking that wide is
      what makes a tiny uppercase line legible; at the name's size it only
@@ -3934,7 +3957,7 @@
 
 .feed-user strong {
   font-family: var(--font-ui);
-  font-size: 0.82rem;
+  font-size: var(--t-lg);
   font-weight: 600;
   text-transform: none;
   letter-spacing: 0;
@@ -3987,12 +4010,12 @@
 .feed-card > p {
   margin: 0;
   color: var(--muted);
-  font-size: 0.78rem;
+  font-size: var(--t-lg);
 }
 
 .feed-card > p {
   color: var(--ink);
-  font-size: 0.86rem;
+  font-size: var(--t-xl);
   line-height: 1.35;
 }
 
@@ -4041,7 +4064,7 @@
 
 .user-feed-copy p {
   margin: 0;
-  font-size: 0.92rem;
+  font-size: var(--t-2xl);
   line-height: 1.4;
 }
 
@@ -4174,7 +4197,7 @@
   font-family: var(--font-ui);
   /* The name of the thing being bought is the heading of this side, not a
      caption on it — it was set smaller than the line underneath it. */
-  font-size: 1.05rem;
+  font-size: var(--t-3xl);
   font-weight: 600;
   text-align: center;
 }
@@ -4250,7 +4273,7 @@
 
 .code-plate span {
   font-family: var(--font-ui);
-  font-size: 0.72rem;
+  font-size: var(--t-md);
   font-weight: 600;
   letter-spacing: 0.22em;
   color: rgb(255 255 255 / 78%);
@@ -4305,14 +4328,14 @@
 
 .deal-wait span {
   font-family: var(--font-ui);
-  font-size: 0.95rem;
+  font-size: var(--t-2xl);
   font-weight: 500;
   color: rgb(255 255 255 / 86%);
 }
 
 .code-note {
   font-family: var(--font-ui);
-  font-size: 0.72rem;
+  font-size: var(--t-md);
   font-style: normal;
   color: rgb(255 255 255 / 60%);
 }
@@ -4370,7 +4393,7 @@
 .detail-head span {
   color: rgb(255 255 255 / 78%);
   -webkit-text-fill-color: rgb(255 255 255 / 78%);
-  font-size: 0.78rem;
+  font-size: var(--t-lg);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -4404,7 +4427,7 @@
   margin: 0;
   color: #fff;
   -webkit-text-fill-color: #fff;
-  font-size: 0.86rem;
+  font-size: var(--t-xl);
   /* Centred over the button it belongs to — it's the caption for the action,
      not body copy, so it shares the button's axis. */
   text-align: center;
@@ -4416,7 +4439,7 @@
   border-radius: 12px;
   /* Buttons inherit the sheet's 1rem, which at 700 and uppercase outweighs
      the title above them. A step down puts them back in line with it. */
-  font-size: 0.9rem;
+  font-size: var(--t-2xl);
 }
 
 .pay-btn {
@@ -4466,7 +4489,7 @@
   color: var(--ink);
   padding: 10px 12px;
   font-family: var(--font-ui);
-  font-size: 0.8rem;
+  font-size: var(--t-lg);
   outline: none;
   /* It sits inside a .sell-field label now, which is uppercase and tracked
      out for the caption above it — the field's own text has to opt back out,
@@ -4506,7 +4529,7 @@
   border-radius: 999px;
   background: rgb(255 255 255 / 12%);
   font-family: var(--font-ui);
-  font-size: 0.85rem;
+  font-size: var(--t-xl);
   font-weight: 600;
   color: #fff;
   cursor: pointer;
@@ -4904,4 +4927,111 @@
 .drawer-body .filter-tabs button:hover {
   color: #fff;
   -webkit-text-fill-color: #fff;
+}
+
+/*
+ * The payment strip. A digital wallet tells you money moved at the top of the
+ * device, over whatever you were looking at, and then stops telling you — so
+ * this is a receipt rather than a dialog: nothing to dismiss, nothing to
+ * answer, gone in three seconds. It sits inside the phone frame because the
+ * device it is imitating is the frame.
+ */
+.pay-notice {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 14px;
+  /* The app's own raised surface under a blur, the way the sheets are — the
+     strip is a piece of this app on top of this app, not a system chrome
+     borrowed from somewhere else. */
+  background: rgb(31 44 57 / 92%);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow:
+    0 1px 0 0 rgb(255 255 255 / 8%) inset,
+    0 10px 28px rgb(0 0 0 / 38%);
+  color: #fff;
+  pointer-events: none;
+  animation: pay-notice-in 320ms cubic-bezier(0.2, 0.9, 0.3, 1) both;
+}
+
+/* Out the way it came, a little faster — an arrival is worth watching and a
+   departure is not. */
+.pay-notice.is-going {
+  animation: pay-notice-out 420ms cubic-bezier(0.4, 0, 1, 1) forwards;
+}
+
+@keyframes pay-notice-in {
+  from {
+    opacity: 0;
+    transform: translateY(-120%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pay-notice-out {
+  to {
+    opacity: 0;
+    transform: translateY(-120%);
+  }
+}
+
+.pay-notice-mark {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: rgb(255 255 255 / 12%);
+}
+
+.pay-notice-mark svg {
+  width: var(--i-md);
+  height: var(--i-md);
+  display: block;
+}
+
+/* Money leaving is stated, money arriving is good news. The only colour on
+   the strip is on the arrow, so the figure itself stays plain white and the
+   two directions are still told apart at a glance. */
+.pay-notice.is-in .pay-notice-mark {
+  color: #7ee0a8;
+  background: rgb(126 224 168 / 16%);
+}
+
+.pay-notice.is-out .pay-notice-mark {
+  color: rgb(255 255 255 / 82%);
+}
+
+.pay-notice-copy {
+  display: grid;
+  gap: 1px;
+  min-width: 0;
+}
+
+.pay-notice-copy strong {
+  font-family: var(--font-ui);
+  font-size: var(--t-lg);
+  font-weight: 700;
+  letter-spacing: 0.015em;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+.pay-notice-copy em {
+  font-style: normal;
+  font-size: var(--t-sm);
+  color: rgb(255 255 255 / 70%);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }

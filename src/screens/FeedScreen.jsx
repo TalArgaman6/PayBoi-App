@@ -78,9 +78,20 @@ function lineTag(party) {
   return 'party'
 }
 
+/*
+ * What the composer promises under the picks, and what the card will show.
+ * It used to hand back the night's line, which for a one-off at a venue is
+ * the word "party" — a tag that says nothing, and the one thing a post must
+ * not come out with as its only room. It names the night now, the same way a
+ * card does.
+ */
 function autoTags(mode, pickIds) {
-  const party = PARTY_BY_ID[pickIds?.[0]]
-  return [typeTag(mode), lineTag(party)]
+  const tags = [typeTag(mode)]
+  for (const id of pickIds || []) {
+    const tag = partyTag(PARTY_BY_ID[id])
+    if (tag && !tags.includes(tag)) tags.push(tag)
+  }
+  return tags
 }
 
 const FEED_FILTERS = catalog.tags.filter(
@@ -737,7 +748,7 @@ function PmSheet({ post, onClose, onPaid }) {
     if (deal !== 'pending') return undefined
     const timer = window.setTimeout(() => {
       setDeal('done')
-      earnOver(total)
+      earnOver(total, 1500, isRide ? 'Ride paid by rider' : 'Ticket paid by buyer')
       onPaid?.()
     }, 5000)
     return () => window.clearTimeout(timer)
@@ -931,21 +942,61 @@ function formatTag(tag) {
   return `#${String(tag || '').toLowerCase()}`
 }
 
-function NightChips({ ids }) {
-  if (!ids?.length) return null
-  return (
-    <div className="rate-picks is-locked">
-      {ids.map((id) => {
-        const party = PARTY_BY_ID[id]
-        if (!party) return null
-        return (
-          <span key={id} className="is-on">
-            {party.title}
-          </span>
-        )
-      })}
-    </div>
-  )
+/*
+ * What a card says in words, capped at two lines: a title, and the tags under
+ * it. A post used to carry a track line *and* a caption, which on a phone is
+ * three rows of type under the picture before the actions — the card stopped
+ * being a photograph with a label and became a paragraph. Whichever of the
+ * two the post has is the title; if it has both, the track wins, because it
+ * is the specific one.
+ */
+function cardTitle(post) {
+  return post.track || post.caption || ''
+}
+
+/*
+ * Tags that say nothing. #party on a feed where every post is a party, #music
+ * on a music post that is already tagged #live — a tag earns its place by
+ * narrowing, and these only restate the room they are standing in. They are
+ * dropped wherever they turn up, including out of a poster's own list.
+ */
+const GENERAL_TAGS = ['party', 'music', 'bar', 'travel', 'sports', 'night', 'post']
+
+/*
+ * Every card gets the same two things under it: what kind of post this is,
+ * and whose night it was. The kind comes off the post rather than its tags,
+ * so a request and a rating carry one too — they used to show no tags at
+ * all. The night comes off whatever the post picked, and failing that off
+ * the tags the poster already wrote, which is where the line has always
+ * lived. Posting used to mean typing the room into the caption; the caption
+ * is gone, so the room comes down here instead, whether or not anyone
+ * thought of it.
+ */
+/*
+ * A night's tag. The line it belongs to if it has one — #forever, #gaze, the
+ * name people actually use — and otherwise the night's own title run
+ * together, because a one-off at a venue has no line to borrow. This is what
+ * the chip row under a post used to say in full; said as a tag it is the
+ * same information in one of the two rows a card gets rather than a third.
+ */
+function partyTag(party) {
+  if (!party) return ''
+  const line = lineTag(party)
+  if (line && !GENERAL_TAGS.includes(line)) return line
+  return party.title.toLowerCase().replace(/[^a-z0-9]+/g, '')
+}
+
+function cardTags(post) {
+  const out = []
+  const add = (tag) => {
+    if (!tag || GENERAL_TAGS.includes(tag) || out.includes(tag)) return
+    out.push(tag)
+  }
+  add(typeTag(post.kind))
+  for (const id of post.nights || []) add(partyTag(PARTY_BY_ID[id]))
+  for (const option of post.options || []) add(partyTag(PARTY_BY_ID[option.id]))
+  for (const tag of post.tags || []) add(tag)
+  return out
 }
 
 function isLivePost(post) {
@@ -1108,6 +1159,9 @@ export function FeedScreen({ onPaid }) {
       user: ME,
       caption: text,
       when: 'now',
+      // The nights it was posted about, not just the tags they produced —
+      // the card resolves names off these, the same as every seeded post.
+      nights: picks,
       tags,
       likes: 0,
       image: photo,
@@ -1329,20 +1383,20 @@ export function FeedScreen({ onPaid }) {
                   )}
                 </div>
               )}
-              {post.track ? <p className="feed-track">{post.track}</p> : null}
-              {/* A request says what it wants in its kicker — the night, and
-                  which of the two things is being asked for. The free line
-                  under it only ever restated that, so a request card is the
-                  kicker and the answer button, nothing between. */}
-              {post.caption && !REQUEST_KINDS.includes(post.kind) && post.kind !== 'rating' ? (
-                <p>{post.caption}</p>
+              {/* One line. A request says what it wants in its kicker — the
+                  night, and which of the two things is being asked for — and
+                  the free line under it only ever restated that, so a request
+                  card is the kicker and the answer button, nothing between.
+                  A rating card is its options. */}
+              {cardTitle(post) &&
+              !REQUEST_KINDS.includes(post.kind) &&
+              post.kind !== 'rating' ? (
+                <p className={post.track ? 'feed-track' : undefined}>{cardTitle(post)}</p>
               ) : null}
-              {REQUEST_KINDS.includes(post.kind) ? null : <NightChips ids={post.nights} />}
-              {post.tags?.length && post.kind !== 'rating' && !REQUEST_KINDS.includes(post.kind) ? (
-                <p className="feed-tags">
-                  {post.tags.map((item) => formatTag(item)).join(' ')}
-                </p>
-              ) : null}
+              {/* On every card, whatever kind it is. */}
+              <p className="feed-tags">
+                {cardTags(post).map((item) => formatTag(item)).join(' ')}
+              </p>
               {post.kind === 'rating' ? (
                 <RatingOptions
                   options={post.options}

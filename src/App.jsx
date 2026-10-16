@@ -1,4 +1,5 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { PayNotice } from './components/PayNotice.jsx'
 import { BottomNav } from './components/BottomNav.jsx'
 import { ItemThumb } from './components/ItemRow.jsx'
 import { RemixProvider } from './components/RemixPlayer.jsx'
@@ -122,11 +123,14 @@ export default function App() {
     // let go of its item, and this ran on the hole that left.
     if (!paid || !waits || approved || !selected) return undefined
     const price = selected.pricePbs
+    // Read off the item now, because the notice is raised after the sheet has
+    // already let go of it.
+    const what = selected.title
     const timer = window.setTimeout(() => {
       setApproved(true)
       setSelected(null)
       setTab('wallet')
-      spendOver(price)
+      spendOver(price, 1500, what)
     }, 5000)
     return () => window.clearTimeout(timer)
   }, [paid, approved, waits, selected?.id])
@@ -243,7 +247,7 @@ export default function App() {
      * out: the card is what the buyer lands back on, and the count down the
      * digits is the first thing they see there.
      */
-    if (scan === 'used' && selected) spendOver(selected.pricePbs)
+    if (scan === 'used' && selected) spendOver(selected.pricePbs, 1500, selected.title)
     setSelected(null)
   }
 
@@ -272,6 +276,8 @@ export default function App() {
         ref={phone}
         style={rankVars(balance, { premium: wallet.premium })}
       >
+        {/* Over everything in the frame, the way a device notice is. */}
+        <PayNotice />
         <RemixProvider>
           {tab === 'events' ? <EventsScreen onSelect={setSelected} /> : null}
           {tab === 'shop' ? <ShopScreen onSelect={setSelected} /> : null}

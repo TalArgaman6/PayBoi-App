@@ -49,7 +49,8 @@
       "when": "3h",
       "tags": [
         "live",
-        "fff"
+        "obo",
+        "shalvata"
       ],
       "likes": 37
     },
@@ -124,7 +125,8 @@
       "when": "8m",
       "tags": [
         "featured",
-        "forever"
+        "offernissim",
+        "fff"
       ],
       "likes": 73
     },
@@ -218,7 +220,8 @@
       "when": "6h",
       "tags": [
         "featured",
-        "forever"
+        "drek",
+        "bobohotel"
       ],
       "likes": 33,
       "with": [
@@ -247,7 +250,7 @@
       "when": "18m",
       "tags": [
         "watchme",
-        "party"
+        "forever"
       ],
       "likes": 24
     },
@@ -281,7 +284,8 @@
       "when": "1d",
       "tags": [
         "alternative",
-        "sports"
+        "sports",
+        "featured"
       ],
       "nights": [
         "tlv-volleyball"
@@ -321,7 +325,7 @@
       "when": "2h",
       "tags": [
         "live",
-        "gaze"
+        "mistermiss"
       ],
       "likes": 61
     },
@@ -390,7 +394,8 @@
       "when": "1h",
       "tags": [
         "alternative",
-        "crush"
+        "crush",
+        "live"
       ],
       "likes": 42,
       "with": [
@@ -433,7 +438,8 @@
       "when": "1d",
       "tags": [
         "alternative",
-        "party"
+        "callas",
+        "featured"
       ],
       "likes": 27
     },
@@ -450,13 +456,13 @@
       "when": "1d",
       "tags": [
         "alternative",
-        "party"
+        "shpagat"
       ],
       "likes": 16
     },
     {
       "id": "sam-music-1",
-      "kind": "featured",
+      "kind": "live",
       "user": {
         "id": "itay",
         "name": "Itay Aharoni",
@@ -467,8 +473,9 @@
       "caption": "The garden line at sunrise.",
       "when": "1d",
       "tags": [
-        "featured",
-        "party"
+        "live",
+        "haoman17",
+        "pag"
       ],
       "likes": 19,
       "with": [

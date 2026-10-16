@@ -73,17 +73,42 @@ function countTo(to, ms) {
   window.requestAnimationFrame(step)
 }
 
-export function spendOver(amount, ms = 1500) {
+/*
+ * Money moving, announced. The card counting itself up or down is the record
+ * of a payment, but you only see it if you are looking at the card — and the
+ * one thing a wallet on a phone always does, whatever app you are in, is tell
+ * you at the top of the screen that something was paid. The store is where
+ * that belongs: every path that moves the balance goes through here, so
+ * nothing can move it quietly.
+ */
+const noteListeners = new Set()
+let noteId = 0
+
+export function onMovement(listener) {
+  noteListeners.add(listener)
+  return () => noteListeners.delete(listener)
+}
+
+function announce(way, amount, label) {
+  if (!amount) return
+  noteId += 1
+  const movement = { id: noteId, way, amount, label: label || '' }
+  for (const listener of noteListeners) listener(movement)
+}
+
+export function spendOver(amount, ms = 1500, label) {
   const cost = Math.max(0, Math.round(amount || 0))
   if (!cost) return
+  announce('out', cost, label)
   countTo(Math.max(0, balance - cost), ms)
 }
 
 // The same walk upward. A top-up is the one time the number is good news, so
 // it gets the same roll rather than appearing fully formed.
-export function earnOver(amount, ms = 1500) {
+export function earnOver(amount, ms = 1500, label) {
   const gain = Math.max(0, Math.round(amount || 0))
   if (!gain) return
+  announce('in', gain, label)
   countTo(balance + gain, ms)
 }
 

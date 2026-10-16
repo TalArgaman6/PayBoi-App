@@ -32,7 +32,7 @@ export function WalletCard({ wallet }) {
             <button
               type="button"
               className="token-top-up"
-              onClick={() => earnOver(TOP_UP)}
+              onClick={() => earnOver(TOP_UP, 1500, 'Top-up')}
               aria-label={`Add ${TOP_UP} ${wallet.token}`}
             >
               {formatTokenBalance(balance)}
@@ -44,7 +44,7 @@ export function WalletCard({ wallet }) {
             <button
               type="button"
               className="fiat-balance token-top-up"
-              onClick={() => spendOver(TOP_UP)}
+              onClick={() => spendOver(TOP_UP, 1500, 'Transfer out')}
               aria-label={`Take ${TOP_UP} ${wallet.token} off`}
             >
               ₪{getFiat().toLocaleString('en-US')}
