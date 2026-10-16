@@ -4370,9 +4370,12 @@
   }
 }
 
+/* A step down. The spinner is what the sheet is saying while it waits; the
+   line under it only names what is being waited on, so at body size it was
+   competing with the thing it captions. */
 .deal-wait span {
   font-family: var(--font-ui);
-  font-size: var(--t-2xl);
+  font-size: var(--t-lg);
   font-weight: 500;
   color: rgb(255 255 255 / 86%);
 }

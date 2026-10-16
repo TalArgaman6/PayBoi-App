@@ -81,7 +81,7 @@
    * last tenth to show. Three-quarters is where the ground starts coming
    * through as something you can see rather than measure.
    */
-  --sheet-over: rgb(31 44 57 / 75%);
+  --sheet-over: rgb(31 44 57 / 92%);
   --muted: #8b90a0;
   --kicker: #ececec;
   --btn: #2a2d38;
