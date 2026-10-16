@@ -4555,8 +4555,16 @@
   cursor: pointer;
 }
 
+/*
+ * Counting used to put a white lift under the figure — first instead of the
+ * shade it always carries, then on top of it. Either way the number sat
+ * differently on the ground while it moved, which is the one thing a balance
+ * should not do: the value changes, the type does not. The movement of the
+ * digits is the whole event. Nothing here now; the rule is left standing as
+ * the hook, should the count ever want marking again.
+ */
 .token-balance.is-counting .token-amount {
-  text-shadow: 0 0 18px rgb(255 255 255 / 45%);
+  text-shadow: inherit;
 }
 
 .pay-btn:disabled {
