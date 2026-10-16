@@ -272,7 +272,7 @@ export function WalletScreen({ onSelect, openedPass = null }) {
           </ul>
         </div>
         <div className="spend-now">
-          <p className="gift-kicker">You can buy now</p>
+          <p className="gift-kicker">You Can Afford It</p>
           <FilterTabs
             filters={SUGGESTION_FILTERS}
             active={kind}
