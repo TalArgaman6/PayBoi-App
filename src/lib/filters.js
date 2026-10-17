@@ -1,9 +1,16 @@
+/*
+ * `{pck}` is where the currency mark goes. The word used to trail each band —
+ * "≤ 200 pck" — and said four times across one row it was most of the row.
+ * A placeholder rather than the glyph itself because these are data, read by
+ * anything that wants them; the row that draws them is what turns it into a
+ * drawing.
+ */
 export const PRICE_RANGES = [
   { id: 'all', label: 'Any', min: 0, max: Infinity },
-  { id: 'cover', label: '≤ 200 pck', min: 0, max: 200 },
-  { id: 'night', label: '201–400 pck', min: 201, max: 400 },
-  { id: 'weekend', label: '401–800 pck', min: 401, max: 800 },
-  { id: 'trip', label: '800+ pck', min: 801, max: Infinity },
+  { id: 'cover', label: '≤ {pck}200', min: 0, max: 200 },
+  { id: 'night', label: '{pck}201–400', min: 201, max: 400 },
+  { id: 'weekend', label: '{pck}401–800', min: 401, max: 800 },
+  { id: 'trip', label: '{pck}800+', min: 801, max: Infinity },
 ]
 
 export const PRICE_SLIDER = {

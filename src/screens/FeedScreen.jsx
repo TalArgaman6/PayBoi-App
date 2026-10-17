@@ -202,6 +202,13 @@ function Peck() {
   )
 }
 
+// The given name on its own. shortName gives "Tal A." — an initial is what
+// a list needs to keep two Tals apart, and is one character of noise on a
+// button that is plainly about the person it sits under.
+function firstName(person) {
+  return String(person?.name || '').trim().split(/\s+/)[0] || ''
+}
+
 function peopleOn(post) {
   return [post.user, ...(post.with || [])].map((person) => ({
     ...person,
@@ -1428,7 +1435,12 @@ export function FeedScreen({ onPaid }) {
                     onClick={() => setPm(post)}
                   >
                     <EnvelopeMark />
-                    PM
+                    {/* Named. A request is one person asking, and the button
+                        that answers it is a message to that person — "PM"
+                        alone made it look like a feature rather than like
+                        writing to Tal. First name only: the row above it
+                        already carries the full one. */}
+                    PM {firstName(post.user)}
                   </button>
                 ) : (
                   <button

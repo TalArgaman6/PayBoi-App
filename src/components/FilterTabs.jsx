@@ -1,10 +1,12 @@
+import { TokenMark } from './TokenMark.jsx'
+
 function TabLabel({ label }) {
-  const parts = String(label).split(/(pck)/i)
+  // Splits on the placeholder and on the bare word, so a label written either
+  // way still comes out as the mark.
+  const parts = String(label).split(/(\{pck\}|pck)/i)
   return parts.map((part, index) =>
-    /^pck$/i.test(part) ? (
-      <span key={index} className="pbs-unit">
-        pck
-      </span>
+    /^(\{pck\}|pck)$/i.test(part) ? (
+      <TokenMark key={index} className="pbs-unit" />
     ) : (
       part
     ),

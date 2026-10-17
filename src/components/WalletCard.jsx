@@ -1,4 +1,5 @@
-import { assetUrl, formatTokenBalance } from '../lib/format.js'
+import { formatTokenBalance } from '../lib/format.js'
+import { TokenMark } from './TokenMark.jsx'
 import {
   useBalance,
   useCounting,
@@ -33,12 +34,7 @@ export function WalletCard({ wallet }) {
               mask so it takes the balance's own colour — which flips to ink
               on the bone ground, and would have left a white glyph stranded
               there. */}
-          <small
-            className="token-mark"
-            style={{ '--icon': `url("${assetUrl('brand/peck-feather.png')}")` }}
-            aria-label={wallet.token}
-            role="img"
-          />
+          <TokenMark className="is-balance" />
           <span className="token-amount">
             <button
               type="button"

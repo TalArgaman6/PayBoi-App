@@ -5,6 +5,7 @@ import events from '../data/events.json'
 import wallet from '../data/wallet.json'
 import { FeaturedBanner } from '../components/FeaturedBanner.jsx'
 import { FilterTabs } from '../components/FilterTabs.jsx'
+import { Cost } from '../components/Cost.jsx'
 import { ItemRow } from '../components/ItemRow.jsx'
 import { ScreenHeader } from '../components/ScreenHeader.jsx'
 import { SearchBar } from '../components/SearchBar.jsx'
@@ -125,7 +126,7 @@ export function MarketplaceScreen({ onSelect }) {
             <ItemRow
               key={item.id}
               item={item}
-              meta={drop ? `${item.shop} · ${item.city}` : formatCost(item)}
+              meta={drop ? `${item.shop} · ${item.city}` : <Cost item={item} />}
               pinned={drop && TOP_DROPS.includes(item.id)}
               onSelect={onSelect}
             />

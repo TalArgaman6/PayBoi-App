@@ -1,6 +1,7 @@
 import { EarnBadge } from './EarnBadge.jsx'
 import { SellerFace } from './SellerFace.jsx'
-import { formatCost, assetUrl } from '../lib/format.js'
+import { assetUrl } from '../lib/format.js'
+import { Cost } from './Cost.jsx'
 
 export function ItemThumb({ thumb, title, image }) {
   const label = thumb?.label || title.slice(0, 2).toUpperCase()
@@ -131,7 +132,7 @@ export function ItemRow({ item, meta, note, onSelect, showEarn = false, pinned =
         <SellerFace seller={item.seller} />
       ) : (
         <span className="item-price">
-          <span className="cost-mark">{formatCost(item)}</span>
+          <span className="cost-mark"><Cost item={item} /></span>
           {showEarn ? <EarnBadge item={item} /> : null}
         </span>
       )}
