@@ -5097,7 +5097,7 @@
      strip's own figures were sitting behind them — so it starts below
      whatever the device says it is keeping for itself, the way the screen
      headers already do. */
-  top: calc(20px + env(safe-area-inset-top, 0px));
+  top: calc(10px + env(safe-area-inset-top, 0px));
   left: 10px;
   right: 10px;
   z-index: 60;

@@ -53,7 +53,14 @@ function setCounting(next) {
   for (const listener of countListeners) listener(counting)
 }
 
-function countTo(to, ms) {
+/*
+ * `settled` is handed in rather than the caller raising the strip itself,
+ * because the strip has to wait for the digits. Raised at the moment the walk
+ * began, the two played over each other — the card counting itself down
+ * behind a banner already saying what it had counted. A receipt comes after
+ * the thing it is a receipt for.
+ */
+function countTo(to, ms, settled) {
   const from = balance
   if (from === to) return
   const start = performance.now()
@@ -67,7 +74,12 @@ function countTo(to, ms) {
     balance = t >= 1 ? to : Math.round(from + (to - from) * eased)
     for (const listener of listeners) listener(balance)
     if (t < 1) window.requestAnimationFrame(step)
-    else setCounting(false)
+    else {
+      setCounting(false)
+      // A beat after the last digit lands, so the two are sequential
+      // rather than merely not simultaneous.
+      window.setTimeout(() => settled?.(), 180)
+    }
   }
 
   window.requestAnimationFrame(step)
@@ -99,8 +111,7 @@ function announce(way, amount, label) {
 export function spendOver(amount, ms = 1500, label) {
   const cost = Math.max(0, Math.round(amount || 0))
   if (!cost) return
-  announce('out', cost, label)
-  countTo(Math.max(0, balance - cost), ms)
+  countTo(Math.max(0, balance - cost), ms, () => announce('out', cost, label))
 }
 
 // The same walk upward. A top-up is the one time the number is good news, so
@@ -108,8 +119,7 @@ export function spendOver(amount, ms = 1500, label) {
 export function earnOver(amount, ms = 1500, label) {
   const gain = Math.max(0, Math.round(amount || 0))
   if (!gain) return
-  announce('in', gain, label)
-  countTo(balance + gain, ms)
+  countTo(balance + gain, ms, () => announce('in', gain, label))
 }
 
 export function useCounting() {
