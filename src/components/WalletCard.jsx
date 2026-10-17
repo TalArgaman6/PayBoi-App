@@ -1,4 +1,4 @@
-import { formatTokenBalance } from '../lib/format.js'
+import { assetUrl, formatTokenBalance } from '../lib/format.js'
 import {
   useBalance,
   useCounting,
@@ -27,7 +27,18 @@ export function WalletCard({ wallet }) {
     <article className="pay-card" aria-label="Peacock card">
       <div className="pay-card-foot">
         <p className={`token-balance${counting ? ' is-counting' : ''}`}>
-          <small>{wallet.token}</small>
+          {/* The mark in place of the word. "pck" beside the figure was the
+              unit spelled out; the eye is the unit, and on a card whose whole
+              job is to be looked at, the drawn mark carries it. Painted as a
+              mask so it takes the balance's own colour — which flips to ink
+              on the bone ground, and would have left a white glyph stranded
+              there. */}
+          <small
+            className="token-mark"
+            style={{ '--icon': `url("${assetUrl('brand/peck-feather.png')}")` }}
+            aria-label={wallet.token}
+            role="img"
+          />
           <span className="token-amount">
             <button
               type="button"

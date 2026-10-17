@@ -63,9 +63,13 @@ function CrestFeathers() {
  * against the stylesheet, not the site — which is how the mark came to be
  * missing from every header.
  */
-export function CrestLockup({ className = 'header-lockup' }) {
+export function CrestLockup({ className = 'header-lockup', bare = false }) {
   return (
-    <img className={className} src={assetUrl('brand/pck-header.png')} alt="PCK" />
+    <img
+      className={className}
+      src={assetUrl(bare ? 'brand/pck-header-letters.png' : 'brand/pck-header.png')}
+      alt="PCK"
+    />
   )
 }
 

@@ -2280,6 +2280,42 @@
   color: rgb(255 255 255 / 78%);
 }
 
+/*
+ * The unit, drawn. Sized in em off the label it replaces, so it tracks the
+ * figure through every place the balance is set at a different size rather
+ * than needing a pixel of its own at each. Painted with currentColor, which
+ * is what carries it through the bone ground's flip to ink — a white PNG
+ * would have been stranded there.
+ *
+ * A block box in a baseline-aligned flex row sits on its bottom edge, which
+ * is the balance's own baseline: the mark stands on the line the digits do.
+ */
+.pay-card .token-balance small.token-mark {
+  display: block;
+  height: 1.3em;
+  width: calc(1.3em * 195 / 240);
+  background-color: currentColor;
+  -webkit-mask-image: var(--icon);
+  mask-image: var(--icon);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+}
+
+/*
+ * The wallet paints the whole balance line with `background: transparent` to
+ * strip the plates off it, and that shorthand lands on this span too — with
+ * four classes behind it, where the rule above has three. The mask had
+ * nothing left to paint, so on the one screen that matters the mark was
+ * simply not there. Said again, inside that scope.
+ */
+.wallet-screen .pay-card .token-balance small.token-mark {
+  background-color: currentColor;
+}
+
 .pay-card .fiat-balance {
   position: relative;
   /* It is a button now — a tap empties the wallet — so it carries the same
@@ -2703,10 +2739,15 @@
   padding: 10px 12px 0;
   border-radius: 16px;
   /* The app's own raised surface rather than a grey of its own: this card
-     stands over the wallet and should read as the same material as it. */
+     stands over the wallet and should read as the same material as it, on
+     the same value every other overlay takes. */
   background: var(--sheet-over);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  /* The same light blur the side panels take. At 14 the row behind it was
+     smoothed into a wash and the card read as a solid plate, which is what
+     made it look heavier than the other popups despite being on their
+     value. */
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
 }
 
 .gift-pop-search {

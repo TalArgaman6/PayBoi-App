@@ -4,6 +4,10 @@ export function ScreenHeader({
   title,
   kicker,
   pin = false,
+  // The wallet carries the mark beside its balance, a thumb's width below —
+  // a second one in the corner is the same drawing twice on one screen. Its
+  // header takes the letters alone, on the same baseline and cap height.
+  bareMark = false,
   onLogo = null,
   onTitle = null,
 }) {
@@ -43,10 +47,10 @@ export function ScreenHeader({
           onClick={onLogo}
           aria-label="Change backdrop"
         >
-          <CrestLockup />
+          <CrestLockup bare={bareMark} />
         </button>
       ) : (
-        <CrestLockup />
+        <CrestLockup bare={bareMark} />
       )}
     </header>
   )
